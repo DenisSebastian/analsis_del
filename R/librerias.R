@@ -2,6 +2,7 @@
 ## Manipulación de Tablas
 suppressMessages(library(dplyr))
 suppressMessages(library(purrr))
+suppressMessages(library(tidyr))
 
 ## Manipulación de Fechas
 suppressMessages(library(lubridate))
@@ -13,3 +14,8 @@ suppressMessages(library(mapview))
 
 ## Manipulación de Excel
 suppressMessages(library(openxlsx))
+
+
+## Graficos
+suppressMessages(library(ggplot2))
+suppressMessages(library(plotly))

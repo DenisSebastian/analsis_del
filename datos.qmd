@@ -13,7 +13,7 @@ options(scipen = 999, warn=-1)
 #cargar Librerias
 source("R/librerias.R")
 # Cargar Funciones
-source("R/librerias.R")
+source("R/funciones.R")
 
 ```
 
@@ -21,10 +21,10 @@ source("R/librerias.R")
 
 En primer lugar se procederá a cargar las librerías necesarias para realizar el tratamiento y transformaciones a los datos.
 
-
 ```{r eval=FALSE}
 ## Manipulación de Tablas
 library(dplyr)
+library(tidyr)
 library(purrr)
 
 ## Manipulación de Fechas
@@ -37,7 +37,11 @@ library(sf)
 library(mapview)
 
 ## Manipulación de Excel
-library(openxlsx))
+library(openxlsx)
+
+## Graficos
+library(ggplot2)
+library(plotly)
 ```
 
 También se cargarán las funciones creadas previamente, revisar el @sec-fuctions.
@@ -47,13 +51,9 @@ También se cargarán las funciones creadas previamente, revisar el @sec-fuction
 source("R/librerias.R")
 ```
 
-
 ## Lectura de Datos
 
 Los datos se encuentran en formato RDS separados por y sin ningún tratamiento. Se procederá a revisar el contenido de los datos del año 2017 llamado `Casos_2017.rds`.
-
-
-
 
 ```{r eval=FALSE}
 datos_2017 <- readRDS(file = "data/delitos/raw/Casos_2017.rds")
@@ -65,30 +65,499 @@ datos_2017 <- readRDS(file = "data_samples/raw_2017_100.rds")
 head(datos_2017)
 ```
 
-
 Se puede observar que corresponde a `1.418.435` de casos policiales con información espacial tipo punto ({{< var library.sf >}}), además información temporal y divisiones administrativas.
 
+## Unificar Bases
 
-### Unificar Bases
-
-Las bases están separadas por año por lo tanto se ban unificar para obtener un solo archivo, lo que facilitarà hacer todas las transformaciones. Revisar las bases a unificar:
-
+Las bases están separadas por año por lo tanto se ban unificar para obtener un solo archivo, lo que facilitará hacer todas las transformaciones. Revisar las bases a unificar:
 
 ```{r}
-
-delitos_anuales <-  list.files("data/delitos/raw/")
+delitos_anuales <-  list.files("data/delitos/raw/", full.names = T)
 delitos_anuales
 ```
 
+Lectura y unificación utilizando la librería {{< var library.purrr >}}, prdimeramente con la lista de objetos `.rds` con sus rutas completas se procederá a sus lecturas con la función de R base llamada `readRDS()` pero dentro del la función `purrr::map_df()` para que el resultado sea solo una tabla.
+
+```{r eval=FALSE}
+delitos_raw <-  list.files("data/delitos/raw/", full.names = T) %>% 
+  map_df(readRDS)
+```
+
+```{r eval=TRUE, echo=FALSE}
+delitos_raw <- readRDS(file = "data_samples/raw_all.rds")
+# head(delitos_raw)
+```
+
+## Eliminar Duplicados
+
+Se crea ID por cada registro considerando las variables de `hora`, `fecha`, `delito_native`, `lon`, `lat.` Como en nuestro caso la base de delitos en objeto espacial (Simple Features) se extraerá las columnas de latitud y longitud con la función `sf2df()` alojado en script de funciones generales (@sec-fuctions).
+
+Primero creamos una variable temporal de delitos con las columnas de interés:
+
+```{r}
+del <-  delitos_raw %>% 
+  sf2df() %>% #variable temporal tipo df (sacar lon lat)
+  dplyr::select(hora, fecha,delito_native,  lon, lat)
+
+head(del[,1:5])
+```
+
+Se genera el ID para valores únicos
+
+```{r}
+delitos_raw$ID <- cumsum(!duplicated(del[,1:5]))
+
+```
+
+Se extraen los duplicados (son los duplicados)
+
+```{r}
+duplicados <- delitos_raw[duplicated(delitos_raw$ID), ]
+# head(duplicados)
+
+id_casos_dup <- duplicados$ID
+# table(delitos$ID %in%id_casos_dup)
+```
+
+Eliminar duplicados
+
+```{r}
+delitos_clean <- delitos_raw[!duplicated(delitos_raw$ID), ]
+# dim(delitos_clean)
+# head(delitos_clean)
+```
+
+<!-- ## Revisión visual -->
+
+<!-- Para efectos del presente libro digital se trabaja con una muestra de datos que es 200 registros al azar por año.  -->
+
+<!-- A continuación se contruye un mapa dinámico para reslizar una inspección visual del los datos, para esto se utilizará la librería {{< var library.mapview >}}. -->
+
+<!-- ```{r} -->
+
+<!-- region_num <- "05" -->
+
+<!-- del_reg <-  delitos_clean %>%  -->
+
+<!--   filter(region == region_num)  -->
+
+<!-- mapview(del_reg, zcol = "grupo_delictual") -->
+
+<!-- ``` -->
+
+### Imputar datos de Zonas Censales a los Delitos
+
+A la información correspondiente a casos policiales se le va a imputar información de zonas censales ({{< var organization.ine >}}) a través de una operación espacial llamada `inteserct` entre los polígonos de las zonas censales con los puntos de los casos policiales.
+
+Lectura de Zonas censales
+
+```{r}
+zonas <- readRDS("data/ine/zonas_urb_consolidadas.rds") 
+head(zonas)
+```
+
+Imputar infomación censal a delitos, para lo cual se utilizará la función `add_info_intersects()` que está en el script de funciones.
+
+```{r}
+zonas_inf_fil <- zonas %>% 
+  dplyr::select(NOM_REGION, PROVINCIA, NOM_PROVIN,
+         COMUNA, NOM_COMUNA, URBANO,
+         DISTRITO, LOC_ZON, GEOCODIGO)
+
+delitos_info <- add_info_intersects(zonas_inf_fil, delitos_clean)
+# dim(delitos_info)
+# head(delitos_info)
+```
+
+Guardar los resultados
+
+```{r eval=FALSE}
+saveRDS(delitos_info, "data/delitos/delitos_all_info.rds")
+```
+
+## Categorizar los delitos
+
+Considerando que en los casos policiales tiene una diversa tipificación de delitos se procede a categorizarlos en grupos similares.
+
+Para facilitar el proceso de clasificación a cada tipo de delito se le asignará una Sigla que se encuentra en una hoja de un archivo excel.
+
+```{r}
+del_sigla <- read.xlsx("data/excel/delito_native.xlsx", 
+                       sheet = "delitos") %>% 
+  rename(Sigla =CATEGORIA)
+head(del_sigla)
+```
+
+La lista de categorías se encuentra en el mismo archivo Excel
+
+```{r}
+categorias <- read.xlsx("data/excel/delito_native.xlsx", 
+                        sheet = "categorias")
+head(categorias)
+```
+
+Con la sigla previamente creada se procede a categorizar cada uno de los casos policiales
+
+```{r}
+delitos_cat <- left_join(delitos_info, del_sigla,
+                         by = c("delito_native" ="DELITO"))
+# head(delitos_cat)
 
 
 
+delitos_cat <- left_join(delitos_cat, categorias, 
+                         by = "Sigla")
+# head(delitos_cat)
+```
+
+Guardar los resultados
+
+```{r eval=FALSE}
+saveRDS(delitos_cat, "data/delitos/delitos_all_categ.rds")
+```
+
+Como resultado del proceso anterior quedan muchos casos policiales sin categoría asignada los cuales se proceden a eliminar.
+
+```{r}
+# #Descartar los NA en Categoria
+delitos_cat_sigla <- delitos_cat%>%
+  filter(!is.na(Categoria))
+
+# head(delitos_cat)
+# dim(delitos_cat_sigla)
+```
+
+Guardar los resultados
+
+```{r eval=FALSE}
+saveRDS(delitos_cat_sigla, "data/delitos/delitos_only_cat.rds")
+```
+
+## Filtrar por Barrios Comerciales
+
+Finalmente se procede a filtrar aquellos casos policiales que sean considerados en el proyecto de valuación de barrios comerciales.
+
+```{r}
+delitos_cat_bc_URB <- delitos_cat%>%
+  filter(Barrios_Comerciales == 1) 
+```
+
+Guardar los resultados
+
+```{r eval=FALSE}
+saveRDS(delitos_cat_bc_URB, "data/delitos/delitos_eval_bcom_urb.rds")
+
+```
+
+## Visualización Resultados Intermedios
+
+```{r}
+
+region_num <- "05"
+del_reg <-  delitos_cat_bc_URB %>% 
+  filter(region == region_num) 
+
+mapview(del_reg, zcol = "Categoria")
+```
+
+## Cálculo de Total Delitos por Espacio y tiempo
 
 
 
+En este punto se procederá a crear tablas de cálculo de total casos policiales por *espacio* las zonas censales, mientras que *tiempo* las variables de mes y año.
+
+![](images/proc_densidades.png){width="80%" fig-align="center"}
+
+Primeramente se debe extraer mes y año de la variable `fecha` para esto se hará uso de la librería {{< var library.lubridate >}} para manipulación de la variables temporales.
+
+```{r}
+
+# Agregar la variable mes
+delitos_urb <- delitos_cat_bc_URB %>% 
+  st_drop_geometry() %>% 
+  mutate(mes = month(fecha),
+         anno = year(fecha)) %>% 
+  filter(!is.na(Categoria))
+head(delitos_urb %>%  select(fecha, mes, anno))
+
+```
+
+A continuación se creará una tabla temporal que permitirá hacer una contabilidad de todos los delitos ocurridos por Zona censal, categoría, mes y año.
+
+```{r}
+# todos los delitos
+tab_del_all <- delitos_urb%>%
+  mutate(a_mes = paste0( anno, "_", sprintf("%02d",mes))) %>% 
+  group_by(GEOCODIGO, Categoria, a_mes )%>%
+  summarise(Cantidad = n(), .groups = "keep")
+
+head(tab_del_all)
+
+```
+
+A continuación se procede a generar el cálculo de la suma de todos los eventos policiales ocurridos por cada zona censal categoría mes y año utilizando la librería {{< var library.tidyr >}} con la función `pivot_wider()`
+
+
+![](images/pivot_wider.png){fig-align="center" width="80%"}
+
+
+```{r}
+tab_del_all_mes <- tab_del_all%>%
+  pivot_wider(names_from = a_mes, values_from = Cantidad, 
+              names_prefix = "a_", values_fill = 0)%>% 
+  dplyr::select(GEOCODIGO, Categoria,sort(names(.)[3:ncol(.)]))
+head(tab_del_all_mes)
+```
+
+```{r eval=FALSE}
+#guargar resultados
+write.xlsx(tab_del_all_mes,
+           "data/tablas/tablas_del_mes/del_zonas_all.xlsx", overwrite = T)
+saveRDS(tab_del_all_mes, "data/tablas/tablas_del_mes/del_zonas_all.rds")
+
+```
+
+## Cálculo de tablas de densidad casos policiales
+
+Lectura de Zonas Urbanas consolidadas
+
+```{r}
+zonas <- readRDS("data/ine/zonas_urb_consolidadas.rds")
+
+
+info_zonas_base <- zonas %>%
+  st_drop_geometry() %>% 
+  dplyr::select(GEOCODIGO = COD_INE_16, AREA) %>% 
+  mutate(GEOCODIGO = as.character(GEOCODIGO))
+```
+
+Calcular delitos anual y agregar área
+
+```{r}
+tab_del_all_mes <- tab_del_all_mes %>%
+  as.data.frame() %>% #acelera el proceso
+  mutate(anual = rowSums(across(.cols = starts_with("a_")))) %>% 
+  left_join(info_zonas_base, by = "GEOCODIGO")
+```
+
+Calcular la densidad delitos por Hectárea (10000 metros)
+
+```{r}
+tab_all_dens <- tab_del_all_mes %>% 
+  mutate(across(starts_with("a_"), ~ .x/(AREA/10000))) %>% 
+  mutate(dens_anual = anual / (AREA/10000))
+
+head(tab_all_dens[,1:10])
+```
+
+Guardar resultados
+
+```{r eval=FALSE}
+write.xlsx(tab_all_dens, 
+           "data/tablas/tabla_dens_mes/del_dens_all.xlsx",
+           overwrite = T)
+
+saveRDS(tab_all_dens, "data/tablas/tabla_dens_mes/del_dens_all.rds")
 
 
 
+```
+
+## Tablas de Densidad de Delitos por Mes (2013 al 2022)
+
+Unir Tablas
+
+```{r}
+info_zonas_base <- zonas %>%
+  dplyr::select(GEOCODIGO = COD_INE_16, REGION, 
+                NOM_REGION, COMUNA, NOM_COMUNA) %>% 
+  mutate(GEOCODIGO = as.character(GEOCODIGO))
+
+del_dens_zonas <- info_zonas_base %>% 
+  left_join(tab_all_dens, by ="GEOCODIGO")
+head(del_dens_zonas[,1:10])
+
+```
 
 
+Selección de Zonas Censales con Mayor Densidad
+
+```{r}
+
+hist(del_dens_zonas$dens_anual, breaks = 100)
+# hist(del_dens_zonas[del_dens_zonas$dens_anual>50,]$dens_anual, breaks = 100)
+
+
+# definición de zonas que corresponde al porcentaje
+n_porc <- porc_df(del_dens_zonas, porcentaje = 5)
+n_porc
+
+dens_max <- del_dens_zonas %>% 
+  slice_max(dens_anual, n = n_porc) 
+
+
+# Densidades 
+
+# mapview(dens_max, zcol = "dens_anual")
+```
+
+
+Conocer que región tiene las zonas con mayor concentración de delitos
+
+```{r}
+
+regiones_max <- dens_max %>% 
+  st_drop_geometry() %>% 
+  group_by(REGION) %>% 
+  summarise(Cantidad = n()) %>% 
+  arrange(desc(Cantidad))
+
+regiones_max
+```
+
+Visualización de las región máxima
+```{r}
+
+reg_dens_max2 <- dens_max %>% 
+  filter(REGION == 13) %>% 
+  filter(!is.na(dens_anual))
+
+# mapview(reg_dens_max2, zcol = "dens_anual", at= c(0,10,50,100,1000))
+
+```
+
+Visualización de desimad máxima por categoria
+
+
+```{r}
+unique(del_dens_zonas$Categoria)
+categoria_tipo <-  "Comercio ilegal"  
+
+dens_max_cat <- del_dens_zonas %>% 
+  filter(Categoria==categoria_tipo) %>% 
+  slice_max(dens_anual, n = n_porc) 
+
+# mapview(dens_max_cat, zcol = "dens_anual")
+```
+
+```{r}
+
+regiones_max_cat <- dens_max_cat %>% 
+  st_drop_geometry() %>% 
+  group_by(REGION) %>% 
+  summarise(Cantidad = n()) %>% 
+  arrange(desc(Cantidad))
+
+regiones_max_cat
+
+
+reg_dens_max_cat <- dens_max_cat %>% 
+  filter(REGION == 13) %>% 
+  filter(!is.na(dens_anual))%>% 
+  slice_max(dens_anual, n = 100) 
+
+mapview(reg_dens_max_cat, zcol = "dens_anual")
+```
+
+
+## Densidades con Respecto al Tiempo
+
+![](images/pivot_longer.png){fig-align="center" width="80%"}
+
+```{r}
+
+categoria_tipo <-  "Comercio ilegal" 
+ts_info <- dens_max %>% 
+  st_drop_geometry() %>% 
+  dplyr::select(Categoria, a_2013_01:a_2020_12) %>% 
+  pivot_longer(cols = a_2013_01:a_2020_12,
+               names_to = "tiempo", values_to = "densidades") %>% 
+  mutate(tiempo = gsub("a_", "", tiempo),
+         tiempo = gsub("_", "-", tiempo),
+         tiempo = ym(tiempo)) 
+head(ts_info)
+```
+
+*Gráficos**
+
+Gráficos de Serie de Tiempo Todas las Categorías
+
+```{r}
+pline <- ggplot() + 
+  geom_line(data = ts_info, aes(x = tiempo, y = densidades,
+                                colour = Categoria),
+            alpha = 0.4) +
+  xlab('Meses ') +
+  ylab('Densidades') +
+  theme_bw()
+pline
+
+```
+
+```{r}
+pline <- ggplot() + 
+  geom_line(data = ts_info, aes(x = tiempo, y = densidades,
+                                colour = Categoria),
+            alpha = 0.4) +
+  xlab('Meses ') +
+  ylab('Densidades') +
+  theme_bw()+
+  facet_grid(Categoria ~ .) + 
+  theme(legend.position = "none")
+# pline
+
+ggplotly(pline)
+```
+
+Gráficos sobre médidas de centralidad (8 Primeras Categorías)
+
+```{r}
+unique(ts_info$Categoria)
+
+df_tidy_mean_1 <- ts_info %>%
+  filter(!is.na(densidades)) %>%
+  filter(Categoria %in% unique(ts_info$Categoria)[1:8]) %>%
+  group_by(tiempo, Categoria) %>%
+  summarise(n = n(),
+            mean = mean(densidades),
+            median = median(densidades),
+            sd = sd(densidades)) %>%
+  mutate(sem = sd / sqrt(n - 1),
+         CI_lower = mean + qt((1-0.95)/2, n - 1) * sem,
+         CI_upper = mean - qt((1-0.95)/2, n - 1) * sem)
+
+mean_plot_1 <- ggplot(df_tidy_mean_1, aes(x = tiempo, y = mean, color = Categoria)) +
+  geom_line(aes(x = tiempo, y = mean, color = Categoria)) +
+  geom_ribbon(
+    aes(ymin = CI_lower, ymax = CI_upper, fill = Categoria),
+    color = "grey90",
+    alpha = 0.2 )+
+  theme_bw()
+
+ggplotly(mean_plot_1)
+
+
+
+```
+
+Gráficos Desagregados
+
+```{r}
+color_list <- viridis::viridis(length(unique(ts_info$Categoria)))
+mean_plot_1_solos <- ggplot(df_tidy_mean_1, aes(x = tiempo, y = mean, color = Categoria)) +
+  geom_line(aes(x = tiempo, y = mean, color = Categoria)) +
+  geom_ribbon(
+    aes(ymin = CI_lower, ymax = CI_upper, fill = Categoria),
+    color = "grey90",
+    alpha = 0.2) +  
+  theme_bw()+
+  scale_fill_manual(values = color_list) +
+  scale_color_manual(values = color_list) +
+  facet_grid(Categoria ~ .) + 
+  theme(legend.position = "none")
+
+
+ggplotly(mean_plot_1_solos)
+
+```
 

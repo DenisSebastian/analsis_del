@@ -13,3 +13,9 @@ library:
   sf: "[Simple Features for R](https://r-spatial.github.io/sf/articles/sf1.html)"
   dplyr: "[dplyr](https://dplyr.tidyverse.org)"
   purrr: "[purrr](https://purrr.tidyverse.org)"
+  mapview: "[mapview](https://r-spatial.github.io/mapview/)"
+  lubridate: "[lubridate](https://lubridate.tidyverse.org)"
+  tidyr: "[tidyr](https://tidyr.tidyverse.org)"
+  
+organization:
+  ine: "[Instituto Nacional de Estadísticas](https://www.ine.gob.cl)"

@@ -167,3 +167,29 @@ read_delitos <-
 
 
 
+
+## Función seleccionar muestra n
+
+
+muestra_n <-  function(df, n, random = F){
+  if(isTRUE(random)){
+    x <- dplyr::slice_sample(df, n = n, replace = F)
+  }else{
+    x <- df[1:n]
+  }
+  return(x)
+}
+
+
+## Función seleccionar muestra por fracción
+
+muestra_frac <-  function(df, prop){
+  x <- dplyr::slice_sample(df, prop = prop, replace = F)
+  return(x)
+}
+
+
+
+
+
+
