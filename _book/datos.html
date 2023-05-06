@@ -202,7 +202,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#cargar-librerías-y-funciones" id="toc-cargar-librerías-y-funciones" class="nav-link active" data-scroll-target="#cargar-librerías-y-funciones"><span class="toc-section-number">1.1</span>  Cargar Librerías y Funciones</a></li>
-  <li><a href="#lectura-de-datos" id="toc-lectura-de-datos" class="nav-link" data-scroll-target="#lectura-de-datos"><span class="toc-section-number">1.2</span>  Lectura de Datos</a></li>
+  <li><a href="#lectura-de-datos" id="toc-lectura-de-datos" class="nav-link" data-scroll-target="#lectura-de-datos"><span class="toc-section-number">1.2</span>  Lectura de Datos</a>
+  <ul class="collapse">
+  <li><a href="#unificar-bases" id="toc-unificar-bases" class="nav-link" data-scroll-target="#unificar-bases"><span class="toc-section-number">1.2.1</span>  Unificar Bases</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -319,8 +322,20 @@ Projected CRS: WGS 84 / UTM zone 19S
 </div>
 </div>
 <p>Se puede observar que corresponde a <code>1.418.435</code> de casos policiales con información espacial tipo punto (<a href="https://r-spatial.github.io/sf/articles/sf1.html">Simple Features for R</a>), además información temporal y divisiones administrativas.</p>
+<section id="unificar-bases" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="unificar-bases"><span class="header-section-number">1.2.1</span> Unificar Bases</h3>
+<p>Las bases están separadas por año por lo tanto se ban unificar para obtener un solo archivo, lo que facilitarà hacer todas las transformaciones. Revisar las bases a unificar:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>delitos_anuales <span class="ot">&lt;-</span>  <span class="fu">list.files</span>(<span class="st">"data/delitos/raw/"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>delitos_anuales</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Casos_2017.rds" "Casos_2018.rds" "Casos_2019.rds" "Casos_2020.rds"
+[5] "Casos_2021.rds" "Casos_2022.rds"</code></pre>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

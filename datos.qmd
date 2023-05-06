@@ -66,9 +66,19 @@ head(datos_2017)
 ```
 
 
-
-
 Se puede observar que corresponde a `1.418.435` de casos policiales con información espacial tipo punto ({{< var library.sf >}}), además información temporal y divisiones administrativas.
+
+
+### Unificar Bases
+
+Las bases están separadas por año por lo tanto se ban unificar para obtener un solo archivo, lo que facilitarà hacer todas las transformaciones. Revisar las bases a unificar:
+
+
+```{r}
+
+delitos_anuales <-  list.files("data/delitos/raw/")
+delitos_anuales
+```
 
 
 
