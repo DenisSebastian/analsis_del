@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Análisis Criminal - Appendix B — R Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./crime_f.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Appendix B — R Project</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Análisis Criminal</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Introducción</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./datos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Datos de Delitos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./crime_f.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Funciones Generales</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./r_project.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">R Project</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introducción-a-r" id="toc-introducción-a-r" class="nav-link active" data-scroll-target="#introducción-a-r"><span class="toc-section-number">C</span>  Introducción a R</a>
+  <ul class="collapse">
+  <li><a href="#qué-es-r-project" id="toc-qué-es-r-project" class="nav-link" data-scroll-target="#qué-es-r-project"><span class="toc-section-number">C.1</span>  ¿Qué es R Project?</a>
+  <ul class="collapse">
+  <li><a href="#ventajas-de-utilizar-r-project" id="toc-ventajas-de-utilizar-r-project" class="nav-link" data-scroll-target="#ventajas-de-utilizar-r-project"><span class="toc-section-number">C.1.1</span>  Ventajas de Utilizar R Project</a></li>
+  <li><a href="#desventajas-de-utilizar-r" id="toc-desventajas-de-utilizar-r" class="nav-link" data-scroll-target="#desventajas-de-utilizar-r"><span class="toc-section-number">C.1.2</span>  Desventajas de utilizar R</a></li>
+  </ul></li>
+  <li><a href="#instalación-de-r-project" id="toc-instalación-de-r-project" class="nav-link" data-scroll-target="#instalación-de-r-project"><span class="toc-section-number">C.2</span>  Instalación de R Project</a>
+  <ul class="collapse">
+  <li><a href="#instalación-de-r-project-1" id="toc-instalación-de-r-project-1" class="nav-link" data-scroll-target="#instalación-de-r-project-1"><span class="toc-section-number">C.2.1</span>  Instalación de R Project</a></li>
+  <li><a href="#instalación-de-r-para-windows" id="toc-instalación-de-r-para-windows" class="nav-link" data-scroll-target="#instalación-de-r-para-windows"><span class="toc-section-number">C.2.2</span>  Instalación de R para Windows</a></li>
+  <li><a href="#instalar-rtools-solo-sistema-operativo-windows" id="toc-instalar-rtools-solo-sistema-operativo-windows" class="nav-link" data-scroll-target="#instalar-rtools-solo-sistema-operativo-windows"><span class="toc-section-number">C.2.3</span>  Instalar Rtools (solo Sistema Operativo Windows)</a></li>
+  <li><a href="#instalación-de-r-para-mac" id="toc-instalación-de-r-para-mac" class="nav-link" data-scroll-target="#instalación-de-r-para-mac"><span class="toc-section-number">C.2.4</span>  Instalación de R para Mac</a></li>
+  </ul></li>
+  <li><a href="#instalación-de-rstudio" id="toc-instalación-de-rstudio" class="nav-link" data-scroll-target="#instalación-de-rstudio"><span class="toc-section-number">C.3</span>  Instalación de RStudio</a>
+  <ul class="collapse">
+  <li><a href="#rstudio-cloud" id="toc-rstudio-cloud" class="nav-link" data-scroll-target="#rstudio-cloud"><span class="toc-section-number">C.3.1</span>  RStudio Cloud</a></li>
+  </ul></li>
+  <li><a href="#instalar-librerías" id="toc-instalar-librerías" class="nav-link" data-scroll-target="#instalar-librerías"><span class="toc-section-number">C.4</span>  Instalar Librerías</a>
+  <ul class="collapse">
+  <li><a href="#librerías-en-r" id="toc-librerías-en-r" class="nav-link" data-scroll-target="#librerías-en-r"><span class="toc-section-number">C.4.1</span>  Librerías en R</a></li>
+  <li><a href="#ejemplo-de-instalación-de-librerías-desde-r" id="toc-ejemplo-de-instalación-de-librerías-desde-r" class="nav-link" data-scroll-target="#ejemplo-de-instalación-de-librerías-desde-r"><span class="toc-section-number">C.4.2</span>  Ejemplo de Instalación de Librerías desde R</a></li>
+  <li><a href="#ejemplo-de-instalación-de-librerías-desde-rstudio" id="toc-ejemplo-de-instalación-de-librerías-desde-rstudio" class="nav-link" data-scroll-target="#ejemplo-de-instalación-de-librerías-desde-rstudio"><span class="toc-section-number">C.4.3</span>  Ejemplo de Instalación de Librerías desde Rstudio</a></li>
+  </ul></li>
+  <li><a href="#definición-de-directorios-de-trabajos" id="toc-definición-de-directorios-de-trabajos" class="nav-link" data-scroll-target="#definición-de-directorios-de-trabajos"><span class="toc-section-number">C.5</span>  Definición de Directorios de Trabajos</a></li>
+  </ul></li>
+  <li><a href="#variables-en-r" id="toc-variables-en-r" class="nav-link" data-scroll-target="#variables-en-r"><span class="toc-section-number">D</span>  Variables en R</a>
+  <ul class="collapse">
+  <li><a href="#tipos-de-objetos-en-r" id="toc-tipos-de-objetos-en-r" class="nav-link" data-scroll-target="#tipos-de-objetos-en-r"><span class="toc-section-number">D.1</span>  Tipos de Objetos en R</a>
+  <ul class="collapse">
+  <li><a href="#variables-numéricas" id="toc-variables-numéricas" class="nav-link" data-scroll-target="#variables-numéricas"><span class="toc-section-number">D.1.1</span>  Variables Numéricas</a></li>
+  <li><a href="#variables-de-caracter" id="toc-variables-de-caracter" class="nav-link" data-scroll-target="#variables-de-caracter"><span class="toc-section-number">D.1.2</span>  Variables de Caracter</a></li>
+  </ul></li>
+  <li><a href="#estructuras-de-datos" id="toc-estructuras-de-datos" class="nav-link" data-scroll-target="#estructuras-de-datos"><span class="toc-section-number">D.2</span>  Estructuras de Datos</a>
+  <ul class="collapse">
+  <li><a href="#vectores" id="toc-vectores" class="nav-link" data-scroll-target="#vectores"><span class="toc-section-number">D.2.1</span>  Vectores</a></li>
+  <li><a href="#listas" id="toc-listas" class="nav-link" data-scroll-target="#listas"><span class="toc-section-number">D.2.2</span>  Listas</a></li>
+  <li><a href="#matrices" id="toc-matrices" class="nav-link" data-scroll-target="#matrices"><span class="toc-section-number">D.2.3</span>  Matrices</a></li>
+  <li><a href="#dataframes" id="toc-dataframes" class="nav-link" data-scroll-target="#dataframes"><span class="toc-section-number">D.2.4</span>  Dataframes</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#funciones-en-r" id="toc-funciones-en-r" class="nav-link" data-scroll-target="#funciones-en-r"><span class="toc-section-number">E</span>  Funciones en R</a>
+  <ul class="collapse">
+  <li><a href="#operaciones-básicas-en-r" id="toc-operaciones-básicas-en-r" class="nav-link" data-scroll-target="#operaciones-básicas-en-r"><span class="toc-section-number">E.1</span>  Operaciones Básicas en R</a>
+  <ul class="collapse">
+  <li><a href="#operaciones-matemáticas" id="toc-operaciones-matemáticas" class="nav-link" data-scroll-target="#operaciones-matemáticas"><span class="toc-section-number">E.1.1</span>  Operaciones Matemáticas</a></li>
+  <li><a href="#funciones-útiles-de-propósito-general" id="toc-funciones-útiles-de-propósito-general" class="nav-link" data-scroll-target="#funciones-útiles-de-propósito-general"><span class="toc-section-number">E.1.2</span>  Funciones Útiles de propósito general</a></li>
+  </ul></li>
+  <li><a href="#operaciones-lógicas" id="toc-operaciones-lógicas" class="nav-link" data-scroll-target="#operaciones-lógicas"><span class="toc-section-number">E.2</span>  Operaciones Lógicas</a>
+  <ul class="collapse">
+  <li><a href="#operador-de-igualdad" id="toc-operador-de-igualdad" class="nav-link" data-scroll-target="#operador-de-igualdad"><span class="toc-section-number">E.2.1</span>  Operador de igualdad: (==)</a></li>
+  <li><a href="#operador-de-desigualdad" id="toc-operador-de-desigualdad" class="nav-link" data-scroll-target="#operador-de-desigualdad"><span class="toc-section-number">E.2.2</span>  Operador de desigualdad: (!=)</a></li>
+  <li><a href="#operador-de-mayor-que" id="toc-operador-de-mayor-que" class="nav-link" data-scroll-target="#operador-de-mayor-que"><span class="toc-section-number">E.2.3</span>  Operador de mayor que: (&gt;)</a></li>
+  <li><a href="#operador-de-menor-que" id="toc-operador-de-menor-que" class="nav-link" data-scroll-target="#operador-de-menor-que"><span class="toc-section-number">E.2.4</span>  Operador de menor que: (&lt;)</a></li>
+  <li><a href="#operador-de-mayor-o-igual-que" id="toc-operador-de-mayor-o-igual-que" class="nav-link" data-scroll-target="#operador-de-mayor-o-igual-que"><span class="toc-section-number">E.2.5</span>  Operador de mayor o igual que: (&gt;=)</a></li>
+  <li><a href="#operador-de-menor-o-igual-que" id="toc-operador-de-menor-o-igual-que" class="nav-link" data-scroll-target="#operador-de-menor-o-igual-que"><span class="toc-section-number">E.2.6</span>  Operador de menor o igual que: (&lt;=)</a></li>
+  <li><a href="#operador-lógico-and" id="toc-operador-lógico-and" class="nav-link" data-scroll-target="#operador-lógico-and"><span class="toc-section-number">E.2.7</span>  Operador lógico AND: (&amp;)</a></li>
+  <li><a href="#operador-lógico-or" id="toc-operador-lógico-or" class="nav-link" data-scroll-target="#operador-lógico-or"><span class="toc-section-number">E.2.8</span>  Operador lógico OR: (|)</a></li>
+  </ul></li>
+  <li><a href="#crear-funciones-propias" id="toc-crear-funciones-propias" class="nav-link" data-scroll-target="#crear-funciones-propias"><span class="toc-section-number">E.3</span>  Crear Funciones Propias</a></li>
+  </ul></li>
+  <li><a href="#estructura-de-control-en-r" id="toc-estructura-de-control-en-r" class="nav-link" data-scroll-target="#estructura-de-control-en-r"><span class="toc-section-number">F</span>  Estructura de Control en R</a>
+  <ul class="collapse">
+  <li><a href="#estructuras-condicionales" id="toc-estructuras-condicionales" class="nav-link" data-scroll-target="#estructuras-condicionales"><span class="toc-section-number">F.1</span>  Estructuras condicionales</a></li>
+  <li><a href="#estructuras-de-bucles" id="toc-estructuras-de-bucles" class="nav-link" data-scroll-target="#estructuras-de-bucles"><span class="toc-section-number">F.2</span>  Estructuras de bucles</a>
+  <ul class="collapse">
+  <li><a href="#estructura-de-bucle-for" id="toc-estructura-de-bucle-for" class="nav-link" data-scroll-target="#estructura-de-bucle-for"><span class="toc-section-number">F.2.1</span>  Estructura de bucle “<code>for</code>”:</a></li>
+  <li><a href="#estructura-de-bucle-while" id="toc-estructura-de-bucle-while" class="nav-link" data-scroll-target="#estructura-de-bucle-while"><span class="toc-section-number">F.2.2</span>  Estructura de bucle “while”:</a></li>
+  <li><a href="#estructura-de-bucle-repeat" id="toc-estructura-de-bucle-repeat" class="nav-link" data-scroll-target="#estructura-de-bucle-repeat"><span class="toc-section-number">F.2.3</span>  Estructura de bucle “repeat”:</a></li>
+  </ul></li>
+  <li><a href="#estructuras-de-control-de-flujo" id="toc-estructuras-de-control-de-flujo" class="nav-link" data-scroll-target="#estructuras-de-control-de-flujo"><span class="toc-section-number">F.3</span>  Estructuras de control de flujo</a>
+  <ul class="collapse">
+  <li><a href="#estructuras-de-control-next" id="toc-estructuras-de-control-next" class="nav-link" data-scroll-target="#estructuras-de-control-next"><span class="toc-section-number">F.3.1</span>  Estructuras de control “next”:</a></li>
+  <li><a href="#estructuras-de-control-break" id="toc-estructuras-de-control-break" class="nav-link" data-scroll-target="#estructuras-de-control-break"><span class="toc-section-number">F.3.2</span>  Estructuras de control “break”:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#tidyverse-en-r" id="toc-tidyverse-en-r" class="nav-link" data-scroll-target="#tidyverse-en-r"><span class="toc-section-number">G</span>  Tidyverse en R</a>
+  <ul class="collapse">
+  <li><a href="#introducción-a-tidyverse" id="toc-introducción-a-tidyverse" class="nav-link" data-scroll-target="#introducción-a-tidyverse"><span class="toc-section-number">G.1</span>  Introducción a Tidyverse</a></li>
+  <li><a href="#estructura-de-un-dataframe" id="toc-estructura-de-un-dataframe" class="nav-link" data-scroll-target="#estructura-de-un-dataframe"><span class="toc-section-number">G.2</span>  Estructura de un dataframe</a></li>
+  <li><a href="#funciones-básicas-dplyr" id="toc-funciones-básicas-dplyr" class="nav-link" data-scroll-target="#funciones-básicas-dplyr"><span class="toc-section-number">G.3</span>  Funciones básicas <code>dplyr</code></a>
+  <ul class="collapse">
+  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select"><span class="toc-section-number">G.3.1</span>  Select</a></li>
+  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="toc-section-number">G.3.2</span>  Filter</a></li>
+  </ul></li>
+  <li><a href="#resúmenes-estadísticos-con-dplyr" id="toc-resúmenes-estadísticos-con-dplyr" class="nav-link" data-scroll-target="#resúmenes-estadísticos-con-dplyr"><span class="toc-section-number">G.4</span>  Resúmenes Estadísticos con <code>dplyr</code></a></li>
+  <li><a href="#visualización-de-variables" id="toc-visualización-de-variables" class="nav-link" data-scroll-target="#visualización-de-variables"><span class="toc-section-number">G.5</span>  Visualización de Variables</a>
+  <ul class="collapse">
+  <li><a href="#función-plot" id="toc-función-plot" class="nav-link" data-scroll-target="#función-plot"><span class="toc-section-number">G.5.1</span>  Función Plot</a></li>
+  <li><a href="#package-ggplot2" id="toc-package-ggplot2" class="nav-link" data-scroll-target="#package-ggplot2"><span class="toc-section-number">G.5.2</span>  Package ggplot2</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#objetos-espaciales-en-r" id="toc-objetos-espaciales-en-r" class="nav-link" data-scroll-target="#objetos-espaciales-en-r"><span class="toc-section-number">H</span>  Objetos Espaciales en R</a>
+  <ul class="collapse">
+  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="toc-section-number">H.1</span>  Introducción</a></li>
+  <li><a href="#lectura-de-insumos-espaciales" id="toc-lectura-de-insumos-espaciales" class="nav-link" data-scroll-target="#lectura-de-insumos-espaciales"><span class="toc-section-number">H.2</span>  Lectura de Insumos Espaciales</a></li>
+  <li><a href="#transformar-a-objeto-sf-simple-features" id="toc-transformar-a-objeto-sf-simple-features" class="nav-link" data-scroll-target="#transformar-a-objeto-sf-simple-features"><span class="toc-section-number">H.3</span>  Transformar a objeto sf (simple features)</a></li>
+  <li><a href="#filtros-espaciales-por-data" id="toc-filtros-espaciales-por-data" class="nav-link" data-scroll-target="#filtros-espaciales-por-data"><span class="toc-section-number">H.4</span>  Filtros espaciales por data</a></li>
+  <li><a href="#visualización-cartográficas" id="toc-visualización-cartográficas" class="nav-link" data-scroll-target="#visualización-cartográficas"><span class="toc-section-number">H.5</span>  Visualización Cartográficas</a>
+  <ul class="collapse">
+  <li><a href="#visualización-estática-simple" id="toc-visualización-estática-simple" class="nav-link" data-scroll-target="#visualización-estática-simple"><span class="toc-section-number">H.5.1</span>  Visualización estática Simple</a></li>
+  <li><a href="#visualización-estática-con-ggplot2" id="toc-visualización-estática-con-ggplot2" class="nav-link" data-scroll-target="#visualización-estática-con-ggplot2"><span class="toc-section-number">H.5.2</span>  Visualización estática con <code>ggplot2</code></a></li>
+  <li><a href="#visualización-dinámica-con-mapview" id="toc-visualización-dinámica-con-mapview" class="nav-link" data-scroll-target="#visualización-dinámica-con-mapview"><span class="toc-section-number">H.5.3</span>  Visualización Dinámica con <code>mapview</code></a></li>
+  </ul></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="toc-section-number">H.6</span>  Referencias:</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Appendix B — R Project</h1>
+<p class="subtitle lead">Repaso de Lenguaje de Programación</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introducción-a-r" class="level1" data-number="C">
+<h1 data-number="C"><span class="header-section-number">C</span> Introducción a R</h1>
+<section id="qué-es-r-project" class="level2" data-number="C.1">
+<h2 data-number="C.1" class="anchored" data-anchor-id="qué-es-r-project"><span class="header-section-number">C.1</span> ¿Qué es R Project?</h2>
+<p>R es un lenguaje programación multiparadigma (procedural, imperativo, orientado a objetos y <a href="https://es.wikipedia.org/wiki/Programación_funcional">funcional</a>) enfocado a aplicaciones estadísticas. Por estadísticas se debe entender también los campos de estudio que se basan o las utilizan como económía, finanzas, ciencia de datos, machine learning, etc.</p>
+<section id="ventajas-de-utilizar-r-project" class="level3" data-number="C.1.1">
+<h3 data-number="C.1.1" class="anchored" data-anchor-id="ventajas-de-utilizar-r-project"><span class="header-section-number">C.1.1</span> Ventajas de Utilizar R Project</h3>
+<p><strong>1. R es un software libre</strong></p>
+<ul>
+<li>La libertad de ejecutar el programa como desee y con cualquier propósito</li>
+<li>Estudiar el funcionamiento del programa y adaptarlo a sus necesidades.</li>
+<li>Rescribir copias para ayudar a los demás.</li>
+<li>Manejar el programa y publicar las mejorar, de manera que toda comunidad se beneficie.</li>
+</ul>
+<p><strong>2. R es multiplataforma</strong></p>
+<ul>
+<li>R funciona en Mac, Windows y en numerosos sistemas UNIX. Esto significa que cualquier persona puede trabajar con tus datos, figuras, análisis y más importante aún usar tus instrucciones (también conocido como scripts o código) para generar las figuras y el análisis. Así que cualquier persona, y en cualquier lugar del mundo, con acceso a cualquier SO puede usar R sin ninguna licencia.</li>
+</ul>
+<p><strong>3. R es de código abierto</strong></p>
+<ul>
+<li>Existe una gran comunidad de voluntarios trabajando para mejorarlo, lo cual permite ser moldeado y dirigido a cuestiones específicas. Creando así programas y paquetes que funcionen en el entorno R. Programas tales como R-studio, Java GUI for R, R- commander, RKWard, entre otros, y con más de 18000 paquetes indexado en CRAN, Biocoductor, GitHub y R-Forge.</li>
+</ul>
+<p><strong>4. Todo dentro de un mismo entorno</strong></p>
+<ul>
+<li>R remplaza la combinación de varios programas para el proceso de análisis de datos, por ejemplo Excel, ArcGis, QGis, SigmaPlot, entre otros. Esto no solo resulta en el alto costo de las licencias de múltiples programas, si no también, en la gran cantidad de archivos con diferentes formatos que no podrían leer otros programas. En cambio con solo utilizar R, puedes realizar todo el análisis de datos e inclusive leer archivos de diferentes formatos.</li>
+</ul>
+</section>
+<section id="desventajas-de-utilizar-r" class="level3" data-number="C.1.2">
+<h3 data-number="C.1.2" class="anchored" data-anchor-id="desventajas-de-utilizar-r"><span class="header-section-number">C.1.2</span> Desventajas de utilizar R</h3>
+<ul>
+<li>R tiene una vasta documentación de ayuda, descripción de paquetes y de funciones, que es difícil encontrar información específica en un momento dado.</li>
+<li>Los mensajes de error que R nos muestra, no es específica sobre los fallos que estamos realizando y solo un usuario con cierta experiencia en el uso de R puede saberlo.</li>
+</ul>
+</section>
+</section>
+<section id="instalación-de-r-project" class="level2" data-number="C.2">
+<h2 data-number="C.2" class="anchored" data-anchor-id="instalación-de-r-project"><span class="header-section-number">C.2</span> Instalación de R Project</h2>
+<section id="instalación-de-r-project-1" class="level3" data-number="C.2.1">
+<h3 data-number="C.2.1" class="anchored" data-anchor-id="instalación-de-r-project-1"><span class="header-section-number">C.2.1</span> Instalación de R Project</h3>
+<p>Primero se debe instalar <strong><a href="https://cran.r-project.org/bin/windows/base/">R Project</a></strong> desde su sitio oficial (https://cran.r-project.org/bin/windows/base/), se ejecuta el instalador que se descargó depende del sistema operativo del PC, como se muestra en las siguientes figuras:</p>
+<p><img src="images/install_r.png" class="img-fluid"></p>
+</section>
+<section id="instalación-de-r-para-windows" class="level3" data-number="C.2.2">
+<h3 data-number="C.2.2" class="anchored" data-anchor-id="instalación-de-r-para-windows"><span class="header-section-number">C.2.2</span> Instalación de R para Windows</h3>
+<center>
+<img src="images/install_r_w.gif" class="img-fluid" style="width:90.0%">
+</center>
+</section>
+<section id="instalar-rtools-solo-sistema-operativo-windows" class="level3" data-number="C.2.3">
+<h3 data-number="C.2.3" class="anchored" data-anchor-id="instalar-rtools-solo-sistema-operativo-windows"><span class="header-section-number">C.2.3</span> Instalar Rtools (solo Sistema Operativo Windows)</h3>
+<center>
+<img src="images/w_rtools.png" class="img-fluid" style="width:60.0%">
+</center>
+<center>
+<img src="images/install_rtools.png" class="img-fluid" style="width:60.0%">
+</center>
+</section>
+<section id="instalación-de-r-para-mac" class="level3" data-number="C.2.4">
+<h3 data-number="C.2.4" class="anchored" data-anchor-id="instalación-de-r-para-mac"><span class="header-section-number">C.2.4</span> Instalación de R para Mac</h3>
+<center>
+<img src="images/install_r_mac.gif" class="img-fluid" style="width:90.0%">
+</center>
+<p><strong>R Project Ejecutándose</strong></p>
+<p><img src="images/r_project.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="instalación-de-rstudio" class="level2" data-number="C.3">
+<h2 data-number="C.3" class="anchored" data-anchor-id="instalación-de-rstudio"><span class="header-section-number">C.3</span> Instalación de RStudio</h2>
+<p>Se recomienta instalar <a href="https://www.rstudio.com/products/rstudio/download/">Rstudio</a>, que es Interfaz de Usuario de R Project, desde su sitio web oficial, el cual permite acceder con mayor facilidad a sus funciones y potencialidades de R.</p>
+<center>
+<img src="images/instaladores_rstudio.png" class="img-fluid" style="width:60.0%">
+</center>
+<p><img src="images/Install_RStudio.png" class="img-fluid"></p>
+<p><img src="images/rstudio.png" class="img-fluid"></p>
+<center>
+<img src="images/rstudio-editor.svg" class="img-fluid" style="width:90.0%">
+</center>
+<section id="rstudio-cloud" class="level3" data-number="C.3.1">
+<h3 data-number="C.3.1" class="anchored" data-anchor-id="rstudio-cloud"><span class="header-section-number">C.3.1</span> RStudio Cloud</h3>
+<p><a href="https://rstudio.cloud">RStudio Cloud</a> es una versión ligera del IDE RStudio alojada en la la nube que permite a cualquiera hacer, compartir, enseñar y aprender Ciencias de Datos Online. Tiene una versión gratuita limitada.</p>
+<section id="características" class="level4" data-number="C.3.1.1">
+<h4 data-number="C.3.1.1" class="anchored" data-anchor-id="características"><span class="header-section-number">C.3.1.1</span> Características:</h4>
+<ul>
+<li>Analyze your data using the RStudio IDE, directly from your browser.</li>
+<li>Share projects with your team, class, workshop or the world.</li>
+<li>Teach data science with R to your students or colleagues.</li>
+<li>Learn data science in an instructor-led environment or with interactive tutorials.</li>
+</ul>
+<center>
+<img src="images/Rstudio_cloud_page.png" class="img-fluid" style="width:90.0%">
+</center>
+<center>
+<img src="images/rstudio_logging.png" class="img-fluid" style="width:90.0%">
+</center>
+<center>
+<img src="images/rstudio_workspace.png" class="img-fluid" style="width:90.0%">
+</center>
+<center>
+<img src="images/rstudio_cloud.png" class="img-fluid" style="width:90.0%">
+</center>
+</section>
+</section>
+</section>
+<section id="instalar-librerías" class="level2" data-number="C.4">
+<h2 data-number="C.4" class="anchored" data-anchor-id="instalar-librerías"><span class="header-section-number">C.4</span> Instalar Librerías</h2>
+<section id="librerías-en-r" class="level3" data-number="C.4.1">
+<h3 data-number="C.4.1" class="anchored" data-anchor-id="librerías-en-r"><span class="header-section-number">C.4.1</span> Librerías en R</h3>
+<p>Las librerías o paquetes en R corresponden a una colección de funciones encapsuladas y diseñadas para atender una tarea específica. Por ejemplo, hay paquetes para trabajo visualización geoespacial, análisis psicométricos, mineria de datos, interacción con servicios de internet y muchas otras cosas más.</p>
+<p>Estos paquetes se encuentran alojados principalmente en <a href="https://cran.r-project.org">CRAN</a> (Comprehensive R Archive Network), así que pasan por un control riguroso antes de estar disponibles para su uso generalizado, al día de hoy (29.11.2021) existen 18498 paquetes disponibles. En el siguiente enlace se deja una lista de temas y sus librerías asociadas disponibles, con una breve descripción (<a href="https://cran.r-project.org/web/views/">enlace</a>)</p>
+<p>Aunque las versiones de prueba de una librería pueden estar disponible en <a href="https://github.com">Github</a> (Respositorio de Control de Versiones) de cada autor.</p>
+</section>
+<section id="ejemplo-de-instalación-de-librerías-desde-r" class="level3" data-number="C.4.2">
+<h3 data-number="C.4.2" class="anchored" data-anchor-id="ejemplo-de-instalación-de-librerías-desde-r"><span class="header-section-number">C.4.2</span> Ejemplo de Instalación de Librerías desde R</h3>
+<p>Podemos instalar paquetes usando la función <code>install.packages()</code>, dando como argumento el nombre del paquete que deseamos instalar, entre comillas.</p>
+<p>Para instalar librerías se puede hacer directamente desde la consola de RStudio, por ejemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>) <span class="co"># Se puede instalar más de una librería a la vez</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ejemplo-de-instalación-de-librerías-desde-rstudio" class="level3" data-number="C.4.3">
+<h3 data-number="C.4.3" class="anchored" data-anchor-id="ejemplo-de-instalación-de-librerías-desde-rstudio"><span class="header-section-number">C.4.3</span> Ejemplo de Instalación de Librerías desde Rstudio</h3>
+<p>También se pude instalar librerías del Panel “Packages”</p>
+<center>
+<img src="images/install_pack2.png" class="img-fluid" style="width:90.0%">
+</center>
+<p>Y por último se puede instalar desde Pestaña “Tools” -&gt; “Install Packages”:</p>
+<center>
+<img src="images/install_pckages.gif" class="img-fluid" style="width:90.0%">
+</center>
+</section>
+</section>
+<section id="definición-de-directorios-de-trabajos" class="level2" data-number="C.5">
+<h2 data-number="C.5" class="anchored" data-anchor-id="definición-de-directorios-de-trabajos"><span class="header-section-number">C.5</span> Definición de Directorios de Trabajos</h2>
+<p>Definir directorio de Trabajo con RStudio</p>
+<center>
+<img src="images/wdirectory.png" class="img-fluid" style="width:80.0%">
+</center>
+<center>
+<img src="images/folder_directory.png" class="img-fluid" style="width:60.0%">
+</center>
+<p>Definir Directorio de Trabajo con una función</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"~/OneDrive - Universidad Adolfo Ibanez/FONDECYT/capacitacion_SPD"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Consultar Directorio de Trabajo</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/Users/denisberroeta/Library/CloudStorage/OneDrive-UniversidadAdolfoIbanez/FONDECYT/capacitacion_SPD"</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="variables-en-r" class="level1" data-number="D">
+<h1 data-number="D"><span class="header-section-number">D</span> Variables en R</h1>
+<section id="tipos-de-objetos-en-r" class="level2" data-number="D.1">
+<h2 data-number="D.1" class="anchored" data-anchor-id="tipos-de-objetos-en-r"><span class="header-section-number">D.1</span> Tipos de Objetos en R</h2>
+<p>Los Datos en R se pueden clasificar por su dimensiones y los tipos de Datos que permiten almacenar, como se muestra en la siguiente tabla:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Dimensiones</th>
+<th>Homogéneos</th>
+<th>Heterogéneos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1d</td>
+<td>Atomic vector</td>
+<td>List</td>
+</tr>
+<tr class="even">
+<td>2d</td>
+<td>Matrix</td>
+<td>Data frame</td>
+</tr>
+<tr class="odd">
+<td>nd</td>
+<td>Array</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Fuente: <a href="http://adv-r.had.co.nz/Data-structures.html">http://adv-r.had.co.nz/Data-structures.html</a></p>
+<p>R nos permite definir variables que pueden ser luego usadas en las distintas operaciones. El lenguaje no solo permite definir escalares (variable de un numero), si no también variables que sean un conjunto de numero o caracteres ordenados.</p>
+<section id="variables-numéricas" class="level3" data-number="D.1.1">
+<h3 data-number="D.1.1" class="anchored" data-anchor-id="variables-numéricas"><span class="header-section-number">D.1.1</span> Variables Numéricas</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># La asignación en R son válidos 2 métodos '&lt;-' o '='</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">7</span> <span class="co"># Definir variable (escalar) x que sea igual a 7</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>x <span class="co"># Mostrar que es x</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="co"># Crear y como funcion de x </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 17</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+</div>
+<p>Números Random con decimales</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ru <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">10</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ru</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] 2.734509 8.890751 9.946318 4.705708 6.941183 4.822620 7.500175 7.867557
+  [9] 7.341138 6.696716 7.064383 9.444162 4.603730 3.185298 6.828166 3.066906
+ [17] 3.743531 8.510762 6.690119 9.232757 5.333774 4.649798 2.295700 3.265825
+ [25] 1.542848 9.505277 1.015939 2.634020 5.185485 8.341810 2.893615 2.738504
+ [33] 7.015717 1.728331 9.204278 9.305483 3.117092 5.027090 4.464247 8.823425
+ [41] 2.091900 3.242419 2.175398 8.046107 5.625957 7.875466 2.997257 5.064028
+ [49] 1.700190 8.819081 7.559677 9.306359 3.160376 1.432525 2.954868 2.415233
+ [57] 7.858856 6.267120 3.966494 2.389541 8.453869 3.152249 7.152445 6.589068
+ [65] 8.629946 8.545178 3.085000 4.458933 9.277898 5.665957 6.078743 2.180593
+ [73] 8.199088 6.419430 8.180573 5.378118 5.223127 1.627984 5.892186 5.878844
+ [81] 5.998031 5.043063 7.400317 3.568636 5.739560 3.658262 7.010542 7.905490
+ [89] 2.911050 4.222335 6.986220 8.630364 2.064318 5.256333 3.071967 4.570265
+ [97] 9.137086 1.612622 5.770856 2.451970</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(ru, <span class="at">breaks =</span> <span class="dv">20</span>, <span class="at">col =</span> <span class="st">"orange"</span>, <span class="at">border =</span> <span class="st">"gray60"</span>, </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Histograma de valores Random"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="r_project_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Números Random Enteros</p>
+<p>Simular los lanzamientos de un dado</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample.int</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 6 6 6 2 2 3 6 2 1 3</code></pre>
+</div>
+</div>
+</section>
+<section id="variables-de-caracter" class="level3" data-number="D.1.2">
+<h3 data-number="D.1.2" class="anchored" data-anchor-id="variables-de-caracter"><span class="header-section-number">D.1.2</span> Variables de Caracter</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ch <span class="ot">&lt;-</span> <span class="st">"Chile"</span> <span class="co"># Definir variable (objeto) ch que sea la palabra "Chile"</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>sn <span class="ot">&lt;-</span> <span class="st">"Santiago"</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ch <span class="co"># Mostrar ch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Chile"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Santiago"</code></pre>
+</div>
+</div>
+<p>Unir variables de texto con <code>paste()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ch <span class="ot">&lt;-</span> <span class="st">"Chile"</span> <span class="co"># Definir variable (objeto) ch que sea la palabra "Chile"</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>sn <span class="ot">&lt;-</span> <span class="st">"Santiago"</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>union <span class="ot">&lt;-</span> <span class="fu">paste</span>(sn,ch, <span class="at">sep =</span> <span class="st">", "</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>union</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Santiago, Chile"</code></pre>
+</div>
+</div>
+<p>Utilizar <code>paste0()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>union <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Provincia de "</span>, sn,ch, <span class="at">sep =</span> <span class="st">", "</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>union</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Provincia de , Santiago, Chile"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>union0 <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Provincia de "</span>, sn, <span class="st">", "</span>, ch)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>union0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Provincia de Santiago, Chile"</code></pre>
+</div>
+</div>
+<p>Buscar y reemplazar con <code>gsub</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>av <span class="ot">&lt;-</span> <span class="st">"Av. Apoquindo"</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>comuna <span class="ot">&lt;-</span> <span class="st">"comuna de Las Condes"</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>calle <span class="ot">&lt;-</span> <span class="fu">paste</span>(av, comuna, union0, <span class="at">sep =</span> <span class="st">", "</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>calle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Av. Apoquindo, comuna de Las Condes, Provincia de Santiago, Chile"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reemplazar Av. por Avenida</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>calle_new <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">pattern =</span> <span class="st">"Av."</span>, <span class="at">replacement =</span> <span class="st">"Avenida"</span>, <span class="at">x =</span> calle)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>calle_new</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Avenida Apoquindo, comuna de Las Condes, Provincia de Santiago, Chile"</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="estructuras-de-datos" class="level2" data-number="D.2">
+<h2 data-number="D.2" class="anchored" data-anchor-id="estructuras-de-datos"><span class="header-section-number">D.2</span> Estructuras de Datos</h2>
+<p>Las variables pueden ser un conjunto de números y caracteres ordenados de varias maneras. El orden que se les da depende de lo que queremos lograr con estos.</p>
+<ul>
+<li>Vector</li>
+<li>Matrices</li>
+<li>Dataframes</li>
+<li>Factores</li>
+<li>Listas</li>
+</ul>
+<section id="vectores" class="level3" data-number="D.2.1">
+<h3 data-number="D.2.1" class="anchored" data-anchor-id="vectores"><span class="header-section-number">D.2.1</span> Vectores</h3>
+<p><strong>Vector</strong> Cadenas unidimensionales (es decir una sola columna o fila) de un tipo único de valores (numéricos, caracteres, etc.)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">16</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>vec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  4  3  1  5  8 16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(vec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(vec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> num [1:6] 4 3 1 5 8 16</code></pre>
+</div>
+</div>
+<p>Podemos seleccionar parte del vector:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># EL primer índice en R es 1 (en otros lenguajes de programación es 0)</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>vec[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<p>La selección también puede ser hecha con una condición, de tal manera que solo seleccione aquella parte del vector que cumple con la condición.</p>
+<p><strong>Mayor a:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>vec[vec <span class="sc">&gt;=</span> <span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  4  5  8 16</code></pre>
+</div>
+</div>
+<p><strong>Contenido en:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>vec[vec <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">7</span>, <span class="dv">29</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3 8</code></pre>
+</div>
+</div>
+<p><strong>Negación de la condición:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>vec[<span class="sc">!</span>vec <span class="sc">&lt;=</span> <span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  4  5  8 16</code></pre>
+</div>
+</div>
+<p>También podemos realizar operaciones matemáticas simples aplicadas al vector, por ejemplo una suma:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>vec2  <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">10</span>, <span class="dv">1</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>vec <span class="sc">+</span> vec2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11 13  2 12 18 17</code></pre>
+</div>
+</div>
+</section>
+<section id="listas" class="level3" data-number="D.2.2">
+<h3 data-number="D.2.2" class="anchored" data-anchor-id="listas"><span class="header-section-number">D.2.2</span> Listas</h3>
+<p>Son estructuras eficientes y flexibles, que permiten combinar distintas clases de elementos :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>lista <span class="ot">&lt;-</span>  <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">"cosa"</span>, x, y)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>lista</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 1
+
+[[2]]
+[1] 2
+
+[[3]]
+[1] 3
+
+[[4]]
+[1] "cosa"
+
+[[5]]
+[1] 7
+
+[[6]]
+[1] 17</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(lista)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 6
+ $ : num 1
+ $ : num 2
+ $ : num 3
+ $ : chr "cosa"
+ $ : num 7
+ $ : num 17</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Tambien se puede seleccionar parte de una lista, usando el doble corchete:</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>lista[[<span class="dv">3</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+Como inspeccionar una lista con Rstudio
+<center>
+<img src="images/rstudio_environment_list.gif" class="img-fluid" style="width:90.0%">
+</center>
+</section>
+<section id="matrices" class="level3" data-number="D.2.3">
+<h3 data-number="D.2.3" class="anchored" data-anchor-id="matrices"><span class="header-section-number">D.2.3</span> Matrices</h3>
+<p>Son estructuras de datos con 2 dimensiones, horizontal y la vertical (filas y columnas). Podemos construirlas usando la función “matrix”, con un vector inicial y sus dimensiones:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">1.3</span>, <span class="fl">2.8</span>, <span class="fl">3.5</span>, <span class="fl">6.4</span>, <span class="fl">5.3</span>, <span class="fl">6.2</span>, <span class="dv">7</span>, <span class="fl">4.5</span>, <span class="fl">2.4</span>, <span class="fl">6.3</span>, <span class="fl">5.6</span>, <span class="fl">5.3</span>, <span class="fl">6.6</span>, <span class="dv">7</span>, <span class="fl">4.3</span>),</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>n</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]  1.3  2.8  3.5
+[2,]  6.4  5.3  6.2
+[3,]  7.0  4.5  2.4
+[4,]  6.3  5.6  5.3
+[5,]  6.6  7.0  4.3</code></pre>
+</div>
+</div>
+<p>La matriz tiene 2 dimensiones, por lo que para seleccionar partes de ella es necesario declarar dos dimensiones separadas por una coma. A la izquierda van las filas y a la derecha las columnas. Un valor vacío indica que se seleccionan todos los valores posibles.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>n[<span class="dv">1</span>,<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.8</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>n[,<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.5 6.2 2.4 5.3 4.3</code></pre>
+</div>
+</div>
+</section>
+<section id="dataframes" class="level3" data-number="D.2.4">
+<h3 data-number="D.2.4" class="anchored" data-anchor-id="dataframes"><span class="header-section-number">D.2.4</span> Dataframes</h3>
+<p>Estructura mas clásica de datos, es una matriz pero con mas atributos como nombres de columna y/o fila. Es lo mas similar en R a una tabla excel o la tabla de atributos. La manera mas simple de crear un dataframe es a partir de una matriz usando la función as.data.frame() :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(n)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   V1  V2  V3
+1 1.3 2.8 3.5
+2 6.4 5.3 6.2
+3 7.0 4.5 2.4
+4 6.3 5.6 5.3
+5 6.6 7.0 4.3</code></pre>
+</div>
+</div>
+<p>Podemos asignar nombres a las columnas del dataframe</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"control_1"</span>,<span class="st">"control_2"</span>,<span class="st">"examen"</span>)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  control_1 control_2 examen
+1       1.3       2.8    3.5
+2       6.4       5.3    6.2
+3       7.0       4.5    2.4
+4       6.3       5.6    5.3
+5       6.6       7.0    4.3</code></pre>
+</div>
+</div>
+<p>Y a las filas del dataframe</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>alumno <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Sofia"</span>,<span class="st">"Tomas"</span>,<span class="st">"Luciano"</span>,<span class="st">"Julian"</span>,<span class="st">"Gabriela"</span>)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  control_1 control_2 examen   alumno
+1       1.3       2.8    3.5    Sofia
+2       6.4       5.3    6.2    Tomas
+3       7.0       4.5    2.4  Luciano
+4       6.3       5.6    5.3   Julian
+5       6.6       7.0    4.3 Gabriela</code></pre>
+</div>
+</div>
+<p>También podemos realizar operaciones entre vectores del dataframe:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>promedio_final <span class="ot">&lt;-</span>  <span class="fl">0.3</span><span class="sc">*</span>df<span class="sc">$</span>control_1 <span class="sc">+</span> <span class="fl">0.3</span><span class="sc">*</span>df<span class="sc">$</span>control_2 <span class="sc">+</span> <span class="fl">0.4</span><span class="sc">*</span>df<span class="sc">$</span>examen</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  control_1 control_2 examen   alumno promedio_final
+1       1.3       2.8    3.5    Sofia           2.63
+2       6.4       5.3    6.2    Tomas           5.99
+3       7.0       4.5    2.4  Luciano           4.41
+4       6.3       5.6    5.3   Julian           5.69
+5       6.6       7.0    4.3 Gabriela           5.80</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="funciones-en-r" class="level1" data-number="E">
+<h1 data-number="E"><span class="header-section-number">E</span> Funciones en R</h1>
+<section id="operaciones-básicas-en-r" class="level2" data-number="E.1">
+<h2 data-number="E.1" class="anchored" data-anchor-id="operaciones-básicas-en-r"><span class="header-section-number">E.1</span> Operaciones Básicas en R</h2>
+<section id="operaciones-matemáticas" class="level3" data-number="E.1.1">
+<h3 data-number="E.1.1" class="anchored" data-anchor-id="operaciones-matemáticas"><span class="header-section-number">E.1.1</span> Operaciones Matemáticas</h3>
+<p>En R, es posible realizar operaciones matemáticas básicas utilizando los operadores aritméticos estándar. Estos operadores incluyen:</p>
+<ul>
+<li>Suma (+): se utiliza para sumar dos valores.</li>
+<li>Resta (-): se utiliza para restar un valor de otro.</li>
+<li>Multiplicación (*): se utiliza para multiplicar dos valores.</li>
+<li>División (/): se utiliza para dividir un valor por otro.</li>
+<li>Exponenciación (^): se utiliza para elevar un valor a una potencia.</li>
+<li>Módulo (%%): se utiliza para encontrar el resto de la división de un valor por otro.</li>
+</ul>
+<p>Estos operadores se pueden utilizar con números enteros, decimales y variables numéricas. Además, también se pueden utilizar paréntesis para especificar el orden de las operaciones.</p>
+<p>A continuación, se presentan algunos ejemplos de operaciones matemáticas básicas en R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Suma</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="co"># resultado: 5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Resta</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">-</span> <span class="dv">2</span> <span class="co"># resultado: 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiplicación</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> <span class="dv">4</span> <span class="co"># resultado: 8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># División</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">/</span> <span class="dv">2</span> <span class="co"># resultado: 5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exponenciación</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^</span><span class="dv">3</span> <span class="co"># resultado: 8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Módulo</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="dv">15</span> <span class="sc">%%</span> <span class="dv">4</span> <span class="co"># resultado: 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Utilizando paréntesis para especificar el orden de las operaciones</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span>) <span class="sc">*</span> <span class="dv">4</span> <span class="co"># resultado: 20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20</code></pre>
+</div>
+</div>
+<p>Es importante tener en cuenta que R sigue las reglas de precedencia de las operaciones matemáticas. Esto significa que las operaciones dentro de los paréntesis se evalúan primero, seguidas de la exponenciación, la multiplicación y la división, y finalmente la suma y la resta. Si se requiere un orden específico de operaciones, se deben utilizar paréntesis para indicarlo.</p>
+<p>Además, R también cuenta con una variedad de funciones matemáticas incorporadas, como “sin”, “cos”, “tan”, “log”, “exp”, entre otras, que se pueden utilizar para realizar operaciones más complejas.</p>
+<p>También se pueden aplica a un elemento a al objeto espacial completo</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">13</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">22</span>,<span class="dv">2</span>,<span class="dv">1</span>)</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(b) <span class="co"># suma</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 75</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(b) <span class="co"># find the square root of x</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.472136 5.477226 4.690416 1.414214 1.000000</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30</code></pre>
+</div>
+</div>
+</section>
+<section id="funciones-útiles-de-propósito-general" class="level3" data-number="E.1.2">
+<h3 data-number="E.1.2" class="anchored" data-anchor-id="funciones-útiles-de-propósito-general"><span class="header-section-number">E.1.2</span> Funciones Útiles de propósito general</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1 1 1 1 1 1 1 1 1 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="st">"HAHA"</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "HAHA" "HAHA" "HAHA" "HAHA" "HAHA" "HAHA" "HAHA" "HAHA" "HAHA" "HAHA"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 3 5 7 9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(<span class="dv">3</span> <span class="sc">&gt;</span> <span class="dv">5</span>, <span class="dv">1</span>, <span class="st">"this is false"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "this is false"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"Hola"</span>, <span class="st">"amigo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Hola amigo"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"Hello"</span>, <span class="st">"amigo"</span>, <span class="at">sep =</span> <span class="st">"--"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Hello--amigo"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"Hello"</span>, <span class="st">"amigo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Helloamigo"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tolower</span>(<span class="st">"HAHAHAHAH"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "hahahahah"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">toupper</span>(<span class="st">"hueuehuehuheuhe"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "HUEUEHUEHUHEUHE"</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="operaciones-lógicas" class="level2" data-number="E.2">
+<h2 data-number="E.2" class="anchored" data-anchor-id="operaciones-lógicas"><span class="header-section-number">E.2</span> Operaciones Lógicas</h2>
+<p>En R, los operadores lógicos se utilizan para realizar comparaciones lógicas entre valores o expresiones. Estos operadores devuelven valores booleanos (TRUE o FALSE) según se cumpla o no la condición.</p>
+<p>A continuación se presentan los operadores lógicos en R:</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class="table table-striped table-hover table-condensed" style="font-size: 16px; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Operador </th>
+   <th style="text-align:left;"> Significado </th>
+   <th style="text-align:left;"> Ejemplo </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> == </td>
+   <td style="text-align:left;"> Igual a </td>
+   <td style="text-align:left;"> 2 == 2 (TRUE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> != </td>
+   <td style="text-align:left;"> Diferente a </td>
+   <td style="text-align:left;"> 2 != 3 (TRUE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> &gt; </td>
+   <td style="text-align:left;"> Mayor que </td>
+   <td style="text-align:left;"> 3 &gt; 2 (TRUE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> &lt; </td>
+   <td style="text-align:left;"> Menor que </td>
+   <td style="text-align:left;"> 2 &lt; 3 (TRUE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> &gt;= </td>
+   <td style="text-align:left;"> Mayor o igual que </td>
+   <td style="text-align:left;"> 3 &gt;= 2 (TRUE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> &lt;= </td>
+   <td style="text-align:left;"> Menor o igual que </td>
+   <td style="text-align:left;"> 2 &lt;= 3 (TRUE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> &amp; </td>
+   <td style="text-align:left;"> Operador lógico AND </td>
+   <td style="text-align:left;"> 2 &lt; 3 &amp; 3 &gt; 1 (TRUE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> | </td>
+   <td style="text-align:left;"> Operador lógico OR </td>
+   <td style="text-align:left;"> 2 &lt; 3 | 3 &lt; 1 (TRUE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ! </td>
+   <td style="text-align:left;"> Operador lógico NOT </td>
+   <td style="text-align:left;"> !(2 == 3) (TRUE) </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<section id="operador-de-igualdad" class="level3" data-number="E.2.1">
+<h3 data-number="E.2.1" class="anchored" data-anchor-id="operador-de-igualdad"><span class="header-section-number">E.2.1</span> Operador de igualdad: (==)</h3>
+<p>Este operador se utiliza para comparar si dos valores son iguales. Retorna TRUE si la condición se cumple y FALSE en caso contrario.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">==</span> b <span class="co"># FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="operador-de-desigualdad" class="level3" data-number="E.2.2">
+<h3 data-number="E.2.2" class="anchored" data-anchor-id="operador-de-desigualdad"><span class="header-section-number">E.2.2</span> Operador de desigualdad: (!=)</h3>
+<p>Este operador se utiliza para comparar si dos valores son diferentes. Retorna TRUE si la condición se cumple y FALSE en caso contrario.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">!=</span> b <span class="co"># TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="operador-de-mayor-que" class="level3" data-number="E.2.3">
+<h3 data-number="E.2.3" class="anchored" data-anchor-id="operador-de-mayor-que"><span class="header-section-number">E.2.3</span> Operador de mayor que: (&gt;)</h3>
+<p>Este operador se utiliza para comparar si un valor es mayor que otro. Retorna TRUE si la condición se cumple y FALSE en caso contrario.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>b <span class="sc">&gt;</span> a <span class="co"># TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="operador-de-menor-que" class="level3" data-number="E.2.4">
+<h3 data-number="E.2.4" class="anchored" data-anchor-id="operador-de-menor-que"><span class="header-section-number">E.2.4</span> Operador de menor que: (&lt;)</h3>
+<p>Este operador se utiliza para comparar si un valor es menor que otro. Retorna TRUE si la condición se cumple y FALSE en caso contrario.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&lt;</span> b <span class="co"># TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="operador-de-mayor-o-igual-que" class="level3" data-number="E.2.5">
+<h3 data-number="E.2.5" class="anchored" data-anchor-id="operador-de-mayor-o-igual-que"><span class="header-section-number">E.2.5</span> Operador de mayor o igual que: (&gt;=)</h3>
+<p>Este operador se utiliza para comparar si un valor es mayor o igual que otro. Retorna TRUE si la condición se cumple y FALSE en caso contrario.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>b <span class="sc">&gt;=</span> a <span class="co"># TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="operador-de-menor-o-igual-que" class="level3" data-number="E.2.6">
+<h3 data-number="E.2.6" class="anchored" data-anchor-id="operador-de-menor-o-igual-que"><span class="header-section-number">E.2.6</span> Operador de menor o igual que: (&lt;=)</h3>
+<p>Este operador se utiliza para comparar si un valor es menor o igual que otro. Retorna TRUE si la condición se cumple y FALSE en caso contrario.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&lt;=</span> b <span class="co"># TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="operador-lógico-and" class="level3" data-number="E.2.7">
+<h3 data-number="E.2.7" class="anchored" data-anchor-id="operador-lógico-and"><span class="header-section-number">E.2.7</span> Operador lógico AND: (&amp;)</h3>
+<p>Este operador se utiliza para evaluar dos o más condiciones y retornar TRUE si todas se cumplen, de lo contrario retorna FALSE.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb122-4"><a href="#cb122-4" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&lt;</span> b <span class="sc">&amp;</span> b <span class="sc">&lt;</span> c <span class="co"># TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="operador-lógico-or" class="level3" data-number="E.2.8">
+<h3 data-number="E.2.8" class="anchored" data-anchor-id="operador-lógico-or"><span class="header-section-number">E.2.8</span> Operador lógico OR: (|)</h3>
+<p>Este operador se utiliza para evaluar dos o más condiciones y retornar TRUE si al menos una se cumple, de lo contrario retorna FALSE.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb124-3"><a href="#cb124-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb124-4"><a href="#cb124-4" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&gt;</span> b <span class="sc">|</span> b <span class="sc">&lt;</span> c <span class="co"># TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>Operador lógico NOT: (!) Este operador se utiliza para negar una condición. Si la condición es TRUE, retorna FALSE, y si la condición es FALSE, retorna TRUE.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb126-3"><a href="#cb126-3" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>(a <span class="sc">==</span> b) <span class="co"># TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>Es importante tener en cuenta que los operadores lógicos se pueden utilizar en combinación para crear expresiones lógicas más complejas. Además, los operadores lógicos también se pueden utilizar en las estructuras de control condicionales, como if/else y switch, para tomar decisiones basadas en condiciones lógicas.</p>
+</section>
+</section>
+<section id="crear-funciones-propias" class="level2" data-number="E.3">
+<h2 data-number="E.3" class="anchored" data-anchor-id="crear-funciones-propias"><span class="header-section-number">E.3</span> Crear Funciones Propias</h2>
+<p>En R, es posible crear funciones propias para realizar tareas específicas y reutilizarlas en diferentes partes de un programa. Para crear una función en R, se utiliza la siguiente estructura:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>nombre_de_la_funcion <span class="ot">&lt;-</span> <span class="cf">function</span>(argumentos) {</span>
+<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>  cuerpo_de_la_funcion</span>
+<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Por ejemplo, se puede crear una función que calcule la suma de dos números:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>suma <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b) {</span>
+<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a>  resultado <span class="ot">&lt;-</span> a <span class="sc">+</span> b</span>
+<span id="cb129-3"><a href="#cb129-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(resultado)</span>
+<span id="cb129-4"><a href="#cb129-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb129-5"><a href="#cb129-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb129-6"><a href="#cb129-6" aria-hidden="true" tabindex="-1"></a>resultado_suma <span class="ot">&lt;-</span> <span class="fu">suma</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb129-7"><a href="#cb129-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(resultado_suma) <span class="co"># 5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<p>Por ejemplo, se puede crear una función que eleve al cuadrado:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>cuadrado <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { <span class="co"># x = parámetro</span></span>
+<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">=</span> x <span class="sc">^</span> <span class="dv">2</span> <span class="co"># asiganción de variables solo dentro de la función</span></span>
+<span id="cb131-3"><a href="#cb131-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(y) <span class="co"># especificar valor retornado (no necesario completamente)</span></span>
+<span id="cb131-4"><a href="#cb131-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb131-5"><a href="#cb131-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-6"><a href="#cb131-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-7"><a href="#cb131-7" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">13</span></span>
+<span id="cb131-8"><a href="#cb131-8" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">22</span>,<span class="dv">2</span>,<span class="dv">1</span>)</span>
+<span id="cb131-9"><a href="#cb131-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cuadrado</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 169</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cuadrado</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 400 900 484   4   1</code></pre>
+</div>
+</div>
+<p>Es importante tener en cuenta que los nombres de las funciones en R deben cumplir las mismas reglas que los nombres de las variables. Además, es recomendable incluir comentarios explicativos dentro del cuerpo de la función para facilitar su comprensión y uso posterior.</p>
+<p><strong>Actividad:</strong></p>
+<p>Actividad: Crear una función que calcule la hipotenusa de un triángulo rectángulo (Teorema de Pitágoras):</p>
+<center>
+<img src="images/hipotenusa.png" class="img-fluid" style="width:40.0%">
+</center>
+<p>Establece que el cuadrado de la longitud de la hipotenusa es igual a la suma de los cuadrados de las longitudes de los catetos.</p>
+<p><span class="math display">c^2 = {a^2}+{b^2}</span></p>
+<p>Por lo cual:</p>
+<p><span class="math display">c = \sqrt{{a^2}+{b^2}}</span></p>
+<div class="callout-tip callout callout-style-simple callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Ayuda
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>hipotenusa <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b){</span>
+<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#h &lt;-     # En esta parte escribir la función</span></span>
+<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(h)</span>
+<span id="cb135-4"><a href="#cb135-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb135-5"><a href="#cb135-5" aria-hidden="true" tabindex="-1"></a>r1 <span class="ot">&lt;-</span>  <span class="fu">hipotenusa</span>(<span class="at">a =</span> <span class="dv">5</span>,  <span class="at">b =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>Encontrar la Hipotenusa de:<br>
+h=<em>?</em>, a = 10, b = 6<br>
+h=<em>?</em>, a = 5, b = 4<br>
+h=<em>?</em>, a = 3, b = 4</p>
+</section>
+</section>
+<section id="estructura-de-control-en-r" class="level1" data-number="F">
+<h1 data-number="F"><span class="header-section-number">F</span> Estructura de Control en R</h1>
+<p>Las estructuras de control en R son herramientas que permiten controlar el flujo de ejecución de un programa. Las estructuras de control son esenciales para cualquier lenguaje de programación, ya que permiten que el programa tome decisiones y realice acciones en función de ciertas condiciones.</p>
+<p>Estas estructuras de control son muy útiles para crear programas que respondan a diferentes situaciones y condiciones, y permiten que los programadores puedan crear soluciones más eficientes y complejas.</p>
+<p>En R, existen tres estructuras de control principales:</p>
+<ol type="1">
+<li><p>Estructuras condicionales: Permiten ejecutar un bloque de código solo si se cumple una condición determinada. Las estructuras condicionales más comunes en R son “<code>if</code>” y “<code>ifelse</code>”.</p></li>
+<li><p>Estructuras de bucles: Permiten ejecutar un bloque de código repetidamente, mientras se cumpla una condición determinada. Las estructuras de bucles más comunes en R son “<code>while</code>”, “<code>for</code>” y “<code>repeat</code>”.</p></li>
+<li><p>Estructuras de control de flujo: Permiten cambiar el flujo de ejecución del programa en función de ciertas condiciones. Las estructuras de control de flujo más comunes en R son “<code>break</code>” y “<code>next</code>”.</p></li>
+</ol>
+<section id="estructuras-condicionales" class="level2" data-number="F.1">
+<h2 data-number="F.1" class="anchored" data-anchor-id="estructuras-condicionales"><span class="header-section-number">F.1</span> Estructuras condicionales</h2>
+<p>Las estructuras condicionales son una de las tres estructuras de control principales en R. Estas estructuras permiten ejecutar un bloque de código solo si se cumple una condición determinada.</p>
+<p>La estructura condicional más común en R es “<code>if</code>”. La sintaxis básica de la estructura “<code>if</code>” es la siguiente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(Condición) {</span>
+<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>  operaciones_si_la_condición_es_TRUE</span>
+<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La “condición” es una expresión lógica que evalúa a verdadero o falso. Si la condición es verdadera, el bloque de código dentro del “if” se ejecutará. Si la condición es falsa, el bloque de código dentro del “if” se ignorará.</p>
+<p>Por ejemplo, le pedimos a R que nos muestre el texto “Verdadero” si la condición se cumple.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Se cumple la condición y se muestra "verdadero"</span></span>
+<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="dv">4</span> <span class="sc">&gt;</span> <span class="dv">3</span>) {</span>
+<span id="cb137-3"><a href="#cb137-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Verdadero"</span></span>
+<span id="cb137-4"><a href="#cb137-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Verdadero"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No se cumple la condición y no pasa nada</span></span>
+<span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="dv">4</span> <span class="sc">&gt;</span> <span class="dv">5</span>) {</span>
+<span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Verdadero"</span></span>
+<span id="cb139-4"><a href="#cb139-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>También se puede agregar un bloque de código opcional para el caso en que la condición sea falsa utilizando la estructura “<code>else</code>”. La sintaxis básica de la estructura “<code>if</code>” con “<code>else</code>” es la siguie</p>
+<p><em>SI esta condición es es cierta, ENTONCES</em> haz estas operaciones, DE OTRO MODO haz estas otras operaciones.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(condición) {</span>
+<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a>  operaciones_si_la_condición_es_TRUE</span>
+<span id="cb140-3"><a href="#cb140-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb140-4"><a href="#cb140-4" aria-hidden="true" tabindex="-1"></a>  operaciones_si_la_condición_es_FALSE</span>
+<span id="cb140-5"><a href="#cb140-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Usando los ejemplos anteriores, podemos mostrar “Falso” si no se cumple la condición, en lugar de que no ocurra nada</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Se cumple la condición y se muestra "Verdadero"</span></span>
+<span id="cb141-2"><a href="#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="dv">4</span> <span class="sc">&gt;</span> <span class="dv">3</span>) {</span>
+<span id="cb141-3"><a href="#cb141-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Verdadero"</span></span>
+<span id="cb141-4"><a href="#cb141-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb141-5"><a href="#cb141-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Falso"</span></span>
+<span id="cb141-6"><a href="#cb141-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Verdadero"</code></pre>
+</div>
+</div>
+<p>La estructura “<code>ifelse</code>” es otra forma de estructura condicional que permite ejecutar diferentes bloques de código en función de la condición. La sintaxis básica de la estructura “<code>ifelse</code>” es la siguiente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(condición, expresión1, expresión2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Si la “condición” es verdadera, se ejecutará “expresión1”. Si la “condición” es falsa, se ejecutará “expresión2”.</p>
+<p>Además, se pueden anidar varias estructuras condicionales utilizando la sintaxis de “if” y “else”. Por ejemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (condición1) {</span>
+<span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Código a ejecutar si la condición1 es verdadera</span></span>
+<span id="cb144-3"><a href="#cb144-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (condición2) {</span>
+<span id="cb144-4"><a href="#cb144-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Código a ejecutar si la condición1 es falsa y la condición2 es verdadera</span></span>
+<span id="cb144-5"><a href="#cb144-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb144-6"><a href="#cb144-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Código a ejecutar si todas las condiciones son falsas</span></span>
+<span id="cb144-7"><a href="#cb144-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>En resumen, las estructuras condicionales en R son herramientas muy útiles para controlar el flujo de ejecución de un programa en función de ciertas condiciones. Estas estructuras permiten crear soluciones más eficientes y complejas al permitir que los programas tomen decisiones y realicen acciones en función de las condiciones que se presenten.</p>
+</section>
+<section id="estructuras-de-bucles" class="level2" data-number="F.2">
+<h2 data-number="F.2" class="anchored" data-anchor-id="estructuras-de-bucles"><span class="header-section-number">F.2</span> Estructuras de bucles</h2>
+<p>Las estructuras de bucles son una de las tres estructuras de control principales en R. Estas estructuras permiten ejecutar un bloque de código repetidamente mientras se cumpla una condición determinada. En R, existen tres estructuras de bucles principales: “<code>while</code>”, “<code>for</code>” y “<code>repeat</code>”.</p>
+<p><strong>Beneficios</strong></p>
+<ul>
+<li>Es más fácil ver el objetivo de tu código; lo diferente llama más atención a la vista que aquello que permanece igual.</li>
+<li>Es más sencillo responder a cambios en los requerimientos. A medida que tus necesidades cambian, solo necesitarás realizar cambios en un lugar, en vez de recordar cambiar en cada lugar donde copiaste y pegaste el código.</li>
+<li>Es probable que tengas menos errores porque cada línea de código es utilizada en más lugares.</li>
+</ul>
+<section id="estructura-de-bucle-for" class="level3" data-number="F.2.1">
+<h3 data-number="F.2.1" class="anchored" data-anchor-id="estructura-de-bucle-for"><span class="header-section-number">F.2.1</span> Estructura de bucle “<code>for</code>”:</h3>
+<p>La estructura “for” permite repetir la ejecución de un bloque de código un número determinado de veces. La sintaxis básica de la estructura “for” es la siguiente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (variable <span class="cf">in</span> secuencia) {</span>
+<span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Código a ejecutar para cada elemento en la secuencia</span></span>
+<span id="cb145-3"><a href="#cb145-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La “secuencia” es un objeto que contiene una serie de elementos. La “variable” toma el valor de cada elemento de la secuencia en cada iteración del bucle. En cada iteración, se ejecutará el bloque de código dentro del “for” para ese valor de la variable.</p>
+<p>Ejemplo simple: <code>print</code> una secuencia</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb146-2"><a href="#cb146-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb146-3"><a href="#cb146-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5</code></pre>
+</div>
+</div>
+<p>Ejemplo 2: Guardando los resultados en un vector</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a>dado <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span>
+<span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a>mi_vector <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb148-3"><a href="#cb148-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(cara <span class="cf">in</span> dado) {</span>
+<span id="cb148-4"><a href="#cb148-4" aria-hidden="true" tabindex="-1"></a>  mi_vector[cara] <span class="ot">&lt;-</span> cara <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb148-5"><a href="#cb148-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb148-6"><a href="#cb148-6" aria-hidden="true" tabindex="-1"></a>mi_vector</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  1  4  9 16 25 36</code></pre>
+</div>
+</div>
+<p>Ejemplo 3: Loops con vectores</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a>alumnos <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Carmen"</span>, <span class="st">"Adriana"</span>, <span class="st">"Marco"</span>, <span class="st">"Fabi"</span>, <span class="st">"Brenda"</span>)</span>
+<span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb150-3"><a href="#cb150-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(alumnos)) {</span>
+<span id="cb150-4"><a href="#cb150-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Hola,"</span>, alumnos[i], <span class="at">sep =</span> <span class="st">" "</span>))</span>
+<span id="cb150-5"><a href="#cb150-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Hola, Carmen"
+[1] "Hola, Adriana"
+[1] "Hola, Marco"
+[1] "Hola, Fabi"
+[1] "Hola, Brenda"</code></pre>
+</div>
+</div>
+<p>Ejemplo 4: loops en Dataframes</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">a =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="at">b =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
+<span id="cb152-2"><a href="#cb152-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">c =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="at">d =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>))</span>
+<span id="cb152-3"><a href="#cb152-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb152-4"><a href="#cb152-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(df)){</span>
+<span id="cb152-5"><a href="#cb152-5" aria-hidden="true" tabindex="-1"></a>  promedio <span class="ot">=</span> <span class="fu">mean</span>(df[,i])</span>
+<span id="cb152-6"><a href="#cb152-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(promedio)</span>
+<span id="cb152-7"><a href="#cb152-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.849284
+[1] -0.5993989
+[1] -0.3552176
+[1] 0.2122577</code></pre>
+</div>
+</div>
+</section>
+<section id="estructura-de-bucle-while" class="level3" data-number="F.2.2">
+<h3 data-number="F.2.2" class="anchored" data-anchor-id="estructura-de-bucle-while"><span class="header-section-number">F.2.2</span> Estructura de bucle “while”:</h3>
+<p>La estructura “<code>while</code>” permite repetir la ejecución de un bloque de código mientras se cumpla una condición determinada. La sintaxis básica de la estructura “<code>while</code>” es la siguiente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb154"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (condición) {</span>
+<span id="cb154-2"><a href="#cb154-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Código a ejecutar mientras se cumpla la condición</span></span>
+<span id="cb154-3"><a href="#cb154-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La “condición” es una expresión lógica que evalúa a verdadero o falso. Si la condición es verdadera, se ejecutará el bloque de código dentro del “while”. Este proceso se repetirá hasta que la condición sea falsa.</p>
+</section>
+<section id="estructura-de-bucle-repeat" class="level3" data-number="F.2.3">
+<h3 data-number="F.2.3" class="anchored" data-anchor-id="estructura-de-bucle-repeat"><span class="header-section-number">F.2.3</span> Estructura de bucle “repeat”:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span> {</span>
+<span id="cb155-2"><a href="#cb155-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Código a ejecutar de manera indefinida</span></span>
+<span id="cb155-3"><a href="#cb155-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (condición) {</span>
+<span id="cb155-4"><a href="#cb155-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb155-5"><a href="#cb155-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb155-6"><a href="#cb155-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>El bloque de código dentro del “<code>repeat</code>” se ejecutará de manera indefinida hasta que se encuentre la sentencia “<code>break</code>”, que permite salir del bucle. La “condición” es una expresión lógica que evalúa a verdadero o falso. Si la condición es verdadera, se ejecutará la sentencia “break” y se saldrá del bucle.</p>
+</section>
+</section>
+<section id="estructuras-de-control-de-flujo" class="level2" data-number="F.3">
+<h2 data-number="F.3" class="anchored" data-anchor-id="estructuras-de-control-de-flujo"><span class="header-section-number">F.3</span> Estructuras de control de flujo</h2>
+<p>“<code>next</code>” y “<code>break</code>” son palabras clave importantes en R que se utilizan en las estructuras de control de flujo, específicamente en las estructuras de bucle. “next” se utiliza para saltar a la siguiente iteración del bucle sin ejecutar el resto del código dentro del bucle, mientras que “break” se utiliza para detener el bucle de forma abrupta, incluso si la condición del bucle todavía se cumple.</p>
+<section id="estructuras-de-control-next" class="level3" data-number="F.3.1">
+<h3 data-number="F.3.1" class="anchored" data-anchor-id="estructuras-de-control-next"><span class="header-section-number">F.3.1</span> Estructuras de control “next”:</h3>
+<p>“<code>next</code>” se utiliza en una estructura de bucle para saltar a la siguiente iteración del bucle sin ejecutar el resto del código dentro del bucle. Es decir, si se encuentra la palabra clave “next” dentro de un bucle, se omitirá el código que viene después y el bucle pasará inmediatamente a la siguiente iteración. La palabra clave “next” es útil cuando se desea saltar una iteración específica del bucle, sin afectar el resto del código.</p>
+<p>Por ejemplo, en el siguiente código se utiliza la palabra clave “next” para omitir la impresión del número 3 dentro del bucle “for”:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb156"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb156-2"><a href="#cb156-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">==</span> <span class="dv">3</span>) {</span>
+<span id="cb156-3"><a href="#cb156-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">next</span></span>
+<span id="cb156-4"><a href="#cb156-4" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb156-5"><a href="#cb156-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb156-6"><a href="#cb156-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1
+[1] 2
+[1] 4
+[1] 5</code></pre>
+</div>
+</div>
+</section>
+<section id="estructuras-de-control-break" class="level3" data-number="F.3.2">
+<h3 data-number="F.3.2" class="anchored" data-anchor-id="estructuras-de-control-break"><span class="header-section-number">F.3.2</span> Estructuras de control “break”:</h3>
+<p>“break”, por otro lado, se utiliza en una estructura de bucle para detener el bucle de forma abrupta, incluso si la condición del bucle todavía se cumple. Es decir, si se encuentra la palabra clave “break” dentro de un bucle, se detendrá el bucle de inmediato y se continuará con la ejecución del código que viene después del bucle. La palabra clave “break” es útil cuando se desea detener el bucle en un punto específico sin tener que esperar a que la condición del bucle se deje de cumplir.</p>
+<p>Por ejemplo, en el siguiente código se utiliza la palabra clave “break” para detener el bucle “while” cuando el valor de “i” es mayor que 5:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb158"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb158-2"><a href="#cb158-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (i <span class="sc">&lt;</span> <span class="dv">10</span>) {</span>
+<span id="cb158-3"><a href="#cb158-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">&gt;</span> <span class="dv">5</span>) {</span>
+<span id="cb158-4"><a href="#cb158-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb158-5"><a href="#cb158-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb158-6"><a href="#cb158-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb158-7"><a href="#cb158-7" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> i <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb158-8"><a href="#cb158-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="tidyverse-en-r" class="level1" data-number="G">
+<h1 data-number="G"><span class="header-section-number">G</span> Tidyverse en R</h1>
+<section id="introducción-a-tidyverse" class="level2" data-number="G.1">
+<h2 data-number="G.1" class="anchored" data-anchor-id="introducción-a-tidyverse"><span class="header-section-number">G.1</span> Introducción a Tidyverse</h2>
+<p><a href="https://www.tidyverse.org">Tidyverse</a> es una colección de paquetes diseñados para Ciencia de Datos.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tidyverse.png" class="img-fluid figure-img" width="300"></p>
+</figure>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb160"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="co"># instalación</span></span>
+<span id="cb160-2"><a href="#cb160-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Todos los paquetes comparten una filosofía de diseño, una gramática y estructuras de datos.</p>
+<p><em>Esta filosofía promueve</em></p>
+<ul>
+<li>En Pipes, navegarás dentro del pipe, <code>%&gt;%</code>, para anidar instrucciones</li>
+<li>Si bien copiar-y-pegar (copy-and-paste) es una herramienta poderosa, deberías evitar utilizarla más de dos veces. Repetir el código es peligroso porque puede llevar a errores e inconsistencias.</li>
+<li>A medida que comiences a escribir funciones más potentes, necesitarás una base sólida acerca de las estructuras de datos.</li>
+<li>Las funciones nos permiten evitar la repetición de código; sin embargo, muchas veces necesitas repertir las mismas acciones con diferentes inputs. Puedes hacer esto con herramientas de iteración.</li>
+</ul>
+</section>
+<section id="estructura-de-un-dataframe" class="level2" data-number="G.2">
+<h2 data-number="G.2" class="anchored" data-anchor-id="estructura-de-un-dataframe"><span class="header-section-number">G.2</span> Estructura de un dataframe</h2>
+<center>
+<img src="images/tidy_frame.svg" class="img-fluid" style="width:80.0%">
+</center>
+<p><strong>Lectura de Base de SII</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb161"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span>
+<span id="cb161-2"><a href="#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(sf))</span>
+<span id="cb161-3"><a href="#cb161-3" aria-hidden="true" tabindex="-1"></a>tbl_sii  <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/rds/mz_constru_SII.rds"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb161-4"><a href="#cb161-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="co"># descartar geometrias solo usar la tabla de datos</span></span>
+<span id="cb161-5"><a href="#cb161-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-6"><a href="#cb161-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tbl_sii)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+  n_com   manzana   reg cod_com num_manz oficinas comercio vivienda total   AREA
+  &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+1 IQUIQUE 1201-0      1    1201        0        0        0        0     0   585.
+2 IQUIQUE 1201-0      1    1201        0        0        0        0     0 17291.
+3 ALTO H… 1211-0      1    1211        0        0        0        0     0  1859.
+4 ALTO H… 1211-0      1    1211        0        0        0        0     0   442.
+5 ALTO H… 1211-0      1    1211        0        0        0        0     0   205.
+6 ALTO H… 1211-0      1    1211        0        0        0        0     0  1200.</code></pre>
+</div>
+</div>
+</section>
+<section id="funciones-básicas-dplyr" class="level2" data-number="G.3">
+<h2 data-number="G.3" class="anchored" data-anchor-id="funciones-básicas-dplyr"><span class="header-section-number">G.3</span> Funciones básicas <code>dplyr</code></h2>
+<center>
+<img src="images/dplyr_variables.png" class="img-fluid" style="width:70.0%">
+</center>
+<section id="select" class="level3" data-number="G.3.1">
+<h3 data-number="G.3.1" class="anchored" data-anchor-id="select"><span class="header-section-number">G.3.1</span> Select</h3>
+<p><code>select</code> Seleccionar variables relevantes</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="co"># seleccionar nomnres de columnas que deseo conservar</span></span>
+<span id="cb163-2"><a href="#cb163-2" aria-hidden="true" tabindex="-1"></a>tbl_sii <span class="sc">%&gt;%</span></span>
+<span id="cb163-3"><a href="#cb163-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(n_com, oficinas, comercio, vivienda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 210,662 × 4
+   n_com         oficinas comercio vivienda
+   &lt;chr&gt;            &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+ 1 IQUIQUE              0        0        0
+ 2 IQUIQUE              0        0        0
+ 3 ALTO HOSPICIO        0        0        0
+ 4 ALTO HOSPICIO        0        0        0
+ 5 ALTO HOSPICIO        0        0        0
+ 6 ALTO HOSPICIO        0        0        0
+ 7 ALTO HOSPICIO        0        0        0
+ 8 ALTO HOSPICIO        0        0        0
+ 9 ALTO HOSPICIO        0        0        0
+10 ALTO HOSPICIO        0        0        0
+# ℹ 210,652 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb165"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="co"># seleccionar nomnres de columnas que deseo eliminar anteponiendo un "-"</span></span>
+<span id="cb165-2"><a href="#cb165-2" aria-hidden="true" tabindex="-1"></a>tbl_sii <span class="sc">%&gt;%</span></span>
+<span id="cb165-3"><a href="#cb165-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>cod_com)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 210,662 × 9
+   n_com         manzana   reg num_manz oficinas comercio vivienda total   AREA
+   &lt;chr&gt;         &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+ 1 IQUIQUE       1201-0      1        0        0        0        0     0   585.
+ 2 IQUIQUE       1201-0      1        0        0        0        0     0 17291.
+ 3 ALTO HOSPICIO 1211-0      1        0        0        0        0     0  1859.
+ 4 ALTO HOSPICIO 1211-0      1        0        0        0        0     0   442.
+ 5 ALTO HOSPICIO 1211-0      1        0        0        0        0     0   205.
+ 6 ALTO HOSPICIO 1211-0      1        0        0        0        0     0  1200.
+ 7 ALTO HOSPICIO 1211-0      1        0        0        0        0     0  4548.
+ 8 ALTO HOSPICIO 1211-0      1        0        0        0        0     0   130.
+ 9 ALTO HOSPICIO 1211-0      1        0        0        0        0     0   300.
+10 ALTO HOSPICIO 1211-0      1        0        0        0        0     0  6488.
+# ℹ 210,652 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="filter" class="level3" data-number="G.3.2">
+<h3 data-number="G.3.2" class="anchored" data-anchor-id="filter"><span class="header-section-number">G.3.2</span> Filter</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a>mi_comuna <span class="ot">&lt;-</span> <span class="st">"LAS CONDES"</span> </span>
+<span id="cb167-2"><a href="#cb167-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb167-3"><a href="#cb167-3" aria-hidden="true" tabindex="-1"></a>sii_com <span class="ot">&lt;-</span> tbl_sii <span class="sc">%&gt;%</span></span>
+<span id="cb167-4"><a href="#cb167-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n_com <span class="sc">==</span> mi_comuna) </span>
+<span id="cb167-5"><a href="#cb167-5" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb167-6"><a href="#cb167-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sii_com, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 10
+  n_com    manzana   reg cod_com num_manz oficinas comercio vivienda total  AREA
+  &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 LAS CON… 15108-…    13   15108     2358        0        0     1316  1390 2358.
+2 LAS CON… 15108-…    13   15108     2360        0        0     1590  1622 2280.
+3 LAS CON… 15108-…    13   15108     2362        0        0     1436  1502 2659.
+4 LAS CON… 15108-…    13   15108     2364        0        0     1926  1926 3348.
+5 LAS CON… 15108-…    13   15108     2366        0        0     2584  2656 4390.</code></pre>
+</div>
+</div>
+<p><code>filter</code>: Operadores Lógicos</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> Operador </th>
+   <th style="text-align:center;"> Comparación </th>
+   <th style="text-align:center;"> Ejemplo </th>
+   <th style="text-align:center;"> Resultado </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> x | y </td>
+   <td style="text-align:center;"> x Ó y es verdadero </td>
+   <td style="text-align:center;"> TRUE | FALSE </td>
+   <td style="text-align:center;"> TRUE </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> x &amp; y </td>
+   <td style="text-align:center;"> x Y y son verdaderos </td>
+   <td style="text-align:center;"> TRUE &amp; FALSE </td>
+   <td style="text-align:center;"> FALSE </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> !x </td>
+   <td style="text-align:center;"> x no es verdadero (negación) </td>
+   <td style="text-align:center;"> !TRUE </td>
+   <td style="text-align:center;"> FALSE </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> isTRUE(x) </td>
+   <td style="text-align:center;"> x es verdadero (afirmación) </td>
+   <td style="text-align:center;"> isTRUE(TRUE) </td>
+   <td style="text-align:center;"> TRUE </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>Filtrar las manzanas que tengan valores de oficina y comercio mayores a 0</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb169"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a>sii_com <span class="sc">%&gt;%</span></span>
+<span id="cb169-2"><a href="#cb169-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(oficinas <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> comercio <span class="sc">&gt;</span> <span class="dv">0</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 493 × 10
+   n_com manzana   reg cod_com num_manz oficinas comercio vivienda  total   AREA
+   &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+ 1 LAS … 15108-…    13   15108     2400     322     3388    65422  1.22e5 1.06e5
+ 2 LAS … 15108-…    13   15108     2407   30864     2518        0  7.50e4 4.04e3
+ 3 LAS … 15108-…    13   15108     1392     424     9902        0  1.58e4 1.27e4
+ 4 LAS … 15108-…    13   15108      336   45190     1432        0  8.28e4 3.24e3
+ 5 LAS … 15108-…    13   15108      338     424.     244.    9993. 1.17e4 1.11e4
+ 6 LAS … 15108-…    13   15108      338     414.     238.    9765. 1.14e4 1.06e4
+ 7 LAS … 15108-…    13   15108      339    1120     5274     7748  1.49e4 9.38e3
+ 8 LAS … 15108-…    13   15108      340     250       72    55206  7.23e4 1.22e4
+ 9 LAS … 15108-…    13   15108      342     494     1914    47690  6.97e4 1.62e4
+10 LAS … 15108-…    13   15108      349   17826     1568        0  3.38e4 1.84e3
+# ℹ 483 more rows</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="resúmenes-estadísticos-con-dplyr" class="level2" data-number="G.4">
+<h2 data-number="G.4" class="anchored" data-anchor-id="resúmenes-estadísticos-con-dplyr"><span class="header-section-number">G.4</span> Resúmenes Estadísticos con <code>dplyr</code></h2>
+<center>
+<img src="images/dplyr_group_by.png" class="img-fluid" style="width:70.0%">
+</center>
+<p>Contabilizar cuantos metros cuadrados de oficina por cada comuna.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb171"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb171-1"><a href="#cb171-1" aria-hidden="true" tabindex="-1"></a>tbl_resumen <span class="ot">&lt;-</span>  tbl_sii <span class="sc">%&gt;%</span></span>
+<span id="cb171-2"><a href="#cb171-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(n_com) <span class="sc">%&gt;%</span></span>
+<span id="cb171-3"><a href="#cb171-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Cantidad_mz =</span> <span class="fu">n</span>(),</span>
+<span id="cb171-4"><a href="#cb171-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Total_of =</span> <span class="fu">sum</span>(oficinas)) <span class="sc">%&gt;%</span></span>
+<span id="cb171-5"><a href="#cb171-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Total_of)) <span class="co"># Ordenar</span></span>
+<span id="cb171-6"><a href="#cb171-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb171-7"><a href="#cb171-7" aria-hidden="true" tabindex="-1"></a>tbl_resumen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 170 × 3
+   n_com           Cantidad_mz Total_of
+   &lt;chr&gt;                 &lt;int&gt;    &lt;dbl&gt;
+ 1 SANTIAGO CENTRO         686  6105996
+ 2 LAS CONDES             2310  4248336
+ 3 PROVIDENCIA             885  3495426
+ 4 HUECHURABA             1160  1006138
+ 5 QUILICURA              2592   751874
+ 6 VITACURA                950   743734
+ 7 SANTIAGO SUR            623   669270
+ 8 Ã‘UÃ‘OA                1337   637982
+ 9 SANTIAGO OESTE          586   586724
+10 PUDAHUEL               2775   561868
+# ℹ 160 more rows</code></pre>
+</div>
+</div>
+<p><strong>Actividad</strong></p>
+<ul>
+<li>Contabilizar cuantos metros cuadrados de Comercio hay por cada comuna rdenar de mayor a menor.</li>
+<li>Crear tabla con las 10 comunas que tienen mayor densisdad de Comercio</li>
+</ul>
+<div class="callout-tip callout callout-style-simple callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Densidad de comercio
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Se puede entender como la división de la cantidad de metros cuadrados de comercio dividio por el total de metros cuadrados.</p>
+</div>
+</div>
+</section>
+<section id="visualización-de-variables" class="level2" data-number="G.5">
+<h2 data-number="G.5" class="anchored" data-anchor-id="visualización-de-variables"><span class="header-section-number">G.5</span> Visualización de Variables</h2>
+<section id="función-plot" class="level3" data-number="G.5.1">
+<h3 data-number="G.5.1" class="anchored" data-anchor-id="función-plot"><span class="header-section-number">G.5.1</span> Función Plot</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb173"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>) <span class="co"># evitas notación cientiífica</span></span>
+<span id="cb173-2"><a href="#cb173-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(sii_com<span class="sc">$</span>vivienda, <span class="at">breaks =</span> <span class="dv">50</span>,</span>
+<span id="cb173-3"><a href="#cb173-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Histograma mt2 de Viviendas"</span>, <span class="at">col =</span> <span class="st">"#225ea8"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="r_project_files/figure-html/unnamed-chunk-69-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb174"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="co"># colores:https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="package-ggplot2" class="level3" data-number="G.5.2">
+<h3 data-number="G.5.2" class="anchored" data-anchor-id="package-ggplot2"><span class="header-section-number">G.5.2</span> Package <a href="https://ggplot2.tidyverse.org">ggplot2</a></h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb175"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb175-2"><a href="#cb175-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sii_com, <span class="fu">aes</span>(<span class="at">x =</span> vivienda)) <span class="sc">+</span> </span>
+<span id="cb175-3"><a href="#cb175-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="st">"#225ea8"</span>, <span class="at">color =</span><span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="r_project_files/figure-html/unnamed-chunk-70-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="https://ggplot2.tidyverse.org">ggplot2</a> con estilos y características</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb176"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb176-1"><a href="#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sii_com, <span class="fu">aes</span>(<span class="at">x =</span> vivienda)) <span class="sc">+</span></span>
+<span id="cb176-2"><a href="#cb176-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">50</span>, <span class="at">color =</span> <span class="st">"#c7e9b4"</span>, <span class="at">fill =</span> <span class="st">"#1d91c0"</span>)<span class="sc">+</span></span>
+<span id="cb176-3"><a href="#cb176-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb176-4"><a href="#cb176-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Histograma mt2 de Viviendas"</span>, <span class="at">x =</span><span class="st">"Mt2. Viviendas"</span>, <span class="at">y =</span> <span class="st">"Frecuencias"</span>)<span class="sc">+</span></span>
+<span id="cb176-5"><a href="#cb176-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>,<span class="at">colour=</span> <span class="st">"gray60"</span>, <span class="at">size=</span><span class="dv">10</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="r_project_files/figure-html/unnamed-chunk-71-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="objetos-espaciales-en-r" class="level1" data-number="H">
+<h1 data-number="H"><span class="header-section-number">H</span> Objetos Espaciales en R</h1>
+<section id="introducción" class="level2" data-number="H.1">
+<h2 data-number="H.1" class="anchored" data-anchor-id="introducción"><span class="header-section-number">H.1</span> Introducción</h2>
+<p>Un rasgo es una cosa, un objeto del mundo real, como un edificio o un árbol. Al igual que los objetos, suelen estar formados por otros objetos. Lo mismo ocurre con los rasgos: un conjunto de rasgos puede formar un único rasgo. Una masa forestal puede ser un rasgo, un bosque puede ser un rasgo, una ciudad puede ser un rasgo. Un píxel de una imagen de satélite puede ser un rasgo, una imagen completa también puede ser un rasgo.</p>
+<p>Los elementos tienen una geometría que describe su ubicación en la Tierra y atributos que describen otras propiedades. La geometría de un árbol puede ser la delineación de su copa, de su tallo o el punto que indica su centro. Otras propiedades pueden ser su altura, color, diámetro a la altura del pecho en una fecha determinada, etc.</p>
+</section>
+<section id="lectura-de-insumos-espaciales" class="level2" data-number="H.2">
+<h2 data-number="H.2" class="anchored" data-anchor-id="lectura-de-insumos-espaciales"><span class="header-section-number">H.2</span> Lectura de Insumos Espaciales</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb177"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("sf")</span></span>
+<span id="cb177-2"><a href="#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb177-3"><a href="#cb177-3" aria-hidden="true" tabindex="-1"></a>crs_ll <span class="ot">&lt;-</span> <span class="st">"+proj=longlat +datum=WGS84 +no_defs"</span></span>
+<span id="cb177-4"><a href="#cb177-4" aria-hidden="true" tabindex="-1"></a>crs_utm <span class="ot">&lt;-</span> <span class="st">"+proj=utm +zone=19 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"</span></span>
+<span id="cb177-5"><a href="#cb177-5" aria-hidden="true" tabindex="-1"></a>censo <span class="ot">&lt;-</span>  <span class="fu">readRDS</span>(<span class="st">"data/rds/Zonas_Censales_2017_Nacional.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="transformar-a-objeto-sf-simple-features" class="level2" data-number="H.3">
+<h2 data-number="H.3" class="anchored" data-anchor-id="transformar-a-objeto-sf-simple-features"><span class="header-section-number">H.3</span> Transformar a objeto sf (simple features)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb178"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb178-1"><a href="#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transformar a objeto sf (simple features)</span></span>
+<span id="cb178-2"><a href="#cb178-2" aria-hidden="true" tabindex="-1"></a>censo_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(censo)</span>
+<span id="cb178-3"><a href="#cb178-3" aria-hidden="true" tabindex="-1"></a><span class="co"># head(censo_sf)</span></span>
+<span id="cb178-4"><a href="#cb178-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(censo_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "REGION"     "NOM_REGION" "PROVINCIA"  "NOM_PROVIN" "COMUNA"    
+ [6] "NOM_COMUNA" "URBANO"     "DISTRITO"   "LOC_ZON"    "GEOCODIGO" 
+[11] "SHAPE_Leng" "SHAPE_Area" "geometry"  </code></pre>
+</div>
+</div>
+</section>
+<section id="filtros-espaciales-por-data" class="level2" data-number="H.4">
+<h2 data-number="H.4" class="anchored" data-anchor-id="filtros-espaciales-por-data"><span class="header-section-number">H.4</span> Filtros espaciales por data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb180"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href="#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb180-2"><a href="#cb180-2" aria-hidden="true" tabindex="-1"></a>mi_communa <span class="ot">&lt;-</span>  <span class="st">"LAS CONDES"</span></span>
+<span id="cb180-3"><a href="#cb180-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb180-4"><a href="#cb180-4" aria-hidden="true" tabindex="-1"></a>zonas_com <span class="ot">&lt;-</span>  censo_sf <span class="sc">%&gt;%</span> </span>
+<span id="cb180-5"><a href="#cb180-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(NOM_COMUNA <span class="sc">==</span> mi_communa)</span>
+<span id="cb180-6"><a href="#cb180-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb180-7"><a href="#cb180-7" aria-hidden="true" tabindex="-1"></a>zonas_com <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 6 features and 12 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -70.56629 ymin: -33.41713 xmax: -70.47884 ymax: -33.36421
+Geodetic CRS:  +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0
+            REGION                       NOM_REGION PROVINCIA NOM_PROVIN COMUNA
+13114051001     13 REGIÓN METROPOLITANA DE SANTIAGO       131   SANTIAGO  13114
+13114041001     13 REGIÓN METROPOLITANA DE SANTIAGO       131   SANTIAGO  13114
+13114041003     13 REGIÓN METROPOLITANA DE SANTIAGO       131   SANTIAGO  13114
+13114161002     13 REGIÓN METROPOLITANA DE SANTIAGO       131   SANTIAGO  13114
+13114151003     13 REGIÓN METROPOLITANA DE SANTIAGO       131   SANTIAGO  13114
+13114021002     13 REGIÓN METROPOLITANA DE SANTIAGO       131   SANTIAGO  13114
+            NOM_COMUNA     URBANO DISTRITO LOC_ZON   GEOCODIGO SHAPE_Leng
+13114051001 LAS CONDES LAS CONDES        5       1 13114051001 0.02302722
+13114041001 LAS CONDES LAS CONDES        4       1 13114041001 0.09575698
+13114041003 LAS CONDES LAS CONDES        4       3 13114041003 0.06782420
+13114161002 LAS CONDES LAS CONDES       16       2 13114161002 0.06482893
+13114151003 LAS CONDES LAS CONDES       15       3 13114151003 0.04135677
+13114021002 LAS CONDES LAS CONDES        2       2 13114021002 0.04687558
+               SHAPE_Area                       geometry
+13114051001 0.00003357387 MULTIPOLYGON (((-70.56008 -...
+13114041001 0.00027087999 MULTIPOLYGON (((-70.47951 -...
+13114041003 0.00024510870 MULTIPOLYGON (((-70.5267 -3...
+13114161002 0.00014506080 MULTIPOLYGON (((-70.50789 -...
+13114151003 0.00008288767 MULTIPOLYGON (((-70.51477 -...
+13114021002 0.00005754391 MULTIPOLYGON (((-70.53606 -...</code></pre>
+</div>
+</div>
+</section>
+<section id="visualización-cartográficas" class="level2" data-number="H.5">
+<h2 data-number="H.5" class="anchored" data-anchor-id="visualización-cartográficas"><span class="header-section-number">H.5</span> Visualización Cartográficas</h2>
+<section id="visualización-estática-simple" class="level3" data-number="H.5.1">
+<h3 data-number="H.5.1" class="anchored" data-anchor-id="visualización-estática-simple"><span class="header-section-number">H.5.1</span> Visualización estática Simple</h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb182"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb182-1"><a href="#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Visualizar</span></span>
+<span id="cb182-2"><a href="#cb182-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Consideración el plot se realiza sobre la columna geometry</span></span>
+<span id="cb182-3"><a href="#cb182-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb182-4"><a href="#cb182-4" aria-hidden="true" tabindex="-1"></a>nombre_plot <span class="ot">&lt;-</span>  <span class="fu">paste0</span>(<span class="st">"COMUNA DE "</span>, mi_communa)</span>
+<span id="cb182-5"><a href="#cb182-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(zonas_com<span class="sc">$</span>geometry, <span class="at">main =</span> nombre_plot,<span class="at">col =</span><span class="st">"orange"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="r_project_files/figure-html/unnamed-chunk-75-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="visualización-estática-con-ggplot2" class="level3" data-number="H.5.2">
+<h3 data-number="H.5.2" class="anchored" data-anchor-id="visualización-estática-con-ggplot2"><span class="header-section-number">H.5.2</span> Visualización estática con <code>ggplot2</code></h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb183"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb183-1"><a href="#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb183-2"><a href="#cb183-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb183-3"><a href="#cb183-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualización ggplot y sf</span></span>
+<span id="cb183-4"><a href="#cb183-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb183-5"><a href="#cb183-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> zonas_com, <span class="at">fill =</span> <span class="st">"orange"</span>, <span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb183-6"><a href="#cb183-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(nombre_plot) <span class="sc">+</span></span>
+<span id="cb183-7"><a href="#cb183-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb183-8"><a href="#cb183-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb183-9"><a href="#cb183-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"gray80"</span>),</span>
+<span id="cb183-10"><a href="#cb183-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"gray80"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="r_project_files/figure-html/unnamed-chunk-76-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="visualización-dinámica-con-mapview" class="level3" data-number="H.5.3">
+<h3 data-number="H.5.3" class="anchored" data-anchor-id="visualización-dinámica-con-mapview"><span class="header-section-number">H.5.3</span> Visualización Dinámica con <code>mapview</code></h3>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb184"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb184-1"><a href="#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("mapview")</span></span>
+<span id="cb184-2"><a href="#cb184-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span>
+<span id="cb184-3"><a href="#cb184-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mapview</span>(zonas_com, <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
+<span id="cb184-4"><a href="#cb184-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.regions =</span> <span class="st">"orange"</span>, <span class="at">color=</span><span class="st">"gray80"</span>,</span>
+<span id="cb184-5"><a href="#cb184-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend =</span><span class="cn">FALSE</span>, <span class="at">cex =</span> <span class="dv">3</span>)</span>
+<span id="cb184-6"><a href="#cb184-6" aria-hidden="true" tabindex="-1"></a>m </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/mapa_mapview.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="referencias" class="level2" data-number="H.6">
+<h2 data-number="H.6" class="anchored" data-anchor-id="referencias"><span class="header-section-number">H.6</span> Referencias:</h2>
+<ul>
+<li><a href="https://es.r4ds.hadley.nz">R para Ciencia de Datos</a></li>
+<li><a href="https://bookdown.org/gboccardo/manual-ED-UCH/">RStudio para Estadística Descriptiva en Ciencias Sociales</a></li>
+<li><a href="https://bookdown.org/jboscomendoza/r-principiantes4/estructuras-de-control.html" class="uri">https://bookdown.org/jboscomendoza/r-principiantes4/estructuras-de-control.html</a></li>
+<li><a href="https://rstudio-pubs-static.s3.amazonaws.com/623888_497a5388a98545c48e9b5b6bec4056f6.html" class="uri">https://rstudio-pubs-static.s3.amazonaws.com/623888_497a5388a98545c48e9b5b6bec4056f6.html</a></li>
+<li><a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">Paletas de colores</a></li>
+<li><a href="https://bookdown.org/jboscomendoza/r-principiantes4/estructuras-de-control.html">https://bookdown.org/jboscomendoza/r-principiantes4/estructuras-de-control.html</a></li>
+<li><a href="https://es.r4ds.hadley.nz/iteración.html">https://es.r4ds.hadley.nz/iteración.html</a></li>
+<li><a href="https://rstudio-pubs-static.s3.amazonaws.com/623888_497a5388a98545c48e9b5b6bec4056f6.html">https://rstudio-pubs-static.s3.amazonaws.com/623888_497a5388a98545c48e9b5b6bec4056f6.html</a></li>
+<li><a href="https://r-spatial.github.io/sf/articles/sf1.html">Simple Features for R</a></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./crime_f.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Funciones Generales</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2023, Denis Berroeta</div>   
+  </div>
+</footer>
+
+
+
+</body></html>

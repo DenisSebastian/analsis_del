@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Curso: Análisis Criminal - Appendix D — Estructura de Control en R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./tidyverse_R.html" rel="next">
+<link href="./funciones.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Appendix D — Estructura de Control en R</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Curso: Análisis Criminal</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Introducción a R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./variables_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Variables en R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./funciones.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Funciones en R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./loops_R.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Estructura de Control en R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tidyverse_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Tidyverse en R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./espacial_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Objetos Espaciales en R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./r_project.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">R Project</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#estructuras-condicionales" id="toc-estructuras-condicionales" class="nav-link active" data-scroll-target="#estructuras-condicionales"><span class="toc-section-number">D.1</span>  Estructuras condicionales</a></li>
+  <li><a href="#estructuras-de-bucles" id="toc-estructuras-de-bucles" class="nav-link" data-scroll-target="#estructuras-de-bucles"><span class="toc-section-number">D.2</span>  Estructuras de bucles</a>
+  <ul class="collapse">
+  <li><a href="#estructura-de-bucle-for" id="toc-estructura-de-bucle-for" class="nav-link" data-scroll-target="#estructura-de-bucle-for"><span class="toc-section-number">D.2.1</span>  Estructura de bucle “<code>for</code>”:</a></li>
+  <li><a href="#estructura-de-bucle-while" id="toc-estructura-de-bucle-while" class="nav-link" data-scroll-target="#estructura-de-bucle-while"><span class="toc-section-number">D.2.2</span>  Estructura de bucle “while”:</a></li>
+  <li><a href="#estructura-de-bucle-repeat" id="toc-estructura-de-bucle-repeat" class="nav-link" data-scroll-target="#estructura-de-bucle-repeat"><span class="toc-section-number">D.2.3</span>  Estructura de bucle “repeat”:</a></li>
+  </ul></li>
+  <li><a href="#estructuras-de-control-de-flujo" id="toc-estructuras-de-control-de-flujo" class="nav-link" data-scroll-target="#estructuras-de-control-de-flujo"><span class="toc-section-number">D.3</span>  Estructuras de control de flujo</a>
+  <ul class="collapse">
+  <li><a href="#estructuras-de-control-next" id="toc-estructuras-de-control-next" class="nav-link" data-scroll-target="#estructuras-de-control-next"><span class="toc-section-number">D.3.1</span>  Estructuras de control “next”:</a></li>
+  <li><a href="#estructuras-de-control-break" id="toc-estructuras-de-control-break" class="nav-link" data-scroll-target="#estructuras-de-control-break"><span class="toc-section-number">D.3.2</span>  Estructuras de control “break”:</a></li>
+  </ul></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="toc-section-number">D.4</span>  Referencias</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Appendix D — Estructura de Control en R</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Las estructuras de control en R son herramientas que permiten controlar el flujo de ejecución de un programa. Las estructuras de control son esenciales para cualquier lenguaje de programación, ya que permiten que el programa tome decisiones y realice acciones en función de ciertas condiciones.</p>
+<p>Estas estructuras de control son muy útiles para crear programas que respondan a diferentes situaciones y condiciones, y permiten que los programadores puedan crear soluciones más eficientes y complejas.</p>
+<p>En R, existen tres estructuras de control principales:</p>
+<ol type="1">
+<li><p>Estructuras condicionales: Permiten ejecutar un bloque de código solo si se cumple una condición determinada. Las estructuras condicionales más comunes en R son “<code>if</code>” y “<code>ifelse</code>”.</p></li>
+<li><p>Estructuras de bucles: Permiten ejecutar un bloque de código repetidamente, mientras se cumpla una condición determinada. Las estructuras de bucles más comunes en R son “<code>while</code>”, “<code>for</code>” y “<code>repeat</code>”.</p></li>
+<li><p>Estructuras de control de flujo: Permiten cambiar el flujo de ejecución del programa en función de ciertas condiciones. Las estructuras de control de flujo más comunes en R son “<code>break</code>” y “<code>next</code>”.</p></li>
+</ol>
+<section id="estructuras-condicionales" class="level2" data-number="D.1">
+<h2 data-number="D.1" class="anchored" data-anchor-id="estructuras-condicionales"><span class="header-section-number">D.1</span> Estructuras condicionales</h2>
+<p>Las estructuras condicionales son una de las tres estructuras de control principales en R. Estas estructuras permiten ejecutar un bloque de código solo si se cumple una condición determinada.</p>
+<p>La estructura condicional más común en R es “<code>if</code>”. La sintaxis básica de la estructura “<code>if</code>” es la siguiente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(Condición) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  operaciones_si_la_condición_es_TRUE</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La “condición” es una expresión lógica que evalúa a verdadero o falso. Si la condición es verdadera, el bloque de código dentro del “if” se ejecutará. Si la condición es falsa, el bloque de código dentro del “if” se ignorará.</p>
+<p>Por ejemplo, le pedimos a R que nos muestre el texto “Verdadero” si la condición se cumple.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Se cumple la condición y se muestra "verdadero"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="dv">4</span> <span class="sc">&gt;</span> <span class="dv">3</span>) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Verdadero"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Verdadero"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No se cumple la condición y no pasa nada</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="dv">4</span> <span class="sc">&gt;</span> <span class="dv">5</span>) {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Verdadero"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>También se puede agregar un bloque de código opcional para el caso en que la condición sea falsa utilizando la estructura “<code>else</code>”. La sintaxis básica de la estructura “<code>if</code>” con “<code>else</code>” es la siguie</p>
+<p><em>SI esta condición es es cierta, ENTONCES</em> haz estas operaciones, DE OTRO MODO haz estas otras operaciones.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(condición) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  operaciones_si_la_condición_es_TRUE</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  operaciones_si_la_condición_es_FALSE</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Usando los ejemplos anteriores, podemos mostrar “Falso” si no se cumple la condición, en lugar de que no ocurra nada</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Se cumple la condición y se muestra "Verdadero"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="dv">4</span> <span class="sc">&gt;</span> <span class="dv">3</span>) {</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Verdadero"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Falso"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Verdadero"</code></pre>
+</div>
+</div>
+<p>La estructura “<code>ifelse</code>” es otra forma de estructura condicional que permite ejecutar diferentes bloques de código en función de la condición. La sintaxis básica de la estructura “<code>ifelse</code>” es la siguiente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(condición, expresión1, expresión2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Si la “condición” es verdadera, se ejecutará “expresión1”. Si la “condición” es falsa, se ejecutará “expresión2”.</p>
+<p>Además, se pueden anidar varias estructuras condicionales utilizando la sintaxis de “if” y “else”. Por ejemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (condición1) {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Código a ejecutar si la condición1 es verdadera</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (condición2) {</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Código a ejecutar si la condición1 es falsa y la condición2 es verdadera</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Código a ejecutar si todas las condiciones son falsas</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>En resumen, las estructuras condicionales en R son herramientas muy útiles para controlar el flujo de ejecución de un programa en función de ciertas condiciones. Estas estructuras permiten crear soluciones más eficientes y complejas al permitir que los programas tomen decisiones y realicen acciones en función de las condiciones que se presenten.</p>
+</section>
+<section id="estructuras-de-bucles" class="level2" data-number="D.2">
+<h2 data-number="D.2" class="anchored" data-anchor-id="estructuras-de-bucles"><span class="header-section-number">D.2</span> Estructuras de bucles</h2>
+<p>Las estructuras de bucles son una de las tres estructuras de control principales en R. Estas estructuras permiten ejecutar un bloque de código repetidamente mientras se cumpla una condición determinada. En R, existen tres estructuras de bucles principales: “<code>while</code>”, “<code>for</code>” y “<code>repeat</code>”.</p>
+<p><strong>Beneficios</strong></p>
+<ul>
+<li>Es más fácil ver el objetivo de tu código; lo diferente llama más atención a la vista que aquello que permanece igual.</li>
+<li>Es más sencillo responder a cambios en los requerimientos. A medida que tus necesidades cambian, solo necesitarás realizar cambios en un lugar, en vez de recordar cambiar en cada lugar donde copiaste y pegaste el código.</li>
+<li>Es probable que tengas menos errores porque cada línea de código es utilizada en más lugares.</li>
+</ul>
+<section id="estructura-de-bucle-for" class="level3" data-number="D.2.1">
+<h3 data-number="D.2.1" class="anchored" data-anchor-id="estructura-de-bucle-for"><span class="header-section-number">D.2.1</span> Estructura de bucle “<code>for</code>”:</h3>
+<p>La estructura “for” permite repetir la ejecución de un bloque de código un número determinado de veces. La sintaxis básica de la estructura “for” es la siguiente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (variable <span class="cf">in</span> secuencia) {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Código a ejecutar para cada elemento en la secuencia</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La “secuencia” es un objeto que contiene una serie de elementos. La “variable” toma el valor de cada elemento de la secuencia en cada iteración del bucle. En cada iteración, se ejecutará el bloque de código dentro del “for” para ese valor de la variable.</p>
+<p>Ejemplo simple: <code>print</code> una secuencia</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>){</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5</code></pre>
+</div>
+</div>
+<p>Ejemplo 2: Guardando los resultados en un vector</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dado <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>mi_vector <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(cara <span class="cf">in</span> dado) {</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  mi_vector[cara] <span class="ot">&lt;-</span> cara <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>mi_vector</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  1  4  9 16 25 36</code></pre>
+</div>
+</div>
+<p>Ejemplo 3: Loops con vectores</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>alumnos <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Carmen"</span>, <span class="st">"Adriana"</span>, <span class="st">"Marco"</span>, <span class="st">"Fabi"</span>, <span class="st">"Brenda"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(alumnos)) {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Hola,"</span>, alumnos[i], <span class="at">sep =</span> <span class="st">" "</span>))</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Hola, Carmen"
+[1] "Hola, Adriana"
+[1] "Hola, Marco"
+[1] "Hola, Fabi"
+[1] "Hola, Brenda"</code></pre>
+</div>
+</div>
+<p>Ejemplo 4: loops en Dataframes</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">a =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="at">b =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">c =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="at">d =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>))</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(df)){</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  promedio <span class="ot">=</span> <span class="fu">mean</span>(df[,i])</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(promedio)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4988638
+[1] -0.6112556
+[1] 0.02338515
+[1] -0.1767015</code></pre>
+</div>
+</div>
+</section>
+<section id="estructura-de-bucle-while" class="level3" data-number="D.2.2">
+<h3 data-number="D.2.2" class="anchored" data-anchor-id="estructura-de-bucle-while"><span class="header-section-number">D.2.2</span> Estructura de bucle “while”:</h3>
+<p>La estructura “<code>while</code>” permite repetir la ejecución de un bloque de código mientras se cumpla una condición determinada. La sintaxis básica de la estructura “<code>while</code>” es la siguiente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (condición) {</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Código a ejecutar mientras se cumpla la condición</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La “condición” es una expresión lógica que evalúa a verdadero o falso. Si la condición es verdadera, se ejecutará el bloque de código dentro del “while”. Este proceso se repetirá hasta que la condición sea falsa.</p>
+</section>
+<section id="estructura-de-bucle-repeat" class="level3" data-number="D.2.3">
+<h3 data-number="D.2.3" class="anchored" data-anchor-id="estructura-de-bucle-repeat"><span class="header-section-number">D.2.3</span> Estructura de bucle “repeat”:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span> {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Código a ejecutar de manera indefinida</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (condición) {</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>El bloque de código dentro del “<code>repeat</code>” se ejecutará de manera indefinida hasta que se encuentre la sentencia “<code>break</code>”, que permite salir del bucle. La “condición” es una expresión lógica que evalúa a verdadero o falso. Si la condición es verdadera, se ejecutará la sentencia “break” y se saldrá del bucle.</p>
+</section>
+</section>
+<section id="estructuras-de-control-de-flujo" class="level2" data-number="D.3">
+<h2 data-number="D.3" class="anchored" data-anchor-id="estructuras-de-control-de-flujo"><span class="header-section-number">D.3</span> Estructuras de control de flujo</h2>
+<p>“<code>next</code>” y “<code>break</code>” son palabras clave importantes en R que se utilizan en las estructuras de control de flujo, específicamente en las estructuras de bucle. “next” se utiliza para saltar a la siguiente iteración del bucle sin ejecutar el resto del código dentro del bucle, mientras que “break” se utiliza para detener el bucle de forma abrupta, incluso si la condición del bucle todavía se cumple.</p>
+<section id="estructuras-de-control-next" class="level3" data-number="D.3.1">
+<h3 data-number="D.3.1" class="anchored" data-anchor-id="estructuras-de-control-next"><span class="header-section-number">D.3.1</span> Estructuras de control “next”:</h3>
+<p>“<code>next</code>” se utiliza en una estructura de bucle para saltar a la siguiente iteración del bucle sin ejecutar el resto del código dentro del bucle. Es decir, si se encuentra la palabra clave “next” dentro de un bucle, se omitirá el código que viene después y el bucle pasará inmediatamente a la siguiente iteración. La palabra clave “next” es útil cuando se desea saltar una iteración específica del bucle, sin afectar el resto del código.</p>
+<p>Por ejemplo, en el siguiente código se utiliza la palabra clave “next” para omitir la impresión del número 3 dentro del bucle “for”:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">==</span> <span class="dv">3</span>) {</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">next</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1
+[1] 2
+[1] 4
+[1] 5</code></pre>
+</div>
+</div>
+</section>
+<section id="estructuras-de-control-break" class="level3" data-number="D.3.2">
+<h3 data-number="D.3.2" class="anchored" data-anchor-id="estructuras-de-control-break"><span class="header-section-number">D.3.2</span> Estructuras de control “break”:</h3>
+<p>“break”, por otro lado, se utiliza en una estructura de bucle para detener el bucle de forma abrupta, incluso si la condición del bucle todavía se cumple. Es decir, si se encuentra la palabra clave “break” dentro de un bucle, se detendrá el bucle de inmediato y se continuará con la ejecución del código que viene después del bucle. La palabra clave “break” es útil cuando se desea detener el bucle en un punto específico sin tener que esperar a que la condición del bucle se deje de cumplir.</p>
+<p>Por ejemplo, en el siguiente código se utiliza la palabra clave “break” para detener el bucle “while” cuando el valor de “i” es mayor que 5:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (i <span class="sc">&lt;</span> <span class="dv">10</span>) {</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">&gt;</span> <span class="dv">5</span>) {</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> i <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="referencias" class="level2" data-number="D.4">
+<h2 data-number="D.4" class="anchored" data-anchor-id="referencias"><span class="header-section-number">D.4</span> Referencias</h2>
+<ul>
+<li><a href="https://bookdown.org/jboscomendoza/r-principiantes4/estructuras-de-control.html">https://bookdown.org/jboscomendoza/r-principiantes4/estructuras-de-control.html</a></li>
+<li><a href="https://es.r4ds.hadley.nz/iteración.html">https://es.r4ds.hadley.nz/iteración.html</a></li>
+<li><a href="https://rstudio-pubs-static.s3.amazonaws.com/623888_497a5388a98545c48e9b5b6bec4056f6.html">https://rstudio-pubs-static.s3.amazonaws.com/623888_497a5388a98545c48e9b5b6bec4056f6.html</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./funciones.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Funciones en R</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./tidyverse_R.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Tidyverse en R</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2023, Denis Berroeta</div>   
+  </div>
+</footer>
+
+
+
+</body></html>
