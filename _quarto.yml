@@ -1,0 +1,42 @@
+project:
+  type: book
+
+book:
+  title: "Análisis Criminal"
+  subtitle: "Curso FONDECYT"
+  # affiliation-title: "Universidad Adolfo Ibáñez - Chile"
+  author: "FONDECYT"
+  date: "2023-04-01"
+  #number-sections: 3
+  page-footer: 
+    left: "Copyright 2023, Denis Berroeta" 
+  chapters:
+    - index.qmd
+    - datos.qmd
+
+    - references.qmd
+        
+  appendices:
+    - crime_f.qmd
+    - r_project.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    html-math-method: katex
+    css: styles/style.css
+    fig-align: "center"
+    fig-cap-location: "margin"
+    tab-cap-location: "left"
+    mailto: "denis.berroeta@uai.cl"
+  
+execute:
+  warning: false
+  
+editor: source
+always_allow_html: true
+
+
+

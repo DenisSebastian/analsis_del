@@ -1,0 +1,84 @@
+---
+subtitle: "Lectura y Transformaciones de Datos"
+editor_options: 
+  chunk_output_type: console
+---
+
+# Datos de Delitos {#sec-data}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen = 999, warn=-1)
+
+#cargar Librerias
+source("R/librerias.R")
+# Cargar Funciones
+source("R/librerias.R")
+
+```
+
+## Cargar Librerías y Funciones
+
+En primer lugar se procederá a cargar las librerías necesarias para realizar el tratamiento y transformaciones a los datos.
+
+
+```{r eval=FALSE}
+## Manipulación de Tablas
+library(dplyr)
+library(purrr)
+
+## Manipulación de Fechas
+library(lubridate)
+
+## Manipulación de Datos Espaciales
+library(sf)
+
+## Visualización de Datos Espaciales
+library(mapview)
+
+## Manipulación de Excel
+library(openxlsx))
+```
+
+También se cargarán las funciones creadas previamente, revisar el @sec-fuctions.
+
+```{r eval=FALSE}
+# Cargar Funciones
+source("R/librerias.R")
+```
+
+
+## Lectura de Datos
+
+Los datos se encuentran en formato RDS separados por y sin ningún tratamiento. Se procederá a revisar el contenido de los datos del año 2017 llamado `Casos_2017.rds`.
+
+
+
+
+```{r eval=FALSE}
+datos_2017 <- readRDS(file = "data/delitos/raw/Casos_2017.rds")
+head(datos_2017)
+```
+
+```{r eval=TRUE, echo=FALSE}
+datos_2017 <- readRDS(file = "data_samples/raw_2017_100.rds")
+head(datos_2017)
+```
+
+
+
+
+Se puede observar que corresponde a `1.418.435` de casos policiales con información espacial tipo punto ({{< var library.sf >}}), además información temporal y divisiones administrativas.
+
+
+
+
+
+
+
+
+
+
+
+
+

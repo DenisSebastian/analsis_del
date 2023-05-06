@@ -1,0 +1,15 @@
+version: 1
+
+email:
+  author: denis.berroeta@uai.cl
+  support: support@example.com
+
+engine:
+  jupyter: "[Jupyter](https://jupyter.org)"
+  knitr: "[Knitr](<https://yihui.name/knitr>)"
+  R: "[The R Project for Statistical Computing](https://www.r-project.org)"
+  
+library:
+  sf: "[Simple Features for R](https://r-spatial.github.io/sf/articles/sf1.html)"
+  dplyr: "[dplyr](https://dplyr.tidyverse.org)"
+  purrr: "[purrr](https://purrr.tidyverse.org)"
