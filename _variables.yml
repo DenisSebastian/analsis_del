@@ -11,11 +11,12 @@ engine:
   
 library:
   sf: "[Simple Features for R](https://r-spatial.github.io/sf/articles/sf1.html)"
-  dplyr: "[dplyr](https://dplyr.tidyverse.org)"
-  purrr: "[purrr](https://purrr.tidyverse.org)"
-  mapview: "[mapview](https://r-spatial.github.io/mapview/)"
-  lubridate: "[lubridate](https://lubridate.tidyverse.org)"
-  tidyr: "[tidyr](https://tidyr.tidyverse.org)"
+  dplyr: "[Dplyr](https://dplyr.tidyverse.org)"
+  purrr: "[Purrr](https://purrr.tidyverse.org)"
+  mapview: "[Mapview](https://r-spatial.github.io/mapview/)"
+  lubridate: "[Lubridate](https://lubridate.tidyverse.org)"
+  tidyr: "[Tidyr](https://tidyr.tidyverse.org)"
+  plotly: "[Plotly](https://plotly.com/r/)"
   
 organization:
   ine: "[Instituto Nacional de Estadísticas](https://www.ine.gob.cl)"

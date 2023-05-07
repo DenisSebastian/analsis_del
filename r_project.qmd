@@ -5,8 +5,6 @@ subtitle: "Repaso de Lenguaje de Programación"
 
 
 
-# Introducción a R
-
 ## ¿Qué es R Project?
 
 R es un lenguaje programación multiparadigma (procedural, imperativo, orientado a objetos y [funcional](https://es.wikipedia.org/wiki/Programación_funcional)) enfocado a aplicaciones estadísticas. Por estadísticas se debe entender también los campos de estudio que se basan o las utilizan como económía, finanzas, ciencia de datos, machine learning, etc.
@@ -983,7 +981,7 @@ Todos los paquetes comparten una filosofía de diseño, una gramática y estruct
 ```{r}
 suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(sf))
-tbl_sii  <- readRDS("data/rds/mz_constru_SII.rds") %>% 
+tbl_sii  <- readRDS("data/sii/mz_constru_SII.rds") %>% 
   st_drop_geometry() # descartar geometrias solo usar la tabla de datos
 
 head(tbl_sii)
@@ -1131,7 +1129,7 @@ Los elementos tienen una geometría que describe su ubicación en la Tierra y at
 library(sf)
 crs_ll <- "+proj=longlat +datum=WGS84 +no_defs"
 crs_utm <- "+proj=utm +zone=19 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"
-censo <-  readRDS("data/rds/Zonas_Censales_2017_Nacional.rds")
+censo <-  readRDS("data/ine/Zonas_Censales_2017_Nacional.rds")
 
 ```
 

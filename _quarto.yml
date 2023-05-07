@@ -13,6 +13,9 @@ book:
   chapters:
     - index.qmd
     - datos.qmd
+    - panel.qmd
+    - resumen.qmd
+    - delta.qmd
 
     - references.qmd
         

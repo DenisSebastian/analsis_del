@@ -182,7 +182,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Datos de Delitos</span></a>
+  <a href="./datos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Limpieza de Datos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./panel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Datos de Panel</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -219,111 +224,108 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introducción-a-r" id="toc-introducción-a-r" class="nav-link active" data-scroll-target="#introducción-a-r"><span class="toc-section-number">C</span>  Introducción a R</a>
+  <li><a href="#qué-es-r-project" id="toc-qué-es-r-project" class="nav-link active" data-scroll-target="#qué-es-r-project"><span class="toc-section-number">B.1</span>  ¿Qué es R Project?</a>
   <ul class="collapse">
-  <li><a href="#qué-es-r-project" id="toc-qué-es-r-project" class="nav-link" data-scroll-target="#qué-es-r-project"><span class="toc-section-number">C.1</span>  ¿Qué es R Project?</a>
-  <ul class="collapse">
-  <li><a href="#ventajas-de-utilizar-r-project" id="toc-ventajas-de-utilizar-r-project" class="nav-link" data-scroll-target="#ventajas-de-utilizar-r-project"><span class="toc-section-number">C.1.1</span>  Ventajas de Utilizar R Project</a></li>
-  <li><a href="#desventajas-de-utilizar-r" id="toc-desventajas-de-utilizar-r" class="nav-link" data-scroll-target="#desventajas-de-utilizar-r"><span class="toc-section-number">C.1.2</span>  Desventajas de utilizar R</a></li>
+  <li><a href="#ventajas-de-utilizar-r-project" id="toc-ventajas-de-utilizar-r-project" class="nav-link" data-scroll-target="#ventajas-de-utilizar-r-project"><span class="toc-section-number">B.1.1</span>  Ventajas de Utilizar R Project</a></li>
+  <li><a href="#desventajas-de-utilizar-r" id="toc-desventajas-de-utilizar-r" class="nav-link" data-scroll-target="#desventajas-de-utilizar-r"><span class="toc-section-number">B.1.2</span>  Desventajas de utilizar R</a></li>
   </ul></li>
-  <li><a href="#instalación-de-r-project" id="toc-instalación-de-r-project" class="nav-link" data-scroll-target="#instalación-de-r-project"><span class="toc-section-number">C.2</span>  Instalación de R Project</a>
+  <li><a href="#instalación-de-r-project" id="toc-instalación-de-r-project" class="nav-link" data-scroll-target="#instalación-de-r-project"><span class="toc-section-number">B.2</span>  Instalación de R Project</a>
   <ul class="collapse">
-  <li><a href="#instalación-de-r-project-1" id="toc-instalación-de-r-project-1" class="nav-link" data-scroll-target="#instalación-de-r-project-1"><span class="toc-section-number">C.2.1</span>  Instalación de R Project</a></li>
-  <li><a href="#instalación-de-r-para-windows" id="toc-instalación-de-r-para-windows" class="nav-link" data-scroll-target="#instalación-de-r-para-windows"><span class="toc-section-number">C.2.2</span>  Instalación de R para Windows</a></li>
-  <li><a href="#instalar-rtools-solo-sistema-operativo-windows" id="toc-instalar-rtools-solo-sistema-operativo-windows" class="nav-link" data-scroll-target="#instalar-rtools-solo-sistema-operativo-windows"><span class="toc-section-number">C.2.3</span>  Instalar Rtools (solo Sistema Operativo Windows)</a></li>
-  <li><a href="#instalación-de-r-para-mac" id="toc-instalación-de-r-para-mac" class="nav-link" data-scroll-target="#instalación-de-r-para-mac"><span class="toc-section-number">C.2.4</span>  Instalación de R para Mac</a></li>
+  <li><a href="#instalación-de-r-project-1" id="toc-instalación-de-r-project-1" class="nav-link" data-scroll-target="#instalación-de-r-project-1"><span class="toc-section-number">B.2.1</span>  Instalación de R Project</a></li>
+  <li><a href="#instalación-de-r-para-windows" id="toc-instalación-de-r-para-windows" class="nav-link" data-scroll-target="#instalación-de-r-para-windows"><span class="toc-section-number">B.2.2</span>  Instalación de R para Windows</a></li>
+  <li><a href="#instalar-rtools-solo-sistema-operativo-windows" id="toc-instalar-rtools-solo-sistema-operativo-windows" class="nav-link" data-scroll-target="#instalar-rtools-solo-sistema-operativo-windows"><span class="toc-section-number">B.2.3</span>  Instalar Rtools (solo Sistema Operativo Windows)</a></li>
+  <li><a href="#instalación-de-r-para-mac" id="toc-instalación-de-r-para-mac" class="nav-link" data-scroll-target="#instalación-de-r-para-mac"><span class="toc-section-number">B.2.4</span>  Instalación de R para Mac</a></li>
   </ul></li>
-  <li><a href="#instalación-de-rstudio" id="toc-instalación-de-rstudio" class="nav-link" data-scroll-target="#instalación-de-rstudio"><span class="toc-section-number">C.3</span>  Instalación de RStudio</a>
+  <li><a href="#instalación-de-rstudio" id="toc-instalación-de-rstudio" class="nav-link" data-scroll-target="#instalación-de-rstudio"><span class="toc-section-number">B.3</span>  Instalación de RStudio</a>
   <ul class="collapse">
-  <li><a href="#rstudio-cloud" id="toc-rstudio-cloud" class="nav-link" data-scroll-target="#rstudio-cloud"><span class="toc-section-number">C.3.1</span>  RStudio Cloud</a></li>
+  <li><a href="#rstudio-cloud" id="toc-rstudio-cloud" class="nav-link" data-scroll-target="#rstudio-cloud"><span class="toc-section-number">B.3.1</span>  RStudio Cloud</a></li>
   </ul></li>
-  <li><a href="#instalar-librerías" id="toc-instalar-librerías" class="nav-link" data-scroll-target="#instalar-librerías"><span class="toc-section-number">C.4</span>  Instalar Librerías</a>
+  <li><a href="#instalar-librerías" id="toc-instalar-librerías" class="nav-link" data-scroll-target="#instalar-librerías"><span class="toc-section-number">B.4</span>  Instalar Librerías</a>
   <ul class="collapse">
-  <li><a href="#librerías-en-r" id="toc-librerías-en-r" class="nav-link" data-scroll-target="#librerías-en-r"><span class="toc-section-number">C.4.1</span>  Librerías en R</a></li>
-  <li><a href="#ejemplo-de-instalación-de-librerías-desde-r" id="toc-ejemplo-de-instalación-de-librerías-desde-r" class="nav-link" data-scroll-target="#ejemplo-de-instalación-de-librerías-desde-r"><span class="toc-section-number">C.4.2</span>  Ejemplo de Instalación de Librerías desde R</a></li>
-  <li><a href="#ejemplo-de-instalación-de-librerías-desde-rstudio" id="toc-ejemplo-de-instalación-de-librerías-desde-rstudio" class="nav-link" data-scroll-target="#ejemplo-de-instalación-de-librerías-desde-rstudio"><span class="toc-section-number">C.4.3</span>  Ejemplo de Instalación de Librerías desde Rstudio</a></li>
+  <li><a href="#librerías-en-r" id="toc-librerías-en-r" class="nav-link" data-scroll-target="#librerías-en-r"><span class="toc-section-number">B.4.1</span>  Librerías en R</a></li>
+  <li><a href="#ejemplo-de-instalación-de-librerías-desde-r" id="toc-ejemplo-de-instalación-de-librerías-desde-r" class="nav-link" data-scroll-target="#ejemplo-de-instalación-de-librerías-desde-r"><span class="toc-section-number">B.4.2</span>  Ejemplo de Instalación de Librerías desde R</a></li>
+  <li><a href="#ejemplo-de-instalación-de-librerías-desde-rstudio" id="toc-ejemplo-de-instalación-de-librerías-desde-rstudio" class="nav-link" data-scroll-target="#ejemplo-de-instalación-de-librerías-desde-rstudio"><span class="toc-section-number">B.4.3</span>  Ejemplo de Instalación de Librerías desde Rstudio</a></li>
   </ul></li>
-  <li><a href="#definición-de-directorios-de-trabajos" id="toc-definición-de-directorios-de-trabajos" class="nav-link" data-scroll-target="#definición-de-directorios-de-trabajos"><span class="toc-section-number">C.5</span>  Definición de Directorios de Trabajos</a></li>
+  <li><a href="#definición-de-directorios-de-trabajos" id="toc-definición-de-directorios-de-trabajos" class="nav-link" data-scroll-target="#definición-de-directorios-de-trabajos"><span class="toc-section-number">B.5</span>  Definición de Directorios de Trabajos</a></li>
+  <li><a href="#variables-en-r" id="toc-variables-en-r" class="nav-link" data-scroll-target="#variables-en-r"><span class="toc-section-number">C</span>  Variables en R</a>
+  <ul class="collapse">
+  <li><a href="#tipos-de-objetos-en-r" id="toc-tipos-de-objetos-en-r" class="nav-link" data-scroll-target="#tipos-de-objetos-en-r"><span class="toc-section-number">C.1</span>  Tipos de Objetos en R</a>
+  <ul class="collapse">
+  <li><a href="#variables-numéricas" id="toc-variables-numéricas" class="nav-link" data-scroll-target="#variables-numéricas"><span class="toc-section-number">C.1.1</span>  Variables Numéricas</a></li>
+  <li><a href="#variables-de-caracter" id="toc-variables-de-caracter" class="nav-link" data-scroll-target="#variables-de-caracter"><span class="toc-section-number">C.1.2</span>  Variables de Caracter</a></li>
   </ul></li>
-  <li><a href="#variables-en-r" id="toc-variables-en-r" class="nav-link" data-scroll-target="#variables-en-r"><span class="toc-section-number">D</span>  Variables en R</a>
+  <li><a href="#estructuras-de-datos" id="toc-estructuras-de-datos" class="nav-link" data-scroll-target="#estructuras-de-datos"><span class="toc-section-number">C.2</span>  Estructuras de Datos</a>
   <ul class="collapse">
-  <li><a href="#tipos-de-objetos-en-r" id="toc-tipos-de-objetos-en-r" class="nav-link" data-scroll-target="#tipos-de-objetos-en-r"><span class="toc-section-number">D.1</span>  Tipos de Objetos en R</a>
-  <ul class="collapse">
-  <li><a href="#variables-numéricas" id="toc-variables-numéricas" class="nav-link" data-scroll-target="#variables-numéricas"><span class="toc-section-number">D.1.1</span>  Variables Numéricas</a></li>
-  <li><a href="#variables-de-caracter" id="toc-variables-de-caracter" class="nav-link" data-scroll-target="#variables-de-caracter"><span class="toc-section-number">D.1.2</span>  Variables de Caracter</a></li>
-  </ul></li>
-  <li><a href="#estructuras-de-datos" id="toc-estructuras-de-datos" class="nav-link" data-scroll-target="#estructuras-de-datos"><span class="toc-section-number">D.2</span>  Estructuras de Datos</a>
-  <ul class="collapse">
-  <li><a href="#vectores" id="toc-vectores" class="nav-link" data-scroll-target="#vectores"><span class="toc-section-number">D.2.1</span>  Vectores</a></li>
-  <li><a href="#listas" id="toc-listas" class="nav-link" data-scroll-target="#listas"><span class="toc-section-number">D.2.2</span>  Listas</a></li>
-  <li><a href="#matrices" id="toc-matrices" class="nav-link" data-scroll-target="#matrices"><span class="toc-section-number">D.2.3</span>  Matrices</a></li>
-  <li><a href="#dataframes" id="toc-dataframes" class="nav-link" data-scroll-target="#dataframes"><span class="toc-section-number">D.2.4</span>  Dataframes</a></li>
+  <li><a href="#vectores" id="toc-vectores" class="nav-link" data-scroll-target="#vectores"><span class="toc-section-number">C.2.1</span>  Vectores</a></li>
+  <li><a href="#listas" id="toc-listas" class="nav-link" data-scroll-target="#listas"><span class="toc-section-number">C.2.2</span>  Listas</a></li>
+  <li><a href="#matrices" id="toc-matrices" class="nav-link" data-scroll-target="#matrices"><span class="toc-section-number">C.2.3</span>  Matrices</a></li>
+  <li><a href="#dataframes" id="toc-dataframes" class="nav-link" data-scroll-target="#dataframes"><span class="toc-section-number">C.2.4</span>  Dataframes</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#funciones-en-r" id="toc-funciones-en-r" class="nav-link" data-scroll-target="#funciones-en-r"><span class="toc-section-number">E</span>  Funciones en R</a>
+  <li><a href="#funciones-en-r" id="toc-funciones-en-r" class="nav-link" data-scroll-target="#funciones-en-r"><span class="toc-section-number">D</span>  Funciones en R</a>
   <ul class="collapse">
-  <li><a href="#operaciones-básicas-en-r" id="toc-operaciones-básicas-en-r" class="nav-link" data-scroll-target="#operaciones-básicas-en-r"><span class="toc-section-number">E.1</span>  Operaciones Básicas en R</a>
+  <li><a href="#operaciones-básicas-en-r" id="toc-operaciones-básicas-en-r" class="nav-link" data-scroll-target="#operaciones-básicas-en-r"><span class="toc-section-number">D.1</span>  Operaciones Básicas en R</a>
   <ul class="collapse">
-  <li><a href="#operaciones-matemáticas" id="toc-operaciones-matemáticas" class="nav-link" data-scroll-target="#operaciones-matemáticas"><span class="toc-section-number">E.1.1</span>  Operaciones Matemáticas</a></li>
-  <li><a href="#funciones-útiles-de-propósito-general" id="toc-funciones-útiles-de-propósito-general" class="nav-link" data-scroll-target="#funciones-útiles-de-propósito-general"><span class="toc-section-number">E.1.2</span>  Funciones Útiles de propósito general</a></li>
+  <li><a href="#operaciones-matemáticas" id="toc-operaciones-matemáticas" class="nav-link" data-scroll-target="#operaciones-matemáticas"><span class="toc-section-number">D.1.1</span>  Operaciones Matemáticas</a></li>
+  <li><a href="#funciones-útiles-de-propósito-general" id="toc-funciones-útiles-de-propósito-general" class="nav-link" data-scroll-target="#funciones-útiles-de-propósito-general"><span class="toc-section-number">D.1.2</span>  Funciones Útiles de propósito general</a></li>
   </ul></li>
-  <li><a href="#operaciones-lógicas" id="toc-operaciones-lógicas" class="nav-link" data-scroll-target="#operaciones-lógicas"><span class="toc-section-number">E.2</span>  Operaciones Lógicas</a>
+  <li><a href="#operaciones-lógicas" id="toc-operaciones-lógicas" class="nav-link" data-scroll-target="#operaciones-lógicas"><span class="toc-section-number">D.2</span>  Operaciones Lógicas</a>
   <ul class="collapse">
-  <li><a href="#operador-de-igualdad" id="toc-operador-de-igualdad" class="nav-link" data-scroll-target="#operador-de-igualdad"><span class="toc-section-number">E.2.1</span>  Operador de igualdad: (==)</a></li>
-  <li><a href="#operador-de-desigualdad" id="toc-operador-de-desigualdad" class="nav-link" data-scroll-target="#operador-de-desigualdad"><span class="toc-section-number">E.2.2</span>  Operador de desigualdad: (!=)</a></li>
-  <li><a href="#operador-de-mayor-que" id="toc-operador-de-mayor-que" class="nav-link" data-scroll-target="#operador-de-mayor-que"><span class="toc-section-number">E.2.3</span>  Operador de mayor que: (&gt;)</a></li>
-  <li><a href="#operador-de-menor-que" id="toc-operador-de-menor-que" class="nav-link" data-scroll-target="#operador-de-menor-que"><span class="toc-section-number">E.2.4</span>  Operador de menor que: (&lt;)</a></li>
-  <li><a href="#operador-de-mayor-o-igual-que" id="toc-operador-de-mayor-o-igual-que" class="nav-link" data-scroll-target="#operador-de-mayor-o-igual-que"><span class="toc-section-number">E.2.5</span>  Operador de mayor o igual que: (&gt;=)</a></li>
-  <li><a href="#operador-de-menor-o-igual-que" id="toc-operador-de-menor-o-igual-que" class="nav-link" data-scroll-target="#operador-de-menor-o-igual-que"><span class="toc-section-number">E.2.6</span>  Operador de menor o igual que: (&lt;=)</a></li>
-  <li><a href="#operador-lógico-and" id="toc-operador-lógico-and" class="nav-link" data-scroll-target="#operador-lógico-and"><span class="toc-section-number">E.2.7</span>  Operador lógico AND: (&amp;)</a></li>
-  <li><a href="#operador-lógico-or" id="toc-operador-lógico-or" class="nav-link" data-scroll-target="#operador-lógico-or"><span class="toc-section-number">E.2.8</span>  Operador lógico OR: (|)</a></li>
+  <li><a href="#operador-de-igualdad" id="toc-operador-de-igualdad" class="nav-link" data-scroll-target="#operador-de-igualdad"><span class="toc-section-number">D.2.1</span>  Operador de igualdad: (==)</a></li>
+  <li><a href="#operador-de-desigualdad" id="toc-operador-de-desigualdad" class="nav-link" data-scroll-target="#operador-de-desigualdad"><span class="toc-section-number">D.2.2</span>  Operador de desigualdad: (!=)</a></li>
+  <li><a href="#operador-de-mayor-que" id="toc-operador-de-mayor-que" class="nav-link" data-scroll-target="#operador-de-mayor-que"><span class="toc-section-number">D.2.3</span>  Operador de mayor que: (&gt;)</a></li>
+  <li><a href="#operador-de-menor-que" id="toc-operador-de-menor-que" class="nav-link" data-scroll-target="#operador-de-menor-que"><span class="toc-section-number">D.2.4</span>  Operador de menor que: (&lt;)</a></li>
+  <li><a href="#operador-de-mayor-o-igual-que" id="toc-operador-de-mayor-o-igual-que" class="nav-link" data-scroll-target="#operador-de-mayor-o-igual-que"><span class="toc-section-number">D.2.5</span>  Operador de mayor o igual que: (&gt;=)</a></li>
+  <li><a href="#operador-de-menor-o-igual-que" id="toc-operador-de-menor-o-igual-que" class="nav-link" data-scroll-target="#operador-de-menor-o-igual-que"><span class="toc-section-number">D.2.6</span>  Operador de menor o igual que: (&lt;=)</a></li>
+  <li><a href="#operador-lógico-and" id="toc-operador-lógico-and" class="nav-link" data-scroll-target="#operador-lógico-and"><span class="toc-section-number">D.2.7</span>  Operador lógico AND: (&amp;)</a></li>
+  <li><a href="#operador-lógico-or" id="toc-operador-lógico-or" class="nav-link" data-scroll-target="#operador-lógico-or"><span class="toc-section-number">D.2.8</span>  Operador lógico OR: (|)</a></li>
   </ul></li>
-  <li><a href="#crear-funciones-propias" id="toc-crear-funciones-propias" class="nav-link" data-scroll-target="#crear-funciones-propias"><span class="toc-section-number">E.3</span>  Crear Funciones Propias</a></li>
+  <li><a href="#crear-funciones-propias" id="toc-crear-funciones-propias" class="nav-link" data-scroll-target="#crear-funciones-propias"><span class="toc-section-number">D.3</span>  Crear Funciones Propias</a></li>
   </ul></li>
-  <li><a href="#estructura-de-control-en-r" id="toc-estructura-de-control-en-r" class="nav-link" data-scroll-target="#estructura-de-control-en-r"><span class="toc-section-number">F</span>  Estructura de Control en R</a>
+  <li><a href="#estructura-de-control-en-r" id="toc-estructura-de-control-en-r" class="nav-link" data-scroll-target="#estructura-de-control-en-r"><span class="toc-section-number">E</span>  Estructura de Control en R</a>
   <ul class="collapse">
-  <li><a href="#estructuras-condicionales" id="toc-estructuras-condicionales" class="nav-link" data-scroll-target="#estructuras-condicionales"><span class="toc-section-number">F.1</span>  Estructuras condicionales</a></li>
-  <li><a href="#estructuras-de-bucles" id="toc-estructuras-de-bucles" class="nav-link" data-scroll-target="#estructuras-de-bucles"><span class="toc-section-number">F.2</span>  Estructuras de bucles</a>
+  <li><a href="#estructuras-condicionales" id="toc-estructuras-condicionales" class="nav-link" data-scroll-target="#estructuras-condicionales"><span class="toc-section-number">E.1</span>  Estructuras condicionales</a></li>
+  <li><a href="#estructuras-de-bucles" id="toc-estructuras-de-bucles" class="nav-link" data-scroll-target="#estructuras-de-bucles"><span class="toc-section-number">E.2</span>  Estructuras de bucles</a>
   <ul class="collapse">
-  <li><a href="#estructura-de-bucle-for" id="toc-estructura-de-bucle-for" class="nav-link" data-scroll-target="#estructura-de-bucle-for"><span class="toc-section-number">F.2.1</span>  Estructura de bucle “<code>for</code>”:</a></li>
-  <li><a href="#estructura-de-bucle-while" id="toc-estructura-de-bucle-while" class="nav-link" data-scroll-target="#estructura-de-bucle-while"><span class="toc-section-number">F.2.2</span>  Estructura de bucle “while”:</a></li>
-  <li><a href="#estructura-de-bucle-repeat" id="toc-estructura-de-bucle-repeat" class="nav-link" data-scroll-target="#estructura-de-bucle-repeat"><span class="toc-section-number">F.2.3</span>  Estructura de bucle “repeat”:</a></li>
+  <li><a href="#estructura-de-bucle-for" id="toc-estructura-de-bucle-for" class="nav-link" data-scroll-target="#estructura-de-bucle-for"><span class="toc-section-number">E.2.1</span>  Estructura de bucle “<code>for</code>”:</a></li>
+  <li><a href="#estructura-de-bucle-while" id="toc-estructura-de-bucle-while" class="nav-link" data-scroll-target="#estructura-de-bucle-while"><span class="toc-section-number">E.2.2</span>  Estructura de bucle “while”:</a></li>
+  <li><a href="#estructura-de-bucle-repeat" id="toc-estructura-de-bucle-repeat" class="nav-link" data-scroll-target="#estructura-de-bucle-repeat"><span class="toc-section-number">E.2.3</span>  Estructura de bucle “repeat”:</a></li>
   </ul></li>
-  <li><a href="#estructuras-de-control-de-flujo" id="toc-estructuras-de-control-de-flujo" class="nav-link" data-scroll-target="#estructuras-de-control-de-flujo"><span class="toc-section-number">F.3</span>  Estructuras de control de flujo</a>
+  <li><a href="#estructuras-de-control-de-flujo" id="toc-estructuras-de-control-de-flujo" class="nav-link" data-scroll-target="#estructuras-de-control-de-flujo"><span class="toc-section-number">E.3</span>  Estructuras de control de flujo</a>
   <ul class="collapse">
-  <li><a href="#estructuras-de-control-next" id="toc-estructuras-de-control-next" class="nav-link" data-scroll-target="#estructuras-de-control-next"><span class="toc-section-number">F.3.1</span>  Estructuras de control “next”:</a></li>
-  <li><a href="#estructuras-de-control-break" id="toc-estructuras-de-control-break" class="nav-link" data-scroll-target="#estructuras-de-control-break"><span class="toc-section-number">F.3.2</span>  Estructuras de control “break”:</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#tidyverse-en-r" id="toc-tidyverse-en-r" class="nav-link" data-scroll-target="#tidyverse-en-r"><span class="toc-section-number">G</span>  Tidyverse en R</a>
-  <ul class="collapse">
-  <li><a href="#introducción-a-tidyverse" id="toc-introducción-a-tidyverse" class="nav-link" data-scroll-target="#introducción-a-tidyverse"><span class="toc-section-number">G.1</span>  Introducción a Tidyverse</a></li>
-  <li><a href="#estructura-de-un-dataframe" id="toc-estructura-de-un-dataframe" class="nav-link" data-scroll-target="#estructura-de-un-dataframe"><span class="toc-section-number">G.2</span>  Estructura de un dataframe</a></li>
-  <li><a href="#funciones-básicas-dplyr" id="toc-funciones-básicas-dplyr" class="nav-link" data-scroll-target="#funciones-básicas-dplyr"><span class="toc-section-number">G.3</span>  Funciones básicas <code>dplyr</code></a>
-  <ul class="collapse">
-  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select"><span class="toc-section-number">G.3.1</span>  Select</a></li>
-  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="toc-section-number">G.3.2</span>  Filter</a></li>
-  </ul></li>
-  <li><a href="#resúmenes-estadísticos-con-dplyr" id="toc-resúmenes-estadísticos-con-dplyr" class="nav-link" data-scroll-target="#resúmenes-estadísticos-con-dplyr"><span class="toc-section-number">G.4</span>  Resúmenes Estadísticos con <code>dplyr</code></a></li>
-  <li><a href="#visualización-de-variables" id="toc-visualización-de-variables" class="nav-link" data-scroll-target="#visualización-de-variables"><span class="toc-section-number">G.5</span>  Visualización de Variables</a>
-  <ul class="collapse">
-  <li><a href="#función-plot" id="toc-función-plot" class="nav-link" data-scroll-target="#función-plot"><span class="toc-section-number">G.5.1</span>  Función Plot</a></li>
-  <li><a href="#package-ggplot2" id="toc-package-ggplot2" class="nav-link" data-scroll-target="#package-ggplot2"><span class="toc-section-number">G.5.2</span>  Package ggplot2</a></li>
+  <li><a href="#estructuras-de-control-next" id="toc-estructuras-de-control-next" class="nav-link" data-scroll-target="#estructuras-de-control-next"><span class="toc-section-number">E.3.1</span>  Estructuras de control “next”:</a></li>
+  <li><a href="#estructuras-de-control-break" id="toc-estructuras-de-control-break" class="nav-link" data-scroll-target="#estructuras-de-control-break"><span class="toc-section-number">E.3.2</span>  Estructuras de control “break”:</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#objetos-espaciales-en-r" id="toc-objetos-espaciales-en-r" class="nav-link" data-scroll-target="#objetos-espaciales-en-r"><span class="toc-section-number">H</span>  Objetos Espaciales en R</a>
+  <li><a href="#tidyverse-en-r" id="toc-tidyverse-en-r" class="nav-link" data-scroll-target="#tidyverse-en-r"><span class="toc-section-number">F</span>  Tidyverse en R</a>
   <ul class="collapse">
-  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="toc-section-number">H.1</span>  Introducción</a></li>
-  <li><a href="#lectura-de-insumos-espaciales" id="toc-lectura-de-insumos-espaciales" class="nav-link" data-scroll-target="#lectura-de-insumos-espaciales"><span class="toc-section-number">H.2</span>  Lectura de Insumos Espaciales</a></li>
-  <li><a href="#transformar-a-objeto-sf-simple-features" id="toc-transformar-a-objeto-sf-simple-features" class="nav-link" data-scroll-target="#transformar-a-objeto-sf-simple-features"><span class="toc-section-number">H.3</span>  Transformar a objeto sf (simple features)</a></li>
-  <li><a href="#filtros-espaciales-por-data" id="toc-filtros-espaciales-por-data" class="nav-link" data-scroll-target="#filtros-espaciales-por-data"><span class="toc-section-number">H.4</span>  Filtros espaciales por data</a></li>
-  <li><a href="#visualización-cartográficas" id="toc-visualización-cartográficas" class="nav-link" data-scroll-target="#visualización-cartográficas"><span class="toc-section-number">H.5</span>  Visualización Cartográficas</a>
+  <li><a href="#introducción-a-tidyverse" id="toc-introducción-a-tidyverse" class="nav-link" data-scroll-target="#introducción-a-tidyverse"><span class="toc-section-number">F.1</span>  Introducción a Tidyverse</a></li>
+  <li><a href="#estructura-de-un-dataframe" id="toc-estructura-de-un-dataframe" class="nav-link" data-scroll-target="#estructura-de-un-dataframe"><span class="toc-section-number">F.2</span>  Estructura de un dataframe</a></li>
+  <li><a href="#funciones-básicas-dplyr" id="toc-funciones-básicas-dplyr" class="nav-link" data-scroll-target="#funciones-básicas-dplyr"><span class="toc-section-number">F.3</span>  Funciones básicas <code>dplyr</code></a>
   <ul class="collapse">
-  <li><a href="#visualización-estática-simple" id="toc-visualización-estática-simple" class="nav-link" data-scroll-target="#visualización-estática-simple"><span class="toc-section-number">H.5.1</span>  Visualización estática Simple</a></li>
-  <li><a href="#visualización-estática-con-ggplot2" id="toc-visualización-estática-con-ggplot2" class="nav-link" data-scroll-target="#visualización-estática-con-ggplot2"><span class="toc-section-number">H.5.2</span>  Visualización estática con <code>ggplot2</code></a></li>
-  <li><a href="#visualización-dinámica-con-mapview" id="toc-visualización-dinámica-con-mapview" class="nav-link" data-scroll-target="#visualización-dinámica-con-mapview"><span class="toc-section-number">H.5.3</span>  Visualización Dinámica con <code>mapview</code></a></li>
+  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select"><span class="toc-section-number">F.3.1</span>  Select</a></li>
+  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="toc-section-number">F.3.2</span>  Filter</a></li>
   </ul></li>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="toc-section-number">H.6</span>  Referencias:</a></li>
+  <li><a href="#resúmenes-estadísticos-con-dplyr" id="toc-resúmenes-estadísticos-con-dplyr" class="nav-link" data-scroll-target="#resúmenes-estadísticos-con-dplyr"><span class="toc-section-number">F.4</span>  Resúmenes Estadísticos con <code>dplyr</code></a></li>
+  <li><a href="#visualización-de-variables" id="toc-visualización-de-variables" class="nav-link" data-scroll-target="#visualización-de-variables"><span class="toc-section-number">F.5</span>  Visualización de Variables</a>
+  <ul class="collapse">
+  <li><a href="#función-plot" id="toc-función-plot" class="nav-link" data-scroll-target="#función-plot"><span class="toc-section-number">F.5.1</span>  Función Plot</a></li>
+  <li><a href="#package-ggplot2" id="toc-package-ggplot2" class="nav-link" data-scroll-target="#package-ggplot2"><span class="toc-section-number">F.5.2</span>  Package ggplot2</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#objetos-espaciales-en-r" id="toc-objetos-espaciales-en-r" class="nav-link" data-scroll-target="#objetos-espaciales-en-r"><span class="toc-section-number">G</span>  Objetos Espaciales en R</a>
+  <ul class="collapse">
+  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="toc-section-number">G.1</span>  Introducción</a></li>
+  <li><a href="#lectura-de-insumos-espaciales" id="toc-lectura-de-insumos-espaciales" class="nav-link" data-scroll-target="#lectura-de-insumos-espaciales"><span class="toc-section-number">G.2</span>  Lectura de Insumos Espaciales</a></li>
+  <li><a href="#transformar-a-objeto-sf-simple-features" id="toc-transformar-a-objeto-sf-simple-features" class="nav-link" data-scroll-target="#transformar-a-objeto-sf-simple-features"><span class="toc-section-number">G.3</span>  Transformar a objeto sf (simple features)</a></li>
+  <li><a href="#filtros-espaciales-por-data" id="toc-filtros-espaciales-por-data" class="nav-link" data-scroll-target="#filtros-espaciales-por-data"><span class="toc-section-number">G.4</span>  Filtros espaciales por data</a></li>
+  <li><a href="#visualización-cartográficas" id="toc-visualización-cartográficas" class="nav-link" data-scroll-target="#visualización-cartográficas"><span class="toc-section-number">G.5</span>  Visualización Cartográficas</a>
+  <ul class="collapse">
+  <li><a href="#visualización-estática-simple" id="toc-visualización-estática-simple" class="nav-link" data-scroll-target="#visualización-estática-simple"><span class="toc-section-number">G.5.1</span>  Visualización estática Simple</a></li>
+  <li><a href="#visualización-estática-con-ggplot2" id="toc-visualización-estática-con-ggplot2" class="nav-link" data-scroll-target="#visualización-estática-con-ggplot2"><span class="toc-section-number">G.5.2</span>  Visualización estática con <code>ggplot2</code></a></li>
+  <li><a href="#visualización-dinámica-con-mapview" id="toc-visualización-dinámica-con-mapview" class="nav-link" data-scroll-target="#visualización-dinámica-con-mapview"><span class="toc-section-number">G.5.3</span>  Visualización Dinámica con <code>mapview</code></a></li>
+  </ul></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="toc-section-number">G.6</span>  Referencias:</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -349,13 +351,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="introducción-a-r" class="level1" data-number="C">
-<h1 data-number="C"><span class="header-section-number">C</span> Introducción a R</h1>
-<section id="qué-es-r-project" class="level2" data-number="C.1">
-<h2 data-number="C.1" class="anchored" data-anchor-id="qué-es-r-project"><span class="header-section-number">C.1</span> ¿Qué es R Project?</h2>
+<section id="qué-es-r-project" class="level2" data-number="B.1">
+<h2 data-number="B.1" class="anchored" data-anchor-id="qué-es-r-project"><span class="header-section-number">B.1</span> ¿Qué es R Project?</h2>
 <p>R es un lenguaje programación multiparadigma (procedural, imperativo, orientado a objetos y <a href="https://es.wikipedia.org/wiki/Programación_funcional">funcional</a>) enfocado a aplicaciones estadísticas. Por estadísticas se debe entender también los campos de estudio que se basan o las utilizan como económía, finanzas, ciencia de datos, machine learning, etc.</p>
-<section id="ventajas-de-utilizar-r-project" class="level3" data-number="C.1.1">
-<h3 data-number="C.1.1" class="anchored" data-anchor-id="ventajas-de-utilizar-r-project"><span class="header-section-number">C.1.1</span> Ventajas de Utilizar R Project</h3>
+<section id="ventajas-de-utilizar-r-project" class="level3" data-number="B.1.1">
+<h3 data-number="B.1.1" class="anchored" data-anchor-id="ventajas-de-utilizar-r-project"><span class="header-section-number">B.1.1</span> Ventajas de Utilizar R Project</h3>
 <p><strong>1. R es un software libre</strong></p>
 <ul>
 <li>La libertad de ejecutar el programa como desee y con cualquier propósito</li>
@@ -376,29 +376,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>R remplaza la combinación de varios programas para el proceso de análisis de datos, por ejemplo Excel, ArcGis, QGis, SigmaPlot, entre otros. Esto no solo resulta en el alto costo de las licencias de múltiples programas, si no también, en la gran cantidad de archivos con diferentes formatos que no podrían leer otros programas. En cambio con solo utilizar R, puedes realizar todo el análisis de datos e inclusive leer archivos de diferentes formatos.</li>
 </ul>
 </section>
-<section id="desventajas-de-utilizar-r" class="level3" data-number="C.1.2">
-<h3 data-number="C.1.2" class="anchored" data-anchor-id="desventajas-de-utilizar-r"><span class="header-section-number">C.1.2</span> Desventajas de utilizar R</h3>
+<section id="desventajas-de-utilizar-r" class="level3" data-number="B.1.2">
+<h3 data-number="B.1.2" class="anchored" data-anchor-id="desventajas-de-utilizar-r"><span class="header-section-number">B.1.2</span> Desventajas de utilizar R</h3>
 <ul>
 <li>R tiene una vasta documentación de ayuda, descripción de paquetes y de funciones, que es difícil encontrar información específica en un momento dado.</li>
 <li>Los mensajes de error que R nos muestra, no es específica sobre los fallos que estamos realizando y solo un usuario con cierta experiencia en el uso de R puede saberlo.</li>
 </ul>
 </section>
 </section>
-<section id="instalación-de-r-project" class="level2" data-number="C.2">
-<h2 data-number="C.2" class="anchored" data-anchor-id="instalación-de-r-project"><span class="header-section-number">C.2</span> Instalación de R Project</h2>
-<section id="instalación-de-r-project-1" class="level3" data-number="C.2.1">
-<h3 data-number="C.2.1" class="anchored" data-anchor-id="instalación-de-r-project-1"><span class="header-section-number">C.2.1</span> Instalación de R Project</h3>
+<section id="instalación-de-r-project" class="level2" data-number="B.2">
+<h2 data-number="B.2" class="anchored" data-anchor-id="instalación-de-r-project"><span class="header-section-number">B.2</span> Instalación de R Project</h2>
+<section id="instalación-de-r-project-1" class="level3" data-number="B.2.1">
+<h3 data-number="B.2.1" class="anchored" data-anchor-id="instalación-de-r-project-1"><span class="header-section-number">B.2.1</span> Instalación de R Project</h3>
 <p>Primero se debe instalar <strong><a href="https://cran.r-project.org/bin/windows/base/">R Project</a></strong> desde su sitio oficial (https://cran.r-project.org/bin/windows/base/), se ejecuta el instalador que se descargó depende del sistema operativo del PC, como se muestra en las siguientes figuras:</p>
 <p><img src="images/install_r.png" class="img-fluid"></p>
 </section>
-<section id="instalación-de-r-para-windows" class="level3" data-number="C.2.2">
-<h3 data-number="C.2.2" class="anchored" data-anchor-id="instalación-de-r-para-windows"><span class="header-section-number">C.2.2</span> Instalación de R para Windows</h3>
+<section id="instalación-de-r-para-windows" class="level3" data-number="B.2.2">
+<h3 data-number="B.2.2" class="anchored" data-anchor-id="instalación-de-r-para-windows"><span class="header-section-number">B.2.2</span> Instalación de R para Windows</h3>
 <center>
 <img src="images/install_r_w.gif" class="img-fluid" style="width:90.0%">
 </center>
 </section>
-<section id="instalar-rtools-solo-sistema-operativo-windows" class="level3" data-number="C.2.3">
-<h3 data-number="C.2.3" class="anchored" data-anchor-id="instalar-rtools-solo-sistema-operativo-windows"><span class="header-section-number">C.2.3</span> Instalar Rtools (solo Sistema Operativo Windows)</h3>
+<section id="instalar-rtools-solo-sistema-operativo-windows" class="level3" data-number="B.2.3">
+<h3 data-number="B.2.3" class="anchored" data-anchor-id="instalar-rtools-solo-sistema-operativo-windows"><span class="header-section-number">B.2.3</span> Instalar Rtools (solo Sistema Operativo Windows)</h3>
 <center>
 <img src="images/w_rtools.png" class="img-fluid" style="width:60.0%">
 </center>
@@ -406,8 +406,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="images/install_rtools.png" class="img-fluid" style="width:60.0%">
 </center>
 </section>
-<section id="instalación-de-r-para-mac" class="level3" data-number="C.2.4">
-<h3 data-number="C.2.4" class="anchored" data-anchor-id="instalación-de-r-para-mac"><span class="header-section-number">C.2.4</span> Instalación de R para Mac</h3>
+<section id="instalación-de-r-para-mac" class="level3" data-number="B.2.4">
+<h3 data-number="B.2.4" class="anchored" data-anchor-id="instalación-de-r-para-mac"><span class="header-section-number">B.2.4</span> Instalación de R para Mac</h3>
 <center>
 <img src="images/install_r_mac.gif" class="img-fluid" style="width:90.0%">
 </center>
@@ -415,8 +415,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/r_project.png" class="img-fluid"></p>
 </section>
 </section>
-<section id="instalación-de-rstudio" class="level2" data-number="C.3">
-<h2 data-number="C.3" class="anchored" data-anchor-id="instalación-de-rstudio"><span class="header-section-number">C.3</span> Instalación de RStudio</h2>
+<section id="instalación-de-rstudio" class="level2" data-number="B.3">
+<h2 data-number="B.3" class="anchored" data-anchor-id="instalación-de-rstudio"><span class="header-section-number">B.3</span> Instalación de RStudio</h2>
 <p>Se recomienta instalar <a href="https://www.rstudio.com/products/rstudio/download/">Rstudio</a>, que es Interfaz de Usuario de R Project, desde su sitio web oficial, el cual permite acceder con mayor facilidad a sus funciones y potencialidades de R.</p>
 <center>
 <img src="images/instaladores_rstudio.png" class="img-fluid" style="width:60.0%">
@@ -426,11 +426,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <center>
 <img src="images/rstudio-editor.svg" class="img-fluid" style="width:90.0%">
 </center>
-<section id="rstudio-cloud" class="level3" data-number="C.3.1">
-<h3 data-number="C.3.1" class="anchored" data-anchor-id="rstudio-cloud"><span class="header-section-number">C.3.1</span> RStudio Cloud</h3>
+<section id="rstudio-cloud" class="level3" data-number="B.3.1">
+<h3 data-number="B.3.1" class="anchored" data-anchor-id="rstudio-cloud"><span class="header-section-number">B.3.1</span> RStudio Cloud</h3>
 <p><a href="https://rstudio.cloud">RStudio Cloud</a> es una versión ligera del IDE RStudio alojada en la la nube que permite a cualquiera hacer, compartir, enseñar y aprender Ciencias de Datos Online. Tiene una versión gratuita limitada.</p>
-<section id="características" class="level4" data-number="C.3.1.1">
-<h4 data-number="C.3.1.1" class="anchored" data-anchor-id="características"><span class="header-section-number">C.3.1.1</span> Características:</h4>
+<section id="características" class="level4" data-number="B.3.1.1">
+<h4 data-number="B.3.1.1" class="anchored" data-anchor-id="características"><span class="header-section-number">B.3.1.1</span> Características:</h4>
 <ul>
 <li>Analyze your data using the RStudio IDE, directly from your browser.</li>
 <li>Share projects with your team, class, workshop or the world.</li>
@@ -452,24 +452,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 </section>
 </section>
-<section id="instalar-librerías" class="level2" data-number="C.4">
-<h2 data-number="C.4" class="anchored" data-anchor-id="instalar-librerías"><span class="header-section-number">C.4</span> Instalar Librerías</h2>
-<section id="librerías-en-r" class="level3" data-number="C.4.1">
-<h3 data-number="C.4.1" class="anchored" data-anchor-id="librerías-en-r"><span class="header-section-number">C.4.1</span> Librerías en R</h3>
+<section id="instalar-librerías" class="level2" data-number="B.4">
+<h2 data-number="B.4" class="anchored" data-anchor-id="instalar-librerías"><span class="header-section-number">B.4</span> Instalar Librerías</h2>
+<section id="librerías-en-r" class="level3" data-number="B.4.1">
+<h3 data-number="B.4.1" class="anchored" data-anchor-id="librerías-en-r"><span class="header-section-number">B.4.1</span> Librerías en R</h3>
 <p>Las librerías o paquetes en R corresponden a una colección de funciones encapsuladas y diseñadas para atender una tarea específica. Por ejemplo, hay paquetes para trabajo visualización geoespacial, análisis psicométricos, mineria de datos, interacción con servicios de internet y muchas otras cosas más.</p>
 <p>Estos paquetes se encuentran alojados principalmente en <a href="https://cran.r-project.org">CRAN</a> (Comprehensive R Archive Network), así que pasan por un control riguroso antes de estar disponibles para su uso generalizado, al día de hoy (29.11.2021) existen 18498 paquetes disponibles. En el siguiente enlace se deja una lista de temas y sus librerías asociadas disponibles, con una breve descripción (<a href="https://cran.r-project.org/web/views/">enlace</a>)</p>
 <p>Aunque las versiones de prueba de una librería pueden estar disponible en <a href="https://github.com">Github</a> (Respositorio de Control de Versiones) de cada autor.</p>
 </section>
-<section id="ejemplo-de-instalación-de-librerías-desde-r" class="level3" data-number="C.4.2">
-<h3 data-number="C.4.2" class="anchored" data-anchor-id="ejemplo-de-instalación-de-librerías-desde-r"><span class="header-section-number">C.4.2</span> Ejemplo de Instalación de Librerías desde R</h3>
+<section id="ejemplo-de-instalación-de-librerías-desde-r" class="level3" data-number="B.4.2">
+<h3 data-number="B.4.2" class="anchored" data-anchor-id="ejemplo-de-instalación-de-librerías-desde-r"><span class="header-section-number">B.4.2</span> Ejemplo de Instalación de Librerías desde R</h3>
 <p>Podemos instalar paquetes usando la función <code>install.packages()</code>, dando como argumento el nombre del paquete que deseamos instalar, entre comillas.</p>
 <p>Para instalar librerías se puede hacer directamente desde la consola de RStudio, por ejemplo:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>) <span class="co"># Se puede instalar más de una librería a la vez</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="ejemplo-de-instalación-de-librerías-desde-rstudio" class="level3" data-number="C.4.3">
-<h3 data-number="C.4.3" class="anchored" data-anchor-id="ejemplo-de-instalación-de-librerías-desde-rstudio"><span class="header-section-number">C.4.3</span> Ejemplo de Instalación de Librerías desde Rstudio</h3>
+<section id="ejemplo-de-instalación-de-librerías-desde-rstudio" class="level3" data-number="B.4.3">
+<h3 data-number="B.4.3" class="anchored" data-anchor-id="ejemplo-de-instalación-de-librerías-desde-rstudio"><span class="header-section-number">B.4.3</span> Ejemplo de Instalación de Librerías desde Rstudio</h3>
 <p>También se pude instalar librerías del Panel “Packages”</p>
 <center>
 <img src="images/install_pack2.png" class="img-fluid" style="width:90.0%">
@@ -480,8 +480,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </center>
 </section>
 </section>
-<section id="definición-de-directorios-de-trabajos" class="level2" data-number="C.5">
-<h2 data-number="C.5" class="anchored" data-anchor-id="definición-de-directorios-de-trabajos"><span class="header-section-number">C.5</span> Definición de Directorios de Trabajos</h2>
+<section id="definición-de-directorios-de-trabajos" class="level2" data-number="B.5">
+<h2 data-number="B.5" class="anchored" data-anchor-id="definición-de-directorios-de-trabajos"><span class="header-section-number">B.5</span> Definición de Directorios de Trabajos</h2>
 <p>Definir directorio de Trabajo con RStudio</p>
 <center>
 <img src="images/wdirectory.png" class="img-fluid" style="width:80.0%">
@@ -501,11 +501,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-</section>
-<section id="variables-en-r" class="level1" data-number="D">
-<h1 data-number="D"><span class="header-section-number">D</span> Variables en R</h1>
-<section id="tipos-de-objetos-en-r" class="level2" data-number="D.1">
-<h2 data-number="D.1" class="anchored" data-anchor-id="tipos-de-objetos-en-r"><span class="header-section-number">D.1</span> Tipos de Objetos en R</h2>
+<section id="variables-en-r" class="level1" data-number="C">
+<h1 data-number="C"><span class="header-section-number">C</span> Variables en R</h1>
+<section id="tipos-de-objetos-en-r" class="level2" data-number="C.1">
+<h2 data-number="C.1" class="anchored" data-anchor-id="tipos-de-objetos-en-r"><span class="header-section-number">C.1</span> Tipos de Objetos en R</h2>
 <p>Los Datos en R se pueden clasificar por su dimensiones y los tipos de Datos que permiten almacenar, como se muestra en la siguiente tabla:</p>
 <table class="table">
 <thead>
@@ -535,8 +534,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p>Fuente: <a href="http://adv-r.had.co.nz/Data-structures.html">http://adv-r.had.co.nz/Data-structures.html</a></p>
 <p>R nos permite definir variables que pueden ser luego usadas en las distintas operaciones. El lenguaje no solo permite definir escalares (variable de un numero), si no también variables que sean un conjunto de numero o caracteres ordenados.</p>
-<section id="variables-numéricas" class="level3" data-number="D.1.1">
-<h3 data-number="D.1.1" class="anchored" data-anchor-id="variables-numéricas"><span class="header-section-number">D.1.1</span> Variables Numéricas</h3>
+<section id="variables-numéricas" class="level3" data-number="C.1.1">
+<h3 data-number="C.1.1" class="anchored" data-anchor-id="variables-numéricas"><span class="header-section-number">C.1.1</span> Variables Numéricas</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># La asignación en R son válidos 2 métodos '&lt;-' o '='</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">7</span> <span class="co"># Definir variable (escalar) x que sea igual a 7</span></span>
@@ -559,19 +558,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ru <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">10</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ru</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 8.811635 5.865857 7.391644 6.067594 8.743696 2.647396 4.774295 5.429959
-  [9] 2.377287 9.616988 6.926653 5.797022 6.847562 4.887095 2.296216 5.664446
- [17] 3.693184 1.481783 1.782443 4.875136 4.071239 7.915234 5.359341 7.759767
- [25] 2.491318 3.968461 1.539798 3.454462 9.794368 5.666611 6.746138 7.188359
- [33] 1.009968 5.630455 4.734392 6.478983 9.304819 1.250389 4.830220 7.835755
- [41] 4.578957 8.292712 7.661948 3.560957 4.669029 5.583798 9.164878 8.117981
- [49] 4.156663 6.518603 8.165289 5.485007 7.260296 6.108508 5.710161 7.110792
- [57] 4.972461 5.511515 4.167841 4.565459 8.803359 1.824712 7.328237 7.449306
- [65] 2.143007 5.991730 5.987725 2.529145 2.906488 3.289845 5.300402 3.542934
- [73] 9.636725 3.800062 5.258058 8.530075 5.807219 1.750988 8.122528 6.306378
- [81] 9.309585 9.962509 3.290576 6.283876 7.987018 9.639122 1.919056 4.855011
- [89] 7.955667 9.883614 4.880729 9.768686 7.781624 4.147312 6.825776 7.554872
- [97] 4.043835 1.530621 3.836080 3.219795</code></pre>
+<pre><code>  [1] 9.525606 5.309441 7.237110 8.476039 3.616157 4.685803 6.956300 5.769024
+  [9] 9.336631 7.361822 5.342092 3.749747 4.361127 3.349734 3.759631 8.131732
+ [17] 5.038853 9.091507 3.019825 8.519360 2.281209 2.716412 4.511776 5.409248
+ [25] 3.762858 8.539529 1.323956 5.216622 1.628558 4.456369 4.155128 9.471889
+ [33] 6.651348 7.572515 2.472536 9.203470 1.427125 9.914051 3.901222 4.003922
+ [41] 6.239679 2.430365 6.786249 7.408852 4.091341 5.700105 8.823409 1.370990
+ [49] 7.370497 1.500268 4.750775 1.887657 3.389593 9.694350 6.850364 1.913708
+ [57] 8.376661 8.432188 5.559319 8.727337 5.621075 1.399101 4.575328 6.693031
+ [65] 5.421970 5.680937 6.929958 3.076742 1.046728 6.623470 9.364048 8.028638
+ [73] 3.143618 2.377705 9.006765 4.565761 3.475726 6.383865 8.970899 9.913525
+ [81] 2.820052 6.156400 3.064021 4.757573 6.267957 5.306628 9.751925 8.521674
+ [89] 6.378396 9.908474 1.590092 8.876499 9.107567 4.051418 1.115371 6.162947
+ [97] 2.840553 9.507248 9.870183 7.333219</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
@@ -590,12 +589,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample.int</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 5 2 3 5 6 5 5 4 5 5</code></pre>
+<pre><code> [1] 4 2 3 5 2 4 2 2 6 4</code></pre>
 </div>
 </div>
 </section>
-<section id="variables-de-caracter" class="level3" data-number="D.1.2">
-<h3 data-number="D.1.2" class="anchored" data-anchor-id="variables-de-caracter"><span class="header-section-number">D.1.2</span> Variables de Caracter</h3>
+<section id="variables-de-caracter" class="level3" data-number="C.1.2">
+<h3 data-number="C.1.2" class="anchored" data-anchor-id="variables-de-caracter"><span class="header-section-number">C.1.2</span> Variables de Caracter</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ch <span class="ot">&lt;-</span> <span class="st">"Chile"</span> <span class="co"># Definir variable (objeto) ch que sea la palabra "Chile"</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>sn <span class="ot">&lt;-</span> <span class="st">"Santiago"</span></span>
@@ -649,8 +648,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </section>
 </section>
-<section id="estructuras-de-datos" class="level2" data-number="D.2">
-<h2 data-number="D.2" class="anchored" data-anchor-id="estructuras-de-datos"><span class="header-section-number">D.2</span> Estructuras de Datos</h2>
+<section id="estructuras-de-datos" class="level2" data-number="C.2">
+<h2 data-number="C.2" class="anchored" data-anchor-id="estructuras-de-datos"><span class="header-section-number">C.2</span> Estructuras de Datos</h2>
 <p>Las variables pueden ser un conjunto de números y caracteres ordenados de varias maneras. El orden que se les da depende de lo que queremos lograr con estos.</p>
 <ul>
 <li>Vector</li>
@@ -659,8 +658,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Factores</li>
 <li>Listas</li>
 </ul>
-<section id="vectores" class="level3" data-number="D.2.1">
-<h3 data-number="D.2.1" class="anchored" data-anchor-id="vectores"><span class="header-section-number">D.2.1</span> Vectores</h3>
+<section id="vectores" class="level3" data-number="C.2.1">
+<h3 data-number="C.2.1" class="anchored" data-anchor-id="vectores"><span class="header-section-number">C.2.1</span> Vectores</h3>
 <p><strong>Vector</strong> Cadenas unidimensionales (es decir una sola columna o fila) de un tipo único de valores (numéricos, caracteres, etc.)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">16</span>)</span>
@@ -716,8 +715,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="listas" class="level3" data-number="D.2.2">
-<h3 data-number="D.2.2" class="anchored" data-anchor-id="listas"><span class="header-section-number">D.2.2</span> Listas</h3>
+<section id="listas" class="level3" data-number="C.2.2">
+<h3 data-number="C.2.2" class="anchored" data-anchor-id="listas"><span class="header-section-number">C.2.2</span> Listas</h3>
 <p>Son estructuras eficientes y flexibles, que permiten combinar distintas clases de elementos :</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>lista <span class="ot">&lt;-</span>  <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">"cosa"</span>, x, y)</span>
@@ -764,8 +763,8 @@ Como inspeccionar una lista con Rstudio
 <img src="images/rstudio_environment_list.gif" class="img-fluid" style="width:90.0%">
 </center>
 </section>
-<section id="matrices" class="level3" data-number="D.2.3">
-<h3 data-number="D.2.3" class="anchored" data-anchor-id="matrices"><span class="header-section-number">D.2.3</span> Matrices</h3>
+<section id="matrices" class="level3" data-number="C.2.3">
+<h3 data-number="C.2.3" class="anchored" data-anchor-id="matrices"><span class="header-section-number">C.2.3</span> Matrices</h3>
 <p>Son estructuras de datos con 2 dimensiones, horizontal y la vertical (filas y columnas). Podemos construirlas usando la función “matrix”, con un vector inicial y sus dimensiones:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">1.3</span>, <span class="fl">2.8</span>, <span class="fl">3.5</span>, <span class="fl">6.4</span>, <span class="fl">5.3</span>, <span class="fl">6.2</span>, <span class="dv">7</span>, <span class="fl">4.5</span>, <span class="fl">2.4</span>, <span class="fl">6.3</span>, <span class="fl">5.6</span>, <span class="fl">5.3</span>, <span class="fl">6.6</span>, <span class="dv">7</span>, <span class="fl">4.3</span>),</span>
@@ -794,8 +793,8 @@ Como inspeccionar una lista con Rstudio
 </div>
 </div>
 </section>
-<section id="dataframes" class="level3" data-number="D.2.4">
-<h3 data-number="D.2.4" class="anchored" data-anchor-id="dataframes"><span class="header-section-number">D.2.4</span> Dataframes</h3>
+<section id="dataframes" class="level3" data-number="C.2.4">
+<h3 data-number="C.2.4" class="anchored" data-anchor-id="dataframes"><span class="header-section-number">C.2.4</span> Dataframes</h3>
 <p>Estructura mas clásica de datos, es una matriz pero con mas atributos como nombres de columna y/o fila. Es lo mas similar en R a una tabla excel o la tabla de atributos. La manera mas simple de crear un dataframe es a partir de una matriz usando la función as.data.frame() :</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(n)</span>
@@ -851,12 +850,12 @@ Como inspeccionar una lista con Rstudio
 </section>
 </section>
 </section>
-<section id="funciones-en-r" class="level1" data-number="E">
-<h1 data-number="E"><span class="header-section-number">E</span> Funciones en R</h1>
-<section id="operaciones-básicas-en-r" class="level2" data-number="E.1">
-<h2 data-number="E.1" class="anchored" data-anchor-id="operaciones-básicas-en-r"><span class="header-section-number">E.1</span> Operaciones Básicas en R</h2>
-<section id="operaciones-matemáticas" class="level3" data-number="E.1.1">
-<h3 data-number="E.1.1" class="anchored" data-anchor-id="operaciones-matemáticas"><span class="header-section-number">E.1.1</span> Operaciones Matemáticas</h3>
+<section id="funciones-en-r" class="level1" data-number="D">
+<h1 data-number="D"><span class="header-section-number">D</span> Funciones en R</h1>
+<section id="operaciones-básicas-en-r" class="level2" data-number="D.1">
+<h2 data-number="D.1" class="anchored" data-anchor-id="operaciones-básicas-en-r"><span class="header-section-number">D.1</span> Operaciones Básicas en R</h2>
+<section id="operaciones-matemáticas" class="level3" data-number="D.1.1">
+<h3 data-number="D.1.1" class="anchored" data-anchor-id="operaciones-matemáticas"><span class="header-section-number">D.1.1</span> Operaciones Matemáticas</h3>
 <p>En R, es posible realizar operaciones matemáticas básicas utilizando los operadores aritméticos estándar. Estos operadores incluyen:</p>
 <ul>
 <li>Suma (+): se utiliza para sumar dos valores.</li>
@@ -936,8 +935,8 @@ Como inspeccionar una lista con Rstudio
 </div>
 </div>
 </section>
-<section id="funciones-útiles-de-propósito-general" class="level3" data-number="E.1.2">
-<h3 data-number="E.1.2" class="anchored" data-anchor-id="funciones-útiles-de-propósito-general"><span class="header-section-number">E.1.2</span> Funciones Útiles de propósito general</h3>
+<section id="funciones-útiles-de-propósito-general" class="level3" data-number="D.1.2">
+<h3 data-number="D.1.2" class="anchored" data-anchor-id="funciones-útiles-de-propósito-general"><span class="header-section-number">D.1.2</span> Funciones Útiles de propósito general</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -984,8 +983,8 @@ Como inspeccionar una lista con Rstudio
 </div>
 </section>
 </section>
-<section id="operaciones-lógicas" class="level2" data-number="E.2">
-<h2 data-number="E.2" class="anchored" data-anchor-id="operaciones-lógicas"><span class="header-section-number">E.2</span> Operaciones Lógicas</h2>
+<section id="operaciones-lógicas" class="level2" data-number="D.2">
+<h2 data-number="D.2" class="anchored" data-anchor-id="operaciones-lógicas"><span class="header-section-number">D.2</span> Operaciones Lógicas</h2>
 <p>En R, los operadores lógicos se utilizan para realizar comparaciones lógicas entre valores o expresiones. Estos operadores devuelven valores booleanos (TRUE o FALSE) según se cumpla o no la condición.</p>
 <p>A continuación se presentan los operadores lógicos en R:</p>
 <div class="cell">
@@ -1050,8 +1049,8 @@ Como inspeccionar una lista con Rstudio
 
 </div>
 </div>
-<section id="operador-de-igualdad" class="level3" data-number="E.2.1">
-<h3 data-number="E.2.1" class="anchored" data-anchor-id="operador-de-igualdad"><span class="header-section-number">E.2.1</span> Operador de igualdad: (==)</h3>
+<section id="operador-de-igualdad" class="level3" data-number="D.2.1">
+<h3 data-number="D.2.1" class="anchored" data-anchor-id="operador-de-igualdad"><span class="header-section-number">D.2.1</span> Operador de igualdad: (==)</h3>
 <p>Este operador se utiliza para comparar si dos valores son iguales. Retorna TRUE si la condición se cumple y FALSE en caso contrario.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
@@ -1062,8 +1061,8 @@ Como inspeccionar una lista con Rstudio
 </div>
 </div>
 </section>
-<section id="operador-de-desigualdad" class="level3" data-number="E.2.2">
-<h3 data-number="E.2.2" class="anchored" data-anchor-id="operador-de-desigualdad"><span class="header-section-number">E.2.2</span> Operador de desigualdad: (!=)</h3>
+<section id="operador-de-desigualdad" class="level3" data-number="D.2.2">
+<h3 data-number="D.2.2" class="anchored" data-anchor-id="operador-de-desigualdad"><span class="header-section-number">D.2.2</span> Operador de desigualdad: (!=)</h3>
 <p>Este operador se utiliza para comparar si dos valores son diferentes. Retorna TRUE si la condición se cumple y FALSE en caso contrario.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
@@ -1074,8 +1073,8 @@ Como inspeccionar una lista con Rstudio
 </div>
 </div>
 </section>
-<section id="operador-de-mayor-que" class="level3" data-number="E.2.3">
-<h3 data-number="E.2.3" class="anchored" data-anchor-id="operador-de-mayor-que"><span class="header-section-number">E.2.3</span> Operador de mayor que: (&gt;)</h3>
+<section id="operador-de-mayor-que" class="level3" data-number="D.2.3">
+<h3 data-number="D.2.3" class="anchored" data-anchor-id="operador-de-mayor-que"><span class="header-section-number">D.2.3</span> Operador de mayor que: (&gt;)</h3>
 <p>Este operador se utiliza para comparar si un valor es mayor que otro. Retorna TRUE si la condición se cumple y FALSE en caso contrario.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
@@ -1086,8 +1085,8 @@ Como inspeccionar una lista con Rstudio
 </div>
 </div>
 </section>
-<section id="operador-de-menor-que" class="level3" data-number="E.2.4">
-<h3 data-number="E.2.4" class="anchored" data-anchor-id="operador-de-menor-que"><span class="header-section-number">E.2.4</span> Operador de menor que: (&lt;)</h3>
+<section id="operador-de-menor-que" class="level3" data-number="D.2.4">
+<h3 data-number="D.2.4" class="anchored" data-anchor-id="operador-de-menor-que"><span class="header-section-number">D.2.4</span> Operador de menor que: (&lt;)</h3>
 <p>Este operador se utiliza para comparar si un valor es menor que otro. Retorna TRUE si la condición se cumple y FALSE en caso contrario.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
@@ -1098,8 +1097,8 @@ Como inspeccionar una lista con Rstudio
 </div>
 </div>
 </section>
-<section id="operador-de-mayor-o-igual-que" class="level3" data-number="E.2.5">
-<h3 data-number="E.2.5" class="anchored" data-anchor-id="operador-de-mayor-o-igual-que"><span class="header-section-number">E.2.5</span> Operador de mayor o igual que: (&gt;=)</h3>
+<section id="operador-de-mayor-o-igual-que" class="level3" data-number="D.2.5">
+<h3 data-number="D.2.5" class="anchored" data-anchor-id="operador-de-mayor-o-igual-que"><span class="header-section-number">D.2.5</span> Operador de mayor o igual que: (&gt;=)</h3>
 <p>Este operador se utiliza para comparar si un valor es mayor o igual que otro. Retorna TRUE si la condición se cumple y FALSE en caso contrario.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
@@ -1110,8 +1109,8 @@ Como inspeccionar una lista con Rstudio
 </div>
 </div>
 </section>
-<section id="operador-de-menor-o-igual-que" class="level3" data-number="E.2.6">
-<h3 data-number="E.2.6" class="anchored" data-anchor-id="operador-de-menor-o-igual-que"><span class="header-section-number">E.2.6</span> Operador de menor o igual que: (&lt;=)</h3>
+<section id="operador-de-menor-o-igual-que" class="level3" data-number="D.2.6">
+<h3 data-number="D.2.6" class="anchored" data-anchor-id="operador-de-menor-o-igual-que"><span class="header-section-number">D.2.6</span> Operador de menor o igual que: (&lt;=)</h3>
 <p>Este operador se utiliza para comparar si un valor es menor o igual que otro. Retorna TRUE si la condición se cumple y FALSE en caso contrario.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
@@ -1122,8 +1121,8 @@ Como inspeccionar una lista con Rstudio
 </div>
 </div>
 </section>
-<section id="operador-lógico-and" class="level3" data-number="E.2.7">
-<h3 data-number="E.2.7" class="anchored" data-anchor-id="operador-lógico-and"><span class="header-section-number">E.2.7</span> Operador lógico AND: (&amp;)</h3>
+<section id="operador-lógico-and" class="level3" data-number="D.2.7">
+<h3 data-number="D.2.7" class="anchored" data-anchor-id="operador-lógico-and"><span class="header-section-number">D.2.7</span> Operador lógico AND: (&amp;)</h3>
 <p>Este operador se utiliza para evaluar dos o más condiciones y retornar TRUE si todas se cumplen, de lo contrario retorna FALSE.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
@@ -1135,8 +1134,8 @@ Como inspeccionar una lista con Rstudio
 </div>
 </div>
 </section>
-<section id="operador-lógico-or" class="level3" data-number="E.2.8">
-<h3 data-number="E.2.8" class="anchored" data-anchor-id="operador-lógico-or"><span class="header-section-number">E.2.8</span> Operador lógico OR: (|)</h3>
+<section id="operador-lógico-or" class="level3" data-number="D.2.8">
+<h3 data-number="D.2.8" class="anchored" data-anchor-id="operador-lógico-or"><span class="header-section-number">D.2.8</span> Operador lógico OR: (|)</h3>
 <p>Este operador se utiliza para evaluar dos o más condiciones y retornar TRUE si al menos una se cumple, de lo contrario retorna FALSE.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
@@ -1159,8 +1158,8 @@ Como inspeccionar una lista con Rstudio
 <p>Es importante tener en cuenta que los operadores lógicos se pueden utilizar en combinación para crear expresiones lógicas más complejas. Además, los operadores lógicos también se pueden utilizar en las estructuras de control condicionales, como if/else y switch, para tomar decisiones basadas en condiciones lógicas.</p>
 </section>
 </section>
-<section id="crear-funciones-propias" class="level2" data-number="E.3">
-<h2 data-number="E.3" class="anchored" data-anchor-id="crear-funciones-propias"><span class="header-section-number">E.3</span> Crear Funciones Propias</h2>
+<section id="crear-funciones-propias" class="level2" data-number="D.3">
+<h2 data-number="D.3" class="anchored" data-anchor-id="crear-funciones-propias"><span class="header-section-number">D.3</span> Crear Funciones Propias</h2>
 <p>En R, es posible crear funciones propias para realizar tareas específicas y reutilizarlas en diferentes partes de un programa. Para crear una función en R, se utiliza la siguiente estructura:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>nombre_de_la_funcion <span class="ot">&lt;-</span> <span class="cf">function</span>(argumentos) {</span>
@@ -1234,8 +1233,8 @@ h=<em>?</em>, a = 5, b = 4<br>
 h=<em>?</em>, a = 3, b = 4</p>
 </section>
 </section>
-<section id="estructura-de-control-en-r" class="level1" data-number="F">
-<h1 data-number="F"><span class="header-section-number">F</span> Estructura de Control en R</h1>
+<section id="estructura-de-control-en-r" class="level1" data-number="E">
+<h1 data-number="E"><span class="header-section-number">E</span> Estructura de Control en R</h1>
 <p>Las estructuras de control en R son herramientas que permiten controlar el flujo de ejecución de un programa. Las estructuras de control son esenciales para cualquier lenguaje de programación, ya que permiten que el programa tome decisiones y realice acciones en función de ciertas condiciones.</p>
 <p>Estas estructuras de control son muy útiles para crear programas que respondan a diferentes situaciones y condiciones, y permiten que los programadores puedan crear soluciones más eficientes y complejas.</p>
 <p>En R, existen tres estructuras de control principales:</p>
@@ -1244,8 +1243,8 @@ h=<em>?</em>, a = 3, b = 4</p>
 <li><p>Estructuras de bucles: Permiten ejecutar un bloque de código repetidamente, mientras se cumpla una condición determinada. Las estructuras de bucles más comunes en R son “<code>while</code>”, “<code>for</code>” y “<code>repeat</code>”.</p></li>
 <li><p>Estructuras de control de flujo: Permiten cambiar el flujo de ejecución del programa en función de ciertas condiciones. Las estructuras de control de flujo más comunes en R son “<code>break</code>” y “<code>next</code>”.</p></li>
 </ol>
-<section id="estructuras-condicionales" class="level2" data-number="F.1">
-<h2 data-number="F.1" class="anchored" data-anchor-id="estructuras-condicionales"><span class="header-section-number">F.1</span> Estructuras condicionales</h2>
+<section id="estructuras-condicionales" class="level2" data-number="E.1">
+<h2 data-number="E.1" class="anchored" data-anchor-id="estructuras-condicionales"><span class="header-section-number">E.1</span> Estructuras condicionales</h2>
 <p>Las estructuras condicionales son una de las tres estructuras de control principales en R. Estas estructuras permiten ejecutar un bloque de código solo si se cumple una condición determinada.</p>
 <p>La estructura condicional más común en R es “<code>if</code>”. La sintaxis básica de la estructura “<code>if</code>” es la siguiente:</p>
 <div class="cell">
@@ -1308,8 +1307,8 @@ h=<em>?</em>, a = 3, b = 4</p>
 </div>
 <p>En resumen, las estructuras condicionales en R son herramientas muy útiles para controlar el flujo de ejecución de un programa en función de ciertas condiciones. Estas estructuras permiten crear soluciones más eficientes y complejas al permitir que los programas tomen decisiones y realicen acciones en función de las condiciones que se presenten.</p>
 </section>
-<section id="estructuras-de-bucles" class="level2" data-number="F.2">
-<h2 data-number="F.2" class="anchored" data-anchor-id="estructuras-de-bucles"><span class="header-section-number">F.2</span> Estructuras de bucles</h2>
+<section id="estructuras-de-bucles" class="level2" data-number="E.2">
+<h2 data-number="E.2" class="anchored" data-anchor-id="estructuras-de-bucles"><span class="header-section-number">E.2</span> Estructuras de bucles</h2>
 <p>Las estructuras de bucles son una de las tres estructuras de control principales en R. Estas estructuras permiten ejecutar un bloque de código repetidamente mientras se cumpla una condición determinada. En R, existen tres estructuras de bucles principales: “<code>while</code>”, “<code>for</code>” y “<code>repeat</code>”.</p>
 <p><strong>Beneficios</strong></p>
 <ul>
@@ -1317,8 +1316,8 @@ h=<em>?</em>, a = 3, b = 4</p>
 <li>Es más sencillo responder a cambios en los requerimientos. A medida que tus necesidades cambian, solo necesitarás realizar cambios en un lugar, en vez de recordar cambiar en cada lugar donde copiaste y pegaste el código.</li>
 <li>Es probable que tengas menos errores porque cada línea de código es utilizada en más lugares.</li>
 </ul>
-<section id="estructura-de-bucle-for" class="level3" data-number="F.2.1">
-<h3 data-number="F.2.1" class="anchored" data-anchor-id="estructura-de-bucle-for"><span class="header-section-number">F.2.1</span> Estructura de bucle “<code>for</code>”:</h3>
+<section id="estructura-de-bucle-for" class="level3" data-number="E.2.1">
+<h3 data-number="E.2.1" class="anchored" data-anchor-id="estructura-de-bucle-for"><span class="header-section-number">E.2.1</span> Estructura de bucle “<code>for</code>”:</h3>
 <p>La estructura “for” permite repetir la ejecución de un bloque de código un número determinado de veces. La sintaxis básica de la estructura “for” es la siguiente:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (variable <span class="cf">in</span> secuencia) {</span>
@@ -1376,15 +1375,15 @@ h=<em>?</em>, a = 3, b = 4</p>
 <span id="cb152-6"><a href="#cb152-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(promedio)</span>
 <span id="cb152-7"><a href="#cb152-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.04650901
-[1] 0.145887
-[1] 0.2658215
-[1] 0.1797405</code></pre>
+<pre><code>[1] -0.5842399
+[1] 0.07280768
+[1] -0.7791801
+[1] 0.06343738</code></pre>
 </div>
 </div>
 </section>
-<section id="estructura-de-bucle-while" class="level3" data-number="F.2.2">
-<h3 data-number="F.2.2" class="anchored" data-anchor-id="estructura-de-bucle-while"><span class="header-section-number">F.2.2</span> Estructura de bucle “while”:</h3>
+<section id="estructura-de-bucle-while" class="level3" data-number="E.2.2">
+<h3 data-number="E.2.2" class="anchored" data-anchor-id="estructura-de-bucle-while"><span class="header-section-number">E.2.2</span> Estructura de bucle “while”:</h3>
 <p>La estructura “<code>while</code>” permite repetir la ejecución de un bloque de código mientras se cumpla una condición determinada. La sintaxis básica de la estructura “<code>while</code>” es la siguiente:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb154"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (condición) {</span>
@@ -1393,8 +1392,8 @@ h=<em>?</em>, a = 3, b = 4</p>
 </div>
 <p>La “condición” es una expresión lógica que evalúa a verdadero o falso. Si la condición es verdadera, se ejecutará el bloque de código dentro del “while”. Este proceso se repetirá hasta que la condición sea falsa.</p>
 </section>
-<section id="estructura-de-bucle-repeat" class="level3" data-number="F.2.3">
-<h3 data-number="F.2.3" class="anchored" data-anchor-id="estructura-de-bucle-repeat"><span class="header-section-number">F.2.3</span> Estructura de bucle “repeat”:</h3>
+<section id="estructura-de-bucle-repeat" class="level3" data-number="E.2.3">
+<h3 data-number="E.2.3" class="anchored" data-anchor-id="estructura-de-bucle-repeat"><span class="header-section-number">E.2.3</span> Estructura de bucle “repeat”:</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb155"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span> {</span>
 <span id="cb155-2"><a href="#cb155-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Código a ejecutar de manera indefinida</span></span>
@@ -1406,11 +1405,11 @@ h=<em>?</em>, a = 3, b = 4</p>
 <p>El bloque de código dentro del “<code>repeat</code>” se ejecutará de manera indefinida hasta que se encuentre la sentencia “<code>break</code>”, que permite salir del bucle. La “condición” es una expresión lógica que evalúa a verdadero o falso. Si la condición es verdadera, se ejecutará la sentencia “break” y se saldrá del bucle.</p>
 </section>
 </section>
-<section id="estructuras-de-control-de-flujo" class="level2" data-number="F.3">
-<h2 data-number="F.3" class="anchored" data-anchor-id="estructuras-de-control-de-flujo"><span class="header-section-number">F.3</span> Estructuras de control de flujo</h2>
+<section id="estructuras-de-control-de-flujo" class="level2" data-number="E.3">
+<h2 data-number="E.3" class="anchored" data-anchor-id="estructuras-de-control-de-flujo"><span class="header-section-number">E.3</span> Estructuras de control de flujo</h2>
 <p>“<code>next</code>” y “<code>break</code>” son palabras clave importantes en R que se utilizan en las estructuras de control de flujo, específicamente en las estructuras de bucle. “next” se utiliza para saltar a la siguiente iteración del bucle sin ejecutar el resto del código dentro del bucle, mientras que “break” se utiliza para detener el bucle de forma abrupta, incluso si la condición del bucle todavía se cumple.</p>
-<section id="estructuras-de-control-next" class="level3" data-number="F.3.1">
-<h3 data-number="F.3.1" class="anchored" data-anchor-id="estructuras-de-control-next"><span class="header-section-number">F.3.1</span> Estructuras de control “next”:</h3>
+<section id="estructuras-de-control-next" class="level3" data-number="E.3.1">
+<h3 data-number="E.3.1" class="anchored" data-anchor-id="estructuras-de-control-next"><span class="header-section-number">E.3.1</span> Estructuras de control “next”:</h3>
 <p>“<code>next</code>” se utiliza en una estructura de bucle para saltar a la siguiente iteración del bucle sin ejecutar el resto del código dentro del bucle. Es decir, si se encuentra la palabra clave “next” dentro de un bucle, se omitirá el código que viene después y el bucle pasará inmediatamente a la siguiente iteración. La palabra clave “next” es útil cuando se desea saltar una iteración específica del bucle, sin afectar el resto del código.</p>
 <p>Por ejemplo, en el siguiente código se utiliza la palabra clave “next” para omitir la impresión del número 3 dentro del bucle “for”:</p>
 <div class="cell">
@@ -1428,8 +1427,8 @@ h=<em>?</em>, a = 3, b = 4</p>
 </div>
 </div>
 </section>
-<section id="estructuras-de-control-break" class="level3" data-number="F.3.2">
-<h3 data-number="F.3.2" class="anchored" data-anchor-id="estructuras-de-control-break"><span class="header-section-number">F.3.2</span> Estructuras de control “break”:</h3>
+<section id="estructuras-de-control-break" class="level3" data-number="E.3.2">
+<h3 data-number="E.3.2" class="anchored" data-anchor-id="estructuras-de-control-break"><span class="header-section-number">E.3.2</span> Estructuras de control “break”:</h3>
 <p>“break”, por otro lado, se utiliza en una estructura de bucle para detener el bucle de forma abrupta, incluso si la condición del bucle todavía se cumple. Es decir, si se encuentra la palabra clave “break” dentro de un bucle, se detendrá el bucle de inmediato y se continuará con la ejecución del código que viene después del bucle. La palabra clave “break” es útil cuando se desea detener el bucle en un punto específico sin tener que esperar a que la condición del bucle se deje de cumplir.</p>
 <p>Por ejemplo, en el siguiente código se utiliza la palabra clave “break” para detener el bucle “while” cuando el valor de “i” es mayor que 5:</p>
 <div class="cell">
@@ -1452,10 +1451,10 @@ h=<em>?</em>, a = 3, b = 4</p>
 </section>
 </section>
 </section>
-<section id="tidyverse-en-r" class="level1" data-number="G">
-<h1 data-number="G"><span class="header-section-number">G</span> Tidyverse en R</h1>
-<section id="introducción-a-tidyverse" class="level2" data-number="G.1">
-<h2 data-number="G.1" class="anchored" data-anchor-id="introducción-a-tidyverse"><span class="header-section-number">G.1</span> Introducción a Tidyverse</h2>
+<section id="tidyverse-en-r" class="level1" data-number="F">
+<h1 data-number="F"><span class="header-section-number">F</span> Tidyverse en R</h1>
+<section id="introducción-a-tidyverse" class="level2" data-number="F.1">
+<h2 data-number="F.1" class="anchored" data-anchor-id="introducción-a-tidyverse"><span class="header-section-number">F.1</span> Introducción a Tidyverse</h2>
 <p><a href="https://www.tidyverse.org">Tidyverse</a> es una colección de paquetes diseñados para Ciencia de Datos.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1475,8 +1474,8 @@ h=<em>?</em>, a = 3, b = 4</p>
 <li>Las funciones nos permiten evitar la repetición de código; sin embargo, muchas veces necesitas repertir las mismas acciones con diferentes inputs. Puedes hacer esto con herramientas de iteración.</li>
 </ul>
 </section>
-<section id="estructura-de-un-dataframe" class="level2" data-number="G.2">
-<h2 data-number="G.2" class="anchored" data-anchor-id="estructura-de-un-dataframe"><span class="header-section-number">G.2</span> Estructura de un dataframe</h2>
+<section id="estructura-de-un-dataframe" class="level2" data-number="F.2">
+<h2 data-number="F.2" class="anchored" data-anchor-id="estructura-de-un-dataframe"><span class="header-section-number">F.2</span> Estructura de un dataframe</h2>
 <center>
 <img src="images/tidy_frame.svg" class="img-fluid" style="width:80.0%">
 </center>
@@ -1484,7 +1483,7 @@ h=<em>?</em>, a = 3, b = 4</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb161"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(dplyr))</span>
 <span id="cb161-2"><a href="#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(sf))</span>
-<span id="cb161-3"><a href="#cb161-3" aria-hidden="true" tabindex="-1"></a>tbl_sii  <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/rds/mz_constru_SII.rds"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb161-3"><a href="#cb161-3" aria-hidden="true" tabindex="-1"></a>tbl_sii  <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/sii/mz_constru_SII.rds"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb161-4"><a href="#cb161-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="co"># descartar geometrias solo usar la tabla de datos</span></span>
 <span id="cb161-5"><a href="#cb161-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb161-6"><a href="#cb161-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tbl_sii)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1501,13 +1500,13 @@ h=<em>?</em>, a = 3, b = 4</p>
 </div>
 </div>
 </section>
-<section id="funciones-básicas-dplyr" class="level2" data-number="G.3">
-<h2 data-number="G.3" class="anchored" data-anchor-id="funciones-básicas-dplyr"><span class="header-section-number">G.3</span> Funciones básicas <code>dplyr</code></h2>
+<section id="funciones-básicas-dplyr" class="level2" data-number="F.3">
+<h2 data-number="F.3" class="anchored" data-anchor-id="funciones-básicas-dplyr"><span class="header-section-number">F.3</span> Funciones básicas <code>dplyr</code></h2>
 <center>
 <img src="images/dplyr_variables.png" class="img-fluid" style="width:70.0%">
 </center>
-<section id="select" class="level3" data-number="G.3.1">
-<h3 data-number="G.3.1" class="anchored" data-anchor-id="select"><span class="header-section-number">G.3.1</span> Select</h3>
+<section id="select" class="level3" data-number="F.3.1">
+<h3 data-number="F.3.1" class="anchored" data-anchor-id="select"><span class="header-section-number">F.3.1</span> Select</h3>
 <p><code>select</code> Seleccionar variables relevantes</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="co"># seleccionar nomnres de columnas que deseo conservar</span></span>
@@ -1550,8 +1549,8 @@ h=<em>?</em>, a = 3, b = 4</p>
 </div>
 </div>
 </section>
-<section id="filter" class="level3" data-number="G.3.2">
-<h3 data-number="G.3.2" class="anchored" data-anchor-id="filter"><span class="header-section-number">G.3.2</span> Filter</h3>
+<section id="filter" class="level3" data-number="F.3.2">
+<h3 data-number="F.3.2" class="anchored" data-anchor-id="filter"><span class="header-section-number">F.3.2</span> Filter</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a>mi_comuna <span class="ot">&lt;-</span> <span class="st">"LAS CONDES"</span> </span>
 <span id="cb167-2"><a href="#cb167-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1636,8 +1635,8 @@ h=<em>?</em>, a = 3, b = 4</p>
 </div>
 </section>
 </section>
-<section id="resúmenes-estadísticos-con-dplyr" class="level2" data-number="G.4">
-<h2 data-number="G.4" class="anchored" data-anchor-id="resúmenes-estadísticos-con-dplyr"><span class="header-section-number">G.4</span> Resúmenes Estadísticos con <code>dplyr</code></h2>
+<section id="resúmenes-estadísticos-con-dplyr" class="level2" data-number="F.4">
+<h2 data-number="F.4" class="anchored" data-anchor-id="resúmenes-estadísticos-con-dplyr"><span class="header-section-number">F.4</span> Resúmenes Estadísticos con <code>dplyr</code></h2>
 <center>
 <img src="images/dplyr_group_by.png" class="img-fluid" style="width:70.0%">
 </center>
@@ -1686,10 +1685,10 @@ Densidad de comercio
 </div>
 </div>
 </section>
-<section id="visualización-de-variables" class="level2" data-number="G.5">
-<h2 data-number="G.5" class="anchored" data-anchor-id="visualización-de-variables"><span class="header-section-number">G.5</span> Visualización de Variables</h2>
-<section id="función-plot" class="level3" data-number="G.5.1">
-<h3 data-number="G.5.1" class="anchored" data-anchor-id="función-plot"><span class="header-section-number">G.5.1</span> Función Plot</h3>
+<section id="visualización-de-variables" class="level2" data-number="F.5">
+<h2 data-number="F.5" class="anchored" data-anchor-id="visualización-de-variables"><span class="header-section-number">F.5</span> Visualización de Variables</h2>
+<section id="función-plot" class="level3" data-number="F.5.1">
+<h3 data-number="F.5.1" class="anchored" data-anchor-id="función-plot"><span class="header-section-number">F.5.1</span> Función Plot</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb173"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>) <span class="co"># evitas notación cientiífica</span></span>
 <span id="cb173-2"><a href="#cb173-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(sii_com<span class="sc">$</span>vivienda, <span class="at">breaks =</span> <span class="dv">50</span>,</span>
@@ -1700,8 +1699,8 @@ Densidad de comercio
 <div class="sourceCode cell-code" id="cb174"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="co"># colores:https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="package-ggplot2" class="level3" data-number="G.5.2">
-<h3 data-number="G.5.2" class="anchored" data-anchor-id="package-ggplot2"><span class="header-section-number">G.5.2</span> Package <a href="https://ggplot2.tidyverse.org">ggplot2</a></h3>
+<section id="package-ggplot2" class="level3" data-number="F.5.2">
+<h3 data-number="F.5.2" class="anchored" data-anchor-id="package-ggplot2"><span class="header-section-number">F.5.2</span> Package <a href="https://ggplot2.tidyverse.org">ggplot2</a></h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb175"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb175-2"><a href="#cb175-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sii_com, <span class="fu">aes</span>(<span class="at">x =</span> vivienda)) <span class="sc">+</span> </span>
@@ -1732,25 +1731,25 @@ Densidad de comercio
 </section>
 </section>
 </section>
-<section id="objetos-espaciales-en-r" class="level1" data-number="H">
-<h1 data-number="H"><span class="header-section-number">H</span> Objetos Espaciales en R</h1>
-<section id="introducción" class="level2" data-number="H.1">
-<h2 data-number="H.1" class="anchored" data-anchor-id="introducción"><span class="header-section-number">H.1</span> Introducción</h2>
+<section id="objetos-espaciales-en-r" class="level1" data-number="G">
+<h1 data-number="G"><span class="header-section-number">G</span> Objetos Espaciales en R</h1>
+<section id="introducción" class="level2" data-number="G.1">
+<h2 data-number="G.1" class="anchored" data-anchor-id="introducción"><span class="header-section-number">G.1</span> Introducción</h2>
 <p>Un rasgo es una cosa, un objeto del mundo real, como un edificio o un árbol. Al igual que los objetos, suelen estar formados por otros objetos. Lo mismo ocurre con los rasgos: un conjunto de rasgos puede formar un único rasgo. Una masa forestal puede ser un rasgo, un bosque puede ser un rasgo, una ciudad puede ser un rasgo. Un píxel de una imagen de satélite puede ser un rasgo, una imagen completa también puede ser un rasgo.</p>
 <p>Los elementos tienen una geometría que describe su ubicación en la Tierra y atributos que describen otras propiedades. La geometría de un árbol puede ser la delineación de su copa, de su tallo o el punto que indica su centro. Otras propiedades pueden ser su altura, color, diámetro a la altura del pecho en una fecha determinada, etc.</p>
 </section>
-<section id="lectura-de-insumos-espaciales" class="level2" data-number="H.2">
-<h2 data-number="H.2" class="anchored" data-anchor-id="lectura-de-insumos-espaciales"><span class="header-section-number">H.2</span> Lectura de Insumos Espaciales</h2>
+<section id="lectura-de-insumos-espaciales" class="level2" data-number="G.2">
+<h2 data-number="G.2" class="anchored" data-anchor-id="lectura-de-insumos-espaciales"><span class="header-section-number">G.2</span> Lectura de Insumos Espaciales</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb177"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("sf")</span></span>
 <span id="cb177-2"><a href="#cb177-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
 <span id="cb177-3"><a href="#cb177-3" aria-hidden="true" tabindex="-1"></a>crs_ll <span class="ot">&lt;-</span> <span class="st">"+proj=longlat +datum=WGS84 +no_defs"</span></span>
 <span id="cb177-4"><a href="#cb177-4" aria-hidden="true" tabindex="-1"></a>crs_utm <span class="ot">&lt;-</span> <span class="st">"+proj=utm +zone=19 +south +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"</span></span>
-<span id="cb177-5"><a href="#cb177-5" aria-hidden="true" tabindex="-1"></a>censo <span class="ot">&lt;-</span>  <span class="fu">readRDS</span>(<span class="st">"data/rds/Zonas_Censales_2017_Nacional.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb177-5"><a href="#cb177-5" aria-hidden="true" tabindex="-1"></a>censo <span class="ot">&lt;-</span>  <span class="fu">readRDS</span>(<span class="st">"data/ine/Zonas_Censales_2017_Nacional.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="transformar-a-objeto-sf-simple-features" class="level2" data-number="H.3">
-<h2 data-number="H.3" class="anchored" data-anchor-id="transformar-a-objeto-sf-simple-features"><span class="header-section-number">H.3</span> Transformar a objeto sf (simple features)</h2>
+<section id="transformar-a-objeto-sf-simple-features" class="level2" data-number="G.3">
+<h2 data-number="G.3" class="anchored" data-anchor-id="transformar-a-objeto-sf-simple-features"><span class="header-section-number">G.3</span> Transformar a objeto sf (simple features)</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb178"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb178-1"><a href="#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transformar a objeto sf (simple features)</span></span>
 <span id="cb178-2"><a href="#cb178-2" aria-hidden="true" tabindex="-1"></a>censo_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(censo)</span>
@@ -1763,8 +1762,8 @@ Densidad de comercio
 </div>
 </div>
 </section>
-<section id="filtros-espaciales-por-data" class="level2" data-number="H.4">
-<h2 data-number="H.4" class="anchored" data-anchor-id="filtros-espaciales-por-data"><span class="header-section-number">H.4</span> Filtros espaciales por data</h2>
+<section id="filtros-espaciales-por-data" class="level2" data-number="G.4">
+<h2 data-number="G.4" class="anchored" data-anchor-id="filtros-espaciales-por-data"><span class="header-section-number">G.4</span> Filtros espaciales por data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb180"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href="#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb180-2"><a href="#cb180-2" aria-hidden="true" tabindex="-1"></a>mi_communa <span class="ot">&lt;-</span>  <span class="st">"LAS CONDES"</span></span>
@@ -1803,10 +1802,10 @@ Geodetic CRS:  +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0
 </div>
 </div>
 </section>
-<section id="visualización-cartográficas" class="level2" data-number="H.5">
-<h2 data-number="H.5" class="anchored" data-anchor-id="visualización-cartográficas"><span class="header-section-number">H.5</span> Visualización Cartográficas</h2>
-<section id="visualización-estática-simple" class="level3" data-number="H.5.1">
-<h3 data-number="H.5.1" class="anchored" data-anchor-id="visualización-estática-simple"><span class="header-section-number">H.5.1</span> Visualización estática Simple</h3>
+<section id="visualización-cartográficas" class="level2" data-number="G.5">
+<h2 data-number="G.5" class="anchored" data-anchor-id="visualización-cartográficas"><span class="header-section-number">G.5</span> Visualización Cartográficas</h2>
+<section id="visualización-estática-simple" class="level3" data-number="G.5.1">
+<h3 data-number="G.5.1" class="anchored" data-anchor-id="visualización-estática-simple"><span class="header-section-number">G.5.1</span> Visualización estática Simple</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb182"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb182-1"><a href="#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Visualizar</span></span>
 <span id="cb182-2"><a href="#cb182-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Consideración el plot se realiza sobre la columna geometry</span></span>
@@ -1822,8 +1821,8 @@ Geodetic CRS:  +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0
 </div>
 </div>
 </section>
-<section id="visualización-estática-con-ggplot2" class="level3" data-number="H.5.2">
-<h3 data-number="H.5.2" class="anchored" data-anchor-id="visualización-estática-con-ggplot2"><span class="header-section-number">H.5.2</span> Visualización estática con <code>ggplot2</code></h3>
+<section id="visualización-estática-con-ggplot2" class="level3" data-number="G.5.2">
+<h3 data-number="G.5.2" class="anchored" data-anchor-id="visualización-estática-con-ggplot2"><span class="header-section-number">G.5.2</span> Visualización estática con <code>ggplot2</code></h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb183"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb183-1"><a href="#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb183-2"><a href="#cb183-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1844,8 +1843,8 @@ Geodetic CRS:  +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0
 </div>
 </div>
 </section>
-<section id="visualización-dinámica-con-mapview" class="level3" data-number="H.5.3">
-<h3 data-number="H.5.3" class="anchored" data-anchor-id="visualización-dinámica-con-mapview"><span class="header-section-number">H.5.3</span> Visualización Dinámica con <code>mapview</code></h3>
+<section id="visualización-dinámica-con-mapview" class="level3" data-number="G.5.3">
+<h3 data-number="G.5.3" class="anchored" data-anchor-id="visualización-dinámica-con-mapview"><span class="header-section-number">G.5.3</span> Visualización Dinámica con <code>mapview</code></h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb184"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb184-1"><a href="#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("mapview")</span></span>
 <span id="cb184-2"><a href="#cb184-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapview)</span>
@@ -1861,8 +1860,8 @@ Geodetic CRS:  +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0
 </div>
 </section>
 </section>
-<section id="referencias" class="level2" data-number="H.6">
-<h2 data-number="H.6" class="anchored" data-anchor-id="referencias"><span class="header-section-number">H.6</span> Referencias:</h2>
+<section id="referencias" class="level2" data-number="G.6">
+<h2 data-number="G.6" class="anchored" data-anchor-id="referencias"><span class="header-section-number">G.6</span> Referencias:</h2>
 <ul>
 <li><a href="https://es.r4ds.hadley.nz">R para Ciencia de Datos</a></li>
 <li><a href="https://bookdown.org/gboccardo/manual-ED-UCH/">RStudio para Estadística Descriptiva en Ciencias Sociales</a></li>

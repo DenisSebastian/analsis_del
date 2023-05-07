@@ -6,6 +6,9 @@ subtitle: "Funciones de uso Frecuente"
 
 ## Dataframe to SF Object 
 
+Convertir DataFrame con columnas de latitud y longitud a un objeto espacial llamado simple feature además se le puede asignar un sistema de referencia de coordenadas.
+
+
 
 ```{r eval=FALSE}
 # dataframe a sf
@@ -18,6 +21,8 @@ df2sf <- function(df, lon ="lon", lat ="lat", crs_base = 4326) {
 }
 ```
 
+
+Al inverso esta función permite convertir de un objeto espacial tipo puntos a una tabla de datos a la cual se le agregará latitud y longitud como columnas.
 
 ```{r eval=FALSE}
 # sf to dataframe
@@ -52,6 +57,8 @@ add_info_intersects <-  function(pol_info, sf_data){
 
 
 ## Tablas Resumen
+
+Crea un resumen estadístico por cada una de las comunes columnas del data frame
 
 ```{r eval=FALSE}
 resumen_base <- function(base, name_base, n_samples = 5){ 
