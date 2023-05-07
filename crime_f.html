@@ -164,7 +164,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Datos de Delitos</span></a>
+  <a href="./datos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Limpieza de Datos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./panel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Datos de Panel</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./resumen.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Resumen</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./delta.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Delta</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -235,6 +250,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="dataframe-to-sf-object" class="level2" data-number="A.1">
 <h2 data-number="A.1" class="anchored" data-anchor-id="dataframe-to-sf-object"><span class="header-section-number">A.1</span> Dataframe to SF Object</h2>
+<p>Convertir DataFrame con columnas de latitud y longitud a un objeto espacial llamado simple feature además se le puede asignar un sistema de referencia de coordenadas.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dataframe a sf</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df2sf <span class="ot">&lt;-</span> <span class="cf">function</span>(df, <span class="at">lon =</span><span class="st">"lon"</span>, <span class="at">lat =</span><span class="st">"lat"</span>, <span class="at">crs_base =</span> <span class="dv">4326</span>) {</span>
@@ -245,6 +261,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sf_object)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Al inverso esta función permite convertir de un objeto espacial tipo puntos a una tabla de datos a la cual se le agregará latitud y longitud como columnas.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sf to dataframe</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sf2df <span class="ot">&lt;-</span> <span class="cf">function</span>(sf_points){</span>
@@ -276,6 +293,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="tablas-resumen" class="level2" data-number="A.3">
 <h2 data-number="A.3" class="anchored" data-anchor-id="tablas-resumen"><span class="header-section-number">A.3</span> Tablas Resumen</h2>
+<p>Crea un resumen estadístico por cada una de las comunes columnas del data frame</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>resumen_base <span class="ot">&lt;-</span> <span class="cf">function</span>(base, name_base, <span class="at">n_samples =</span> <span class="dv">5</span>){ </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  smp <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(base), <span class="at">size =</span> n_samples, <span class="at">replace =</span> F)</span>
