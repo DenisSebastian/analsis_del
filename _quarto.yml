@@ -2,8 +2,8 @@ project:
   type: book
 
 book:
-  title: "Análisis Criminal"
-  subtitle: "Curso FONDECYT"
+  title: "Análisis Criminológico Espacial"
+  subtitle: "Profundización en criminología territorial"
   # affiliation-title: "Universidad Adolfo Ibáñez - Chile"
   author: "FONDECYT"
   date: "2023-04-01"
@@ -12,6 +12,7 @@ book:
     left: "Copyright 2023, Denis Berroeta" 
   chapters:
     - index.qmd
+    - marco.qmd
     - datos.qmd
     - panel.qmd
     - resumen.qmd

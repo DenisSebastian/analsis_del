@@ -2,8 +2,14 @@ version: 1
 
 email:
   author: denis.berroeta@uai.cl
-  support: support@example.com
 
+
+garreton:
+  name: "[Matías Garretón](https://designlab.uai.cl/profesor/matias-garreton/)"
+  cargo1: "Director de Investigación en [Design Lab UAI](https://designlab.uai.cl)"
+  cargo2: "Investigador asociado [COES](https://coes.cl)"
+  email: matias.garreton@uai.cl
+  
 engine:
   jupyter: "[Jupyter](https://jupyter.org)"
   knitr: "[Knitr](<https://yihui.name/knitr>)"
