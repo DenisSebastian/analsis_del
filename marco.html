@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Análisis Criminológico Espacial - 1&nbsp; Marco de Referencia</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./datos.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body class="nav-sidebar floating slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Marco de Referencia</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Análisis Criminológico Espacial</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Introducción</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./marco.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Marco de Referencia</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./datos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Limpieza de Datos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./panel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datos de Panel</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./resumen.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Resumen</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./delta.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Delta</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./crime_f.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Funciones Generales</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./r_project.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">R Project</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#corrientes-pincipales-de-la-criminología" id="toc-corrientes-pincipales-de-la-criminología" class="nav-link active" data-scroll-target="#corrientes-pincipales-de-la-criminología"><span class="toc-section-number">1.1</span>  Corrientes Pincipales de la Criminología</a></li>
+  <li><a href="#integración-de-teorías-criminológica" id="toc-integración-de-teorías-criminológica" class="nav-link" data-scroll-target="#integración-de-teorías-criminológica"><span class="toc-section-number">1.2</span>  Integración de Teorías Criminológica</a></li>
+  <li><a href="#ley-de-la-concetración-espacial-del-crimen" id="toc-ley-de-la-concetración-espacial-del-crimen" class="nav-link" data-scroll-target="#ley-de-la-concetración-espacial-del-crimen"><span class="toc-section-number">1.3</span>  Ley de la Concetración Espacial del Crimen</a></li>
+  <li><a href="#teorías-de-oportunidad-del-crimen" id="toc-teorías-de-oportunidad-del-crimen" class="nav-link" data-scroll-target="#teorías-de-oportunidad-del-crimen"><span class="toc-section-number">1.4</span>  Teorías de Oportunidad del Crimen</a></li>
+  <li><a href="#teoría-de-desorganización-social" id="toc-teoría-de-desorganización-social" class="nav-link" data-scroll-target="#teoría-de-desorganización-social"><span class="toc-section-number">1.5</span>  Teoría de Desorganización Social</a></li>
+  <li><a href="#equilibrio-criminal-inestable-en-américa-latina" id="toc-equilibrio-criminal-inestable-en-américa-latina" class="nav-link" data-scroll-target="#equilibrio-criminal-inestable-en-américa-latina"><span class="toc-section-number">1.6</span>  Equilibrio Criminal Inestable en América Latina</a></li>
+  <li><a href="#evolución-de-las-manifestaciones-territoriales-de-criminalidad-en-chile" id="toc-evolución-de-las-manifestaciones-territoriales-de-criminalidad-en-chile" class="nav-link" data-scroll-target="#evolución-de-las-manifestaciones-territoriales-de-criminalidad-en-chile"><span class="toc-section-number">1.7</span>  Evolución de las manifestaciones territoriales de criminalidad en Chile:</a></li>
+  <li><a href="#autoría" id="toc-autoría" class="nav-link" data-scroll-target="#autoría"><span class="toc-section-number">1.8</span>  Autoría</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Marco de Referencia</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="corrientes-pincipales-de-la-criminología" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="corrientes-pincipales-de-la-criminología"><span class="header-section-number">1.1</span> Corrientes Pincipales de la Criminología</h2>
+<ol type="1">
+<li><p><span style="color: #2171b5;"><strong>El comportamiento criminal a nivel individual como una desviación de la normalidad</strong></span> Análisis de las características - sexo, educación, nivel socioeconómico, entre otros -, influencia familiar y experiencias de vida de los sujetos que desarrollan carreras criminales (Harris, 1977; Pratt y Cullen, 2005; Travers y Howard-Wagner, 2013).</p></li>
+<li><p><span style="color: #2171b5;"><strong>Racionalidad económica del crimen</strong></span>. Decisiones de costo -función del riesgo e intensidad de castigo) y beneficio (ingreso) de cometer un crimen; y también las condiciones de fomento y control del comportamiento criminal que en forma agregada pueden conducir a equilibrios criminales de menor o mayor intensidad (Fender, 1999; Bergman, 2019).</p></li>
+<li><p><span style="color: #2171b5;"><strong>Influencia de características del territorio sobre la concentración geográfica de actividades criminales</strong></span>.</p>
+<ul>
+<li>Reproducción de comportamientos criminales en barrios socialmente desorganizados (Kubrin y Mioduszewski, 2019; Sampson y Grooves, 1989),</li>
+<li>Condiciones contextuales que generan oportunidades para la realización de crímenes (Kennedy y Forde, 1990; Olaghere y Lum, 2018).</li>
+</ul></li>
+</ol>
+</section>
+<section id="integración-de-teorías-criminológica" class="level2 page-columns page-full" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="integración-de-teorías-criminológica"><span class="header-section-number">1.2</span> Integración de Teorías Criminológica</h2>
+<div id="fig-integracion" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/int_teorias.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;1.1: Integración de Teorías Criminológica</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="ley-de-la-concetración-espacial-del-crimen" class="level2 page-columns page-full" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="ley-de-la-concetración-espacial-del-crimen"><span class="header-section-number">1.3</span> Ley de la Concetración Espacial del Crimen</h2>
+<p>Empíricamente se ha observado que un alto porcentaje de los crímenes (50%) se concentra en una pequeña fracción (3% - 8%) de las calles de una ciudad (Sherman, 1989)</p>
+<div id="fig-concentracion" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/conce_sp.png" class="img-fluid figure-img" width="450"></p>
+<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;1.2: Lee, Eck, Soo &amp; Martinez, 2017</figcaption><p></p>
+</figure>
+</div>
+<p>Esto se ha confirmado tanto en países occidentales industrializados (Weisbrud, 2015) como en América Latina (Chainey et al., 2019; Jaitman y Azenjam, 2016; Ortega et al, 2015).</p>
+</section>
+<section id="teorías-de-oportunidad-del-crimen" class="level2 page-columns page-full" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="teorías-de-oportunidad-del-crimen"><span class="header-section-number">1.4</span> Teorías de Oportunidad del Crimen</h2>
+<p>Teoría de actividades rutinarias (Cohen y Felson, 1979) probabilidad de encuentro entre agresor y víctima en situación de vulnerabilidad.</p>
+<div id="fig-concentracion" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/tar.png" class="img-fluid figure-img" width="250"></p>
+<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;1.3: Teoría de actividades rutinarias (Cohen y Felson, 1979)</figcaption><p></p>
+</figure>
+</div>
+<p>Relaciones espaciales complejas entre:</p>
+<ul>
+<li>Residencia de víctima</li>
+<li>Guardianes en el hogar</li>
+<li>Residencia del agresor</li>
+<li>Lugares propicios al crimen</li>
+<li>Patrones de movilidad</li>
+<li>Sistemas de transporte</li>
+</ul>
+<p>Diversidad geográfica de fenómenos criminales (Frank et al., 2011)</p>
+</section>
+<section id="teoría-de-desorganización-social" class="level2 page-columns page-full" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="teoría-de-desorganización-social"><span class="header-section-number">1.5</span> Teoría de Desorganización Social</h2>
+<p>Hipótesis: vivir en barrios desfavorecidos tiene un efecto negativo en las oportunidades de vida de los residentes, a iguales características individuales</p>
+<div id="fig-concentracion" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/tas.png" class="img-fluid figure-img" width="450"></p>
+<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;1.4: Teoría de Desorganización Social, Sampson, 2012</figcaption><p></p>
+</figure>
+</div>
+<p>El capital material, social y cultural está desigualmente distribuido entre barrios segregados de alto y bajo nivel socioeconómico</p>
+<p>Diversos problemas de criminalidad y salud tienden a agruparse en barrios vulnerables</p>
+<p>Círculo vicioso de acumulación local de desventajas, de consolidación de subculturas criminales y de disputa del monopolio de la violencia</p>
+</section>
+<section id="equilibrio-criminal-inestable-en-américa-latina" class="level2 page-columns page-full" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="equilibrio-criminal-inestable-en-américa-latina"><span class="header-section-number">1.6</span> Equilibrio Criminal Inestable en América Latina</h2>
+<div id="fig-concentracion" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/bergman.png" class="img-fluid figure-img" width="800"></p>
+<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;1.5: Bergman, 2018, “More Money More Crime”</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="evolución-de-las-manifestaciones-territoriales-de-criminalidad-en-chile" class="level2 page-columns page-full" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="evolución-de-las-manifestaciones-territoriales-de-criminalidad-en-chile"><span class="header-section-number">1.7</span> Evolución de las manifestaciones territoriales de criminalidad en Chile:</h2>
+<p><strong>Efectos del estallido social y de la pandemia de Covid-19.</strong></p>
+<p>La delincuencia y la sensación de victimización son problemas persistentes en Chile y América Latina (ENUSC, 2016). Este continente es el más violento del mundo, con altos niveles de violencia armada, un poder creciente de las organizaciones ilegales y capacidades limitadas de control y disuasión de los Estados. En Chile, se estima que el costo de la delincuencia asciende a 410.000 pesos por habitante, equivalente al 2,8% del PIB, siendo el cuarto mayor en el continente (Jaitman et al, 2017). Más allá de cualquier estimación económica, este fenómeno tiene un costo incalculable para las personas, en particular cuando son afectadas por la pérdida de seres queridos o en su integridad física y/o moral. Además, los trastornos políticos y sociales generados por el crecimiento y diversificación de actividades criminales puede generar riesgos estructurales para la seguridad pública y la estabilidad democrática (Bergman, 2019). Diversas disciplinas y teorías han desarrollado perspectivas complementarias para analizar fenómenos criminales. Primero, la investigación del comportamiento criminal a nivel de individuos como una desviación de la normalidad se ha enfocado tradicionalmente en el análisis de las características (sexo, educación, nivel socioeconómico, entre otros), influencia familiar y experiencias de vida de los sujetos que desarrollan carreras criminales (Harris, 1977; Pratt y Cullen, 2005). Segundo, estudios que se enfocan en <strong>la influencia de características del territorio sobre el comportamiento de grupos sociales, y sea en términos de la reproducción de comportamientos criminales en barrios socialmente desorganizados</strong> (ref), o identificando condiciones contextuales que generan oportunidades para la realización de crímenes (ref). Tercero, modelando la racionalidad microeconómica del crimen en términos de decisiones de costo (en función del riesgo e intensidad de castigo) y beneficio (ingreso) de cometer un crimen (refs); y también las condiciones de fomento y control del comportamiento criminal que en forma agregada pueden conducir a equilibrios criminales de menor o mayor intensidad (Fender, 1999).</p>
+<p>Esta documento plantea desde el segundo tipo de estudios, correspondiente a la criminología geográfica y ecológica, y además incluye elementos de los otros dos, para complementar el marco de análisis de procesos de cambio de equilibrio criminal y aportar observaciones etnográficas para contextualizar este análisis en barrios vulnerables de Chile. En este ámbito, la teoría de los <span style="color: #2171b5;"><strong>Efectos de Barrio</strong></span> (Neighborhood Effects; Sampson et al, 2002; Galster, 2012) ofrece un marco teórico amplio que permite integrar múltiples perspectivas y niveles de análisis para el estudio de la influencia del entorno geográfico en las oportunidades de vida de las personas, incluyendo su eventual compromiso en actividades criminales. Los Efectos de Barrio podrían influir en la salud, desempeño educativo y laboral, relaciones interpersonales y otros, pero los efectos de contagio de comportamientos criminales y consumo de drogas, entre pares del vecindario - como agravante de la reproducción familiar - son particularmente significativos y recurrentes en distintos casos de estudio (Case &amp; Katz, 1991; Graif et al, 2014; entre otros). En este sentido, <strong>la teoría de los Efectos de Barrio es ampliamente coincidente con la teoría de la <span style="color: #2171b5;">Desorganización Social</span></strong>, respecto a la existencia de condiciones ecológicas de vulnerabilidad socioeconómica que podrían incrementar la exposición al crimen (ref).</p>
+<p>La teoría de la Desorganización Social (Shaw y McKay, 1942) fue uno de los primeros intentos contemporáneos para explicar por qué determinadas condiciones de vida a nivel de comunidades podían incentivar comportamientos criminales en sus miembros. Diversos estudios en esta línea, desarrollados principalmente en EE.UU. han vinculado la desorganización social con altas densidades de población, movilidad residencial, diversidad étnica, carencia material, inestabilidad familiar, carencia de capital social y debilidad de redes interpersonales. Estas condiciones reducirían la efectividad de los mecanismos de control social e incentivarían la adopción de comportamientos criminales (Engelen et al., 2016; Collazos et al., 2019; Sampson y Groves, 1989; Sampson, Raudenbush y Earls, 1997). En contraparte, cabe advertir que el origen de estos problemas radica en injusticias estructurales que reproducen la pobreza y la delincuencia a través de desigualdades de oportunidad, inseguridad social y sesgos del sistema penal (Wacquant, 2008).</p>
+<p>Estudios más recientes en el marco de los Efectos de Barrio han expandido el espectro de análisis geográfico, considerando redes de barrios en las que circulan individuos desarrollando sus actividades cotidianas (Graif et al, 2014). De este modo se observa una gran heterogeneidad de exposición al crimen en contextos no-residenciales, diferenciando las experiencias de individuos que residen en un mismo barrio. Desde este ángulo, <em>los Efectos de Barrio convergen conceptualmente con la teoría de las <span style="color: #2171b5;"><strong>Actividades Rutinarias</strong></span></em>, otra línea principal de la criminología ecológica, que analiza la distribución espacio-temporal de las oportunidades para delinquir.</p>
+<p>La teoría de las Actividades Rutinarias (Cohen y Felson, 1979) se enfoca en el análisis de la localización de las oportunidades para delinquir. Esta teoría explica la actividad criminal contra personas o lugares a partir de la interacción de tipos de actores: delincuentes motivados, objetivos vulnerables y (ausencia de) guardianes capaces, sean estos agentes de la ley, vecinos o propietarios (Bottoms &amp; Wiles, 1997). Por ejemplo, los robos a residencias ocurren con mayor frecuencia en períodos de ausencia de sus ocupantes (Cohen y Cantor, 1981). Asimismo, la concentración de equipamientos criminógenos, como bares, supermercados y estaciones de servicio, se asocia a tasas locales de criminalidad más altas que en áreas residenciales de la ciudad (Bernasco y Block, 2011; Jones y Pridemore, 2019) Las calles con altos flujos de personas y muchos objetivos potenciales suelen tener mayores riesgos de delincuencia, debido a la elevada probabilidad de interacción entre delincuentes y víctimas potenciales (Bernasco y Luykx, 2003; Beavon et al, 1994).</p>
+<p>Las distintas teorías criminológicas mencionadas aportan <strong>perspectivas complementarias – individuales o territoriales, sicosociales o económicas - que pueden ser integradas para analizar fenómenos criminales multidimensionales y complejos</strong>. Diversos estudios han mostrado que variables territoriales correspondientes a la teoría de las actividades rutinarias tienen efectos más fuertes y consistentes en los patrones de concentración de la delincuencia, pero al mismo tiempo demuestran efectos relevantes de variables que representan condiciones de desorganización social (Garreton, Dammert, Berroeta y Sanchez, en revisión; Jones y Pridemore, 2019; Weisbrud, 2012). Empíricamente se ha constatado que un alto porcentaje de los crímenes se concentra en una pequeña fracción de las calles de una ciudad (Sherman, 1989), lo que puede explicarse por la concentración de oportunidades para delinquir en barrios con alta afluencia de público y por condiciones de desorganización social en barrios socialmente vulnerables . Existe amplia evidencia internacional que confirma esta afirmación, tanto en países occidentales industrializados (Weisbrud, 2015) como en América Latina (Chainey et al., 2019; Jaitman y Azenjam, 2016; Ortega et al, 2015).</p>
+<p>En Chile, diversas investigaciones han generado evidencia relevante acerca de procesos criminales, con enfoques disciplinarios específicos. De la Fuente et al (2011) demostró que la frecuencia de delitos contra la propiedad varía en función de factores ecológicos como la pobreza, desempleo, densidad de población, eficacia policial y otros, mediante un análisis econométrico de un panel de 13 Regiones de Chile en el período 1990-2008. Un análisis más reciente (FK Economics, 2019), con datos de corte transversal para el año 2019 y agregados a nivel comunal, también reporta correlaciones significativas de éstos y otros factores con un espectro más amplio de delitos, aunque presenta discrepancias importantes con el anterior en cuanto a metodología y resultados. Baloian et al (2017) desarrollaron un modelo predictivo de diversos delitos contra la propiedad, basado en un análisis microgeográfico de variables de contexto. Ortega (2014), aporta una aguda observación etnográfica de procesos de reproducción local de una subcultura de violencia, criminalidad, alcoholismo y drogadicción en una comuna del Gran Santiago. Este estudio en profundidad describe lúcidamente las narrativas de adolescentes que aspiran a desarrollar carreras delictuales, junto a sus pares del barrio. Evitando estigmatizarlos, estos casos sustentan una crítica estructural a una sociedad que ofrece escasas posibilidades de movilidad social a través de la educación y el empleo formal (Espinoza et al, 2017), que tolera altos niveles de segregación en sus ciudades (Garreton et al, 2020) y que criminaliza la pobreza a través de los sistemas policial y penal (ref).</p>
+<p>Analizando esta evidencia, consideramos pertinente desarrollar un análisis amplio y contingente de la criminalidad territorial en Chile. Existen indicios preocupantes de diversificación y sofisticación que sugieren un fortalecimiento de actividades criminales (PDI, 2018). De aquí en adelante, utilizaremos el concepto de “actividad criminal” para referirnos a un conjunto de acciones ilegales, cuyo objetivo es generar ingreso, que son realizadas por actores heterogéneos, descentralizados y coordinados a través de mercados ilegales. En otro nivel, reservaremos el término “organización criminal” para estructuras criminales de mayor escala, que realizan actividades criminales y en ocasiones actividades legales, por ejemplo los carteles latinoamericanos de narcotráfico o las mafias de EE.UU., Italia y otros países (Paoli, 2014). La investigación de esto último escapa a los objetivos y metodologías de este proyecto.</p>
+<p>Para analizar la evolución de las actividades criminales, es necesario complementar el marco teórico hasta aquí presentado con teorías que abordan este fenómeno desde un punto de vista de procesos históricos en países latinoamericanos. <strong>Una paradoja notable en América Latina ha sido el aumento paralelo del crecimiento económico y de los niveles de inseguridad y actividad criminal</strong>, al contrario de lo observado en países industrializados (Bergman, 2019). Aunque existen situaciones diversas en distintos países, durante las últimas tres décadas se ha constatado una considerable expansión económica en este continente, junto a una importante reducción de la pobreza y en menor medida de la desigualdad (Amarante et al, 2016). Sin embargo, no se ha observado un fortalecimiento concomitante de las capacidades estatales de seguridad civil y social. Así, esta paradoja del desarrollo latinoamericano se explicaría por equilibrios de alta criminalidad, generados por oportunidades económicas crecientes en mercados ilícitos e ilegales, ante el desarrollo mucho más lento de capacidades investigativas y disuasivas en los sistemas policiales y judiciales (Bergman, 2019). Los diferentes niveles de actividad criminal observados en distintos países latinoamericanos pueden entenderse como equilibrios múltiples, que resultan del comportamiento agregado de individuos que toman decisiones racionales de beneficios y costos de cometer crímenes, sopesando el ingreso esperado con la probabilidad y consecuencias de ser castigados (Fender, 1999).</p>
+<p><strong>Los procesos de transición de equilibrios de baja a alta actividad criminal observados en países de América Latina desde la mitad del siglo XX permiten delinear un sendero que consta de seis pasos</strong> (Bergman, 2019). <em>Primero</em>, la heterogeneidad geográfica de oportunidades económicas y capacidades disuasivas, que permite la intensificación de actividades criminales en territorios particulares. <em>Segundo</em>, un equilibrio inestable en niveles intermedios de actividad criminal, en el que el Estado lucha por contener el crecimiento de mercados criminales. <em>Tercero</em>, un estresor mayor que desestabiliza este equilibrio precario, por ejemplo, el impacto que tuvo el tráfico de drogas ilegales en México. <em>Cuarto</em>, un deterioro acelerado de la seguridad pública, cuando las capacidades de organización criminal empiezan a superar y/o a corromper las capacidades de disuasión estatal. <em>Quinto</em>, la diversificación de actividades criminales en una amplia gama de mercados ilícitos e ilegales, incluyendo extorsiones y secuestros, y la eventual estructuración de organizaciones criminales de gran escala. <em>Sexto</em>, un equilibrio de alta actividad criminal, en el que el Estado es incapaz de recuperar el monopolio de la violencia (Op. Cit.). Desde una perspectiva de política pública territorial, es clave evitar la transición de situaciones en que la disputa violenta por mercados ilícitos emergentes, generalmente de drogas, escala a la diversificación de fuentes de ingreso criminal con actividades extremadamente violentas como la extorsión y el secuestro (Bergman, 2018).</p>
+<p>Aunque el narcotráfico es un elemento clave en la transición hacia equilibrios de alta criminalidad, las actividades criminales pueden abarcar un amplio espectro de mercados ilícitos (ej.: contrabando de bienes legales) e ilegales (ej.: tráfico de personas). En América Latina, los mercados ilegales incluyen drogas, prostitución, juegos de azar y apuestas, reducción de especies, tráfico de personas, secuestro y extorsión, entre otros (Bergman, 2018). La consolidación comercial en mercados ilegales requiere un alto grado de compromiso criminal y un cierto nivel de tolerancia y/o corrupción de las autoridades ((Holanda, 2016, Dammert y Sarmiento, 2019). La violencia es un resultado potencial de estas actividades criminales, pero éstas no son necesariamente violentas. La violencia tiene costos materiales e inmateriales, y la decisión de usarla se basa en un análisis de costo-beneficio. Cuando las leyes se aplican de manera efectiva y las sanciones son severas, aumenta la probabilidad de detección y castigo del comercio ilícito, y disminuye el alcance de la violencia (Bergman, 2018).</p>
+<p>En comparación con el resto de América Latina, Chile goza de niveles relativamente bajos de actividad criminal y violencia (Solar, 2018). En particular, este país tiene tasas comparativamente bajas de homicidios, corrupción y temor a organizaciones criminales, en comparación con el resto de la región (Jaitman et al, 2017). Además, Chile ha tenido una trayectoria diferenciada en términos de probidad de las autoridades y control de la corrupción, con baja tolerancia social a actividades tales como el soborno o la colusión entre grupos criminales y agentes de la ley y de seguridad (Bonner, 2013; Silva 2016). Sin embargo, desde el retorno a la democracia en 1990, surgieron diversas oportunidades criminales en relación a la apertura del comercio internacional y el crecimiento económico. Además, la fuerte desigualdad económica y la segregación de las ciudades chilenas ha generado focos persistentes de vulnerabilidad social y pobreza, que presentan condiciones favorables para el arraigo de organizaciones criminales (Dammert y Malone, 2003; Garreton, 2017, 2020).</p>
+<p>De este modo, el temor a la delincuencia y las percepciones de victimización han mantenido un rol protagónico en el debate público e incluso se han agudizado en años recientes (Dammert, 2013; FK Economics, 2019). El discurso de una probidad excepcional de las autoridades chilenas en el contexto latinoamericano contrasta con la baja sostenida de la aprobación y confianza en las instituciones y con una inquietud creciente entre expertos e instituciones policiales respecto al crecimiento y sofisticación del crimen organizado en Chile (PDI, 2018, 2019; ¿otros?). Un conjunto de desventajas - segregación urbana generalizada en Chile (Garreton, 2020), reproducción de comportamientos criminales en el sistema penal, casi nula movilidad social de personas con bajo nivel educativo y otras formas de desigualdad - se intersectan a escala de barrios, lo que podría ofrecer arraigo a organizaciones criminales emergentes. Estas condiciones corresponden a lo descrito en otros países como el segundo de los seis pasos (arriba mencionados) de transición hacia un equilibrio de alta criminalidad (Bergman, 2019).</p>
+<p>En esta situación, <strong>cabe preguntarse si el actual estado de crisis, generado por el impacto sucesivo del estallido social ocurrido a fines del año 2019 (Guell, 2019) y de la pandemia de Covid-19 actualmente en desarrollo, podría ser un estresor mayor capaz de desencadenar un deterioro progresivo de la seguridad pública</strong>. Cabe destacar que revertir la pérdida de control del monopolio de la violencia que implica el paso a esta última fase implicaría un altísimo costo social (Bergman, 2018).</p>
+<p>En suma, las trayectorias de recrudecimiento del crimen y la violencia observadas en otros países de América Latina alertan de un riesgo latente en Chile, a saber, que una crisis social, sanitaria y económica como la que atravesamos actualmente podría desencadenar la transición hacia un régimen de alta criminalidad. En complemento a la labor investigativa propiamente policial, el análisis de las manifestaciones territoriales de la actividad criminal puede generar evidencia robusta para el diseño de políticas de prevención de la delincuencia, sociales o situacionales, enfocadas en la seguridad pública y/o recuperación de barrios con fuerte arraigo de actividades criminales. Para ello, proponemos integrar tres marco teóricos complementarios. Primero, la teoría de Efectos de Barrio, que ofrece la amplitud conceptual necesaria para interpretar evidencia diversa (individual, colectiva, cuantitativa, cualitativa, etc) en forma coherente (Galster, 2012). Segundo, las teorías de Desorganización Social y Actividades Rutinarias, conceptualmente relacionadas a los Efectos de Barrio, que aportan una tradición analítica robusta y precisa en cuanto a variables territoriales relevantes para el análisis espacial de las actividades criminales. Tercero, una adaptación de la teoría de <span style="color: #2171b5;"><strong>equilibrio criminal</strong></span> al contexto Latinoamericano, que sugiere senderos (path dependence) conducentes a equilibrios de alta criminalidad (Bergman, 2019), permitiendo definir hipótesis de causalidad y co-dependencia de actividades criminales (<a href="#fig-causalidad">Figure&nbsp;<span>1.6</span></a>), que pueden ser analizadas cuantitativamente con conceptos y variables territoriales definidos por las teorías anteriores.</p>
+<div id="fig-causalidad" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/causalidad.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;1.6: Sendero hipotético de diversificación de delitos hacia un equilibrio de alta criminalidad</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="autoría" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="autoría"><span class="header-section-number">1.8</span> Autoría</h2>
+<p><a href="https://designlab.uai.cl/profesor/matias-garreton/">Matías Garretón</a>, Director de Investigación en <a href="https://designlab.uai.cl">Design Lab UAI</a>, Investigador asociado <a href="https://coes.cl">COES</a>, email: matias.garreton@uai.cl</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introducción</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./datos.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Limpieza de Datos</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2023, Denis Berroeta</div>   
+  </div>
+</footer>
+
+
+
+</body></html>

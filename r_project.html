@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Análisis Criminal - Appendix B — R Project</title>
+<title>Análisis Criminológico Espacial - Appendix B — R Project</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -165,7 +165,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Análisis Criminal</a> 
+      <a href="./">Análisis Criminológico Espacial</a> 
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -182,22 +182,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Limpieza de Datos</span></a>
+  <a href="./marco.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Marco de Referencia</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./panel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Datos de Panel</span></a>
+  <a href="./datos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Limpieza de Datos</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resumen.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Resumen</span></a>
+  <a href="./panel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datos de Panel</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./delta.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Delta</span></a>
+  <a href="./resumen.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Resumen</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./delta.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Delta</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -568,19 +573,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ru <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">10</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ru</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 8.586361 7.193603 5.233618 6.195669 3.989913 9.752325 9.363861 6.947753
-  [9] 2.738887 3.606254 9.055893 7.085625 1.068399 5.023983 3.578313 4.014209
- [17] 6.236140 9.287050 8.251172 8.627816 1.651452 1.021838 3.733519 2.862577
- [25] 8.677870 6.447763 6.129571 9.857093 3.186245 8.228976 1.570920 1.038886
- [33] 9.615501 1.279759 7.374988 7.499236 3.424120 4.922563 7.601010 8.311340
- [41] 4.236675 6.369380 4.994848 6.343910 8.217972 6.102499 7.997894 8.579512
- [49] 6.361882 9.231044 4.203275 2.669299 9.598282 8.748873 2.452218 1.532054
- [57] 6.824882 7.000124 5.994202 8.487095 1.267178 5.574278 5.258930 7.943519
- [65] 3.009280 1.478613 4.931362 4.017004 6.235941 3.460687 3.572758 2.140116
- [73] 1.224729 6.087313 8.465306 6.742469 1.138756 5.553893 7.182371 7.488354
- [81] 8.316555 6.647435 2.736619 6.630847 2.890207 9.550078 3.807427 2.869597
- [89] 4.747390 6.216223 5.888227 4.705807 6.072471 2.753579 9.640613 4.969234
- [97] 8.044662 2.720670 7.835259 7.039074</code></pre>
+<pre><code>  [1] 7.789795 1.230997 3.141904 3.033840 3.515151 6.165930 4.893382 9.475875
+  [9] 2.146112 5.361448 3.118187 5.322506 1.004937 1.898853 6.847682 8.868769
+ [17] 6.285403 1.029803 4.327408 3.158340 3.792705 8.958432 6.916715 6.995500
+ [25] 1.099301 7.933682 7.238016 1.251594 9.574846 6.723350 1.691004 8.409113
+ [33] 6.399222 5.963985 5.448694 6.581360 4.016276 4.751593 4.612125 2.388988
+ [41] 4.578813 5.782829 5.436341 2.428298 7.911605 4.750576 5.836098 3.852289
+ [49] 1.008394 2.515685 1.366294 3.099277 2.028341 4.552943 1.114942 7.972630
+ [57] 1.700335 3.039007 9.479471 6.862038 6.016655 3.305314 7.823365 3.099120
+ [65] 6.555775 9.954988 2.582240 5.570884 4.248454 2.816736 9.112943 1.538263
+ [73] 1.017877 7.173689 4.402719 8.566602 4.432907 8.845108 3.268122 6.142515
+ [81] 4.118898 7.706965 6.432938 8.936759 8.734696 3.210559 8.303611 7.519686
+ [89] 6.990843 5.251342 6.237485 7.045757 4.212056 4.442450 3.093600 4.489485
+ [97] 2.548170 5.491185 7.812909 6.360682</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
@@ -599,7 +604,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample.int</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 5 3 2 5 3 1 1 1 4 3</code></pre>
+<pre><code> [1] 6 2 5 2 6 5 1 6 1 3</code></pre>
 </div>
 </div>
 </section>
@@ -1385,10 +1390,10 @@ h=<em>?</em>, a = 3, b = 4</p>
 <span id="cb152-6"><a href="#cb152-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(promedio)</span>
 <span id="cb152-7"><a href="#cb152-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.3927145
-[1] 0.09907429
-[1] 0.1939441
-[1] -0.08315682</code></pre>
+<pre><code>[1] -0.08018696
+[1] -0.08661908
+[1] -0.0138252
+[1] -0.139204</code></pre>
 </div>
 </div>
 </section>
