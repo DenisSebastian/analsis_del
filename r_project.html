@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -119,7 +90,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -150,11 +122,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Appendix B — R Project</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./crime_f.html">Appendices</a></li><li class="breadcrumb-item"><a href="./r_project.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">R Project</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -162,70 +139,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Análisis Criminológico Espacial</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Introducción</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./marco.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Marco de Referencia</span></a>
+  <a href="./marco.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Marco de Referencia</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Limpieza de Datos</span></a>
+  <a href="./datos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Limpieza de Datos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./panel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datos de Panel</span></a>
+  <a href="./panel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datos de Panel</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resumen.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Resumen</span></a>
+  <a href="./resumen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Resumen</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./delta.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Delta</span></a>
+  <a href="./delta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Delta</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./crime_f.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Funciones Generales</span></a>
+  <a href="./crime_f.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Funciones Generales</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r_project.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">R Project</span></a>
+  <a href="./r_project.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">R Project</span></span></a>
   </div>
 </li>
       </ul>
@@ -233,114 +220,115 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#qué-es-r-project" id="toc-qué-es-r-project" class="nav-link active" data-scroll-target="#qué-es-r-project"><span class="toc-section-number">B.1</span>  ¿Qué es R Project?</a>
+  <li><a href="#qué-es-r-project" id="toc-qué-es-r-project" class="nav-link active" data-scroll-target="#qué-es-r-project"><span class="header-section-number">B.1</span> ¿Qué es R Project?</a>
   <ul class="collapse">
-  <li><a href="#ventajas-de-utilizar-r-project" id="toc-ventajas-de-utilizar-r-project" class="nav-link" data-scroll-target="#ventajas-de-utilizar-r-project"><span class="toc-section-number">B.1.1</span>  Ventajas de Utilizar R Project</a></li>
-  <li><a href="#desventajas-de-utilizar-r" id="toc-desventajas-de-utilizar-r" class="nav-link" data-scroll-target="#desventajas-de-utilizar-r"><span class="toc-section-number">B.1.2</span>  Desventajas de utilizar R</a></li>
+  <li><a href="#ventajas-de-utilizar-r-project" id="toc-ventajas-de-utilizar-r-project" class="nav-link" data-scroll-target="#ventajas-de-utilizar-r-project"><span class="header-section-number">B.1.1</span> Ventajas de Utilizar R Project</a></li>
+  <li><a href="#desventajas-de-utilizar-r" id="toc-desventajas-de-utilizar-r" class="nav-link" data-scroll-target="#desventajas-de-utilizar-r"><span class="header-section-number">B.1.2</span> Desventajas de utilizar R</a></li>
   </ul></li>
-  <li><a href="#instalación-de-r-project" id="toc-instalación-de-r-project" class="nav-link" data-scroll-target="#instalación-de-r-project"><span class="toc-section-number">B.2</span>  Instalación de R Project</a>
+  <li><a href="#instalación-de-r-project" id="toc-instalación-de-r-project" class="nav-link" data-scroll-target="#instalación-de-r-project"><span class="header-section-number">B.2</span> Instalación de R Project</a>
   <ul class="collapse">
-  <li><a href="#instalación-de-r-project-1" id="toc-instalación-de-r-project-1" class="nav-link" data-scroll-target="#instalación-de-r-project-1"><span class="toc-section-number">B.2.1</span>  Instalación de R Project</a></li>
-  <li><a href="#instalación-de-r-para-windows" id="toc-instalación-de-r-para-windows" class="nav-link" data-scroll-target="#instalación-de-r-para-windows"><span class="toc-section-number">B.2.2</span>  Instalación de R para Windows</a></li>
-  <li><a href="#instalar-rtools-solo-sistema-operativo-windows" id="toc-instalar-rtools-solo-sistema-operativo-windows" class="nav-link" data-scroll-target="#instalar-rtools-solo-sistema-operativo-windows"><span class="toc-section-number">B.2.3</span>  Instalar Rtools (solo Sistema Operativo Windows)</a></li>
-  <li><a href="#instalación-de-r-para-mac" id="toc-instalación-de-r-para-mac" class="nav-link" data-scroll-target="#instalación-de-r-para-mac"><span class="toc-section-number">B.2.4</span>  Instalación de R para Mac</a></li>
+  <li><a href="#instalación-de-r-project-1" id="toc-instalación-de-r-project-1" class="nav-link" data-scroll-target="#instalación-de-r-project-1"><span class="header-section-number">B.2.1</span> Instalación de R Project</a></li>
+  <li><a href="#instalación-de-r-para-windows" id="toc-instalación-de-r-para-windows" class="nav-link" data-scroll-target="#instalación-de-r-para-windows"><span class="header-section-number">B.2.2</span> Instalación de R para Windows</a></li>
+  <li><a href="#instalar-rtools-solo-sistema-operativo-windows" id="toc-instalar-rtools-solo-sistema-operativo-windows" class="nav-link" data-scroll-target="#instalar-rtools-solo-sistema-operativo-windows"><span class="header-section-number">B.2.3</span> Instalar Rtools (solo Sistema Operativo Windows)</a></li>
+  <li><a href="#instalación-de-r-para-mac" id="toc-instalación-de-r-para-mac" class="nav-link" data-scroll-target="#instalación-de-r-para-mac"><span class="header-section-number">B.2.4</span> Instalación de R para Mac</a></li>
   </ul></li>
-  <li><a href="#instalación-de-rstudio" id="toc-instalación-de-rstudio" class="nav-link" data-scroll-target="#instalación-de-rstudio"><span class="toc-section-number">B.3</span>  Instalación de RStudio</a>
+  <li><a href="#instalación-de-rstudio" id="toc-instalación-de-rstudio" class="nav-link" data-scroll-target="#instalación-de-rstudio"><span class="header-section-number">B.3</span> Instalación de RStudio</a>
   <ul class="collapse">
-  <li><a href="#rstudio-cloud" id="toc-rstudio-cloud" class="nav-link" data-scroll-target="#rstudio-cloud"><span class="toc-section-number">B.3.1</span>  RStudio Cloud</a></li>
+  <li><a href="#rstudio-cloud" id="toc-rstudio-cloud" class="nav-link" data-scroll-target="#rstudio-cloud"><span class="header-section-number">B.3.1</span> RStudio Cloud</a></li>
   </ul></li>
-  <li><a href="#instalar-librerías" id="toc-instalar-librerías" class="nav-link" data-scroll-target="#instalar-librerías"><span class="toc-section-number">B.4</span>  Instalar Librerías</a>
+  <li><a href="#instalar-librerías" id="toc-instalar-librerías" class="nav-link" data-scroll-target="#instalar-librerías"><span class="header-section-number">B.4</span> Instalar Librerías</a>
   <ul class="collapse">
-  <li><a href="#librerías-en-r" id="toc-librerías-en-r" class="nav-link" data-scroll-target="#librerías-en-r"><span class="toc-section-number">B.4.1</span>  Librerías en R</a></li>
-  <li><a href="#ejemplo-de-instalación-de-librerías-desde-r" id="toc-ejemplo-de-instalación-de-librerías-desde-r" class="nav-link" data-scroll-target="#ejemplo-de-instalación-de-librerías-desde-r"><span class="toc-section-number">B.4.2</span>  Ejemplo de Instalación de Librerías desde R</a></li>
-  <li><a href="#ejemplo-de-instalación-de-librerías-desde-rstudio" id="toc-ejemplo-de-instalación-de-librerías-desde-rstudio" class="nav-link" data-scroll-target="#ejemplo-de-instalación-de-librerías-desde-rstudio"><span class="toc-section-number">B.4.3</span>  Ejemplo de Instalación de Librerías desde Rstudio</a></li>
+  <li><a href="#librerías-en-r" id="toc-librerías-en-r" class="nav-link" data-scroll-target="#librerías-en-r"><span class="header-section-number">B.4.1</span> Librerías en R</a></li>
+  <li><a href="#ejemplo-de-instalación-de-librerías-desde-r" id="toc-ejemplo-de-instalación-de-librerías-desde-r" class="nav-link" data-scroll-target="#ejemplo-de-instalación-de-librerías-desde-r"><span class="header-section-number">B.4.2</span> Ejemplo de Instalación de Librerías desde R</a></li>
+  <li><a href="#ejemplo-de-instalación-de-librerías-desde-rstudio" id="toc-ejemplo-de-instalación-de-librerías-desde-rstudio" class="nav-link" data-scroll-target="#ejemplo-de-instalación-de-librerías-desde-rstudio"><span class="header-section-number">B.4.3</span> Ejemplo de Instalación de Librerías desde Rstudio</a></li>
   </ul></li>
-  <li><a href="#definición-de-directorios-de-trabajos" id="toc-definición-de-directorios-de-trabajos" class="nav-link" data-scroll-target="#definición-de-directorios-de-trabajos"><span class="toc-section-number">B.5</span>  Definición de Directorios de Trabajos</a></li>
-  <li><a href="#variables-en-r" id="toc-variables-en-r" class="nav-link" data-scroll-target="#variables-en-r"><span class="toc-section-number">C</span>  Variables en R</a>
+  <li><a href="#definición-de-directorios-de-trabajos" id="toc-definición-de-directorios-de-trabajos" class="nav-link" data-scroll-target="#definición-de-directorios-de-trabajos"><span class="header-section-number">B.5</span> Definición de Directorios de Trabajos</a></li>
+  <li><a href="#variables-en-r" id="toc-variables-en-r" class="nav-link" data-scroll-target="#variables-en-r"><span class="header-section-number">C</span> Variables en R</a>
   <ul class="collapse">
-  <li><a href="#tipos-de-objetos-en-r" id="toc-tipos-de-objetos-en-r" class="nav-link" data-scroll-target="#tipos-de-objetos-en-r"><span class="toc-section-number">C.1</span>  Tipos de Objetos en R</a>
+  <li><a href="#tipos-de-objetos-en-r" id="toc-tipos-de-objetos-en-r" class="nav-link" data-scroll-target="#tipos-de-objetos-en-r"><span class="header-section-number">C.1</span> Tipos de Objetos en R</a>
   <ul class="collapse">
-  <li><a href="#variables-numéricas" id="toc-variables-numéricas" class="nav-link" data-scroll-target="#variables-numéricas"><span class="toc-section-number">C.1.1</span>  Variables Numéricas</a></li>
-  <li><a href="#variables-de-caracter" id="toc-variables-de-caracter" class="nav-link" data-scroll-target="#variables-de-caracter"><span class="toc-section-number">C.1.2</span>  Variables de Caracter</a></li>
+  <li><a href="#variables-numéricas" id="toc-variables-numéricas" class="nav-link" data-scroll-target="#variables-numéricas"><span class="header-section-number">C.1.1</span> Variables Numéricas</a></li>
+  <li><a href="#variables-de-caracter" id="toc-variables-de-caracter" class="nav-link" data-scroll-target="#variables-de-caracter"><span class="header-section-number">C.1.2</span> Variables de Caracter</a></li>
   </ul></li>
-  <li><a href="#estructuras-de-datos" id="toc-estructuras-de-datos" class="nav-link" data-scroll-target="#estructuras-de-datos"><span class="toc-section-number">C.2</span>  Estructuras de Datos</a>
+  <li><a href="#estructuras-de-datos" id="toc-estructuras-de-datos" class="nav-link" data-scroll-target="#estructuras-de-datos"><span class="header-section-number">C.2</span> Estructuras de Datos</a>
   <ul class="collapse">
-  <li><a href="#vectores" id="toc-vectores" class="nav-link" data-scroll-target="#vectores"><span class="toc-section-number">C.2.1</span>  Vectores</a></li>
-  <li><a href="#listas" id="toc-listas" class="nav-link" data-scroll-target="#listas"><span class="toc-section-number">C.2.2</span>  Listas</a></li>
-  <li><a href="#matrices" id="toc-matrices" class="nav-link" data-scroll-target="#matrices"><span class="toc-section-number">C.2.3</span>  Matrices</a></li>
-  <li><a href="#dataframes" id="toc-dataframes" class="nav-link" data-scroll-target="#dataframes"><span class="toc-section-number">C.2.4</span>  Dataframes</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#funciones-en-r" id="toc-funciones-en-r" class="nav-link" data-scroll-target="#funciones-en-r"><span class="toc-section-number">D</span>  Funciones en R</a>
-  <ul class="collapse">
-  <li><a href="#operaciones-básicas-en-r" id="toc-operaciones-básicas-en-r" class="nav-link" data-scroll-target="#operaciones-básicas-en-r"><span class="toc-section-number">D.1</span>  Operaciones Básicas en R</a>
-  <ul class="collapse">
-  <li><a href="#operaciones-matemáticas" id="toc-operaciones-matemáticas" class="nav-link" data-scroll-target="#operaciones-matemáticas"><span class="toc-section-number">D.1.1</span>  Operaciones Matemáticas</a></li>
-  <li><a href="#funciones-útiles-de-propósito-general" id="toc-funciones-útiles-de-propósito-general" class="nav-link" data-scroll-target="#funciones-útiles-de-propósito-general"><span class="toc-section-number">D.1.2</span>  Funciones Útiles de propósito general</a></li>
-  </ul></li>
-  <li><a href="#operaciones-lógicas" id="toc-operaciones-lógicas" class="nav-link" data-scroll-target="#operaciones-lógicas"><span class="toc-section-number">D.2</span>  Operaciones Lógicas</a>
-  <ul class="collapse">
-  <li><a href="#operador-de-igualdad" id="toc-operador-de-igualdad" class="nav-link" data-scroll-target="#operador-de-igualdad"><span class="toc-section-number">D.2.1</span>  Operador de igualdad: (==)</a></li>
-  <li><a href="#operador-de-desigualdad" id="toc-operador-de-desigualdad" class="nav-link" data-scroll-target="#operador-de-desigualdad"><span class="toc-section-number">D.2.2</span>  Operador de desigualdad: (!=)</a></li>
-  <li><a href="#operador-de-mayor-que" id="toc-operador-de-mayor-que" class="nav-link" data-scroll-target="#operador-de-mayor-que"><span class="toc-section-number">D.2.3</span>  Operador de mayor que: (&gt;)</a></li>
-  <li><a href="#operador-de-menor-que" id="toc-operador-de-menor-que" class="nav-link" data-scroll-target="#operador-de-menor-que"><span class="toc-section-number">D.2.4</span>  Operador de menor que: (&lt;)</a></li>
-  <li><a href="#operador-de-mayor-o-igual-que" id="toc-operador-de-mayor-o-igual-que" class="nav-link" data-scroll-target="#operador-de-mayor-o-igual-que"><span class="toc-section-number">D.2.5</span>  Operador de mayor o igual que: (&gt;=)</a></li>
-  <li><a href="#operador-de-menor-o-igual-que" id="toc-operador-de-menor-o-igual-que" class="nav-link" data-scroll-target="#operador-de-menor-o-igual-que"><span class="toc-section-number">D.2.6</span>  Operador de menor o igual que: (&lt;=)</a></li>
-  <li><a href="#operador-lógico-and" id="toc-operador-lógico-and" class="nav-link" data-scroll-target="#operador-lógico-and"><span class="toc-section-number">D.2.7</span>  Operador lógico AND: (&amp;)</a></li>
-  <li><a href="#operador-lógico-or" id="toc-operador-lógico-or" class="nav-link" data-scroll-target="#operador-lógico-or"><span class="toc-section-number">D.2.8</span>  Operador lógico OR: (|)</a></li>
-  </ul></li>
-  <li><a href="#crear-funciones-propias" id="toc-crear-funciones-propias" class="nav-link" data-scroll-target="#crear-funciones-propias"><span class="toc-section-number">D.3</span>  Crear Funciones Propias</a></li>
-  </ul></li>
-  <li><a href="#estructura-de-control-en-r" id="toc-estructura-de-control-en-r" class="nav-link" data-scroll-target="#estructura-de-control-en-r"><span class="toc-section-number">E</span>  Estructura de Control en R</a>
-  <ul class="collapse">
-  <li><a href="#estructuras-condicionales" id="toc-estructuras-condicionales" class="nav-link" data-scroll-target="#estructuras-condicionales"><span class="toc-section-number">E.1</span>  Estructuras condicionales</a></li>
-  <li><a href="#estructuras-de-bucles" id="toc-estructuras-de-bucles" class="nav-link" data-scroll-target="#estructuras-de-bucles"><span class="toc-section-number">E.2</span>  Estructuras de bucles</a>
-  <ul class="collapse">
-  <li><a href="#estructura-de-bucle-for" id="toc-estructura-de-bucle-for" class="nav-link" data-scroll-target="#estructura-de-bucle-for"><span class="toc-section-number">E.2.1</span>  Estructura de bucle “<code>for</code>”:</a></li>
-  <li><a href="#estructura-de-bucle-while" id="toc-estructura-de-bucle-while" class="nav-link" data-scroll-target="#estructura-de-bucle-while"><span class="toc-section-number">E.2.2</span>  Estructura de bucle “while”:</a></li>
-  <li><a href="#estructura-de-bucle-repeat" id="toc-estructura-de-bucle-repeat" class="nav-link" data-scroll-target="#estructura-de-bucle-repeat"><span class="toc-section-number">E.2.3</span>  Estructura de bucle “repeat”:</a></li>
-  </ul></li>
-  <li><a href="#estructuras-de-control-de-flujo" id="toc-estructuras-de-control-de-flujo" class="nav-link" data-scroll-target="#estructuras-de-control-de-flujo"><span class="toc-section-number">E.3</span>  Estructuras de control de flujo</a>
-  <ul class="collapse">
-  <li><a href="#estructuras-de-control-next" id="toc-estructuras-de-control-next" class="nav-link" data-scroll-target="#estructuras-de-control-next"><span class="toc-section-number">E.3.1</span>  Estructuras de control “next”:</a></li>
-  <li><a href="#estructuras-de-control-break" id="toc-estructuras-de-control-break" class="nav-link" data-scroll-target="#estructuras-de-control-break"><span class="toc-section-number">E.3.2</span>  Estructuras de control “break”:</a></li>
+  <li><a href="#vectores" id="toc-vectores" class="nav-link" data-scroll-target="#vectores"><span class="header-section-number">C.2.1</span> Vectores</a></li>
+  <li><a href="#listas" id="toc-listas" class="nav-link" data-scroll-target="#listas"><span class="header-section-number">C.2.2</span> Listas</a></li>
+  <li><a href="#matrices" id="toc-matrices" class="nav-link" data-scroll-target="#matrices"><span class="header-section-number">C.2.3</span> Matrices</a></li>
+  <li><a href="#dataframes" id="toc-dataframes" class="nav-link" data-scroll-target="#dataframes"><span class="header-section-number">C.2.4</span> Dataframes</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#tidyverse-en-r" id="toc-tidyverse-en-r" class="nav-link" data-scroll-target="#tidyverse-en-r"><span class="toc-section-number">F</span>  Tidyverse en R</a>
+  <li><a href="#funciones-en-r" id="toc-funciones-en-r" class="nav-link" data-scroll-target="#funciones-en-r"><span class="header-section-number">D</span> Funciones en R</a>
   <ul class="collapse">
-  <li><a href="#introducción-a-tidyverse" id="toc-introducción-a-tidyverse" class="nav-link" data-scroll-target="#introducción-a-tidyverse"><span class="toc-section-number">F.1</span>  Introducción a Tidyverse</a></li>
-  <li><a href="#estructura-de-un-dataframe" id="toc-estructura-de-un-dataframe" class="nav-link" data-scroll-target="#estructura-de-un-dataframe"><span class="toc-section-number">F.2</span>  Estructura de un dataframe</a></li>
-  <li><a href="#funciones-básicas-dplyr" id="toc-funciones-básicas-dplyr" class="nav-link" data-scroll-target="#funciones-básicas-dplyr"><span class="toc-section-number">F.3</span>  Funciones básicas <code>dplyr</code></a>
+  <li><a href="#operaciones-básicas-en-r" id="toc-operaciones-básicas-en-r" class="nav-link" data-scroll-target="#operaciones-básicas-en-r"><span class="header-section-number">D.1</span> Operaciones Básicas en R</a>
   <ul class="collapse">
-  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select"><span class="toc-section-number">F.3.1</span>  Select</a></li>
-  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="toc-section-number">F.3.2</span>  Filter</a></li>
+  <li><a href="#operaciones-matemáticas" id="toc-operaciones-matemáticas" class="nav-link" data-scroll-target="#operaciones-matemáticas"><span class="header-section-number">D.1.1</span> Operaciones Matemáticas</a></li>
+  <li><a href="#funciones-útiles-de-propósito-general" id="toc-funciones-útiles-de-propósito-general" class="nav-link" data-scroll-target="#funciones-útiles-de-propósito-general"><span class="header-section-number">D.1.2</span> Funciones Útiles de propósito general</a></li>
   </ul></li>
-  <li><a href="#resúmenes-estadísticos-con-dplyr" id="toc-resúmenes-estadísticos-con-dplyr" class="nav-link" data-scroll-target="#resúmenes-estadísticos-con-dplyr"><span class="toc-section-number">F.4</span>  Resúmenes Estadísticos con <code>dplyr</code></a></li>
-  <li><a href="#visualización-de-variables" id="toc-visualización-de-variables" class="nav-link" data-scroll-target="#visualización-de-variables"><span class="toc-section-number">F.5</span>  Visualización de Variables</a>
+  <li><a href="#operaciones-lógicas" id="toc-operaciones-lógicas" class="nav-link" data-scroll-target="#operaciones-lógicas"><span class="header-section-number">D.2</span> Operaciones Lógicas</a>
   <ul class="collapse">
-  <li><a href="#función-plot" id="toc-función-plot" class="nav-link" data-scroll-target="#función-plot"><span class="toc-section-number">F.5.1</span>  Función Plot</a></li>
-  <li><a href="#package-ggplot2" id="toc-package-ggplot2" class="nav-link" data-scroll-target="#package-ggplot2"><span class="toc-section-number">F.5.2</span>  Package ggplot2</a></li>
+  <li><a href="#operador-de-igualdad" id="toc-operador-de-igualdad" class="nav-link" data-scroll-target="#operador-de-igualdad"><span class="header-section-number">D.2.1</span> Operador de igualdad: (==)</a></li>
+  <li><a href="#operador-de-desigualdad" id="toc-operador-de-desigualdad" class="nav-link" data-scroll-target="#operador-de-desigualdad"><span class="header-section-number">D.2.2</span> Operador de desigualdad: (!=)</a></li>
+  <li><a href="#operador-de-mayor-que" id="toc-operador-de-mayor-que" class="nav-link" data-scroll-target="#operador-de-mayor-que"><span class="header-section-number">D.2.3</span> Operador de mayor que: (&gt;)</a></li>
+  <li><a href="#operador-de-menor-que" id="toc-operador-de-menor-que" class="nav-link" data-scroll-target="#operador-de-menor-que"><span class="header-section-number">D.2.4</span> Operador de menor que: (&lt;)</a></li>
+  <li><a href="#operador-de-mayor-o-igual-que" id="toc-operador-de-mayor-o-igual-que" class="nav-link" data-scroll-target="#operador-de-mayor-o-igual-que"><span class="header-section-number">D.2.5</span> Operador de mayor o igual que: (&gt;=)</a></li>
+  <li><a href="#operador-de-menor-o-igual-que" id="toc-operador-de-menor-o-igual-que" class="nav-link" data-scroll-target="#operador-de-menor-o-igual-que"><span class="header-section-number">D.2.6</span> Operador de menor o igual que: (&lt;=)</a></li>
+  <li><a href="#operador-lógico-and" id="toc-operador-lógico-and" class="nav-link" data-scroll-target="#operador-lógico-and"><span class="header-section-number">D.2.7</span> Operador lógico AND: (&amp;)</a></li>
+  <li><a href="#operador-lógico-or" id="toc-operador-lógico-or" class="nav-link" data-scroll-target="#operador-lógico-or"><span class="header-section-number">D.2.8</span> Operador lógico OR: (|)</a></li>
+  </ul></li>
+  <li><a href="#crear-funciones-propias" id="toc-crear-funciones-propias" class="nav-link" data-scroll-target="#crear-funciones-propias"><span class="header-section-number">D.3</span> Crear Funciones Propias</a></li>
+  </ul></li>
+  <li><a href="#estructura-de-control-en-r" id="toc-estructura-de-control-en-r" class="nav-link" data-scroll-target="#estructura-de-control-en-r"><span class="header-section-number">E</span> Estructura de Control en R</a>
+  <ul class="collapse">
+  <li><a href="#estructuras-condicionales" id="toc-estructuras-condicionales" class="nav-link" data-scroll-target="#estructuras-condicionales"><span class="header-section-number">E.1</span> Estructuras condicionales</a></li>
+  <li><a href="#estructuras-de-bucles" id="toc-estructuras-de-bucles" class="nav-link" data-scroll-target="#estructuras-de-bucles"><span class="header-section-number">E.2</span> Estructuras de bucles</a>
+  <ul class="collapse">
+  <li><a href="#estructura-de-bucle-for" id="toc-estructura-de-bucle-for" class="nav-link" data-scroll-target="#estructura-de-bucle-for"><span class="header-section-number">E.2.1</span> Estructura de bucle “<code>for</code>”:</a></li>
+  <li><a href="#estructura-de-bucle-while" id="toc-estructura-de-bucle-while" class="nav-link" data-scroll-target="#estructura-de-bucle-while"><span class="header-section-number">E.2.2</span> Estructura de bucle “while”:</a></li>
+  <li><a href="#estructura-de-bucle-repeat" id="toc-estructura-de-bucle-repeat" class="nav-link" data-scroll-target="#estructura-de-bucle-repeat"><span class="header-section-number">E.2.3</span> Estructura de bucle “repeat”:</a></li>
+  </ul></li>
+  <li><a href="#estructuras-de-control-de-flujo" id="toc-estructuras-de-control-de-flujo" class="nav-link" data-scroll-target="#estructuras-de-control-de-flujo"><span class="header-section-number">E.3</span> Estructuras de control de flujo</a>
+  <ul class="collapse">
+  <li><a href="#estructuras-de-control-next" id="toc-estructuras-de-control-next" class="nav-link" data-scroll-target="#estructuras-de-control-next"><span class="header-section-number">E.3.1</span> Estructuras de control “next”:</a></li>
+  <li><a href="#estructuras-de-control-break" id="toc-estructuras-de-control-break" class="nav-link" data-scroll-target="#estructuras-de-control-break"><span class="header-section-number">E.3.2</span> Estructuras de control “break”:</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#objetos-espaciales-en-r" id="toc-objetos-espaciales-en-r" class="nav-link" data-scroll-target="#objetos-espaciales-en-r"><span class="toc-section-number">G</span>  Objetos Espaciales en R</a>
+  <li><a href="#tidyverse-en-r" id="toc-tidyverse-en-r" class="nav-link" data-scroll-target="#tidyverse-en-r"><span class="header-section-number">F</span> Tidyverse en R</a>
   <ul class="collapse">
-  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="toc-section-number">G.1</span>  Introducción</a></li>
-  <li><a href="#lectura-de-insumos-espaciales" id="toc-lectura-de-insumos-espaciales" class="nav-link" data-scroll-target="#lectura-de-insumos-espaciales"><span class="toc-section-number">G.2</span>  Lectura de Insumos Espaciales</a></li>
-  <li><a href="#transformar-a-objeto-sf-simple-features" id="toc-transformar-a-objeto-sf-simple-features" class="nav-link" data-scroll-target="#transformar-a-objeto-sf-simple-features"><span class="toc-section-number">G.3</span>  Transformar a objeto sf (simple features)</a></li>
-  <li><a href="#filtros-espaciales-por-data" id="toc-filtros-espaciales-por-data" class="nav-link" data-scroll-target="#filtros-espaciales-por-data"><span class="toc-section-number">G.4</span>  Filtros espaciales por data</a></li>
-  <li><a href="#visualización-cartográficas" id="toc-visualización-cartográficas" class="nav-link" data-scroll-target="#visualización-cartográficas"><span class="toc-section-number">G.5</span>  Visualización Cartográficas</a>
+  <li><a href="#introducción-a-tidyverse" id="toc-introducción-a-tidyverse" class="nav-link" data-scroll-target="#introducción-a-tidyverse"><span class="header-section-number">F.1</span> Introducción a Tidyverse</a></li>
+  <li><a href="#estructura-de-un-dataframe" id="toc-estructura-de-un-dataframe" class="nav-link" data-scroll-target="#estructura-de-un-dataframe"><span class="header-section-number">F.2</span> Estructura de un dataframe</a></li>
+  <li><a href="#funciones-básicas-dplyr" id="toc-funciones-básicas-dplyr" class="nav-link" data-scroll-target="#funciones-básicas-dplyr"><span class="header-section-number">F.3</span> Funciones básicas <code>dplyr</code></a>
   <ul class="collapse">
-  <li><a href="#visualización-estática-simple" id="toc-visualización-estática-simple" class="nav-link" data-scroll-target="#visualización-estática-simple"><span class="toc-section-number">G.5.1</span>  Visualización estática Simple</a></li>
-  <li><a href="#visualización-estática-con-ggplot2" id="toc-visualización-estática-con-ggplot2" class="nav-link" data-scroll-target="#visualización-estática-con-ggplot2"><span class="toc-section-number">G.5.2</span>  Visualización estática con <code>ggplot2</code></a></li>
-  <li><a href="#visualización-dinámica-con-mapview" id="toc-visualización-dinámica-con-mapview" class="nav-link" data-scroll-target="#visualización-dinámica-con-mapview"><span class="toc-section-number">G.5.3</span>  Visualización Dinámica con <code>mapview</code></a></li>
+  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select"><span class="header-section-number">F.3.1</span> Select</a></li>
+  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="header-section-number">F.3.2</span> Filter</a></li>
   </ul></li>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="toc-section-number">G.6</span>  Referencias:</a></li>
+  <li><a href="#resúmenes-estadísticos-con-dplyr" id="toc-resúmenes-estadísticos-con-dplyr" class="nav-link" data-scroll-target="#resúmenes-estadísticos-con-dplyr"><span class="header-section-number">F.4</span> Resúmenes Estadísticos con <code>dplyr</code></a></li>
+  <li><a href="#visualización-de-variables" id="toc-visualización-de-variables" class="nav-link" data-scroll-target="#visualización-de-variables"><span class="header-section-number">F.5</span> Visualización de Variables</a>
+  <ul class="collapse">
+  <li><a href="#función-plot" id="toc-función-plot" class="nav-link" data-scroll-target="#función-plot"><span class="header-section-number">F.5.1</span> Función Plot</a></li>
+  <li><a href="#package-ggplot2" id="toc-package-ggplot2" class="nav-link" data-scroll-target="#package-ggplot2"><span class="header-section-number">F.5.2</span> Package ggplot2</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#objetos-espaciales-en-r" id="toc-objetos-espaciales-en-r" class="nav-link" data-scroll-target="#objetos-espaciales-en-r"><span class="header-section-number">G</span> Objetos Espaciales en R</a>
+  <ul class="collapse">
+  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="header-section-number">G.1</span> Introducción</a></li>
+  <li><a href="#lectura-de-insumos-espaciales" id="toc-lectura-de-insumos-espaciales" class="nav-link" data-scroll-target="#lectura-de-insumos-espaciales"><span class="header-section-number">G.2</span> Lectura de Insumos Espaciales</a></li>
+  <li><a href="#transformar-a-objeto-sf-simple-features" id="toc-transformar-a-objeto-sf-simple-features" class="nav-link" data-scroll-target="#transformar-a-objeto-sf-simple-features"><span class="header-section-number">G.3</span> Transformar a objeto sf (simple features)</a></li>
+  <li><a href="#filtros-espaciales-por-data" id="toc-filtros-espaciales-por-data" class="nav-link" data-scroll-target="#filtros-espaciales-por-data"><span class="header-section-number">G.4</span> Filtros espaciales por data</a></li>
+  <li><a href="#visualización-cartográficas" id="toc-visualización-cartográficas" class="nav-link" data-scroll-target="#visualización-cartográficas"><span class="header-section-number">G.5</span> Visualización Cartográficas</a>
+  <ul class="collapse">
+  <li><a href="#visualización-estática-simple" id="toc-visualización-estática-simple" class="nav-link" data-scroll-target="#visualización-estática-simple"><span class="header-section-number">G.5.1</span> Visualización estática Simple</a></li>
+  <li><a href="#visualización-estática-con-ggplot2" id="toc-visualización-estática-con-ggplot2" class="nav-link" data-scroll-target="#visualización-estática-con-ggplot2"><span class="header-section-number">G.5.2</span> Visualización estática con <code>ggplot2</code></a></li>
+  <li><a href="#visualización-dinámica-con-mapview" id="toc-visualización-dinámica-con-mapview" class="nav-link" data-scroll-target="#visualización-dinámica-con-mapview"><span class="header-section-number">G.5.3</span> Visualización Dinámica con <code>mapview</code></a></li>
+  </ul></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">G.6</span> Referencias:</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -350,7 +338,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Appendix B — R Project</h1>
+<h1 class="title">Appendix B — R Project</h1>
 <p class="subtitle lead">Repaso de Lenguaje de Programación</p>
 </div>
 
@@ -573,19 +561,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ru <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">10</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ru</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 7.789795 1.230997 3.141904 3.033840 3.515151 6.165930 4.893382 9.475875
-  [9] 2.146112 5.361448 3.118187 5.322506 1.004937 1.898853 6.847682 8.868769
- [17] 6.285403 1.029803 4.327408 3.158340 3.792705 8.958432 6.916715 6.995500
- [25] 1.099301 7.933682 7.238016 1.251594 9.574846 6.723350 1.691004 8.409113
- [33] 6.399222 5.963985 5.448694 6.581360 4.016276 4.751593 4.612125 2.388988
- [41] 4.578813 5.782829 5.436341 2.428298 7.911605 4.750576 5.836098 3.852289
- [49] 1.008394 2.515685 1.366294 3.099277 2.028341 4.552943 1.114942 7.972630
- [57] 1.700335 3.039007 9.479471 6.862038 6.016655 3.305314 7.823365 3.099120
- [65] 6.555775 9.954988 2.582240 5.570884 4.248454 2.816736 9.112943 1.538263
- [73] 1.017877 7.173689 4.402719 8.566602 4.432907 8.845108 3.268122 6.142515
- [81] 4.118898 7.706965 6.432938 8.936759 8.734696 3.210559 8.303611 7.519686
- [89] 6.990843 5.251342 6.237485 7.045757 4.212056 4.442450 3.093600 4.489485
- [97] 2.548170 5.491185 7.812909 6.360682</code></pre>
+<pre><code>  [1] 8.834174 9.750921 6.684917 8.238500 1.493514 5.501181 7.224596 8.123748
+  [9] 5.331022 9.602950 8.427315 2.884876 4.372013 2.138077 4.974699 7.998430
+ [17] 3.596399 3.300196 6.181258 5.952859 5.429266 2.255864 1.509249 5.191106
+ [25] 2.048137 9.067650 8.398832 5.173501 4.958047 5.810671 4.148393 2.368973
+ [33] 3.839667 5.159625 2.994212 4.294059 1.585608 2.187365 4.627233 5.001911
+ [41] 9.684054 1.093166 2.815844 6.047658 3.368533 8.450630 3.527048 3.562598
+ [49] 7.472477 2.310931 7.829555 3.647495 2.373842 4.413913 7.251515 4.402401
+ [57] 1.150746 5.708177 7.759068 3.597288 7.117296 6.230237 8.947581 2.388901
+ [65] 7.594191 6.984614 5.713209 4.939495 8.634993 9.991530 2.714251 1.363432
+ [73] 4.240802 4.227235 8.361757 7.743768 2.830194 5.340305 7.404776 2.370838
+ [81] 6.504993 3.593945 2.649272 5.297901 2.462591 6.598782 7.594155 1.167980
+ [89] 9.689278 2.036444 3.783589 4.392033 9.578047 5.191343 8.993747 7.597751
+ [97] 3.468525 2.741396 1.768802 5.142257</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
@@ -604,7 +592,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample.int</span>(<span class="at">n =</span> <span class="dv">6</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 6 2 5 2 6 5 1 6 1 3</code></pre>
+<pre><code> [1] 4 6 6 2 5 1 4 2 3 4</code></pre>
 </div>
 </div>
 </section>
@@ -1004,63 +992,63 @@ Como inspeccionar una lista con Rstudio
 <p>A continuación se presentan los operadores lógicos en R:</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class="table table-striped table-hover table-condensed" style="font-size: 16px; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> Operador </th>
-   <th style="text-align:left;"> Significado </th>
-   <th style="text-align:left;"> Ejemplo </th>
-  </tr>
- </thead>
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Operador</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Significado</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Ejemplo</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> == </td>
-   <td style="text-align:left;"> Igual a </td>
-   <td style="text-align:left;"> 2 == 2 (TRUE) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> != </td>
-   <td style="text-align:left;"> Diferente a </td>
-   <td style="text-align:left;"> 2 != 3 (TRUE) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> &gt; </td>
-   <td style="text-align:left;"> Mayor que </td>
-   <td style="text-align:left;"> 3 &gt; 2 (TRUE) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> &lt; </td>
-   <td style="text-align:left;"> Menor que </td>
-   <td style="text-align:left;"> 2 &lt; 3 (TRUE) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> &gt;= </td>
-   <td style="text-align:left;"> Mayor o igual que </td>
-   <td style="text-align:left;"> 3 &gt;= 2 (TRUE) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> &lt;= </td>
-   <td style="text-align:left;"> Menor o igual que </td>
-   <td style="text-align:left;"> 2 &lt;= 3 (TRUE) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> &amp; </td>
-   <td style="text-align:left;"> Operador lógico AND </td>
-   <td style="text-align:left;"> 2 &lt; 3 &amp; 3 &gt; 1 (TRUE) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> | </td>
-   <td style="text-align:left;"> Operador lógico OR </td>
-   <td style="text-align:left;"> 2 &lt; 3 | 3 &lt; 1 (TRUE) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> ! </td>
-   <td style="text-align:left;"> Operador lógico NOT </td>
-   <td style="text-align:left;"> !(2 == 3) (TRUE) </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">==</td>
+<td style="text-align: left;">Igual a</td>
+<td style="text-align: left;">2 == 2 (TRUE)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">!=</td>
+<td style="text-align: left;">Diferente a</td>
+<td style="text-align: left;">2 != 3 (TRUE)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&gt;</td>
+<td style="text-align: left;">Mayor que</td>
+<td style="text-align: left;">3 &gt; 2 (TRUE)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&lt;</td>
+<td style="text-align: left;">Menor que</td>
+<td style="text-align: left;">2 &lt; 3 (TRUE)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&gt;=</td>
+<td style="text-align: left;">Mayor o igual que</td>
+<td style="text-align: left;">3 &gt;= 2 (TRUE)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&lt;=</td>
+<td style="text-align: left;">Menor o igual que</td>
+<td style="text-align: left;">2 &lt;= 3 (TRUE)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&amp;</td>
+<td style="text-align: left;">Operador lógico AND</td>
+<td style="text-align: left;">2 &lt; 3 &amp; 3 &gt; 1 (TRUE)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">|</td>
+<td style="text-align: left;">Operador lógico OR</td>
+<td style="text-align: left;">2 &lt; 3 | 3 &lt; 1 (TRUE)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">!</td>
+<td style="text-align: left;">Operador lógico NOT</td>
+<td style="text-align: left;">!(2 == 3) (TRUE)</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -1223,12 +1211,12 @@ Como inspeccionar una lista con Rstudio
 <p><span class="math display">c^2 = {a^2}+{b^2}</span></p>
 <p>Por lo cual:</p>
 <p><span class="math display">c = \sqrt{{a^2}+{b^2}}</span></p>
-<div class="callout-tip callout callout-style-simple callout-captioned">
+<div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Ayuda
 </div>
 </div>
@@ -1390,10 +1378,10 @@ h=<em>?</em>, a = 3, b = 4</p>
 <span id="cb152-6"><a href="#cb152-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(promedio)</span>
 <span id="cb152-7"><a href="#cb152-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.08018696
-[1] -0.08661908
-[1] -0.0138252
-[1] -0.139204</code></pre>
+<pre><code>[1] 0.1501419
+[1] 0.1873907
+[1] 0.1120926
+[1] 0.3773029</code></pre>
 </div>
 </div>
 </section>
@@ -1587,43 +1575,43 @@ h=<em>?</em>, a = 3, b = 4</p>
 <p><code>filter</code>: Operadores Lógicos</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:center;"> Operador </th>
-   <th style="text-align:center;"> Comparación </th>
-   <th style="text-align:center;"> Ejemplo </th>
-   <th style="text-align:center;"> Resultado </th>
-  </tr>
- </thead>
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Operador</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Comparación</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Ejemplo</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Resultado</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:center;"> x | y </td>
-   <td style="text-align:center;"> x Ó y es verdadero </td>
-   <td style="text-align:center;"> TRUE | FALSE </td>
-   <td style="text-align:center;"> TRUE </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> x &amp; y </td>
-   <td style="text-align:center;"> x Y y son verdaderos </td>
-   <td style="text-align:center;"> TRUE &amp; FALSE </td>
-   <td style="text-align:center;"> FALSE </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> !x </td>
-   <td style="text-align:center;"> x no es verdadero (negación) </td>
-   <td style="text-align:center;"> !TRUE </td>
-   <td style="text-align:center;"> FALSE </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> isTRUE(x) </td>
-   <td style="text-align:center;"> x es verdadero (afirmación) </td>
-   <td style="text-align:center;"> isTRUE(TRUE) </td>
-   <td style="text-align:center;"> TRUE </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: center;">x | y</td>
+<td style="text-align: center;">x Ó y es verdadero</td>
+<td style="text-align: center;">TRUE | FALSE</td>
+<td style="text-align: center;">TRUE</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">x &amp; y</td>
+<td style="text-align: center;">x Y y son verdaderos</td>
+<td style="text-align: center;">TRUE &amp; FALSE</td>
+<td style="text-align: center;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">!x</td>
+<td style="text-align: center;">x no es verdadero (negación)</td>
+<td style="text-align: center;">!TRUE</td>
+<td style="text-align: center;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">isTRUE(x)</td>
+<td style="text-align: center;">x es verdadero (afirmación)</td>
+<td style="text-align: center;">isTRUE(TRUE)</td>
+<td style="text-align: center;">TRUE</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -1686,12 +1674,12 @@ h=<em>?</em>, a = 3, b = 4</p>
 <li>Contabilizar cuantos metros cuadrados de Comercio hay por cada comuna rdenar de mayor a menor.</li>
 <li>Crear tabla con las 10 comunas que tienen mayor densisdad de Comercio</li>
 </ul>
-<div class="callout-tip callout callout-style-simple callout-captioned">
+<div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Densidad de comercio
 </div>
 </div>
@@ -1921,9 +1909,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1988,6 +1990,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -2040,6 +2128,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">Copyright 2023, Denis Berroeta</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 

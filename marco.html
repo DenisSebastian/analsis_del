@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -57,7 +57,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -69,11 +70,16 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Marco de Referencia</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./marco.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Marco de Referencia</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -81,70 +87,80 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Análisis Criminológico Espacial</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Introducción</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./marco.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Marco de Referencia</span></a>
+  <a href="./marco.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Marco de Referencia</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Limpieza de Datos</span></a>
+  <a href="./datos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Limpieza de Datos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./panel.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datos de Panel</span></a>
+  <a href="./panel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datos de Panel</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resumen.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Resumen</span></a>
+  <a href="./resumen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Resumen</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./delta.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Delta</span></a>
+  <a href="./delta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Delta</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./crime_f.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Funciones Generales</span></a>
+  <a href="./crime_f.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Funciones Generales</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./r_project.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">R Project</span></a>
+  <a href="./r_project.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">R Project</span></span></a>
   </div>
 </li>
       </ul>
@@ -152,20 +168,21 @@ ul.task-list li input[type="checkbox"] {
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#corrientes-pincipales-de-la-criminología" id="toc-corrientes-pincipales-de-la-criminología" class="nav-link active" data-scroll-target="#corrientes-pincipales-de-la-criminología"><span class="toc-section-number">1.1</span>  Corrientes Pincipales de la Criminología</a></li>
-  <li><a href="#integración-de-teorías-criminológica" id="toc-integración-de-teorías-criminológica" class="nav-link" data-scroll-target="#integración-de-teorías-criminológica"><span class="toc-section-number">1.2</span>  Integración de Teorías Criminológica</a></li>
-  <li><a href="#ley-de-la-concetración-espacial-del-crimen" id="toc-ley-de-la-concetración-espacial-del-crimen" class="nav-link" data-scroll-target="#ley-de-la-concetración-espacial-del-crimen"><span class="toc-section-number">1.3</span>  Ley de la Concetración Espacial del Crimen</a></li>
-  <li><a href="#teorías-de-oportunidad-del-crimen" id="toc-teorías-de-oportunidad-del-crimen" class="nav-link" data-scroll-target="#teorías-de-oportunidad-del-crimen"><span class="toc-section-number">1.4</span>  Teorías de Oportunidad del Crimen</a></li>
-  <li><a href="#teoría-de-desorganización-social" id="toc-teoría-de-desorganización-social" class="nav-link" data-scroll-target="#teoría-de-desorganización-social"><span class="toc-section-number">1.5</span>  Teoría de Desorganización Social</a></li>
-  <li><a href="#equilibrio-criminal-inestable-en-américa-latina" id="toc-equilibrio-criminal-inestable-en-américa-latina" class="nav-link" data-scroll-target="#equilibrio-criminal-inestable-en-américa-latina"><span class="toc-section-number">1.6</span>  Equilibrio Criminal Inestable en América Latina</a></li>
-  <li><a href="#evolución-de-las-manifestaciones-territoriales-de-criminalidad-en-chile" id="toc-evolución-de-las-manifestaciones-territoriales-de-criminalidad-en-chile" class="nav-link" data-scroll-target="#evolución-de-las-manifestaciones-territoriales-de-criminalidad-en-chile"><span class="toc-section-number">1.7</span>  Evolución de las manifestaciones territoriales de criminalidad en Chile:</a></li>
-  <li><a href="#autoría" id="toc-autoría" class="nav-link" data-scroll-target="#autoría"><span class="toc-section-number">1.8</span>  Autoría</a></li>
+  <li><a href="#corrientes-pincipales-de-la-criminología" id="toc-corrientes-pincipales-de-la-criminología" class="nav-link active" data-scroll-target="#corrientes-pincipales-de-la-criminología"><span class="header-section-number">1.1</span> Corrientes Pincipales de la Criminología</a></li>
+  <li><a href="#integración-de-teorías-criminológica" id="toc-integración-de-teorías-criminológica" class="nav-link" data-scroll-target="#integración-de-teorías-criminológica"><span class="header-section-number">1.2</span> Integración de Teorías Criminológica</a></li>
+  <li><a href="#ley-de-la-concetración-espacial-del-crimen" id="toc-ley-de-la-concetración-espacial-del-crimen" class="nav-link" data-scroll-target="#ley-de-la-concetración-espacial-del-crimen"><span class="header-section-number">1.3</span> Ley de la Concetración Espacial del Crimen</a></li>
+  <li><a href="#teorías-de-oportunidad-del-crimen" id="toc-teorías-de-oportunidad-del-crimen" class="nav-link" data-scroll-target="#teorías-de-oportunidad-del-crimen"><span class="header-section-number">1.4</span> Teorías de Oportunidad del Crimen</a></li>
+  <li><a href="#teoría-de-desorganización-social" id="toc-teoría-de-desorganización-social" class="nav-link" data-scroll-target="#teoría-de-desorganización-social"><span class="header-section-number">1.5</span> Teoría de Desorganización Social</a></li>
+  <li><a href="#equilibrio-criminal-inestable-en-américa-latina" id="toc-equilibrio-criminal-inestable-en-américa-latina" class="nav-link" data-scroll-target="#equilibrio-criminal-inestable-en-américa-latina"><span class="header-section-number">1.6</span> Equilibrio Criminal Inestable en América Latina</a></li>
+  <li><a href="#evolución-de-las-manifestaciones-territoriales-de-criminalidad-en-chile" id="toc-evolución-de-las-manifestaciones-territoriales-de-criminalidad-en-chile" class="nav-link" data-scroll-target="#evolución-de-las-manifestaciones-territoriales-de-criminalidad-en-chile"><span class="header-section-number">1.7</span> Evolución de las manifestaciones territoriales de criminalidad en Chile:</a></li>
+  <li><a href="#autoría" id="toc-autoría" class="nav-link" data-scroll-target="#autoría"><span class="header-section-number">1.8</span> Autoría</a></li>
   </ul>
 </nav>
     </div>
@@ -174,7 +191,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Marco de Referencia</span></h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Marco de Referencia</span></h1>
 </div>
 
 
@@ -206,7 +223,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="fig-integracion" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/int_teorias.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;1.1: Integración de Teorías Criminológica</figcaption><p></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;1.1: Integración de Teorías Criminológica</figcaption>
 </figure>
 </div>
 </section>
@@ -216,7 +233,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="fig-concentracion" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/conce_sp.png" class="img-fluid figure-img" width="450"></p>
-<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;1.2: Lee, Eck, Soo &amp; Martinez, 2017</figcaption><p></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;1.2: Lee, Eck, Soo &amp; Martinez, 2017</figcaption>
 </figure>
 </div>
 <p>Esto se ha confirmado tanto en países occidentales industrializados (Weisbrud, 2015) como en América Latina (Chainey et al., 2019; Jaitman y Azenjam, 2016; Ortega et al, 2015).</p>
@@ -227,7 +244,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="fig-concentracion" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/tar.png" class="img-fluid figure-img" width="250"></p>
-<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;1.3: Teoría de actividades rutinarias (Cohen y Felson, 1979)</figcaption><p></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;1.3: Teoría de actividades rutinarias (Cohen y Felson, 1979)</figcaption>
 </figure>
 </div>
 <p>Relaciones espaciales complejas entre:</p>
@@ -247,7 +264,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="fig-concentracion" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/tas.png" class="img-fluid figure-img" width="450"></p>
-<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;1.4: Teoría de Desorganización Social, Sampson, 2012</figcaption><p></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;1.4: Teoría de Desorganización Social, Sampson, 2012</figcaption>
 </figure>
 </div>
 <p>El capital material, social y cultural está desigualmente distribuido entre barrios segregados de alto y bajo nivel socioeconómico</p>
@@ -259,7 +276,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="fig-concentracion" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/bergman.png" class="img-fluid figure-img" width="800"></p>
-<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;1.5: Bergman, 2018, “More Money More Crime”</figcaption><p></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;1.5: Bergman, 2018, “More Money More Crime”</figcaption>
 </figure>
 </div>
 </section>
@@ -284,13 +301,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="fig-causalidad" class="quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="images/causalidad.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption margin-caption">Figure&nbsp;1.6: Sendero hipotético de diversificación de delitos hacia un equilibrio de alta criminalidad</figcaption><p></p>
+<figcaption class="figure-caption margin-caption">Figure&nbsp;1.6: Sendero hipotético de diversificación de delitos hacia un equilibrio de alta criminalidad</figcaption>
 </figure>
 </div>
 </section>
 <section id="autoría" class="level2" data-number="1.8">
 <h2 data-number="1.8" class="anchored" data-anchor-id="autoría"><span class="header-section-number">1.8</span> Autoría</h2>
-<p><a href="https://designlab.uai.cl/profesor/matias-garreton/">Matías Garretón</a>, Director de Investigación en <a href="https://designlab.uai.cl">Design Lab UAI</a>, Investigador asociado <a href="https://coes.cl">COES</a>, email: matias.garreton@uai.cl</p>
+<p><a href="https://designlab.uai.cl/profesor/matias-garreton/">Matías Garretón</a>, Director de Investigación en Design Lab UAI, Investigador asociado COES,<br>
+email: <a href="mailto:matias.garreton@uai.cl" class="email">matias.garreton@uai.cl</a></p>
 
 
 </section>
@@ -323,9 +341,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -390,6 +422,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -445,6 +563,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">Copyright 2023, Denis Berroeta</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
   </div>
 </footer>
 
