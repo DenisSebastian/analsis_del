@@ -1,4 +1,16 @@
 # References {.unnumbered}
 
+
+## Bibliográficas
+
+ En proceso.
+ 
 ::: {#refs}
 :::
+
+
+## Enlaces de Apoyo
+
+- [R para Ciencia de Datos](https://es.r4ds.hadley.nz)
+- [RStudio para Estadística Descriptiva en Ciencias Sociales](https://bookdown.org/gboccardo/manual-ED-UCH/)
+- <https://bookdown.org/jboscomendoza/r-principiantes4/estructuras-de-control.html>

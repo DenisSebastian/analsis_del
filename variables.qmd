@@ -1,0 +1,224 @@
+# Variables en R
+
+## Tipos de Objetos en R
+
+Los Datos en R se pueden clasificar por su dimensiones y los tipos de Datos que permiten almacenar, como se muestra en la siguiente tabla:
+
+| Dimensiones | Homogéneos    | Heterogéneos |
+|-------------|---------------|--------------|
+| 1d          | Atomic vector | List         |
+| 2d          | Matrix        | Data frame   |
+| nd          | Array         |              |
+
+Fuente: [http://adv-r.had.co.nz/Data-structures.html](http://adv-r.had.co.nz/Data-structures.html)
+
+
+
+R nos permite definir variables que pueden ser luego usadas en las distintas operaciones. El lenguaje no solo permite definir escalares (variable de un numero), si no también variables que sean un conjunto de numero o caracteres ordenados.
+
+
+### Variables Numéricas
+```{r}
+# La asignación en R son válidos 2 métodos '<-' o '='
+x <- 7 # Definir variable (escalar) x que sea igual a 7
+x # Mostrar que es x
+
+y <- 3 + 2 * x # Crear y como funcion de x 
+y
+class(y)
+```
+
+
+Números Random con decimales
+
+```{r}
+ru <- runif(n = 100, min = 1, max = 10)
+ru
+```
+
+
+```{r fig.width=8, fig.align='center'}
+hist(ru, breaks = 20, col = "orange", border = "gray60", 
+     main = "Histograma de valores Random")
+```
+
+
+Números Random Enteros
+
+Simular los lanzamientos de un dado
+```{r}
+sample.int(n = 6, size = 10, replace = T)
+
+```
+
+
+### Variables de Caracter {#sec-string}
+
+
+```{r}
+ch <- "Chile" # Definir variable (objeto) ch que sea la palabra "Chile"
+sn <- "Santiago"
+ch # Mostrar ch
+sn
+```
+
+
+Unir variables de texto con  `paste()`
+
+```{r}
+ch <- "Chile" # Definir variable (objeto) ch que sea la palabra "Chile"
+sn <- "Santiago"
+union <- paste(sn,ch, sep = ", ")
+union
+
+```
+
+
+Utilizar `paste0()`
+```{r}
+union <- paste("Provincia de ", sn,ch, sep = ", ")
+union
+
+union0 <- paste0("Provincia de ", sn, ", ", ch)
+union0
+```
+
+
+Buscar y reemplazar con `gsub`
+
+```{r}
+av <- "Av. Apoquindo"
+comuna <- "comuna de Las Condes"
+calle <- paste(av, comuna, union0, sep = ", ")
+calle
+# reemplazar Av. por Avenida
+calle_new <- gsub(pattern = "Av.", replacement = "Avenida", x = calle)
+calle_new
+```
+
+
+
+## Estructuras de Datos
+
+Las variables pueden ser un conjunto de números y caracteres ordenados de varias maneras. El orden que se les da depende de lo que queremos lograr con estos. 
+
+* Vector
+* Matrices
+* Dataframes
+* Factores
+* Listas
+
+
+### Vectores
+
+**Vector** Cadenas unidimensionales (es decir una sola columna o fila) de un tipo único de valores (numéricos, caracteres, etc.)
+
+```{r }
+vec <-  c(4, 3, 1, 5, 8, 16)
+vec
+class(vec)
+str(vec)
+```
+
+
+Podemos seleccionar parte del vector: 
+
+```{r }
+# EL primer índice en R es 1 (en otros lenguajes de programación es 0)
+vec[3]
+
+```
+
+La selección también puede ser hecha con una condición, de tal manera que solo seleccione aquella parte del vector que cumple con la condición.
+
+**Mayor a:**
+```{r }
+vec[vec >= 4]
+```
+
+
+**Contenido en:**
+```{r }
+vec[vec %in% c(3, 8, 7, 29)]
+```
+
+**Negación de la condición:**
+
+```{r }
+vec[!vec <= 3]
+```
+También podemos realizar operaciones matemáticas simples aplicadas al vector, por ejemplo una suma:
+```{r }
+vec2  <-  c(7, 10, 1)
+vec + vec2
+```
+
+
+### Listas
+
+Son estructuras eficientes y flexibles, que permiten combinar distintas clases de elementos : 
+```{r }
+lista <-  list(1, 2, 3, "cosa", x, y)
+lista
+str(lista)
+```
+
+
+```{r }
+#Tambien se puede seleccionar parte de una lista, usando el doble corchete:
+lista[[3]]
+
+```
+
+Como inspeccionar una lista con Rstudio
+<center>![](images/rstudio_environment_list.gif){width=90%}</center>
+
+### Matrices
+
+Son estructuras de datos con 2 dimensiones, horizontal y la vertical (filas y columnas). Podemos construirlas usando la función "matrix", con un vector inicial y sus dimensiones:
+
+```{r }
+n <- matrix(c(1.3, 2.8, 3.5, 6.4, 5.3, 6.2, 7, 4.5, 2.4, 6.3, 5.6, 5.3, 6.6, 7, 4.3),
+  nrow = 5, ncol = 3, byrow = TRUE)
+n
+```
+
+
+La matriz tiene 2 dimensiones, por lo que para seleccionar partes de ella es necesario declarar dos dimensiones separadas por una coma. A la izquierda van las filas y a la derecha las columnas. Un valor vacío indica que se seleccionan todos los valores posibles.
+
+```{r }
+n[1,2]
+```
+
+```{r }
+n[,3]
+```
+
+###  Dataframes
+
+Estructura mas clásica de datos, es una matriz pero con mas atributos como nombres de columna y/o fila. Es lo mas similar en R a una tabla excel o la tabla de atributos. La manera mas simple de crear un dataframe es a partir de una matriz usando la función as.data.frame() :
+
+```{r }
+df<- as.data.frame(n)
+df
+```
+
+
+Podemos asignar nombres a las columnas del dataframe
+```{r }
+names(df)<- c("control_1","control_2","examen")
+df
+```
+
+Y a las filas del dataframe
+```{r }
+df$alumno <- c("Sofia","Tomas","Luciano","Julian","Gabriela")
+df
+```
+
+
+También podemos realizar operaciones entre vectores del dataframe:
+```{r }
+df$promedio_final <-  0.3*df$control_1 + 0.3*df$control_2 + 0.4*df$examen
+df
+```

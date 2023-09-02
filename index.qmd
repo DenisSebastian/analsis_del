@@ -1,3 +1,17 @@
 # Introducción {.unnumbered}
 
-Este libro tien por objetivo generar capacitar a la Subsecretaría de Prevención del Delito.
+Este libro tiene como objetivo apoyar la capacitación a los integrantes de la Subsecretaría de Prevención del Delito en el curso de Análisis criminológico de datos. A través de una guía práctica, se proporcionará a los lectores las habilidades necesarias para limpiar, estructurar y analizar datos de una manera rigurosa y efectiva. El libro está diseñado para proporcionar una comprensión sólida de las técnicas de análisis exploratorio y descriptivo de datos, así como de las técnicas de limpieza y transformación de datos. 
+
+
+
+## Objetivos del curso 
+
+El Objetivo General de aprendizaje este curso es aplicar herramientas eficientes para el trabajo con grandes volúmenes de datos, aplicándolos al análisis de patrones territoriales y tendencias delictuales. 
+
+**Objetivos específicos: **
+
+* Abrir datos de formato diverso, limpiarlos, estructurarlos y concatenarlos, en R. 
+* Generar indicadores y series longitudinales con datos de panel, en R.
+* Exportar datos agregados a .csv y .shp, para analizar casos territoriales en otros programas.
+
+Se evaluará la aplicación de estas herramientas al análisis personal de casos territoriales. 

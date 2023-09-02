@@ -2,27 +2,33 @@ project:
   type: book
 
 book:
-  title: "Análisis Criminológico Espacial"
-  subtitle: "Profundización en criminología territorial"
+  title: "Análisis Criminológico de Datos"
+  subtitle: "Técnicas Avanzadas de Análisis Delictual Aplicado con uso de SIG"
   # affiliation-title: "Universidad Adolfo Ibáñez - Chile"
-  author: "FONDECYT"
-  date: "2023-04-01"
+  author: "Centro de Inteligencia Territorial- UAI"
+  date: "2023-09-01"
   #number-sections: 3
   page-footer: 
     left: "Copyright 2023, Denis Berroeta" 
   chapters:
     - index.qmd
-    - marco.qmd
+    - syllabus.qmd
+    # - marco.qmd
     - datos.qmd
-    - panel.qmd
-    - resumen.qmd
-    - delta.qmd
+    # - panel.qmd
+    # - resumen.qmd
+    # - delta.qmd
 
     - references.qmd
         
   appendices:
-    - crime_f.qmd
+    # - crime_f.qmd
     - r_project.qmd
+    - variables.qmd
+    # - control_r.qmd
+    # - funciones.qmd
+    # - tidyverse.qmd
+    # - espacial_r.qmd
 
 bibliography: references.bib
 

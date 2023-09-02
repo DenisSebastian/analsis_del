@@ -1,13 +1,4 @@
----
-title: "Resúmenes"
-subtitile: "Generar tablas Resumenes"
-editor_options: 
-  chunk_output_type: console
----
-
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval =TRUE)
+knitr::opts_chunk$set(echo = TRUE)
 options(scipen = 999, warn=-1)
 
 #cargar Librerias
@@ -15,42 +6,12 @@ source("R/librerias.R")
 # Cargar Funciones
 source("R/funciones.R")
 
-```
 
+delitos <- readRDS( "data/delitos/delitos_all_categ.rds")
 
-## Introducción
+# Crear variable de tiempo ------------------------------------------------
+# se debe crear una varible de tiempo de que conserve el orden
 
-
-Este capítulo tiene como objetivos generar tablas resúmenes generales de acuerdo a diferentes unidades territoriales, tipologías delictuales y tipos de casos policiales.
-
-
-
-## Preparación de Data
-
-```{r eval=FALSE}
-#cargar Librerias
-source("R/librerias.R")
-# Cargar Funciones
-source("R/funciones.R")
-
-
-delitos <- readRDS( "data/delitos/delitos_all_categ.rds") %>% 
-  rename(ZONA = GEOCODIGO)
-```
-
-```{r echo=FALSE, eval=TRUE}
-source("R/librerias.R")
-# Cargar Funciones
-source("R/funciones.R")
-
-
-delitos <- readRDS("data_samples/del_cat_sampled.rds")
-```
-
-Creación de una variable de tiempo para concervar el orden de los datos
-
-
-```{r eval=TRUE}
 delitos <- delitos %>%
   st_drop_geometry() %>% 
   mutate(FECHA_DEL = ymd(FECHA_DEL)) %>% 
@@ -58,47 +19,29 @@ delitos <- delitos %>%
                          sprintf("%02d",month(FECHA_DEL)))) %>% 
   mutate(tiempo = ym(tiempo))
 
-# head(delitos)
-```
 
-## Resúmenes por mes
+# Contabilizar por mes ----------------------------------------------------
 
-
-General
-
-```{r eval=TRUE}
 # General
 del_mes <- delitos %>% 
   group_by(tiempo, GRUPO, TIPO) %>% 
   summarise(cantidad = n(), .groups = "keep") %>% 
   arrange(tiempo) %>% 
   as.data.frame()
+saveRDS(del_mes, "data/resumen/del_mes.rds")
+write.xlsx(del_mes, "data/tablas/del_mes.xlsx", overwrite = T)
 
-# saveRDS(del_mes, "data/resumen/del_mes.rds")
-# write.xlsx(del_mes, "data/tablas/del_mes.xlsx", overwrite = T)
 
-
-head(del_mes)
-```
-
-Regional
-
-```{r}
+# Regional
 del_region <- delitos %>% 
   group_by(tiempo, REGION, NOM_REGION, GRUPO, TIPO) %>% 
   summarise(cantidad = n(), .groups = "keep") %>% 
   arrange(tiempo)%>% 
   as.data.frame()
 
-# saveRDS(del_region, "data/resumen/del_regional.rds")
-# write.xlsx(del_region, "data/tablas/del_region.xlsx", overwrite = T)
+saveRDS(del_region, "data/resumen/del_regional.rds")
+write.xlsx(del_region, "data/tablas/del_region.xlsx", overwrite = T)
 
-head(del_region)
-```
-
-
-Comunal
-```{r}
 
 # Comunal
 del_comuna <- delitos %>% 
@@ -107,13 +50,10 @@ del_comuna <- delitos %>%
   arrange(tiempo)%>% 
   as.data.frame()
 
-# saveRDS(del_comuna, "data/resumen/del_comuna.rds")
-# write.xlsx(del_comuna, "data/tablas/del_comuna.xlsx", overwrite = T)
+saveRDS(del_comuna, "data/resumen/del_comuna.rds")
+write.xlsx(del_comuna, "data/tablas/del_comuna.xlsx", overwrite = T)
 
-head(del_comuna)
-```
 
-```{r eval =T}
 # Zona
 del_zona <- delitos %>% 
   group_by(tiempo, REGION, NOM_REGION,COMUNA,  NOM_COMUNA,  ZONA,  GRUPO, TIPO) %>% 
@@ -121,32 +61,24 @@ del_zona <- delitos %>%
   arrange(tiempo)%>% 
   as.data.frame()
 
-# saveRDS(del_zona, "data/resumen/del_zona.rds")
-# write.xlsx(del_zona, "data/tablas/del_zona.xlsx", overwrite = T)
+saveRDS(del_zona, "data/resumen/del_zona.rds")
+write.xlsx(del_zona, "data/tablas/del_zona.xlsx", overwrite = T)
 
 
-head(del_comuna)
-```
-
-
-```{r eval = T}
 del_tipo_zona <- delitos %>% 
   group_by(tiempo, REGION, NOM_REGION,COMUNA,  NOM_COMUNA,  ZONA,  TIPO) %>% 
   summarise(cantidad = n(), .groups = "keep") %>% 
   arrange(tiempo)%>% 
   as.data.frame()
 
-# saveRDS(del_tipo_zona, "data/resumen/del_tipo_zona.rds")
-# write.xlsx(deldel_tipo_zona_zona, "data/tablas/del_tipo_zona.xlsx", overwrite = T)
+saveRDS(del_tipo_zona, "data/resumen/del_tipo_zona.rds")
+write.xlsx(del_tipo_zona, "data/tablas/del_tipo_zona.xlsx", overwrite = T)
 
 
-head(del_tipo_zona)
 
-```
 
-## Resúmenes por Denuncia
+# Contabilidad por mes - DENUNCIA -----------------------------------------
 
-```{r eval =T}
 # General
 del_mes <- delitos %>% 
   filter(CLASIFICAC == "DENUNCIA") %>% 
@@ -155,15 +87,9 @@ del_mes <- delitos %>%
   arrange(tiempo) %>% 
   mutate(CLASIFICAC = "DENUNCIA") %>% 
   as.data.frame()
+saveRDS(del_mes, "data/resumen/del_mes_denuncia.rds")
+write.xlsx(del_mes, "data/tablas/del_mes_denuncia.xlsx", overwrite = T)
 
-# saveRDS(del_mes, "data/resumen/del_mes_denuncia.rds")
-# write.xlsx(del_mes, "data/tablas/del_mes_denuncia.xlsx", overwrite = T)
-
-head(del_mes)
-```
-
-
-```{r eval =T}
 # Regional
 del_region <- delitos %>% 
   filter(CLASIFICAC == "DENUNCIA") %>% 
@@ -173,14 +99,9 @@ del_region <- delitos %>%
   mutate(CLASIFICAC = "DENUNCIA") %>% 
   as.data.frame()
 
-# saveRDS(del_region, "data/resumen/del_regional_denuncia.rds")
-# write.xlsx(del_region, "data/tablas/del_regional_denuncia.xlsx", overwrite = T)
+saveRDS(del_region, "data/resumen/del_regional_denuncia.rds")
+write.xlsx(del_region, "data/tablas/del_regional_denuncia.xlsx", overwrite = T)
 
-head(del_region)
-```
-
-
-```{r eval = T}
 # Comunal
 del_comuna <- delitos %>% 
   filter(CLASIFICAC == "DENUNCIA") %>% 
@@ -190,16 +111,11 @@ del_comuna <- delitos %>%
   mutate(CLASIFICAC = "DENUNCIA") %>% 
   as.data.frame()
 
-# saveRDS(del_comuna, "data/resumen/del_comuna_denuncia.rds")
-# write.xlsx(del_comuna, "data/tablas/del_comuna_denuncia.xlsx", overwrite = T))
+saveRDS(del_comuna, "data/resumen/del_comuna_denuncia.rds")
+write.xlsx(del_comuna, "data/tablas/del_comuna_denuncia.xlsx", overwrite = T)
 
-head(del_comuna)
-```
-
-
-```{r eval =T}
 # Zona
-del_zona<- delitos %>% 
+del_zona <- delitos %>% 
   filter(CLASIFICAC == "DENUNCIA") %>% 
   group_by(tiempo, REGION, NOM_REGION,COMUNA,  NOM_COMUNA,  ZONA,  GRUPO, TIPO) %>% 
   summarise(cantidad = n(), .groups = "keep") %>% 
@@ -207,14 +123,10 @@ del_zona<- delitos %>%
   mutate(CLASIFICAC = "DENUNCIA") %>% 
   as.data.frame()
 
-# saveRDS(del_zona, "data/resumen/del_zona_denuncia.rds")
-# write.xlsx(del_zona, "data/tablas/del_zona_denuncia.xlsx", overwrite = T)
-
-head(del_zona)
-```
+saveRDS(del_zona, "data/resumen/del_zona_denuncia.rds")
+write.xlsx(del_zona, "data/tablas/del_zona_denuncia.xlsx", overwrite = T)
 
 
-```{r eval = T}
 # Zona tipo
 del_tipo_zona <- delitos %>% 
   filter(CLASIFICAC == "DENUNCIA") %>% 
@@ -224,16 +136,13 @@ del_tipo_zona <- delitos %>%
   mutate(CLASIFICAC = "DENUNCIA") %>% 
   as.data.frame()
 
-# saveRDS(del_tipo_zona, "data/resumen/del_tipo_zona_denuncia.rds")
-# write.xlsx(del_tipo_zona, "data/tablas/del_tipo_zona_denuncia.xlsx", overwrite = T)
+saveRDS(del_tipo_zona, "data/resumen/del_tipo_zona_denuncia.rds")
+write.xlsx(del_tipo_zona, "data/tablas/del_tipo_zona_denuncia.xlsx", overwrite = T)
 
 
-head(del_tipo_zona)
-```
 
-## Resúmenes por Detenciones
+# Contabilidad por mes DETENCIONES ----------------------------------------
 
-```{r eval =F}
 # General
 del_mes <- delitos %>% 
   filter(CLASIFICAC == "DETENCION") %>% 
@@ -242,16 +151,10 @@ del_mes <- delitos %>%
   arrange(tiempo) %>% 
   mutate(CLASIFICAC = "DETENCION") %>% 
   as.data.frame()
-
-# saveRDS(del_mes, "data/resumen/del_mes_detencion.rds")
-# write.xlsx(del_mes, "data/tablas/del_mes_detencion.xlsx", overwrite = T)
-
-head(del_mes)
-
-```
+saveRDS(del_mes, "data/resumen/del_mes_detencion.rds")
+write.xlsx(del_mes, "data/tablas/del_mes_detencion.xlsx", overwrite = T)
 
 
-```{r eval =T}
 # Regional
 del_region <- delitos %>% 
   filter(CLASIFICAC == "DETENCION") %>% 
@@ -261,14 +164,9 @@ del_region <- delitos %>%
   arrange(tiempo)%>% 
   as.data.frame()
 
-# saveRDS(del_region, "data/resumen/del_regional_detencion.rds")
-# write.xlsx(del_region, "data/tablas/del_regional_detencion.xlsx", overwrite = T)
+saveRDS(del_region, "data/resumen/del_regional_detencion.rds")
+write.xlsx(del_region, "data/tablas/del_regional_detencion.xlsx", overwrite = T)
 
-head(del_region)
-```
-
-
-```{r eval = T}
 # Comunal
 del_comuna <- delitos %>% 
   filter(CLASIFICAC == "DETENCION") %>% 
@@ -278,15 +176,10 @@ del_comuna <- delitos %>%
   mutate(CLASIFICAC = "DETENCION") %>% 
   as.data.frame()
 
-# saveRDS(del_comuna, "data/resumen/del_comuna_detencion.rds")
-# write.xlsx(del_comuna, "data/tablas/del_comuna_detencion.xlsx", overwrite = T)
+saveRDS(del_comuna, "data/resumen/del_comuna_detencion.rds")
+write.xlsx(del_comuna, "data/tablas/del_comuna_detencion.xlsx", overwrite = T)
 
 
-head(del_comuna)
-```
-
-
-```{r eval = T}
 # Zona
 del_zona <- delitos %>% 
   filter(CLASIFICAC == "DETENCION") %>% 
@@ -296,14 +189,10 @@ del_zona <- delitos %>%
   mutate(CLASIFICAC = "DETENCION") %>% 
   as.data.frame()
 
-# saveRDS(del_zona, "data/resumen/del_zona_detencion.rds")
-# write.xlsx(del_zona, "data/tablas/del_zona_detencion.xlsx", overwrite = T)
-
-head(del_zona)
-```
+saveRDS(del_zona, "data/resumen/del_zona_detencion.rds")
+write.xlsx(del_zona, "data/tablas/del_zona_detencion.xlsx", overwrite = T)
 
 
-```{r eval =T}
 # Zona tipo
 del_tipo_zona <- delitos %>% 
   filter(CLASIFICAC == "DETENCION") %>% 
@@ -313,9 +202,8 @@ del_tipo_zona <- delitos %>%
   mutate(CLASIFICAC = "DETENCION") %>% 
   as.data.frame()
 
-# saveRDS(del_tipo_zona, "data/resumen/del_tipo_zona_detencion.rds")
-# write.xlsx(del_tipo_zona, "data/tablas/del_tipo_zona_detencion.xlsx", overwrite = T)
+saveRDS(del_tipo_zona, "data/resumen/del_tipo_zona_detencion.rds")
+write.xlsx(del_tipo_zona, "data/tablas/del_tipo_zona_detencion.xlsx", overwrite = T)
 
-head(del_tipo_zona)
-```
+
 

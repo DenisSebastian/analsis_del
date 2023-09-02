@@ -99,4 +99,5 @@ En suma, las trayectorias de recrudecimiento del crimen y la violencia observada
 
 ## Autoría
 
-{{< var garreton.name >}}, {{< var garreton.cargo1 >}}, {{< var garreton.cargo2 >}}, email: {{< var garreton.email >}}
+{{< var garreton.name >}}, {{< var garreton.cargo2 >}},   
+email: {{< var garreton.email >}}

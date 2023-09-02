@@ -1,14 +1,14 @@
 ---
-subtitle: "Lectura y Transformaciones de Datos"
+subtitle: "Lectura y Consolidación de Datos"
 editor_options: 
   chunk_output_type: console
 ---
 
-# Limpieza de Datos {#sec-data}
+# Datos {#sec-data}
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, eval =FALSE)
 options(scipen = 999, warn=-1)
 
 #cargar Librerias
@@ -20,251 +20,304 @@ source("R/funciones.R")
 
 ## Introducción
 
-La limpieza de datos es una tarea fundamental en el análisis de datos, ya que los datos pueden contener errores, valores faltantes, duplicados o información inconsistente. Estos problemas pueden afectar la calidad de los resultados obtenidos a partir del análisis y, en algunos casos, incluso invalidar las conclusiones. Por lo tanto, es importante que los datos se sometan a procesos de limpieza y transformación antes de ser utilizados en el análisis.
+La lectura y limpieza de datos es una tarea fundamental en el análisis de datos, ya que los datos pueden contener errores, valores faltantes, duplicados o información inconsistente. Estos problemas pueden afectar la calidad de los resultados obtenidos a partir del análisis y, en algunos casos, incluso invalidar las conclusiones. Por lo tanto, es importante que los datos se sometan a procesos de limpieza y transformación antes de ser utilizados en el análisis.
 
-En este capítulo, se explorarán técnicas para la lectura de diferentes tipos de archivos y la transformación de datos. En particular, se abordará el proceso de limpieza de datos, que consiste en identificar y corregir errores, eliminar valores faltantes, tratar los datos duplicados y resolver cualquier inconsistencia en los datos.
 
-## Cargar Librerías y Funciones
-
-En primer lugar se procederá a cargar las librerías necesarias para realizar el tratamiento y transformaciones a los datos.
-
-```{r eval=FALSE}
-## Manipulación de Tablas
-library(dplyr)
-library(tidyr)
-
-## Programación funcional
-library(purrr)
-
-## Manipulación de Fechas
-library(lubridate)
-
-## Manipulación de Datos Espaciales
-library(sf)
-
-## Visualización de Datos Espaciales
-library(mapview)
-
-## Manipulación de Excel
-library(openxlsx)
-
-## Graficos
-library(ggplot2)
-library(plotly)
-```
-
-También se cargarán las funciones creadas previamente, revisar el @sec-fuctions.
-
-```{r eval=FALSE}
-# Cargar Funciones
-source("R/librerias.R")
-```
 
 ## Lectura de Datos
 
-Los datos se encuentran en formato RDS separados por y sin ningún tratamiento. Se procederá a revisar el contenido de los datos del año 2017 llamado `Casos_2017.rds`.
+Uno de los objetivos principales de este capítulo es replicar fielmente los procesos de lectura, limpieza y estructura que realizan normalmente los analistas. Por lo tanto, se requiere tener bases de datos con la misma forma y estructura que las originales. Para este fin, se utilizará una base de datos llamada `samples`, que es una copia de la original, pero anonimizada aleatoriamente.Los datos originales fueron anomimizados mediante distribución aleatoria por columna, lo que impostibilita reconstruir la base original y a su vez los datos mantienen su estructura y tipología tal como se distribuyen los datos originales.
 
-```{r eval=FALSE}
-datos_2017 <- readRDS(file = "data/delitos/raw/Casos_2017.rds")
-head(datos_2017)
-```
 
-```{r eval=TRUE, echo=FALSE}
-datos_2017 <- readRDS(file = "data_samples/raw_2017_100.rds")
-head(datos_2017)
-```
+::: {.callout-tip}
+## Directorio de Trabajo
 
-Se puede observar que corresponde a `1.418.435` de casos policiales con información espacial tipo punto ({{< var library.sf >}}), además información temporal y divisiones administrativas.
+Definir correctamente el directorio de trabajo en R, que corresponde al lugar o carpeta de origen de donde R va acceder a los diferentes archivos. (Ver @sec-wd)
 
-## Unificar Bases
+:::
 
-Las bases están separadas por año por lo tanto se ban unificar para obtener un solo archivo, lo que facilitará hacer todas las transformaciones. Revisar las bases a unificar:
+
+
+
+
+### Datos CSV
+
+Una forma común de almacenar tablas es mediante archivos de valores separados por comas (CSV). Estos archivos tienen una extensión `.csv` y se utilizan ampliamente para compartir datos porque son compatibles con muchos sistemas diferentes y ocupan relativamente poco espacio de almacenamiento. Una ventaja de usar archivos .csv es la disponibilidad de la función `read.csv()`, que está optimizada para importar archivos CSV y esta disponible por defeto en R base.
+
+**Lectura de Unitaria:** A continuación procedermos a la lectura de uno de los archivos CSV. Recordar definir un directorio de trabajo que será el punto de partida donde se accederá a los diferentes archivos del proyecto. (Ver @sec-wd)
+
 
 ```{r}
-delitos_anuales <-  list.files("data/delitos/raw/", full.names = T)
-delitos_anuales
+# 1. Definir Diferectorio de trabajo con setwd("") o con Rstudio
+# 2. Lectura y asignar nombre de variables
+
+partes_1T_2015 <- read.csv(
+  file = "data/samples/Base Estadistica/CSV/partes_1er_trim_2015.csv") 
+
+# dim(partes_1T_2015)
+# str(partes_1T_2015)
+# head(partes_1T_2015)
 ```
 
-Lectura y unificación utilizando la librería {{< var library.purrr >}}, prdimeramente con la lista de objetos `.rds` con sus rutas completas se procederá a sus lecturas con la función de R base llamada `readRDS()` pero dentro del la función `purrr::map_df()` para que el resultado sea solo una tabla.
+**Lectura de Secuencial:** En este caso si todos los archivos que se van a leer se encuentran en la misma carpeta o directorio se recomienda que declare esa ruta en una variable en R y posteriormente genere la ruta completa adicionando solamente el nombre del archivo para esto usaremos la función `paste0()` para concatener cadenas de texto. (Ver @sec-string)
 
-```{r eval=FALSE}
-delitos_raw <-  list.files("data/delitos/raw/", full.names = T) %>% 
-  map_df(readRDS)
-```
-
-```{r eval=TRUE, echo=FALSE}
-delitos_raw <- readRDS(file = "data_samples/raw_all.rds")
-# head(delitos_raw)
-```
-
-## Eliminar Duplicados
-
-Se crea ID por cada registro considerando las variables de `hora`, `fecha`, `delito_native`, `lon`, `lat.` Como en nuestro caso la base de delitos en objeto espacial (Simple Features) se extraerá las columnas de latitud y longitud con la función `sf2df()` alojado en script de funciones generales (@sec-fuctions).
-
-Primero creamos una variable temporal de delitos con las columnas de interés:
 
 ```{r}
-del <-  delitos_raw %>% 
-  sf2df() %>% #variable temporal tipo df (sacar lon lat)
-  dplyr::select(hora, fecha,delito_native,  lon, lat)
+# Declarar la ruta en una variable (considerar que finaliza con slash "/")
+path_csv <-  "data/samples/Base Estadistica/CSV/"
 
-head(del[,1:5])
+# Partes
+# Declarar la ruta del archivo + nombre
+partes_1T_2015 <- read.csv(file =  paste0(path_csv, "partes_1er_trim_2015.csv"))
+partes_2T_2015 <- read.csv(file =  paste0(path_csv, "partes_2do_trim_2015.csv"))
+
+
+# Participaciones
+particp_1T_2015 <- read.csv(
+  file =  paste0(path_csv, "participantes_1er_trim_2015.csv"))
+particp_2T_2015 <- read.csv(
+  file =  paste0(path_csv, "participantes_2do_trim_2015.csv"))
+
+
 ```
 
-Se genera el ID para valores únicos
+
+**Unir Bases:** Uno de los objetivos puede ser unificar o consolidar bases del mismo tipo pero de diferentes periodos, se procede a su unidicación utilizando una de las formas más simples que es mediante la función `rbind()` que unir por filas (rows). 
+
+::: {.callout-warning}
+## Cantidad de Columnnas
+Para que funione correctamente debemos estar seguros que las candidad de columnas de todos los dataframes que se van a unir deben ser idénticos.
+:::
 
 ```{r}
-delitos_raw$ID <- cumsum(!duplicated(del[,1:5]))
+# Verificar si la cantidad de columnas son identicas
+ncol(partes_1T_2015)
+ncol(partes_2T_2015)
 
+
+# Unir Partes
+partes_2015 <-  rbind(partes_1T_2015, partes_2T_2015)
+dim(partes_2015)
+
+
+# Unir Participaciones
+participaciones_2015 <-  rbind(particp_1T_2015, particp_2T_2015)
+dim(participaciones_2015)
 ```
 
-Se extraen los duplicados (son los duplicados)
+**Guardar Bases Conbinadas**: Aquí hau que tener claro cual será carpeta de destino para nuestro caso en `data/resultados/combinadas` esta carpeta debe existir en el directorio. La función que se usará para guardar es `write.csv()`. 
 
 ```{r}
-duplicados <- delitos_raw[duplicated(delitos_raw$ID), ]
-# head(duplicados)
+path_out = "data/resultados/combinadas/"
 
-id_casos_dup <- duplicados$ID
-# table(delitos$ID %in%id_casos_dup)
+file_name_partes <- "partes_2015.csv"
+write.csv(x = partes_2015, file = paste0(path_out, file_name_partes))
+
+
+file_name_particp <- "participaciones_2015.csv"
+write.csv(x = participaciones_2015, file = paste0(path_out, file_name_particp))
 ```
 
-Eliminar duplicados
+
+
+### Datos TXT
+
+Otra forma de almacenar tablas de datos es mediante archivos de texto plano con extensión `.txt` y que tambien se utilizan ampliamente para compartir datos porque son compatibles con muchos sistemas diferentes y ocupan relativamente poco espacio de almacenamiento. Utilizaremos la función `read.delim()` que también es de R base. 
+
+::: {.callout-warning}
+## Definir el elemento separador
+
+Una consideración importante, para que R entienda que los datos que lee desde un archivo TXT corresponden a tablas de datos, hay que declarar que caracter es separador, en lcaso de los archivos de samples es `"\t"` que representa tab. Puede variar de cada tipo de archivo.
+
+:::
+
+
+**Lectura de Unitaria:** A continuación procedermos a la lectura de uno de los archivos CSV. Recordar definir un directorio de trabajo que será el punto de partida donde se accederá a los diferentes archivos del proyecto. (Ver @sec-wd)
+
 
 ```{r}
-delitos_clean <- delitos_raw[!duplicated(delitos_raw$ID), ]
-# dim(delitos_clean)
-# head(delitos_clean)
+# 1. Definir Diferectorio de trabajo con setwd("") o con Rstudio
+# 2. Lectura y asignar nombre de variables
+
+partes_1T_2015_txt <- read.delim(
+  file = "data/samples/Base Estadistica/TXT/partes_1er_trim_2015.txt",
+  header = TRUE, sep = "\t", quote = "",  stringsAsFactors = FALSE) 
+
+dim(partes_1T_2015_txt)
+str(partes_1T_2015_txt)
+head(partes_1T_2015_txt)
 ```
 
-<!-- ## Revisión visual -->
+**Lectura de Secuencial:** En este caso si todos los archivos que se van a leer se encuentran en la misma carpeta o directorio se recomienda que declare esa ruta en una variable en R y posteriormente genere la ruta completa adicionando solamente el nombre del archivo para esto usaremos la función `paste0()` para concatener cadenas de texto.
 
-<!-- Para efectos del presente libro digital se trabaja con una muestra de datos que es 200 registros al azar por año.  -->
-
-<!-- A continuación se contruye un mapa dinámico para reslizar una inspección visual del los datos, para esto se utilizará la librería {{< var library.mapview >}}. -->
-
-<!-- ```{r} -->
-
-<!-- region_num <- "05" -->
-
-<!-- del_reg <-  delitos_clean %>%  -->
-
-<!--   filter(region == region_num)  -->
-
-<!-- mapview(del_reg, zcol = "grupo_delictual") -->
-
-<!-- ``` -->
-
-### Imputar datos de Zonas Censales a los Delitos
-
-A la información correspondiente a casos policiales se le va a imputar información de zonas censales ({{< var organization.ine >}}) a través de una operación espacial llamada `inteserct` entre los polígonos de las zonas censales con los puntos de los casos policiales.
-
-Lectura de Zonas censales
 
 ```{r}
-zonas <- readRDS("data/ine/zonas_urb_consolidadas.rds") 
-head(zonas)
+# Declarar la ruta en una variable (considerar que finaliza con slash "/")
+path_txt <-  "data/samples/Base Estadistica/TXT/"
+
+# Partes
+# Declarar la ruta del archivo + nombre
+partes_1T_2015_txt <- read.delim(
+  file =  paste0(path_txt, "partes_1er_trim_2015.txt"),
+  header = TRUE, sep = "\t", quote = "",  stringsAsFactors = FALSE)
+
+partes_2T_2015_txt <- read.delim(
+  file =  paste0(path_txt, "partes_2do_trim_2015.txt"),
+  header = TRUE, sep = "\t", quote = "",  stringsAsFactors = FALSE)
+
+
+# Participaciones
+particp_1T_2015_txt <- read.delim(
+  file =  paste0(path_txt, "participantes_1er_trim_2015.txt"),
+  header = TRUE, sep = "\t", quote = "",  stringsAsFactors = FALSE)
+
+particp_2T_2015_txt <- read.delim(
+  file =  paste0(path_txt, "participantes_2do_trim_2015.txt"),
+  header = TRUE, sep = "\t", quote = "",  stringsAsFactors = FALSE)
+
 ```
 
-Imputar infomación censal a delitos, para lo cual se utilizará la función `add_info_intersects()` que está en el script de funciones.
+
+**Unir Bases:**
+
 
 ```{r}
-zonas_inf_fil <- zonas %>% 
-  dplyr::select(NOM_REGION, PROVINCIA, NOM_PROVIN,
-         COMUNA, NOM_COMUNA, URBANO,
-         DISTRITO, LOC_ZON, GEOCODIGO)
+# Verificar si la cantidad de columnas son identicas
+dim(partes_1T_2015_txt)
+dim(partes_2T_2015_txt)
 
-delitos_info <- add_info_intersects(zonas_inf_fil, delitos_clean)
-# dim(delitos_info)
-# head(delitos_info)
+
+# Unir Partes
+partes_2015_txt <-  rbind(partes_1T_2015_txt, partes_2T_2015_txt)
+dim(partes_2015_txt)
+
+
+# Unir Participaciones
+participaciones_2015_txt <-  rbind(particp_1T_2015_txt, particp_2T_2015_txt)
+dim(participaciones_2015_txt)
 ```
 
-Guardar los resultados
-
-```{r eval=FALSE}
-saveRDS(delitos_info, "data/delitos/delitos_all_info.rds")
-```
-
-## Categorizar los delitos
-
-Considerando que en los casos policiales tiene una diversa tipificación de delitos se procede a categorizarlos en grupos similares.
-
-Para facilitar el proceso de clasificación a cada tipo de delito se le asignará una Sigla que se encuentra en una hoja de un archivo excel.
+**Guardar Bases Conbinadas**: La función que se usará para guardar es `write.table()`. 
 
 ```{r}
-del_sigla <- read.xlsx("data/excel/delito_native.xlsx", 
-                       sheet = "delitos") %>% 
-  rename(Sigla =CATEGORIA)
-head(del_sigla)
+path_out = "data/resultados/combinadas/"
+
+file_name_partes <- "partes_2015.txt"
+write.table(x = partes_2015_txt, file = paste0(path_out, file_name_partes),
+            sep = "\t", na = "", quote = FALSE, eol = "\n")
+
+
+file_name_particp <- "participaciones_2015.txt"
+write.table(x = participaciones_2015_txt, file = paste0(path_out, file_name_particp),
+            sep = "\t", na = "", quote = FALSE, eol = "\n")
 ```
 
-La lista de categorías se encuentra en el mismo archivo Excel
+
+
+### Datos Espaciales SHP
+
+Los objetos espaciales en R representan datos georreferenciados, lo que significa que están vinculados a una ubicación en el mundo real. Los objetos espaciales se pueden representar en mapas y gráficos, y se pueden analizar para identificar patrones y tendencias en los datos. Para nuestro casos, los objetos espaciales son tipo puntos que representan casos policiales en formato shapefile.Para su lectura y manipulación utilizaremos la librería `sf` ({{< var library.sf >}}).
+
+::: {.callout-note}
+## Librería sf
+
+El uso de sf nos facilitará la manipulación de datos espaciales tipo vectorial como puntos, polígonos o líneas, su característica principal es que se trabaja como si fuese una tabla y en una sola columna almacena las información espacial (`geometry`)
+
+:::
+
+
+**Lectura de Unitaria:** A continuación procedermos a la lectura de uno de los archivos Shapefiles con su estensión `.shp`. Para la lectura utilizaremos la función `st_read()`
+
 
 ```{r}
-categorias <- read.xlsx("data/excel/delito_native.xlsx", 
-                        sheet = "categorias")
-head(categorias)
+# 1. Cargar Librería
+library(sf)
+# 2. Lectura y asignar nombre de variables
+
+casos_T1_2015 <- st_read(dsn = "data/samples/Base Geo/casos_2015_t1.shp") 
+
+dim(partes_1T_2015_txt)
+str(partes_1T_2015_txt)
+partes_1T_2015_txt
 ```
 
-Con la sigla previamente creada se procede a categorizar cada uno de los casos policiales
+**Lectura de Secuencial:** En este caso si todos los archivos que se van a leer se encuentran en la misma carpeta o directorio se recomienda que declare esa ruta en una variable en R y posteriormente genere la ruta completa adicionando solamente el nombre del archivo para esto usaremos la función `paste0()` para concatener cadenas de texto.
+
 
 ```{r}
-delitos_cat <- left_join(delitos_info, del_sigla,
-                         by = c("delito_native" ="DELITO"))
-# head(delitos_cat)
+# Declarar la ruta en una variable (considerar que finaliza con slash "/")
+path_txt <-  "data/samples/Base Geo/"
 
+# Casps
+# unir la ruta del archivo + nombre
+casos_T1_2015 <- st_read(paste0(path_txt, "casos_2015_t1.shp"))
+casos_T2_2015 <- st_read(paste0(path_txt, "casos_2015_t2.shp"))
 
-
-delitos_cat <- left_join(delitos_cat, categorias, 
-                         by = "Sigla")
-# head(delitos_cat)
 ```
 
-Guardar los resultados
 
-```{r eval=FALSE}
-saveRDS(delitos_cat, "data/delitos/delitos_all_categ.rds")
+**Unir Bases:**
+
+
+No se pueden unir ya que no tienen las misma columnas
+```{r}
+# Verificar si la cantidad de columnas son identicas
+dim(casos_T1_2015)
+dim(casos_T2_2015)
+
+
+# Unir Partes
+casos_2015 <-  rbind(casos_T1_2015, casos_T2_2015)
+# Error in rbind.data.frame(...) : 
+  # numbers of columns of arguments do not match
 ```
 
-Como resultado del proceso anterior quedan muchos casos policiales sin categoría asignada los cuales se proceden a eliminar.
+Solución 1: Unir solo las colunas en común
 
 ```{r}
-# #Descartar los NA en Categoria
-delitos_cat_sigla <- delitos_cat%>%
-  filter(!is.na(Categoria))
+# encontrar la columnas en común
+common <- intersect(colnames(casos_T1_2015), colnames(casos_T2_2015))
 
-# head(delitos_cat)
-# dim(delitos_cat_sigla)
+# unir bases seleccionando solo als columnas en común
+casos_2015_s1 <- rbind(casos_T1_2015[common], casos_T2_2015[common])
+casos_2015_s1
+
 ```
 
-Guardar los resultados
+Solución 2: Unir y en la base faltante rellena con `NA` usando `dplyr::bind_rows()`
 
-```{r eval=FALSE}
-saveRDS(delitos_cat_sigla, "data/delitos/delitos_only_cat.rds")
-```
-
-## Filtrar por Barrios Comerciales
-
-Finalmente se procede a filtrar aquellos casos policiales que sean considerados en el proyecto de valuación de barrios comerciales.
 
 ```{r}
-delitos_cat_bc_URB <- delitos_cat%>%
-  filter(Barrios_Comerciales == 1) 
+library(dplyr)
+
+casos_2015_s2 <- bind_rows(casos_T1_2015, casos_T2_2015)
+casos_2015_s2 
 ```
 
-Guardar los resultados
 
-```{r eval=FALSE}
-saveRDS(delitos_cat_bc_URB, "data/delitos/delitos_eval_bcom_urb.rds")
 
-```
 
-## Visualización Resultados Intermedios
+
+**Guardar Bases Conbinadas**: La función que se usará para guardar es `write.table()`. 
 
 ```{r}
+path_out = "data/resultados/combinadas/"
 
-region_num <- "05"
-del_reg <-  delitos_cat_bc_URB %>% 
-  filter(region == region_num) 
+file_name_comun <- "casos_2015_comun.shp"
+st_write(casos_2015_s1, paste0(path_out, file_name_comun), delete_dsn = T)
 
-mapview(del_reg, zcol = "Categoria")
+
+
+file_name_all <- "casos_2015_all.shp"
+st_write(casos_2015_s2, paste0(path_out, file_name_all), delete_dsn = T)
+
 ```
+
+## Conclusión 
+
+En este capítulo se presentaron conocimientos esenciales para la lectura de datos tal como son adquiridos, con el objetivo de representar de manera fidedigna la etapa de pretratamiento que realizan los analistas. Además, se combinaron los diferentes periodos de cada tipo de datos y se guardaron de forma segura. En los siguientes capítulos se presentarán flujos de trabajo más eficientes y automatizados, pero por ahora es importante tener claridad sobre los pasos básicos.
+
+
+
+
+

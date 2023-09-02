@@ -1,11 +1,3 @@
----
-subtitle: "Transformación a Datos de Panel"
-editor_options: 
-  chunk_output_type: console
----
-
-# Datos de Panel
-```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 options(scipen = 999, warn=-1)
 
@@ -14,42 +6,11 @@ source("R/librerias.R")
 # Cargar Funciones
 source("R/funciones.R")
 
-```
 
-
-## Introducción
-
-En estadística y econometría, el término de datos de panel se refiere a datos que combinan una dimensión temporal con otra transversal.
-
-Un conjunto de datos que recoge observaciones de un fenómeno a lo largo del tiempo se conoce como serie temporal. Dichos conjuntos de datos están ordenados y la información relevante respecto al fenómeno estudiado es la que proporciona su evolución en el tiempo. Un conjunto transversal de datos contiene observaciones sobre múltiples fenómenos en un momento determinado. En este caso, el orden de las observaciones es irrelevante.
-
-Un conjunto de datos de panel recoge observaciones sobre múltiples fenómenos a lo largo de determinados períodos. La dimensión temporal enriquece la estructura de los datos y es capaz de aportar información que no aparece en un único corte.
-
-Para nuestro caso los datos de panel serán la densidad de delitos por zona censal y el orden temporal será construido con el mes y el año eso es lo que sale a continuación.
-
-
-## Cálculo de Total Delitos por Espacio y tiempo
-
-
-
-En este punto se procederá a crear tablas de cálculo de total casos policiales por *espacio* las zonas censales, mientras que *tiempo* las variables de mes y año.
-
-![](images/proc_densidades.png){width="80%" fig-align="center"}
-
-Primeramente se debe extraer mes y año de la variable `fecha` para esto se hará uso de la librería {{< var library.lubridate >}} para manipulación de la variables temporales.
-
-
-```{r eval=FALSE}
+# Lectura de data
 delitos_cat_bc_URB <- readRDS("data/delitos/delitos_eval_bcom_urb.rds")
-```
+head(delitos_cat_bc_URB)
 
-
-```{r echo=FALSE}
-delitos_cat_bc_URB <- readRDS("data_samples/delitos_eval_bcom_urb.rds")
-```
-
-
-```{r}
 
 # Agregar la variable mes
 delitos_urb <- delitos_cat_bc_URB %>% 
@@ -60,48 +21,37 @@ delitos_urb <- delitos_cat_bc_URB %>%
   filter(!is.na(Categoria))
 head(delitos_urb %>%  select(fecha, mes, anno))
 
-```
 
-A continuación se creará una tabla temporal que permitirá hacer una contabilidad de todos los delitos ocurridos por Zona censal, categoría, mes y año.
-
-```{r}
-# todos los delitos
 tab_del_all <- delitos_urb%>%
   mutate(a_mes = paste0( anno, "_", sprintf("%02d",mes))) %>% 
-  group_by(GEOCODIGO, Categoria, a_mes )%>%
+  group_by(ZONA, Categoria, a_mes )%>%
   summarise(Cantidad = n(), .groups = "keep")
 
 head(tab_del_all)
 
-```
 
-A continuación se procede a generar el cálculo de la suma de todos los eventos policiales ocurridos por cada zona censal categoría mes y año utilizando la librería {{< var library.tidyr >}} con la función `pivot_wider()`
+#pivot wider
 
-
-![](images/pivot_wider.png){fig-align="center" width="80%"}
-
-
-```{r}
 tab_del_all_mes <- tab_del_all%>%
   pivot_wider(names_from = a_mes, values_from = Cantidad, 
               names_prefix = "a_", values_fill = 0)%>% 
-  dplyr::select(GEOCODIGO, Categoria,sort(names(.)[3:ncol(.)]))
+  dplyr::select(ZONA, Categoria,sort(names(.)[3:ncol(.)]))
 head(tab_del_all_mes)
-```
 
-```{r eval=FALSE}
 #guargar resultados
 write.xlsx(tab_del_all_mes,
            "data/tablas/tablas_del_mes/del_zonas_all.xlsx", overwrite = T)
 saveRDS(tab_del_all_mes, "data/tablas/tablas_del_mes/del_zonas_all.rds")
 
-```
 
-## Cálculo de tablas de densidad casos policiales
 
-Lectura de Zonas Urbanas consolidadas
 
-```{r}
+# Cálculo de tablas de densidad casos policiales --------------------------
+
+
+
+# Lectura de Zonas Urbanas consolidadas
+
 zonas <- readRDS("data/ine/zonas_urb_consolidadas.rds")
 
 
@@ -109,30 +59,25 @@ info_zonas_base <- zonas %>%
   st_drop_geometry() %>% 
   dplyr::select(GEOCODIGO = COD_INE_16, AREA) %>% 
   mutate(GEOCODIGO = as.character(GEOCODIGO))
-```
 
-Calcular delitos anual y agregar área
 
-```{r}
+# Calcular delitos anual y agregar área
+
 tab_del_all_mes <- tab_del_all_mes %>%
   as.data.frame() %>% #acelera el proceso
   mutate(anual = rowSums(across(.cols = starts_with("a_")))) %>% 
   left_join(info_zonas_base, by = "GEOCODIGO")
-```
 
-Calcular la densidad delitos por Hectárea (10000 metros)
 
-```{r}
+
+# Calcular la densidad delitos por Hectárea (10000 metros)
+
 tab_all_dens <- tab_del_all_mes %>% 
   mutate(across(starts_with("a_"), ~ .x/(AREA/10000))) %>% 
   mutate(dens_anual = anual / (AREA/10000))
 
 head(tab_all_dens[,1:10])
-```
 
-Guardar resultados
-
-```{r eval=FALSE}
 write.xlsx(tab_all_dens, 
            "data/tablas/tabla_dens_mes/del_dens_all.xlsx",
            overwrite = T)
@@ -140,14 +85,8 @@ write.xlsx(tab_all_dens,
 saveRDS(tab_all_dens, "data/tablas/tabla_dens_mes/del_dens_all.rds")
 
 
+# Tablas de Densidad de Delitos por Mes (2013 al 2022)
 
-```
-
-## Tablas de Densidad de Delitos por Mes (2017 al 2022)
-
-Unir Tablas
-
-```{r}
 info_zonas_base <- zonas %>%
   dplyr::select(GEOCODIGO = COD_INE_16, REGION, 
                 NOM_REGION, COMUNA, NOM_COMUNA) %>% 
@@ -157,12 +96,10 @@ del_dens_zonas <- info_zonas_base %>%
   left_join(tab_all_dens, by ="GEOCODIGO")
 head(del_dens_zonas[,1:10])
 
-```
 
 
-Selección de Zonas Censales con Mayor Densidad
+# Selección de Zonas Censales con Mayor Densidad
 
-```{r}
 
 hist(del_dens_zonas$dens_anual, breaks = 100)
 # hist(del_dens_zonas[del_dens_zonas$dens_anual>50,]$dens_anual, breaks = 100)
@@ -178,13 +115,12 @@ dens_max <- del_dens_zonas %>%
 
 # Densidades 
 
-# mapview(dens_max, zcol = "dens_anual")
-```
+mapview(dens_max, zcol = "dens_anual")
 
 
-Conocer que región tiene las zonas con mayor concentración de delitos
 
-```{r}
+# Conocer que región tiene las zonas con mayor concentración de delitos
+
 
 regiones_max <- dens_max %>% 
   st_drop_geometry() %>% 
@@ -193,23 +129,12 @@ regiones_max <- dens_max %>%
   arrange(desc(Cantidad))
 
 regiones_max
-```
-
-Visualización de las región máxima
-```{r}
-
 reg_dens_max2 <- dens_max %>% 
   filter(REGION == 13) %>% 
   filter(!is.na(dens_anual))
 
-# mapview(reg_dens_max2, zcol = "dens_anual", at= c(0,10,50,100,1000))
-
-```
-
-Visualización de desimad máxima por categoria
 
 
-```{r}
 unique(del_dens_zonas$Categoria)
 categoria_tipo <-  "Comercio ilegal"  
 
@@ -217,10 +142,7 @@ dens_max_cat <- del_dens_zonas %>%
   filter(Categoria==categoria_tipo) %>% 
   slice_max(dens_anual, n = n_porc) 
 
-# mapview(dens_max_cat, zcol = "dens_anual")
-```
 
-```{r}
 
 regiones_max_cat <- dens_max_cat %>% 
   st_drop_geometry() %>% 
@@ -237,14 +159,11 @@ reg_dens_max_cat <- dens_max_cat %>%
   slice_max(dens_anual, n = 100) 
 
 mapview(reg_dens_max_cat, zcol = "dens_anual")
-```
 
 
-## Densidades con Respecto al Tiempo
 
-![](images/pivot_longer.png){fig-align="center" width="80%"}
+#  Densidades con Respecto al Tiempo --------------------------------------
 
-```{r}
 
 categoria_tipo <-  "Comercio ilegal" 
 ts_info <- dens_max %>% 
@@ -255,14 +174,11 @@ ts_info <- dens_max %>%
   mutate(tiempo = gsub("a_", "", tiempo),
          tiempo = gsub("_", "-", tiempo),
          tiempo = ym(tiempo)) 
+
 head(ts_info)
-```
 
-**Gráficos**
 
-Gráficos de Serie de Tiempo Todas las Categorías. Se utilizará la librería {{< var library.plotly >}} para hacer gráficos dinámicos
 
-```{r}
 pline <- ggplot() + 
   geom_line(data = ts_info, aes(x = tiempo, y = densidades,
                                 colour = Categoria),
@@ -272,9 +188,7 @@ pline <- ggplot() +
   theme_bw()
 pline
 
-```
 
-```{r}
 pline <- ggplot() + 
   geom_line(data = ts_info, aes(x = tiempo, y = densidades,
                                 colour = Categoria),
@@ -287,11 +201,10 @@ pline <- ggplot() +
 # pline
 
 ggplotly(pline)
-```
 
-Gráficos sobre médidas de centralidad (8 Primeras Categorías)
 
-```{r}
+# Gráficos sobre médidas de centralidad (8 Primeras Categoría
+
 unique(ts_info$Categoria)
 
 df_tidy_mean_1 <- ts_info %>%
@@ -319,11 +232,6 @@ ggplotly(mean_plot_1)
 
 
 
-```
-
-Gráficos Desagregados
-
-```{r}
 color_list <- viridis::viridis(length(unique(ts_info$Categoria)))
 mean_plot_1_solos <- ggplot(df_tidy_mean_1, aes(x = tiempo, y = mean, color = Categoria)) +
   geom_line(aes(x = tiempo, y = mean, color = Categoria)) +
@@ -339,6 +247,4 @@ mean_plot_1_solos <- ggplot(df_tidy_mean_1, aes(x = tiempo, y = mean, color = Ca
 
 
 ggplotly(mean_plot_1_solos)
-
-```
 

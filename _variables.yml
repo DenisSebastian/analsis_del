@@ -1,14 +1,17 @@
 version: 1
 
 email:
-  author: denis.berroeta@uai.cl
+  author: <denis.berroeta@uai.cl>
 
+berrota:
+  name: "[Denis Berroeta](https://cit.uai.cl/denis-berroeta/)"
+  cargo: "Coordinador de Investigación, Centro de Inteligencia Territorial - UAI"
+  email: <denis.berroeta@uai.cl>
 
 garreton:
-  name: "[Matías Garretón](https://designlab.uai.cl/profesor/matias-garreton/)"
-  cargo1: "Director de Investigación en [Design Lab UAI](https://designlab.uai.cl)"
-  cargo2: "Investigador asociado [COES](https://coes.cl)"
-  email: matias.garreton@uai.cl
+  name: "Matías Garretón"
+  cargo2: "Investigador asociado COES"
+  email: <matiasgarreton@gmail.cl>
   
 engine:
   jupyter: "[Jupyter](https://jupyter.org)"

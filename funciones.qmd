@@ -1,0 +1,312 @@
+# Funciones en R
+
+## Operaciones Básicas en R
+
+### Operaciones Matemáticas
+En R, es posible realizar operaciones matemáticas básicas utilizando los operadores aritméticos estándar. Estos operadores incluyen:
+
+* Suma (+): se utiliza para sumar dos valores.
+* Resta (-): se utiliza para restar un valor de otro.
+* Multiplicación (*): se utiliza para multiplicar dos valores.
+* División (/): se utiliza para dividir un valor por otro.
+* Exponenciación (^): se utiliza para elevar un valor a una potencia.
+* Módulo (%%): se utiliza para encontrar el resto de la división de un valor por otro.
+
+Estos operadores se pueden utilizar con números enteros, decimales y variables numéricas. Además, también se pueden utilizar paréntesis para especificar el orden de las operaciones.
+
+A continuación, se presentan algunos ejemplos de operaciones matemáticas básicas en R:
+
+```{r}
+# Suma
+2 + 3 # resultado: 5
+
+# Resta
+5 - 2 # resultado: 3
+
+# Multiplicación
+2 * 4 # resultado: 8
+
+# División
+10 / 2 # resultado: 5
+
+# Exponenciación
+2^3 # resultado: 8
+
+# Módulo
+15 %% 4 # resultado: 3
+
+# Utilizando paréntesis para especificar el orden de las operaciones
+(2 + 3) * 4 # resultado: 20
+
+```
+
+
+Es importante tener en cuenta que R sigue las reglas de precedencia de las operaciones matemáticas. Esto significa que las operaciones dentro de los paréntesis se evalúan primero, seguidas de la exponenciación, la multiplicación y la división, y finalmente la suma y la resta. Si se requiere un orden específico de operaciones, se deben utilizar paréntesis para indicarlo.
+
+Además, R también cuenta con una variedad de funciones matemáticas incorporadas, como "sin", "cos", "tan", "log", "exp", entre otras, que se pueden utilizar para realizar operaciones más complejas.
+
+
+
+También se pueden aplica a un elemento a al objeto espacial completo
+
+```{r}
+a <- 13
+b <- c(20,30,22,2,1)
+
+sum(b) # suma
+sqrt(b) # find the square root of x
+```
+
+```{r}
+mean(b)
+min(b)
+max(b)
+
+
+```
+
+
+### Funciones Útiles de propósito general
+
+```{r}
+rep(1, 10)
+rep("HAHA", 10)
+seq(1, 10)
+seq(1, 10, by = 2)
+ifelse(3 > 5, 1, "this is false")
+```
+
+
+```{r}
+paste("Hola", "amigo")
+paste("Hello", "amigo", sep = "--")
+paste0("Hello", "amigo")
+tolower("HAHAHAHAH")
+toupper("hueuehuehuheuhe")
+```
+
+
+## Operaciones Lógicas
+
+En R, los operadores lógicos se utilizan para realizar comparaciones lógicas entre valores o expresiones. Estos operadores devuelven valores booleanos (TRUE o FALSE) según se cumpla o no la condición.
+
+A continuación se presentan los operadores lógicos en R:
+
+```{r echo=FALSE}
+suppressPackageStartupMessages(library(kableExtra))
+op_log <- data.frame(
+  stringsAsFactors = FALSE,
+  Operador = c("==", "!=", ">", "<", ">=", "<=", "&", "|", "!"),
+  Significado = c(
+    "Igual a",
+    "Diferente a",
+    "Mayor que",
+    "Menor que",
+    "Mayor o igual que",
+    "Menor o igual que",
+    "Operador lógico AND",
+    "Operador lógico OR",
+    "Operador lógico NOT"
+  ),
+  Ejemplo = c(
+    "2 == 2 (TRUE)",
+    "2 != 3 (TRUE)",
+    "3 > 2 (TRUE)",
+    "2 < 3 (TRUE)",
+    "3 >= 2 (TRUE)",
+    "2 <= 3 (TRUE)",
+    "2 < 3 & 3 > 1 (TRUE)",
+    "2 < 3 | 3 < 1 (TRUE)",
+    "!(2 == 3) (TRUE)"
+  )
+)
+
+op_log %>% 
+  kbl() %>%
+   kable_styling(bootstrap_options = c("striped", "hover", "condensed"), font_size = 16)
+```
+
+
+### Operador de igualdad: (==)
+
+Este operador se utiliza para comparar si dos valores son iguales. Retorna TRUE si la condición se cumple y FALSE en caso contrario.
+
+```{r}
+a <- 2
+b <- 3
+a == b # FALSE
+```
+
+### Operador de desigualdad: (!=)
+
+Este operador se utiliza para comparar si dos valores son diferentes. Retorna TRUE si la condición se cumple y FALSE en caso contrario.
+
+```{r}
+a <- 2
+b <- 3
+a != b # TRUE
+```
+
+
+### Operador de mayor que: (>)
+Este operador se utiliza para comparar si un valor es mayor que otro. Retorna TRUE si la condición se cumple y FALSE en caso contrario.
+
+```{r}
+a <- 2
+b <- 3
+b > a # TRUE
+```
+
+
+### Operador de menor que: (<)
+Este operador se utiliza para comparar si un valor es menor que otro. Retorna TRUE si la condición se cumple y FALSE en caso contrario.
+
+```{r}
+a <- 2
+b <- 3
+a < b # TRUE
+```
+
+
+### Operador de mayor o igual que: (>=)
+Este operador se utiliza para comparar si un valor es mayor o igual que otro. Retorna TRUE si la condición se cumple y FALSE en caso contrario.
+
+```{r}
+a <- 2
+b <- 3
+b >= a # TRUE
+```
+
+
+### Operador de menor o igual que: (<=)
+Este operador se utiliza para comparar si un valor es menor o igual que otro. Retorna TRUE si la condición se cumple y FALSE en caso contrario.
+
+```{r}
+a <- 2
+b <- 3
+a <= b # TRUE
+```
+
+
+### Operador lógico AND: (&)
+Este operador se utiliza para evaluar dos o más condiciones y retornar TRUE si todas se cumplen, de lo contrario retorna FALSE.
+
+```{r}
+a <- 2
+b <- 3
+c <- 4
+a < b & b < c # TRUE
+
+```
+
+
+### Operador lógico OR: (|)
+Este operador se utiliza para evaluar dos o más condiciones y retornar TRUE si al menos una se cumple, de lo contrario retorna FALSE.
+
+```{r}
+a <- 2
+b <- 3
+c <- 4
+a > b | b < c # TRUE
+```
+
+Operador lógico NOT: (!)
+Este operador se utiliza para negar una condición. Si la condición es TRUE, retorna FALSE, y si la condición es FALSE, retorna TRUE.
+
+
+```{r}
+a <- 2
+b <- 3
+!(a == b) # TRUE
+```
+
+Es importante tener en cuenta que los operadores lógicos se pueden utilizar en combinación para crear expresiones lógicas más complejas. Además, los operadores lógicos también se pueden utilizar en las estructuras de control condicionales, como if/else y switch, para tomar decisiones basadas en condiciones lógicas.
+
+
+## Crear Funciones Propias
+
+En R, es posible crear funciones propias para realizar tareas específicas y reutilizarlas en diferentes partes de un programa. Para crear una función en R, se utiliza la siguiente estructura:
+
+```{r}
+nombre_de_la_funcion <- function(argumentos) {
+  cuerpo_de_la_funcion
+}
+```
+
+Por ejemplo, se puede crear una función que calcule la suma de dos números:
+
+```{r}
+suma <- function(a, b) {
+  resultado <- a + b
+  return(resultado)
+}
+
+resultado_suma <- suma(2, 3)
+print(resultado_suma) # 5
+```
+
+Por ejemplo, se puede crear una función que eleve al cuadrado:
+```{r}
+
+
+cuadrado <- function(x) { # x = parámetro
+    y = x ^ 2 # asiganción de variables solo dentro de la función
+    return(y) # especificar valor retornado (no necesario completamente)
+}
+
+
+a <- 13
+b <- c(20,30,22,2,1)
+cuadrado(a)
+cuadrado(b)
+```
+
+Es importante tener en cuenta que los nombres de las funciones en R deben cumplir las mismas reglas que los nombres de las variables. Además, es recomendable incluir comentarios explicativos dentro del cuerpo de la función para facilitar su comprensión y uso posterior.
+
+
+
+
+**Actividad:**
+
+Actividad: Crear una función que calcule la hipotenusa de un triángulo rectángulo (Teorema de Pitágoras):
+
+<center>![](images/hipotenusa.png){width=40%}</center>
+
+
+Establece que el cuadrado de la longitud de la hipotenusa es igual a la suma de los cuadrados de las longitudes de los catetos.
+
+$$c^2 = {a^2}+{b^2}$$
+
+Por lo cual:
+
+$$c = \sqrt{{a^2}+{b^2}}$$
+
+
+::: {.callout-tip appearance="simple"}
+
+## Ayuda  
+```{r eval=F}
+hipotenusa <- function(a, b){
+  #h <-     # En esta parte escribir la función
+  return(h)
+}
+r1 <-  hipotenusa(a = 5,  b = 5)
+
+```
+
+:::
+
+
+Encontrar la Hipotenusa  de:   
+  h=*?*, a = 10, b = 6  
+  h=*?*, a = 5, b = 4  
+  h=*?*, a = 3, b = 4  
+
+
+
+
+## Referencias:
+
+- [https://bookdown.org/jboscomendoza/r-principiantes4/estructuras-de-control.html](https://bookdown.org/jboscomendoza/r-principiantes4/estructuras-de-control.html)
+
+- [Loops y funciones en R](https://rstudio-pubs-static.s3.amazonaws.com/623888_497a5388a98545c48e9b5b6bec4056f6.html)

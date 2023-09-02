@@ -1,0 +1,296 @@
+---
+subtitle: "Lectura y Transformaciones de Datos"
+editor_options: 
+  chunk_output_type: console
+---
+
+# Limpieza de Datos {#sec-data}
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval =FALSE)
+options(scipen = 999, warn=-1)
+
+#cargar Librerias
+source("R/librerias.R")
+# Cargar Funciones
+source("R/funciones.R")
+
+```
+
+## Introducción
+
+La limpieza de datos es una tarea fundamental en el análisis de datos, ya que los datos pueden contener errores, valores faltantes, duplicados o información inconsistente. Estos problemas pueden afectar la calidad de los resultados obtenidos a partir del análisis y, en algunos casos, incluso invalidar las conclusiones. Por lo tanto, es importante que los datos se sometan a procesos de limpieza y transformación antes de ser utilizados en el análisis.
+
+En este capítulo, se explorarán técnicas para la lectura de diferentes tipos de archivos y la transformación de datos. En particular, se abordará el proceso de limpieza de datos, que consiste en identificar y corregir errores, eliminar valores faltantes, tratar los datos duplicados y resolver cualquier inconsistencia en los datos.
+
+## Cargar Librerías y Funciones
+
+En primer lugar se procederá a cargar las librerías necesarias para realizar el tratamiento y transformaciones a los datos.
+
+```{r eval=FALSE}
+## Manipulación de Tablas
+library(dplyr)
+library(tidyr)
+
+## Programación funcional
+library(purrr)
+
+## Manipulación de Fechas
+library(lubridate)
+
+## Manipulación de Datos Espaciales
+library(sf)
+
+## Visualización de Datos Espaciales
+library(mapview)
+
+## Manipulación de Excel
+library(openxlsx)
+
+## Graficos
+library(ggplot2)
+library(plotly)
+```
+
+También se cargarán las funciones creadas previamente, revisar el @sec-fuctions.
+
+```{r eval=FALSE}
+# Cargar Funciones
+source("R/librerias.R")
+```
+
+## Lectura de Datos
+
+Los datos se encuentran en formato RDS separados por y sin ningún tratamiento. Se procederá a revisar el contenido de los datos del año 2017 llamado `Casos_2017.rds`.
+
+```{r eval=FALSE}
+datos_2017 <- readRDS(file = "data/delitos/raw/Casos_2017.rds")
+head(datos_2017)
+```
+
+```{r eval=TRUE, echo=FALSE}
+datos_2017 <- readRDS(file = "data_samples/raw_2017_100.rds")
+head(datos_2017)
+```
+
+Se puede observar que corresponde a `1.418.435` de casos policiales con información espacial tipo punto ({{< var library.sf >}}), además información temporal y divisiones administrativas.
+
+## Unificar Bases
+
+Las bases están separadas por año por lo tanto se ban unificar para obtener un solo archivo, lo que facilitará hacer todas las transformaciones. Revisar las bases a unificar:
+
+```{r}
+delitos_anuales <-  list.files("data/delitos/raw", full.names = T)
+delitos_anuales
+```
+
+Lectura y unificación utilizando la librería {{< var library.purrr >}}, prdimeramente con la lista de objetos `.rds` con sus rutas completas se procederá a sus lecturas con la función de R base llamada `readRDS()` pero dentro del la función `purrr::map_df()` para que el resultado sea solo una tabla.
+
+```{r eval=FALSE}
+delitos_raw <-  list.files("data/delitos/raw/", full.names = T) %>% 
+  map_df(readRDS)
+```
+
+```{r eval=TRUE, echo=FALSE}
+delitos_raw <- readRDS(file = "data_samples/raw_all.rds")
+# head(delitos_raw)
+```
+
+
+## Seleccion de variables
+
+
+```{r}
+# selección de variables
+cols_names <- c("DELITO", "GRUPO", "CLASIFICAC", 
+                "CATEGORIA","GRUPO_DELI", "GRUPO_INTE",
+                "FECHA_DEL",  "DIA",  "MES", "ANO",
+                "HORA_DEL_D", "HORA24", "BLOQUE",
+                "LUGAR", "geometry")
+```
+
+```{r}
+delitos_raw <- delitos_raw %>% 
+  select_at(.tbl = ., .vars = cols_names)
+
+```
+
+
+
+
+
+## Eliminar Duplicados
+
+Se crea ID por cada registro considerando las variables de `hora`, `fecha`, `delito_native`, `lon`, `lat.` Como en nuestro caso la base de delitos en objeto espacial (Simple Features) se extraerá las columnas de latitud y longitud con la función `sf2df()` alojado en script de funciones generales (@sec-fuctions).
+
+Primero creamos una variable temporal de delitos con las columnas de interés:
+
+```{r}
+del <-  delitos_raw %>% 
+  sf2df() %>% #variable temporal tipo df (sacar lon lat)
+  dplyr::select(hora, fecha,delito_native,  lon, lat)
+
+head(del[,1:5])
+```
+
+Se genera el ID para valores únicos
+
+```{r}
+delitos_raw$ID <- cumsum(!duplicated(del[,1:5]))
+
+```
+
+Se extraen los duplicados (son los duplicados)
+
+```{r}
+duplicados <- delitos_raw[duplicated(delitos_raw$ID), ]
+# head(duplicados)
+
+id_casos_dup <- duplicados$ID
+# table(delitos$ID %in%id_casos_dup)
+```
+
+Eliminar duplicados
+
+```{r}
+delitos_clean <- delitos_raw[!duplicated(delitos_raw$ID), ]
+# dim(delitos_clean)
+# head(delitos_clean)
+```
+
+<!-- ## Revisión visual -->
+
+<!-- Para efectos del presente libro digital se trabaja con una muestra de datos que es 200 registros al azar por año.  -->
+
+<!-- A continuación se contruye un mapa dinámico para reslizar una inspección visual del los datos, para esto se utilizará la librería {{< var library.mapview >}}. -->
+
+<!-- ```{r} -->
+
+<!-- region_num <- "05" -->
+
+<!-- del_reg <-  delitos_clean %>%  -->
+
+<!--   filter(region == region_num)  -->
+
+<!-- mapview(del_reg, zcol = "grupo_delictual") -->
+
+<!-- ``` -->
+
+### Imputar datos de Zonas Censales a los Delitos
+
+A la información correspondiente a casos policiales se le va a imputar información de zonas censales ({{< var organization.ine >}}) a través de una operación espacial llamada `inteserct` entre los polígonos de las zonas censales con los puntos de los casos policiales.
+
+Lectura de Zonas censales
+
+```{r}
+zonas <- readRDS("data/ine/zonas_urb_consolidadas.rds") %>% 
+  st_transform(32719)
+head(zonas)
+```
+
+Imputar infomación censal a delitos, para lo cual se utilizará la función `add_info_intersects()` que está en el script de funciones.
+
+```{r}
+zonas_inf_fil <- zonas %>% 
+  dplyr::select(NOM_REGION, PROVINCIA, NOM_PROVIN,
+         COMUNA, NOM_COMUNA, URBANO,
+         DISTRITO, LOC_ZON, GEOCODIGO)
+
+delitos_info <- add_info_intersects(zonas_inf_fil, delitos_clean)
+# dim(delitos_info)
+# head(delitos_info)
+```
+
+Guardar los resultados
+
+```{r eval=FALSE}
+saveRDS(delitos_info, "data/delitos/delitos_all_info.rds")
+```
+
+## Categorizar los delitos
+
+Considerando que en los casos policiales tiene una diversa tipificación de delitos se procede a categorizarlos en grupos similares.
+
+Para facilitar el proceso de clasificación a cada tipo de delito se le asignará una Sigla que se encuentra en una hoja de un archivo excel.
+
+```{r eval = T}
+del_sigla <- read.xlsx("data/excel/delito_native.xlsx", 
+                       sheet = "delitos") %>% 
+  mutate(DELITO = toupper(DELITO)) %>% 
+  rename(Sigla =CATEGORIA)
+head(del_sigla)
+```
+
+La lista de categorías se encuentra en el mismo archivo Excel
+
+```{r eval = T}
+categorias <- read.xlsx("data/excel/delito_native.xlsx", 
+                        sheet = "categorias")
+  
+head(categorias)
+```
+
+Con la sigla previamente creada se procede a categorizar cada uno de los casos policiales
+
+```{r}
+delitos_cat <- left_join(delitos_info, del_sigla,
+                         by = c("delito_native" ="DELITO"))
+# head(delitos_cat)
+
+
+
+delitos_cat <- left_join(delitos_cat, categorias, 
+                         by = "Sigla")
+# head(delitos_cat)
+```
+
+Guardar los resultados
+
+```{r eval=FALSE}
+saveRDS(delitos_cat, "data/delitos/delitos_all_categ.rds")
+```
+
+Como resultado del proceso anterior quedan muchos casos policiales sin categoría asignada los cuales se proceden a eliminar.
+
+```{r}
+# #Descartar los NA en Categoria
+delitos_cat_sigla <- delitos_cat%>%
+  filter(!is.na(Categoria))
+
+# head(delitos_cat)
+# dim(delitos_cat_sigla)
+```
+
+Guardar los resultados
+
+```{r eval=FALSE}
+saveRDS(delitos_cat_sigla, "data/delitos/delitos_only_cat.rds")
+```
+
+## Filtrar por Barrios Comerciales
+
+Finalmente se procede a filtrar aquellos casos policiales que sean considerados en el proyecto de valuación de barrios comerciales.
+
+```{r}
+delitos_cat_bc_URB <- delitos_cat%>%
+  filter(Barrios_Comerciales == 1) 
+```
+
+Guardar los resultados
+
+```{r eval=FALSE}
+saveRDS(delitos_cat_bc_URB, "data/delitos/delitos_eval_bcom_urb.rds")
+
+```
+
+## Visualización Resultados Intermedios
+
+```{r}
+
+region_num <- "05"
+del_reg <-  delitos_cat_bc_URB %>% 
+  filter(region == region_num) 
+
+mapview(del_reg, zcol = "Categoria")
+```

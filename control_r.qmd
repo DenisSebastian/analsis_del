@@ -1,0 +1,244 @@
+---
+subtitle: "Estructuras de Control y Bucles en R"
+---
+
+# Bucles en R
+
+Las estructuras de control en R son herramientas que permiten controlar el flujo de ejecución de un programa. Las estructuras de control son esenciales para cualquier lenguaje de programación, ya que permiten que el programa tome decisiones y realice acciones en función de ciertas condiciones.
+
+
+Estas estructuras de control son muy útiles para crear programas que respondan a diferentes situaciones y condiciones, y permiten que los programadores puedan crear soluciones más eficientes y complejas.
+
+En R, existen tres estructuras de control principales:
+
+1. Estructuras condicionales: Permiten ejecutar un bloque de código solo si se cumple una condición determinada. Las estructuras condicionales más comunes en R son "`if`" y "`ifelse`".
+
+2. Estructuras de bucles: Permiten ejecutar un bloque de código repetidamente, mientras se cumpla una condición determinada. Las estructuras de bucles más comunes en R son "`while`", "`for`" y "`repeat`".
+
+3. Estructuras de control de flujo: Permiten cambiar el flujo de ejecución del programa en función de ciertas condiciones. Las estructuras de control de flujo más comunes en R son "`break`" y "`next`".
+
+## Estructuras condicionales
+
+
+Las estructuras condicionales son una de las tres estructuras de control principales en R. Estas estructuras permiten ejecutar un bloque de código solo si se cumple una condición determinada.
+
+La estructura condicional más común en R es "`if`". La sintaxis básica de la estructura "`if`" es la siguiente:
+
+```{r eval=FALSE}
+if(Condición) {
+  operaciones_si_la_condición_es_TRUE
+}
+```
+
+La "condición" es una expresión lógica que evalúa a verdadero o falso. Si la condición es verdadera, el bloque de código dentro del "if" se ejecutará. Si la condición es falsa, el bloque de código dentro del "if" se ignorará.
+
+
+Por ejemplo, le pedimos a R que nos muestre el texto "Verdadero" si la condición se cumple.
+
+```{r}
+# Se cumple la condición y se muestra "verdadero"
+if(4 > 3) {
+  "Verdadero"
+}
+```
+
+```{r}
+# No se cumple la condición y no pasa nada
+if(4 > 5) {
+  "Verdadero"
+}
+```
+
+
+También se puede agregar un bloque de código opcional para el caso en que la condición sea falsa utilizando la estructura "`else`". La sintaxis básica de la estructura "`if`" con "`else`" es la siguie
+
+*SI esta condición es es cierta, ENTONCES* haz estas operaciones, DE OTRO MODO haz estas otras operaciones.
+
+```{r eval=FALSE}
+if(condición) {
+  operaciones_si_la_condición_es_TRUE
+} else {
+  operaciones_si_la_condición_es_FALSE
+}
+```
+
+
+Usando los ejemplos anteriores, podemos mostrar "Falso" si no se cumple la condición, en lugar de que no ocurra nada
+
+```{r}
+# Se cumple la condición y se muestra "Verdadero"
+if(4 > 3) {
+  "Verdadero"
+} else {
+  "Falso"
+}
+```
+
+
+
+La estructura "`ifelse`" es otra forma de estructura condicional que permite ejecutar diferentes bloques de código en función de la condición. La sintaxis básica de la estructura "`ifelse`" es la siguiente:
+
+
+```{r eval=FALSE}
+ifelse(condición, expresión1, expresión2)
+```
+
+Si la "condición" es verdadera, se ejecutará "expresión1". Si la "condición" es falsa, se ejecutará "expresión2".
+
+Además, se pueden anidar varias estructuras condicionales utilizando la sintaxis de "if" y "else". Por ejemplo:
+
+
+```{r eval=FALSE}
+if (condición1) {
+  # Código a ejecutar si la condición1 es verdadera
+} else if (condición2) {
+  # Código a ejecutar si la condición1 es falsa y la condición2 es verdadera
+} else {
+  # Código a ejecutar si todas las condiciones son falsas
+}
+```
+
+En resumen, las estructuras condicionales en R son herramientas muy útiles para controlar el flujo de ejecución de un programa en función de ciertas condiciones. Estas estructuras permiten crear soluciones más eficientes y complejas al permitir que los programas tomen decisiones y realicen acciones en función de las condiciones que se presenten.
+
+## Estructuras de bucles
+
+
+Las estructuras de bucles son una de las tres estructuras de control principales en R. Estas estructuras permiten ejecutar un bloque de código repetidamente mientras se cumpla una condición determinada. En R, existen tres estructuras de bucles principales: "`while`", "`for`" y "`repeat`".
+
+
+**Beneficios**
+
+* Es más fácil ver el objetivo de tu código; lo diferente llama más atención a la vista que aquello que permanece igual.
+* Es más sencillo responder a cambios en los requerimientos. A medida que tus necesidades cambian, solo necesitarás realizar cambios en un lugar, en vez de recordar cambiar en cada lugar donde copiaste y pegaste el código.
+* Es probable que tengas menos errores porque cada línea de código es utilizada en más lugares.
+
+
+
+### Estructura de bucle "`for`":
+
+La estructura "for" permite repetir la ejecución de un bloque de código un número determinado de veces. La sintaxis básica de la estructura "for" es la siguiente:
+
+```{r eval=FALSE}
+for (variable in secuencia) {
+  # Código a ejecutar para cada elemento en la secuencia
+}
+```
+
+La "secuencia" es un objeto que contiene una serie de elementos. La "variable" toma el valor de cada elemento de la secuencia en cada iteración del bucle. En cada iteración, se ejecutará el bloque de código dentro del "for" para ese valor de la variable.
+
+Ejemplo simple: `print` una secuencia
+
+
+```{r}
+for (i in 1:5){
+  print(i)
+}
+
+```
+
+
+
+
+Ejemplo 2: Guardando los resultados en un vector
+
+```{r}
+dado <- 1:6
+mi_vector <- NULL
+for(cara in dado) {
+  mi_vector[cara] <- cara ^ 2
+}
+mi_vector
+```
+
+
+Ejemplo 3: Loops con vectores
+
+```{r}
+alumnos <- c("Carmen", "Adriana", "Marco", "Fabi", "Brenda")
+
+for(i in 1:length(alumnos)) {
+  print(paste("Hola,", alumnos[i], sep = " "))
+}
+```
+
+
+Ejemplo 4: loops en Dataframes
+
+```{r}
+df <- data.frame(a = rnorm(10), b = rnorm(10),
+                 c = rnorm(10), d = rnorm(10))
+
+for(i in 1:ncol(df)){
+  promedio = mean(df[,i])
+  print(promedio)
+}
+```
+
+
+
+### Estructura de bucle "while":
+
+La estructura "`while`" permite repetir la ejecución de un bloque de código mientras se cumpla una condición determinada. La sintaxis básica de la estructura "`while`" es la siguiente:
+
+```{r eval=FALSE}
+while (condición) {
+  # Código a ejecutar mientras se cumpla la condición
+}
+
+```
+
+La "condición" es una expresión lógica que evalúa a verdadero o falso. Si la condición es verdadera, se ejecutará el bloque de código dentro del "while". Este proceso se repetirá hasta que la condición sea falsa.
+
+
+### Estructura de bucle "repeat":
+
+```{r eval=FALSE}
+repeat {
+  # Código a ejecutar de manera indefinida
+  if (condición) {
+    break
+  }
+}
+```
+El bloque de código dentro del "`repeat`" se ejecutará de manera indefinida hasta que se encuentre la sentencia "`break`", que permite salir del bucle. La "condición" es una expresión lógica que evalúa a verdadero o falso. Si la condición es verdadera, se ejecutará la sentencia "break" y se saldrá del bucle.
+
+
+## Estructuras de control de flujo
+
+"`next`" y "`break`" son palabras clave importantes en R que se utilizan en las estructuras de control de flujo, específicamente en las estructuras de bucle. "next" se utiliza para saltar a la siguiente iteración del bucle sin ejecutar el resto del código dentro del bucle, mientras que "break" se utiliza para detener el bucle de forma abrupta, incluso si la condición del bucle todavía se cumple.
+
+###  Estructuras de control "next":
+
+"`next`" se utiliza en una estructura de bucle para saltar a la siguiente iteración del bucle sin ejecutar el resto del código dentro del bucle. Es decir, si se encuentra la palabra clave "next" dentro de un bucle, se omitirá el código que viene después y el bucle pasará inmediatamente a la siguiente iteración. La palabra clave "next" es útil cuando se desea saltar una iteración específica del bucle, sin afectar el resto del código.
+
+Por ejemplo, en el siguiente código se utiliza la palabra clave "next" para omitir la impresión del número 3 dentro del bucle "for":
+
+```{r}
+for (i in 1:5) {
+  if (i == 3) {
+    next
+  }
+  print(i)
+}
+```
+###  Estructuras de control "break":
+
+"break", por otro lado, se utiliza en una estructura de bucle para detener el bucle de forma abrupta, incluso si la condición del bucle todavía se cumple. Es decir, si se encuentra la palabra clave "break" dentro de un bucle, se detendrá el bucle de inmediato y se continuará con la ejecución del código que viene después del bucle. La palabra clave "break" es útil cuando se desea detener el bucle en un punto específico sin tener que esperar a que la condición del bucle se deje de cumplir.
+
+Por ejemplo, en el siguiente código se utiliza la palabra clave "break" para detener el bucle "while" cuando el valor de "i" es mayor que 5:
+
+```{r}
+i <- 1
+while (i < 10) {
+  if (i > 5) {
+    break
+  }
+  print(i)
+  i <- i + 1
+}
+```
+
+
+## Referencias:
+
+- [Loops y funciones en R](https://rstudio-pubs-static.s3.amazonaws.com/623888_497a5388a98545c48e9b5b6bec4056f6.html)
