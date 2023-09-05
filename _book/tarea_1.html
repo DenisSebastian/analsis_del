@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Centro de Inteligencia Territorial- UAI">
-<meta name="dcterms.date" content="2023-09-01">
 
-<title>Análisis Criminológico de Datos</title>
+<title>Análisis Criminológico de Datos - Tarea 1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./syllabus.html" rel="next">
+<link href="./references.html" rel="next">
+<link href="./datos.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -76,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introducción</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tarea_1.html">Tareas</a></li><li class="breadcrumb-item"><a href="./tarea_1.html">Tarea 1</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -103,7 +102,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introducción</span></a>
   </div>
 </li>
@@ -130,7 +129,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tarea_1.html" class="sidebar-item-text sidebar-link">
+  <a href="./tarea_1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Tarea 1</span></a>
   </div>
 </li>
@@ -175,9 +174,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a>
+  <li><a href="#antecedentes" id="toc-antecedentes" class="nav-link active" data-scroll-target="#antecedentes">Antecedentes</a></li>
+  <li><a href="#instrucciones" id="toc-instrucciones" class="nav-link" data-scroll-target="#instrucciones">Instrucciones</a>
   <ul class="collapse">
-  <li><a href="#objetivos-del-curso" id="toc-objetivos-del-curso" class="nav-link" data-scroll-target="#objetivos-del-curso">Objetivos del curso</a></li>
+  <li><a href="#parte-1-csv" id="toc-parte-1-csv" class="nav-link" data-scroll-target="#parte-1-csv">Parte 1: CSV</a></li>
+  <li><a href="#parte-2-txt" id="toc-parte-2-txt" class="nav-link" data-scroll-target="#parte-2-txt">Parte 2: TXT</a></li>
+  <li><a href="#parte-3-shp" id="toc-parte-3-shp" class="nav-link" data-scroll-target="#parte-3-shp">Parte 3: SHP</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -187,27 +189,15 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Análisis Criminológico de Datos</h1>
-<p class="subtitle lead">Técnicas Avanzadas de Análisis Delictual Aplicado con uso de SIG</p>
+<h1 class="title">Tarea 1</h1>
+<p class="subtitle lead">Datos</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Centro de Inteligencia Territorial- UAI </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 1, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -215,19 +205,39 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="introducción" class="level1 unnumbered">
-<h1 class="unnumbered">Introducción</h1>
-<p>Este libro tiene como objetivo apoyar la capacitación a los integrantes de la Subsecretaría de Prevención del Delito en el curso de Análisis criminológico de datos. A través de una guía práctica, se proporcionará a los lectores las habilidades necesarias para limpiar, estructurar y analizar datos de una manera rigurosa y efectiva. El libro está diseñado para proporcionar una comprensión sólida de las técnicas de análisis exploratorio y descriptivo de datos, así como de las técnicas de limpieza y transformación de datos.</p>
-<section id="objetivos-del-curso" class="level2">
-<h2 class="anchored" data-anchor-id="objetivos-del-curso">Objetivos del curso</h2>
-<p>El Objetivo General de aprendizaje este curso es aplicar herramientas eficientes para el trabajo con grandes volúmenes de datos, aplicándolos al análisis de patrones territoriales y tendencias delictuales.</p>
-<p><strong>Objetivos específicos: </strong></p>
+<section id="antecedentes" class="level2">
+<h2 class="anchored" data-anchor-id="antecedentes">Antecedentes</h2>
 <ul>
-<li>Abrir datos de formato diverso, limpiarlos, estructurarlos y concatenarlos, en R.</li>
-<li>Generar indicadores y series longitudinales con datos de panel, en R.</li>
-<li>Exportar datos agregados a .csv y .shp, para analizar casos territoriales en otros programas.</li>
+<li>Fecha de entrega: <strong>12 de Septiembre 2023</strong></li>
+<li>Formato: Informe (docx, pdf) + Código (.R)</li>
+<li>Integrantes: 3</li>
 </ul>
-<p>Se evaluará la aplicación de estas herramientas al análisis personal de casos territoriales.</p>
+</section>
+<section id="instrucciones" class="level2">
+<h2 class="anchored" data-anchor-id="instrucciones">Instrucciones</h2>
+<section id="parte-1-csv" class="level3">
+<h3 class="anchored" data-anchor-id="parte-1-csv">Parte 1: CSV</h3>
+<ul>
+<li>Lectura secuencial de archivos reales (no samples)</li>
+<li>Unir y Guardar</li>
+<li>Visualización de resultados (head, dim)</li>
+</ul>
+</section>
+<section id="parte-2-txt" class="level3">
+<h3 class="anchored" data-anchor-id="parte-2-txt">Parte 2: TXT</h3>
+<ul>
+<li>Lectura secuencial de archivos reales (no samples)</li>
+<li>Unir y Guardar</li>
+<li>Visualización de resultados (head, dim)</li>
+</ul>
+</section>
+<section id="parte-3-shp" class="level3">
+<h3 class="anchored" data-anchor-id="parte-3-shp">Parte 3: SHP</h3>
+<ul>
+<li>Lectura secuencial de archivos reales (no samples)</li>
+<li>Unir (dos soluciones y justificar la mejor opción) y Guardarlos</li>
+<li>Visualización de resultados (head, dim)</li>
+</ul>
 
 
 </section>
@@ -469,10 +479,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./datos.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Datos</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./syllabus.html" class="pagination-link">
-        <span class="nav-page-text">Syllabus</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

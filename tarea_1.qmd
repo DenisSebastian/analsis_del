@@ -1,0 +1,34 @@
+---
+subtitle: "Datos"
+editor_options: 
+  chunk_output_type: console
+---
+
+# Tarea 1 {.unnumbered}
+
+
+## Antecedentes
+
+- Fecha de entrega: **12 de Septiembre 2023**
+- Formato: Informe (docx, pdf) + Código (.R)
+- Integrantes: 3 
+
+
+## Instrucciones
+
+
+### Parte 1: CSV
+- Lectura secuencial de archivos reales (no samples)
+- Unir y Guardar
+- Visualización de resultados (head, dim)
+
+### Parte 2: TXT
+- Lectura secuencial de archivos reales (no samples)
+- Unir y Guardar
+- Visualización de resultados (head, dim)
+
+### Parte 3: SHP
+- Lectura secuencial de archivos reales (no samples)
+- Unir (dos soluciones y justificar la mejor opción) y Guardarlos
+- Visualización de resultados (head, dim)
+
