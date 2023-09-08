@@ -192,26 +192,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./crime_f.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Funciones Generales</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./r_project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">R Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">R Project</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Variables en R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Variables en R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./control_r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Estructuras en R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Estructuras en R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tidyverse.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Tidyverse en R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Tidyverse en R</span></span></a>
   </div>
 </li>
       </ul>
@@ -275,13 +281,13 @@ Directorio de Trabajo
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Definir correctamente el directorio de trabajo en R, que corresponde al lugar o carpeta de origen de donde R va acceder a los diferentes archivos. (Ver <a href="r_project.html#sec-wd"><span>Section&nbsp;A.5</span></a>)</p>
+<p>Definir correctamente el directorio de trabajo en R, que corresponde al lugar o carpeta de origen de donde R va acceder a los diferentes archivos. (Ver <a href="r_project.html#sec-wd"><span>Section&nbsp;B.5</span></a>)</p>
 </div>
 </div>
 <section id="datos-csv" class="level3" data-number="1.2.1">
 <h3 data-number="1.2.1" class="anchored" data-anchor-id="datos-csv"><span class="header-section-number">1.2.1</span> Datos CSV</h3>
 <p>Una forma común de almacenar tablas es mediante archivos de valores separados por comas (CSV). Estos archivos tienen una extensión <code>.csv</code> y se utilizan ampliamente para compartir datos porque son compatibles con muchos sistemas diferentes y ocupan relativamente poco espacio de almacenamiento. Una ventaja de usar archivos .csv es la disponibilidad de la función <code>read.csv()</code>, que está optimizada para importar archivos CSV y esta disponible por defeto en R base.</p>
-<p><strong>Lectura de Unitaria:</strong> A continuación procedermos a la lectura de uno de los archivos CSV. Recordar definir un directorio de trabajo que será el punto de partida donde se accederá a los diferentes archivos del proyecto. (Ver <a href="r_project.html#sec-wd"><span>Section&nbsp;A.5</span></a>)</p>
+<p><strong>Lectura de Unitaria:</strong> A continuación procedermos a la lectura de uno de los archivos CSV. Recordar definir un directorio de trabajo que será el punto de partida donde se accederá a los diferentes archivos del proyecto. (Ver <a href="r_project.html#sec-wd"><span>Section&nbsp;B.5</span></a>)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Definir Diferectorio de trabajo con setwd("") o con Rstudio</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Lectura y asignar nombre de variables</span></span>
@@ -307,7 +313,7 @@ Encoding UTF-8
 <p>Se agregó a la función <code>read.csv()</code> el parámetro <code>encoding = "UTF-8"</code> para procese correctamente las cadenas de textos con acentos o ñ propias del idioma español</p>
 </div>
 </div>
-<p><strong>Lectura de Secuencial:</strong> En este caso si todos los archivos que se van a leer se encuentran en la misma carpeta o directorio se recomienda que declare esa ruta en una variable en R y posteriormente genere la ruta completa adicionando solamente el nombre del archivo para esto usaremos la función <code>paste0()</code> para concatener cadenas de texto. (Ver <a href="variables.html#sec-string"><span>Section&nbsp;B.1.2</span></a>)</p>
+<p><strong>Lectura de Secuencial:</strong> En este caso si todos los archivos que se van a leer se encuentran en la misma carpeta o directorio se recomienda que declare esa ruta en una variable en R y posteriormente genere la ruta completa adicionando solamente el nombre del archivo para esto usaremos la función <code>paste0()</code> para concatener cadenas de texto. (Ver <a href="variables.html#sec-string"><span>Section&nbsp;C.1.2</span></a>)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Declarar la ruta en una variable (considerar que finaliza con slash "/")</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>path_csv <span class="ot">&lt;-</span>  <span class="st">"data/samples/Base Estadistica/CSV/"</span></span>
@@ -385,7 +391,7 @@ Definir el elemento separador
 <p>Una consideración importante, para que R entienda que los datos que lee desde un archivo TXT corresponden a tablas de datos, hay que declarar que caracter es separador, en lcaso de los archivos de samples es <code>"\t"</code> que representa tab. Puede variar de cada tipo de archivo.</p>
 </div>
 </div>
-<p><strong>Lectura de Unitaria:</strong> A continuación procedermos a la lectura de uno de los archivos CSV. Recordar definir un directorio de trabajo que será el punto de partida donde se accederá a los diferentes archivos del proyecto. (Ver <a href="r_project.html#sec-wd"><span>Section&nbsp;A.5</span></a>)</p>
+<p><strong>Lectura de Unitaria:</strong> A continuación procedermos a la lectura de uno de los archivos CSV. Recordar definir un directorio de trabajo que será el punto de partida donde se accederá a los diferentes archivos del proyecto. (Ver <a href="r_project.html#sec-wd"><span>Section&nbsp;B.5</span></a>)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Definir Diferectorio de trabajo con setwd("") o con Rstudio</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Lectura y asignar nombre de variables</span></span>

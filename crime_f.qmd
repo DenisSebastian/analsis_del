@@ -209,4 +209,83 @@ muestra_frac <-  function(df, prop){
 ```
 
 
+## Muestreo Aleatorio
+
+Función que cambia orden de elementos en un vector, en el caso de aplicación este vector será una columna.
+
+```{r}
+# valores aleatios por columna
+
+generar_datos_aleatorios <- function(columna) {
+  # Obtener la longitud de la columna
+  longitud <- length(columna)
+  # Generar datos aleatorios de la misma longitud
+  datos_aleatorios <- sample(columna, longitud)
+  return(datos_aleatorios)
+}
+```
+
+
+A continuación se presentan una serie de funciones de lectura de archivos en diferentes formatos, que aposteriormente noniminza aleatoriamente cada columna utilizando la función `generar_datos_aleatorios()`, luego toma una muestra de datos y finalmente guarda los resultados. Lo anterior, se crearon funciones para datos tipo csv, txt y shapefile.
+
+```{r}
+samples_csv <- function(path_in, path_out, file_name, n_samples){
+  
+  print("Lectura")
+  tabla_anonima <- read.csv(file = paste0(path_in, file_name),
+                            stringsAsFactors = FALSE) 
+  
+  
+  print("Revolviendo datos por columna")
+  tabla_anonima  <- tabla_anonima%>%
+    mutate_all(~ generar_datos_aleatorios(.))%>% 
+    sample_n(size = n_samples, replace = F) 
+  
+  print("guardando")
+  write.csv(x = tabla_anonima, file = paste0(path_out, file_name))
+  return(tabla_anonima)
+}
+```
+
+
+```{r}
+samples_txt <- function(path_in, path_out, file_name, n_samples, 
+                        header = TRUE, sep = "\t"){
+  
+  print("Lectura")
+  tabla_anonima <- read.delim(file = paste0(path_in, file_name),
+                              sep = sep, header = header, 
+                              quote = "", 
+                              stringsAsFactors = FALSE) 
+  
+  print("Revolviendo datos por columna")
+  tabla_sampled  <- tabla_anonima%>%
+    mutate_all(~ generar_datos_aleatorios(.))%>% 
+    sample_n(size = n_samples, replace = F) 
+  
+  print("guardando")
+  write.table(x = tabla_sampled, file = paste0(path_out, file_name), 
+               sep = sep, na = "", quote = FALSE, eol = "\n")
+  return(tabla_sampled)
+}
+```
+
+
+```{r}
+samples_shp <- function(path_in, path_out, file_name, n_samples){
+  
+  print("Lectura")
+  tabla_sf <- st_read(paste0(path_in, file_name)) 
+  
+  print("Revolviendo datos por columna")
+  tabla_sf_anomina  <- tabla_sf%>%
+    mutate_all(~ generar_datos_aleatorios(.))%>% 
+    sample_n(size = n_samples, replace = F) 
+  
+  print("guardando")
+  st_write(tabla_sf_anomina, paste0(path_out, file_name), delete_dsn =T)
+  return(tabla_sf_anomina)
+}
+
+```
 

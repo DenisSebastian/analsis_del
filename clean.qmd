@@ -222,7 +222,7 @@ delitos_clean <- delitos_raw[!duplicated(delitos_raw$ID), ]
 
 <!-- ``` -->
 
-### Imputar datos de Zonas Censales a los Delitos
+## Imputar datos de Zonas Censales a los Delitos
 
 A la información correspondiente a casos policiales se le va a imputar información de zonas censales ({{< var organization.ine >}}) a través de una operación espacial llamada `inteserct` entre los polígonos de las zonas censales con los puntos de los casos policiales.
 
