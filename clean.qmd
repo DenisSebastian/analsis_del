@@ -36,9 +36,10 @@ library(tidyr)
 library(sf)
 ```
 
-## Lectura de Datos
+## Lectura y Unificación de Bases
 
-Los datos se encuentran en formato RDS separados por y sin ningún tratamiento. Se procederá a revisar el contenido de los datos del año 2017 llamado `Casos_2017.rds`.
+
+Los datos se encuentran en formato RDS separados por y sin ningún tratamiento. Se procederá a revisar el contenido de los datos del año 2017 llamado `Casos_2017.rds`, para revisar la estructura de la base.
 
 ```{r eval=FALSE}
 datos_2017 <- readRDS(file = "data/delitos/raw/Casos_2017.rds")
@@ -52,7 +53,6 @@ head(datos_2017)
 
 Se puede observar que corresponde a `1.418.435` de casos policiales con información espacial tipo punto ({{< var library.sf >}}), además información temporal y divisiones administrativas.
 
-## Unificar Bases
 
 Las bases están separadas por año por lo tanto se van unificar para obtener un solo archivo, lo que facilitará hacer todas las transformaciones. 
 
@@ -222,7 +222,7 @@ delitos_clean <- delitos_raw[!duplicated(delitos_raw$ID), ]
 
 <!-- ``` -->
 
-## Imputar datos de Zonas Censales a los Delitos
+## Imputar datos Censales
 
 A la información correspondiente a casos policiales se le va a imputar información de zonas censales ({{< var organization.ine >}}) a través de una operación espacial llamada `inteserct` entre los polígonos de las zonas censales con los puntos de los casos policiales.
 
