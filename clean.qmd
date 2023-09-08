@@ -174,7 +174,7 @@ Primero creamos una variable temporal de delitos con las columnas de interés:
 ```{r}
 del <-  delitos_raw %>% 
   sf2df() %>% #variable temporal tipo df (sacar lon lat)
-  dplyr::select(hora, fecha,delito_native,  lon, lat)
+  dplyr::select(HORA_DEL_D, FECHA_DEL, DELITO,  lon, lat)
 
 head(del[,1:5])
 ```
@@ -280,7 +280,7 @@ Con la sigla previamente creada se procede a categorizar cada uno de los casos p
 
 ```{r}
 delitos_cat <- left_join(delitos_info, del_sigla,
-                         by = c("delito_native" ="DELITO"))
+                         by = "DELITO")
 # head(delitos_cat)
 
 

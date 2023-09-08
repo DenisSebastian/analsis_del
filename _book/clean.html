@@ -234,13 +234,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">2.1</span> Introducción</a></li>
   <li><a href="#cargar-librerías" id="toc-cargar-librerías" class="nav-link" data-scroll-target="#cargar-librerías"><span class="header-section-number">2.2</span> Cargar Librerías</a></li>
-  <li><a href="#lectura-de-datos" id="toc-lectura-de-datos" class="nav-link" data-scroll-target="#lectura-de-datos"><span class="header-section-number">2.3</span> Lectura de Datos</a></li>
-  <li><a href="#unificar-bases" id="toc-unificar-bases" class="nav-link" data-scroll-target="#unificar-bases"><span class="header-section-number">2.4</span> Unificar Bases</a></li>
-  <li><a href="#selección-de-variables" id="toc-selección-de-variables" class="nav-link" data-scroll-target="#selección-de-variables"><span class="header-section-number">2.5</span> Selección de variables</a></li>
-  <li><a href="#eliminar-duplicados" id="toc-eliminar-duplicados" class="nav-link" data-scroll-target="#eliminar-duplicados"><span class="header-section-number">2.6</span> Eliminar Duplicados</a></li>
-  <li><a href="#imputar-datos-de-zonas-censales-a-los-delitos" id="toc-imputar-datos-de-zonas-censales-a-los-delitos" class="nav-link" data-scroll-target="#imputar-datos-de-zonas-censales-a-los-delitos"><span class="header-section-number">2.7</span> Imputar datos de Zonas Censales a los Delitos</a></li>
-  <li><a href="#categorizar-los-delitos" id="toc-categorizar-los-delitos" class="nav-link" data-scroll-target="#categorizar-los-delitos"><span class="header-section-number">2.8</span> Categorizar los delitos</a></li>
-  <li><a href="#barrios-comerciales" id="toc-barrios-comerciales" class="nav-link" data-scroll-target="#barrios-comerciales"><span class="header-section-number">2.9</span> Barrios Comerciales</a></li>
+  <li><a href="#lectura-y-unificación-de-bases" id="toc-lectura-y-unificación-de-bases" class="nav-link" data-scroll-target="#lectura-y-unificación-de-bases"><span class="header-section-number">2.3</span> Lectura y Unificación de Bases</a></li>
+  <li><a href="#selección-de-variables" id="toc-selección-de-variables" class="nav-link" data-scroll-target="#selección-de-variables"><span class="header-section-number">2.4</span> Selección de variables</a></li>
+  <li><a href="#eliminar-duplicados" id="toc-eliminar-duplicados" class="nav-link" data-scroll-target="#eliminar-duplicados"><span class="header-section-number">2.5</span> Eliminar Duplicados</a></li>
+  <li><a href="#imputar-datos-censales" id="toc-imputar-datos-censales" class="nav-link" data-scroll-target="#imputar-datos-censales"><span class="header-section-number">2.6</span> Imputar datos Censales</a></li>
+  <li><a href="#categorizar-los-delitos" id="toc-categorizar-los-delitos" class="nav-link" data-scroll-target="#categorizar-los-delitos"><span class="header-section-number">2.7</span> Categorizar los delitos</a></li>
+  <li><a href="#barrios-comerciales" id="toc-barrios-comerciales" class="nav-link" data-scroll-target="#barrios-comerciales"><span class="header-section-number">2.8</span> Barrios Comerciales</a></li>
   </ul>
 </nav>
     </div>
@@ -281,9 +280,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="lectura-de-datos" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="lectura-de-datos"><span class="header-section-number">2.3</span> Lectura de Datos</h2>
-<p>Los datos se encuentran en formato RDS separados por y sin ningún tratamiento. Se procederá a revisar el contenido de los datos del año 2017 llamado <code>Casos_2017.rds</code>.</p>
+<section id="lectura-y-unificación-de-bases" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="lectura-y-unificación-de-bases"><span class="header-section-number">2.3</span> Lectura y Unificación de Bases</h2>
+<p>Los datos se encuentran en formato RDS separados por y sin ningún tratamiento. Se procederá a revisar el contenido de los datos del año 2017 llamado <code>Casos_2017.rds</code>, para revisar la estructura de la base.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>datos_2017 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"data/delitos/raw/Casos_2017.rds"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos_2017)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -292,9 +291,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 <p>Se puede observar que corresponde a <code>1.418.435</code> de casos policiales con información espacial tipo punto (<a href="https://r-spatial.github.io/sf/articles/sf1.html">Simple Features for R</a>), además información temporal y divisiones administrativas.</p>
-</section>
-<section id="unificar-bases" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="unificar-bases"><span class="header-section-number">2.4</span> Unificar Bases</h2>
 <p>Las bases están separadas por año por lo tanto se van unificar para obtener un solo archivo, lo que facilitará hacer todas las transformaciones.</p>
 <p>Primero se listarán todos los archivos que se encuentran en la carpeta</p>
 <div class="cell">
@@ -376,8 +372,8 @@ Lectura Secuencial
 
 </div>
 </section>
-<section id="selección-de-variables" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="selección-de-variables"><span class="header-section-number">2.5</span> Selección de variables</h2>
+<section id="selección-de-variables" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="selección-de-variables"><span class="header-section-number">2.4</span> Selección de variables</h2>
 <p>Una forma sencilla de selección de variables es definir previamente los nombres de columnas que se necesitará y después seleccionar con la función <code>select_at()</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># selección de variables</span></span>
@@ -392,8 +388,8 @@ Lectura Secuencial
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_at</span>(<span class="at">.tbl =</span> ., <span class="at">.vars =</span> cols_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="eliminar-duplicados" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="eliminar-duplicados"><span class="header-section-number">2.6</span> Eliminar Duplicados</h2>
+<section id="eliminar-duplicados" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="eliminar-duplicados"><span class="header-section-number">2.5</span> Eliminar Duplicados</h2>
 <p>Eventualmente es posible que un sistema de adinistración de datos se generen registros duplicados, lo que puede afectar los posteriores análisis entonces es de importancia identificar cuando ocurre y eleminar los duplicados. A continuación se propone una estrategia para esto creando una variable ID compuesta por otras variables donde la probabilidad de que un evento se repita más de una vez sea casi imposble y los más problable que se encuentre en una situación duplicidad de registro.</p>
 <p>Se crea ID por cada registro considerando las variables de <code>hora</code>, <code>fecha</code>, <code>delito_native</code>, <code>lon</code>, <code>lat.</code> Como en nuestro caso la base de delitos en objeto espacial (Simple Features) se extraerá las columnas de latitud y longitud con la función <code>sf2df()</code> alojado en script de funciones generales (<a href="crime_f.html#sec-fnc_df2sf"><span>Section&nbsp;A.1</span></a>).</p>
 <p>Primero creamos una variable temporal de delitos con las columnas de interés:</p>
@@ -432,8 +428,8 @@ Lectura Secuencial
 <!-- mapview(del_reg, zcol = "grupo_delictual") -->
 <!-- ``` -->
 </section>
-<section id="imputar-datos-de-zonas-censales-a-los-delitos" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="imputar-datos-de-zonas-censales-a-los-delitos"><span class="header-section-number">2.7</span> Imputar datos de Zonas Censales a los Delitos</h2>
+<section id="imputar-datos-censales" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="imputar-datos-censales"><span class="header-section-number">2.6</span> Imputar datos Censales</h2>
 <p>A la información correspondiente a casos policiales se le va a imputar información de zonas censales (<a href="https://www.ine.gob.cl">Instituto Nacional de Estadísticas</a>) a través de una operación espacial llamada <code>inteserct</code> entre los polígonos de las zonas censales con los puntos de los casos policiales.</p>
 <p>Lectura de Zonas censales</p>
 <div class="cell">
@@ -457,8 +453,8 @@ Lectura Secuencial
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(delitos_info, <span class="st">"data/delitos/delitos_all_info.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="categorizar-los-delitos" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="categorizar-los-delitos"><span class="header-section-number">2.8</span> Categorizar los delitos</h2>
+<section id="categorizar-los-delitos" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="categorizar-los-delitos"><span class="header-section-number">2.7</span> Categorizar los delitos</h2>
 <p>Considerando que en los casos policiales tiene una diversa tipificación de delitos se procede a categorizarlos en grupos similares.</p>
 <p>Para facilitar el proceso de clasificación a cada tipo de delito se le asignará una Sigla que se encuentra en una hoja de un archivo excel.</p>
 <div class="cell">
@@ -530,8 +526,8 @@ Lectura Secuencial
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(delitos_cat_sigla, <span class="st">"data/delitos/delitos_only_cat.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="barrios-comerciales" class="level2" data-number="2.9">
-<h2 data-number="2.9" class="anchored" data-anchor-id="barrios-comerciales"><span class="header-section-number">2.9</span> Barrios Comerciales</h2>
+<section id="barrios-comerciales" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="barrios-comerciales"><span class="header-section-number">2.8</span> Barrios Comerciales</h2>
 <p>Finalmente se procede a filtrar aquellos casos policiales que sean considerados en el proyecto de valuación de barrios comerciales.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>delitos_cat_bc_URB <span class="ot">&lt;-</span> delitos_cat<span class="sc">%&gt;%</span></span>
