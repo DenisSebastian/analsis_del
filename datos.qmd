@@ -52,12 +52,21 @@ Una forma común de almacenar tablas es mediante archivos de valores separados p
 # 2. Lectura y asignar nombre de variables
 
 partes_1T_2015 <- read.csv(
-  file = "data/samples/Base Estadistica/CSV/partes_1er_trim_2015.csv") 
+  file = "data/samples/Base Estadistica/CSV/partes_1er_trim_2015.csv", 
+  encoding = "UTF-8") 
 
 # dim(partes_1T_2015)
 # str(partes_1T_2015)
 # head(partes_1T_2015)
 ```
+
+::: {.callout-note}
+## Encoding UTF-8
+Se agregó a la función `read.csv()` el parámetro `encoding = "UTF-8"` para procese correctamente las cadenas de textos con acentos o ñ propias del idioma español
+:::
+
+
+
 
 **Lectura de Secuencial:** En este caso si todos los archivos que se van a leer se encuentran en la misma carpeta o directorio se recomienda que declare esa ruta en una variable en R y posteriormente genere la ruta completa adicionando solamente el nombre del archivo para esto usaremos la función `paste0()` para concatener cadenas de texto. (Ver @sec-string)
 
@@ -68,15 +77,19 @@ path_csv <-  "data/samples/Base Estadistica/CSV/"
 
 # Partes
 # Declarar la ruta del archivo + nombre
-partes_1T_2015 <- read.csv(file =  paste0(path_csv, "partes_1er_trim_2015.csv"))
-partes_2T_2015 <- read.csv(file =  paste0(path_csv, "partes_2do_trim_2015.csv"))
+partes_1T_2015 <- read.csv(file =  paste0(path_csv, "partes_1er_trim_2015.csv"), 
+                           encoding = "UTF-8")
+partes_2T_2015 <- read.csv(file =  paste0(path_csv, "partes_2do_trim_2015.csv"), 
+                           encoding = "UTF-8")
 
 
 # Participaciones
 particp_1T_2015 <- read.csv(
-  file =  paste0(path_csv, "participantes_1er_trim_2015.csv"))
+  file =  paste0(path_csv, "participantes_1er_trim_2015.csv"),
+  encoding = "UTF-8")
 particp_2T_2015 <- read.csv(
-  file =  paste0(path_csv, "participantes_2do_trim_2015.csv"))
+  file =  paste0(path_csv, "participantes_2do_trim_2015.csv"),
+  encoding = "UTF-8")
 
 
 ```
@@ -141,7 +154,8 @@ Una consideración importante, para que R entienda que los datos que lee desde u
 
 partes_1T_2015_txt <- read.delim(
   file = "data/samples/Base Estadistica/TXT/partes_1er_trim_2015.txt",
-  header = TRUE, sep = "\t", quote = "",  stringsAsFactors = FALSE) 
+  header = TRUE, sep = "\t", quote = "",  stringsAsFactors = FALSE, 
+  encoding = "UTF-8") 
 
 dim(partes_1T_2015_txt)
 str(partes_1T_2015_txt)
@@ -159,21 +173,25 @@ path_txt <-  "data/samples/Base Estadistica/TXT/"
 # Declarar la ruta del archivo + nombre
 partes_1T_2015_txt <- read.delim(
   file =  paste0(path_txt, "partes_1er_trim_2015.txt"),
-  header = TRUE, sep = "\t", quote = "",  stringsAsFactors = FALSE)
+  header = TRUE, sep = "\t", quote = "",  stringsAsFactors = FALSE,
+  encoding = "UTF-8")
 
 partes_2T_2015_txt <- read.delim(
   file =  paste0(path_txt, "partes_2do_trim_2015.txt"),
-  header = TRUE, sep = "\t", quote = "",  stringsAsFactors = FALSE)
+  header = TRUE, sep = "\t", quote = "",  stringsAsFactors = FALSE,
+  encoding = "UTF-8")
 
 
 # Participaciones
 particp_1T_2015_txt <- read.delim(
   file =  paste0(path_txt, "participantes_1er_trim_2015.txt"),
-  header = TRUE, sep = "\t", quote = "",  stringsAsFactors = FALSE)
+  header = TRUE, sep = "\t", quote = "",  stringsAsFactors = FALSE,
+  encoding = "UTF-8")
 
 particp_2T_2015_txt <- read.delim(
   file =  paste0(path_txt, "participantes_2do_trim_2015.txt"),
-  header = TRUE, sep = "\t", quote = "",  stringsAsFactors = FALSE)
+  header = TRUE, sep = "\t", quote = "",  stringsAsFactors = FALSE,
+  encoding = "UTF-8")
 
 ```
 

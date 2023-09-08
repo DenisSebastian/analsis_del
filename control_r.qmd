@@ -2,7 +2,7 @@
 subtitle: "Estructuras de Control y Bucles en R"
 ---
 
-# Bucles en R
+# Estructuras en R
 
 Las estructuras de control en R son herramientas que permiten controlar el flujo de ejecución de un programa. Las estructuras de control son esenciales para cualquier lenguaje de programación, ya que permiten que el programa tome decisiones y realice acciones en función de ciertas condiciones.
 
@@ -100,7 +100,7 @@ if (condición1) {
 
 En resumen, las estructuras condicionales en R son herramientas muy útiles para controlar el flujo de ejecución de un programa en función de ciertas condiciones. Estas estructuras permiten crear soluciones más eficientes y complejas al permitir que los programas tomen decisiones y realicen acciones en función de las condiciones que se presenten.
 
-## Estructuras de bucles
+## Estructuras de bucles {#sec-bucles}
 
 
 Las estructuras de bucles son una de las tres estructuras de control principales en R. Estas estructuras permiten ejecutar un bloque de código repetidamente mientras se cumpla una condición determinada. En R, existen tres estructuras de bucles principales: "`while`", "`for`" y "`repeat`".

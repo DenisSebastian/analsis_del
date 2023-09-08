@@ -4,7 +4,7 @@ subtitle: "Funciones de uso Frecuente"
 
 # Funciones Generales {#sec-fuctions}
 
-## Dataframe to SF Object 
+## Dataframe to SF Object {#sec-fnc_df2sf}
 
 Convertir DataFrame con columnas de latitud y longitud a un objeto espacial llamado simple feature además se le puede asignar un sistema de referencia de coordenadas.
 
@@ -35,7 +35,7 @@ sf2df <- function(sf_points){
 ```
 
 
-## Imputar datos por intersect
+## Imputar datos por intersect {#sec-fnc_addIntersect}
 
 ```{r eval=FALSE}
 add_info_intersects <-  function(pol_info, sf_data){

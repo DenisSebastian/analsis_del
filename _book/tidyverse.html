@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Análisis Criminológico de Datos - Appendix E — Tidyverse en R</title>
+<title>Análisis Criminológico de Datos - Appendix D — Tidyverse en R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./espacial_r.html" rel="next">
-<link href="./funciones.html" rel="prev">
+<link href="./control_r.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -109,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r_project.html">Appendices</a></li><li class="breadcrumb-item"><a href="./tidyverse.html"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Tidyverse en R</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r_project.html">Appendices</a></li><li class="breadcrumb-item"><a href="./tidyverse.html"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Tidyverse en R</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -148,16 +147,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./marco.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Marco de Referencia</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./datos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Datos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Datos</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Tareas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tarea_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tarea 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -166,13 +176,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r_project.html" class="sidebar-item-text sidebar-link">
@@ -193,20 +203,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./funciones.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Funciones en R</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./tidyverse.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Tidyverse en R</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./espacial_r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Spatial</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Tidyverse en R</span></span></a>
   </div>
 </li>
       </ul>
@@ -221,20 +219,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introducción-a-tidyverse" id="toc-introducción-a-tidyverse" class="nav-link active" data-scroll-target="#introducción-a-tidyverse"><span class="header-section-number">E.1</span> Introducción a Tidyverse</a></li>
-  <li><a href="#estructura-de-un-dataframe" id="toc-estructura-de-un-dataframe" class="nav-link" data-scroll-target="#estructura-de-un-dataframe"><span class="header-section-number">E.2</span> Estructura de un dataframe</a></li>
-  <li><a href="#funciones-básicas-dplyr" id="toc-funciones-básicas-dplyr" class="nav-link" data-scroll-target="#funciones-básicas-dplyr"><span class="header-section-number">E.3</span> Funciones básicas <code>dplyr</code></a>
+  <li><a href="#introducción-a-tidyverse" id="toc-introducción-a-tidyverse" class="nav-link active" data-scroll-target="#introducción-a-tidyverse"><span class="header-section-number">D.1</span> Introducción a Tidyverse</a></li>
+  <li><a href="#estructura-de-un-dataframe" id="toc-estructura-de-un-dataframe" class="nav-link" data-scroll-target="#estructura-de-un-dataframe"><span class="header-section-number">D.2</span> Estructura de un dataframe</a></li>
+  <li><a href="#funciones-básicas-dplyr" id="toc-funciones-básicas-dplyr" class="nav-link" data-scroll-target="#funciones-básicas-dplyr"><span class="header-section-number">D.3</span> Funciones básicas <code>dplyr</code></a>
   <ul class="collapse">
-  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select"><span class="header-section-number">E.3.1</span> Select</a></li>
-  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="header-section-number">E.3.2</span> Filter</a></li>
+  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select"><span class="header-section-number">D.3.1</span> Select</a></li>
+  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="header-section-number">D.3.2</span> Filter</a></li>
   </ul></li>
-  <li><a href="#resúmenes-estadísticos-con-dplyr" id="toc-resúmenes-estadísticos-con-dplyr" class="nav-link" data-scroll-target="#resúmenes-estadísticos-con-dplyr"><span class="header-section-number">E.4</span> Resúmenes Estadísticos con <code>dplyr</code></a></li>
-  <li><a href="#visualización-de-variables" id="toc-visualización-de-variables" class="nav-link" data-scroll-target="#visualización-de-variables"><span class="header-section-number">E.5</span> Visualización de Variables</a>
+  <li><a href="#resúmenes-estadísticos-con-dplyr" id="toc-resúmenes-estadísticos-con-dplyr" class="nav-link" data-scroll-target="#resúmenes-estadísticos-con-dplyr"><span class="header-section-number">D.4</span> Resúmenes Estadísticos con <code>dplyr</code></a></li>
+  <li><a href="#visualización-de-variables" id="toc-visualización-de-variables" class="nav-link" data-scroll-target="#visualización-de-variables"><span class="header-section-number">D.5</span> Visualización de Variables</a>
   <ul class="collapse">
-  <li><a href="#función-plot" id="toc-función-plot" class="nav-link" data-scroll-target="#función-plot"><span class="header-section-number">E.5.1</span> Función Plot</a></li>
-  <li><a href="#package-ggplot2" id="toc-package-ggplot2" class="nav-link" data-scroll-target="#package-ggplot2"><span class="header-section-number">E.5.2</span> Package ggplot2</a></li>
+  <li><a href="#función-plot" id="toc-función-plot" class="nav-link" data-scroll-target="#función-plot"><span class="header-section-number">D.5.1</span> Función Plot</a></li>
+  <li><a href="#package-ggplot2" id="toc-package-ggplot2" class="nav-link" data-scroll-target="#package-ggplot2"><span class="header-section-number">D.5.2</span> Package ggplot2</a></li>
   </ul></li>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">E.6</span> Referencias:</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">D.6</span> Referencias:</a></li>
   </ul>
 </nav>
     </div>
@@ -243,7 +241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Appendix E — Tidyverse en R</h1>
+<h1 class="title">Appendix D — Tidyverse en R</h1>
 <p class="subtitle lead">Universo Tidyverse</p>
 </div>
 
@@ -259,8 +257,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="introducción-a-tidyverse" class="level2" data-number="E.1">
-<h2 data-number="E.1" class="anchored" data-anchor-id="introducción-a-tidyverse"><span class="header-section-number">E.1</span> Introducción a Tidyverse</h2>
+<section id="introducción-a-tidyverse" class="level2" data-number="D.1">
+<h2 data-number="D.1" class="anchored" data-anchor-id="introducción-a-tidyverse"><span class="header-section-number">D.1</span> Introducción a Tidyverse</h2>
 <p><a href="https://www.tidyverse.org">Tidyverse</a> es una colección de paquetes diseñados para Ciencia de Datos.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -280,8 +278,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Las funciones nos permiten evitar la repetición de código; sin embargo, muchas veces necesitas repertir las mismas acciones con diferentes inputs. Puedes hacer esto con herramientas de iteración.</li>
 </ul>
 </section>
-<section id="estructura-de-un-dataframe" class="level2" data-number="E.2">
-<h2 data-number="E.2" class="anchored" data-anchor-id="estructura-de-un-dataframe"><span class="header-section-number">E.2</span> Estructura de un dataframe</h2>
+<section id="estructura-de-un-dataframe" class="level2" data-number="D.2">
+<h2 data-number="D.2" class="anchored" data-anchor-id="estructura-de-un-dataframe"><span class="header-section-number">D.2</span> Estructura de un dataframe</h2>
 <center>
 <img src="images/tidy_frame.svg" class="img-fluid" style="width:80.0%">
 </center>
@@ -306,13 +304,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="funciones-básicas-dplyr" class="level2" data-number="E.3">
-<h2 data-number="E.3" class="anchored" data-anchor-id="funciones-básicas-dplyr"><span class="header-section-number">E.3</span> Funciones básicas <code>dplyr</code></h2>
+<section id="funciones-básicas-dplyr" class="level2" data-number="D.3">
+<h2 data-number="D.3" class="anchored" data-anchor-id="funciones-básicas-dplyr"><span class="header-section-number">D.3</span> Funciones básicas <code>dplyr</code></h2>
 <center>
 <img src="images/dplyr_variables.png" class="img-fluid" style="width:70.0%">
 </center>
-<section id="select" class="level3" data-number="E.3.1">
-<h3 data-number="E.3.1" class="anchored" data-anchor-id="select"><span class="header-section-number">E.3.1</span> Select</h3>
+<section id="select" class="level3" data-number="D.3.1">
+<h3 data-number="D.3.1" class="anchored" data-anchor-id="select"><span class="header-section-number">D.3.1</span> Select</h3>
 <p><code>select</code> Seleccionar variables relevantes</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># seleccionar nomnres de columnas que deseo conservar</span></span>
@@ -355,8 +353,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="filter" class="level3" data-number="E.3.2">
-<h3 data-number="E.3.2" class="anchored" data-anchor-id="filter"><span class="header-section-number">E.3.2</span> Filter</h3>
+<section id="filter" class="level3" data-number="D.3.2">
+<h3 data-number="D.3.2" class="anchored" data-anchor-id="filter"><span class="header-section-number">D.3.2</span> Filter</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mi_comuna <span class="ot">&lt;-</span> <span class="st">"LAS CONDES"</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -445,8 +443,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="resúmenes-estadísticos-con-dplyr" class="level2" data-number="E.4">
-<h2 data-number="E.4" class="anchored" data-anchor-id="resúmenes-estadísticos-con-dplyr"><span class="header-section-number">E.4</span> Resúmenes Estadísticos con <code>dplyr</code></h2>
+<section id="resúmenes-estadísticos-con-dplyr" class="level2" data-number="D.4">
+<h2 data-number="D.4" class="anchored" data-anchor-id="resúmenes-estadísticos-con-dplyr"><span class="header-section-number">D.4</span> Resúmenes Estadísticos con <code>dplyr</code></h2>
 <center>
 <img src="images/dplyr_group_by.png" class="img-fluid" style="width:70.0%">
 </center>
@@ -495,10 +493,10 @@ Densidad de comercio
 </div>
 </div>
 </section>
-<section id="visualización-de-variables" class="level2" data-number="E.5">
-<h2 data-number="E.5" class="anchored" data-anchor-id="visualización-de-variables"><span class="header-section-number">E.5</span> Visualización de Variables</h2>
-<section id="función-plot" class="level3" data-number="E.5.1">
-<h3 data-number="E.5.1" class="anchored" data-anchor-id="función-plot"><span class="header-section-number">E.5.1</span> Función Plot</h3>
+<section id="visualización-de-variables" class="level2" data-number="D.5">
+<h2 data-number="D.5" class="anchored" data-anchor-id="visualización-de-variables"><span class="header-section-number">D.5</span> Visualización de Variables</h2>
+<section id="función-plot" class="level3" data-number="D.5.1">
+<h3 data-number="D.5.1" class="anchored" data-anchor-id="función-plot"><span class="header-section-number">D.5.1</span> Función Plot</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>) <span class="co"># evitas notación cientiífica</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(sii_com<span class="sc">$</span>vivienda, <span class="at">breaks =</span> <span class="dv">50</span>,</span>
@@ -509,8 +507,8 @@ Densidad de comercio
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># colores:https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="package-ggplot2" class="level3" data-number="E.5.2">
-<h3 data-number="E.5.2" class="anchored" data-anchor-id="package-ggplot2"><span class="header-section-number">E.5.2</span> Package <a href="https://ggplot2.tidyverse.org">ggplot2</a></h3>
+<section id="package-ggplot2" class="level3" data-number="D.5.2">
+<h3 data-number="D.5.2" class="anchored" data-anchor-id="package-ggplot2"><span class="header-section-number">D.5.2</span> Package <a href="https://ggplot2.tidyverse.org">ggplot2</a></h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sii_com, <span class="fu">aes</span>(<span class="at">x =</span> vivienda)) <span class="sc">+</span> </span>
@@ -540,8 +538,8 @@ Densidad de comercio
 </div>
 </section>
 </section>
-<section id="referencias" class="level2" data-number="E.6">
-<h2 data-number="E.6" class="anchored" data-anchor-id="referencias"><span class="header-section-number">E.6</span> Referencias:</h2>
+<section id="referencias" class="level2" data-number="D.6">
+<h2 data-number="D.6" class="anchored" data-anchor-id="referencias"><span class="header-section-number">D.6</span> Referencias:</h2>
 <ul>
 <li><p><a href="https://www.tidyverse.org">Tidyverse</a></p></li>
 <li><p><a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">Paletas de colores</a></p></li>
@@ -786,14 +784,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./funciones.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Funciones en R</span></span>
+      <a href="./control_r.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Bucles en R</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./espacial_r.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Spatial</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

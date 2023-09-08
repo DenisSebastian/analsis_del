@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Análisis Criminológico de Datos - Appendix C — Bucles en R</title>
+<title>Análisis Criminológico de Datos - Appendix D — Estructuras en R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./funciones.html" rel="next">
+<link href="./tidyverse.html" rel="next">
 <link href="./variables.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./r_project.html">Appendices</a></li><li class="breadcrumb-item"><a href="./control_r.html"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Bucles en R</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./crime_f.html">Appendices</a></li><li class="breadcrumb-item"><a href="./control_r.html"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Estructuras en R</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -148,16 +148,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./marco.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Marco de Referencia</span></span></a>
+  <a href="./datos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Datos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./datos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Datos</span></span></a>
+  <a href="./clean.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Limpieza</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Tareas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tarea_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tarea 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
@@ -166,35 +183,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./crime_f.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Funciones Generales</span></span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r_project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">R Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">R Project</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Variables en R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Variables en R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./control_r.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Bucles en R</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./funciones.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Funciones en R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Estructuras en R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -215,19 +232,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#estructuras-condicionales" id="toc-estructuras-condicionales" class="nav-link active" data-scroll-target="#estructuras-condicionales"><span class="header-section-number">C.1</span> Estructuras condicionales</a></li>
-  <li><a href="#estructuras-de-bucles" id="toc-estructuras-de-bucles" class="nav-link" data-scroll-target="#estructuras-de-bucles"><span class="header-section-number">C.2</span> Estructuras de bucles</a>
+  <li><a href="#estructuras-condicionales" id="toc-estructuras-condicionales" class="nav-link active" data-scroll-target="#estructuras-condicionales"><span class="header-section-number">D.1</span> Estructuras condicionales</a></li>
+  <li><a href="#sec-bucles" id="toc-sec-bucles" class="nav-link" data-scroll-target="#sec-bucles"><span class="header-section-number">D.2</span> Estructuras de bucles</a>
   <ul class="collapse">
-  <li><a href="#estructura-de-bucle-for" id="toc-estructura-de-bucle-for" class="nav-link" data-scroll-target="#estructura-de-bucle-for"><span class="header-section-number">C.2.1</span> Estructura de bucle “<code>for</code>”:</a></li>
-  <li><a href="#estructura-de-bucle-while" id="toc-estructura-de-bucle-while" class="nav-link" data-scroll-target="#estructura-de-bucle-while"><span class="header-section-number">C.2.2</span> Estructura de bucle “while”:</a></li>
-  <li><a href="#estructura-de-bucle-repeat" id="toc-estructura-de-bucle-repeat" class="nav-link" data-scroll-target="#estructura-de-bucle-repeat"><span class="header-section-number">C.2.3</span> Estructura de bucle “repeat”:</a></li>
+  <li><a href="#estructura-de-bucle-for" id="toc-estructura-de-bucle-for" class="nav-link" data-scroll-target="#estructura-de-bucle-for"><span class="header-section-number">D.2.1</span> Estructura de bucle “<code>for</code>”:</a></li>
+  <li><a href="#estructura-de-bucle-while" id="toc-estructura-de-bucle-while" class="nav-link" data-scroll-target="#estructura-de-bucle-while"><span class="header-section-number">D.2.2</span> Estructura de bucle “while”:</a></li>
+  <li><a href="#estructura-de-bucle-repeat" id="toc-estructura-de-bucle-repeat" class="nav-link" data-scroll-target="#estructura-de-bucle-repeat"><span class="header-section-number">D.2.3</span> Estructura de bucle “repeat”:</a></li>
   </ul></li>
-  <li><a href="#estructuras-de-control-de-flujo" id="toc-estructuras-de-control-de-flujo" class="nav-link" data-scroll-target="#estructuras-de-control-de-flujo"><span class="header-section-number">C.3</span> Estructuras de control de flujo</a>
+  <li><a href="#estructuras-de-control-de-flujo" id="toc-estructuras-de-control-de-flujo" class="nav-link" data-scroll-target="#estructuras-de-control-de-flujo"><span class="header-section-number">D.3</span> Estructuras de control de flujo</a>
   <ul class="collapse">
-  <li><a href="#estructuras-de-control-next" id="toc-estructuras-de-control-next" class="nav-link" data-scroll-target="#estructuras-de-control-next"><span class="header-section-number">C.3.1</span> Estructuras de control “next”:</a></li>
-  <li><a href="#estructuras-de-control-break" id="toc-estructuras-de-control-break" class="nav-link" data-scroll-target="#estructuras-de-control-break"><span class="header-section-number">C.3.2</span> Estructuras de control “break”:</a></li>
+  <li><a href="#estructuras-de-control-next" id="toc-estructuras-de-control-next" class="nav-link" data-scroll-target="#estructuras-de-control-next"><span class="header-section-number">D.3.1</span> Estructuras de control “next”:</a></li>
+  <li><a href="#estructuras-de-control-break" id="toc-estructuras-de-control-break" class="nav-link" data-scroll-target="#estructuras-de-control-break"><span class="header-section-number">D.3.2</span> Estructuras de control “break”:</a></li>
   </ul></li>
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">C.4</span> Referencias:</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">D.4</span> Referencias:</a></li>
   </ul>
 </nav>
     </div>
@@ -236,7 +253,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Appendix C — Bucles en R</h1>
+<h1 class="title">Appendix D — Estructuras en R</h1>
 <p class="subtitle lead">Estructuras de Control y Bucles en R</p>
 </div>
 
@@ -260,8 +277,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Estructuras de bucles: Permiten ejecutar un bloque de código repetidamente, mientras se cumpla una condición determinada. Las estructuras de bucles más comunes en R son “<code>while</code>”, “<code>for</code>” y “<code>repeat</code>”.</p></li>
 <li><p>Estructuras de control de flujo: Permiten cambiar el flujo de ejecución del programa en función de ciertas condiciones. Las estructuras de control de flujo más comunes en R son “<code>break</code>” y “<code>next</code>”.</p></li>
 </ol>
-<section id="estructuras-condicionales" class="level2" data-number="C.1">
-<h2 data-number="C.1" class="anchored" data-anchor-id="estructuras-condicionales"><span class="header-section-number">C.1</span> Estructuras condicionales</h2>
+<section id="estructuras-condicionales" class="level2" data-number="D.1">
+<h2 data-number="D.1" class="anchored" data-anchor-id="estructuras-condicionales"><span class="header-section-number">D.1</span> Estructuras condicionales</h2>
 <p>Las estructuras condicionales son una de las tres estructuras de control principales en R. Estas estructuras permiten ejecutar un bloque de código solo si se cumple una condición determinada.</p>
 <p>La estructura condicional más común en R es “<code>if</code>”. La sintaxis básica de la estructura “<code>if</code>” es la siguiente:</p>
 <div class="cell">
@@ -324,8 +341,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>En resumen, las estructuras condicionales en R son herramientas muy útiles para controlar el flujo de ejecución de un programa en función de ciertas condiciones. Estas estructuras permiten crear soluciones más eficientes y complejas al permitir que los programas tomen decisiones y realicen acciones en función de las condiciones que se presenten.</p>
 </section>
-<section id="estructuras-de-bucles" class="level2" data-number="C.2">
-<h2 data-number="C.2" class="anchored" data-anchor-id="estructuras-de-bucles"><span class="header-section-number">C.2</span> Estructuras de bucles</h2>
+<section id="sec-bucles" class="level2" data-number="D.2">
+<h2 data-number="D.2" class="anchored" data-anchor-id="sec-bucles"><span class="header-section-number">D.2</span> Estructuras de bucles</h2>
 <p>Las estructuras de bucles son una de las tres estructuras de control principales en R. Estas estructuras permiten ejecutar un bloque de código repetidamente mientras se cumpla una condición determinada. En R, existen tres estructuras de bucles principales: “<code>while</code>”, “<code>for</code>” y “<code>repeat</code>”.</p>
 <p><strong>Beneficios</strong></p>
 <ul>
@@ -333,8 +350,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Es más sencillo responder a cambios en los requerimientos. A medida que tus necesidades cambian, solo necesitarás realizar cambios en un lugar, en vez de recordar cambiar en cada lugar donde copiaste y pegaste el código.</li>
 <li>Es probable que tengas menos errores porque cada línea de código es utilizada en más lugares.</li>
 </ul>
-<section id="estructura-de-bucle-for" class="level3" data-number="C.2.1">
-<h3 data-number="C.2.1" class="anchored" data-anchor-id="estructura-de-bucle-for"><span class="header-section-number">C.2.1</span> Estructura de bucle “<code>for</code>”:</h3>
+<section id="estructura-de-bucle-for" class="level3" data-number="D.2.1">
+<h3 data-number="D.2.1" class="anchored" data-anchor-id="estructura-de-bucle-for"><span class="header-section-number">D.2.1</span> Estructura de bucle “<code>for</code>”:</h3>
 <p>La estructura “for” permite repetir la ejecución de un bloque de código un número determinado de veces. La sintaxis básica de la estructura “for” es la siguiente:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (variable <span class="cf">in</span> secuencia) {</span>
@@ -392,15 +409,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(promedio)</span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4695001
-[1] -0.4643527
-[1] -0.0719572
-[1] -0.06149058</code></pre>
+<pre><code>[1] 0.4682172
+[1] 0.2372855
+[1] -0.1968423
+[1] 0.2698067</code></pre>
 </div>
 </div>
 </section>
-<section id="estructura-de-bucle-while" class="level3" data-number="C.2.2">
-<h3 data-number="C.2.2" class="anchored" data-anchor-id="estructura-de-bucle-while"><span class="header-section-number">C.2.2</span> Estructura de bucle “while”:</h3>
+<section id="estructura-de-bucle-while" class="level3" data-number="D.2.2">
+<h3 data-number="D.2.2" class="anchored" data-anchor-id="estructura-de-bucle-while"><span class="header-section-number">D.2.2</span> Estructura de bucle “while”:</h3>
 <p>La estructura “<code>while</code>” permite repetir la ejecución de un bloque de código mientras se cumpla una condición determinada. La sintaxis básica de la estructura “<code>while</code>” es la siguiente:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (condición) {</span>
@@ -409,8 +426,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>La “condición” es una expresión lógica que evalúa a verdadero o falso. Si la condición es verdadera, se ejecutará el bloque de código dentro del “while”. Este proceso se repetirá hasta que la condición sea falsa.</p>
 </section>
-<section id="estructura-de-bucle-repeat" class="level3" data-number="C.2.3">
-<h3 data-number="C.2.3" class="anchored" data-anchor-id="estructura-de-bucle-repeat"><span class="header-section-number">C.2.3</span> Estructura de bucle “repeat”:</h3>
+<section id="estructura-de-bucle-repeat" class="level3" data-number="D.2.3">
+<h3 data-number="D.2.3" class="anchored" data-anchor-id="estructura-de-bucle-repeat"><span class="header-section-number">D.2.3</span> Estructura de bucle “repeat”:</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span> {</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Código a ejecutar de manera indefinida</span></span>
@@ -422,11 +439,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>El bloque de código dentro del “<code>repeat</code>” se ejecutará de manera indefinida hasta que se encuentre la sentencia “<code>break</code>”, que permite salir del bucle. La “condición” es una expresión lógica que evalúa a verdadero o falso. Si la condición es verdadera, se ejecutará la sentencia “break” y se saldrá del bucle.</p>
 </section>
 </section>
-<section id="estructuras-de-control-de-flujo" class="level2" data-number="C.3">
-<h2 data-number="C.3" class="anchored" data-anchor-id="estructuras-de-control-de-flujo"><span class="header-section-number">C.3</span> Estructuras de control de flujo</h2>
+<section id="estructuras-de-control-de-flujo" class="level2" data-number="D.3">
+<h2 data-number="D.3" class="anchored" data-anchor-id="estructuras-de-control-de-flujo"><span class="header-section-number">D.3</span> Estructuras de control de flujo</h2>
 <p>“<code>next</code>” y “<code>break</code>” son palabras clave importantes en R que se utilizan en las estructuras de control de flujo, específicamente en las estructuras de bucle. “next” se utiliza para saltar a la siguiente iteración del bucle sin ejecutar el resto del código dentro del bucle, mientras que “break” se utiliza para detener el bucle de forma abrupta, incluso si la condición del bucle todavía se cumple.</p>
-<section id="estructuras-de-control-next" class="level3" data-number="C.3.1">
-<h3 data-number="C.3.1" class="anchored" data-anchor-id="estructuras-de-control-next"><span class="header-section-number">C.3.1</span> Estructuras de control “next”:</h3>
+<section id="estructuras-de-control-next" class="level3" data-number="D.3.1">
+<h3 data-number="D.3.1" class="anchored" data-anchor-id="estructuras-de-control-next"><span class="header-section-number">D.3.1</span> Estructuras de control “next”:</h3>
 <p>“<code>next</code>” se utiliza en una estructura de bucle para saltar a la siguiente iteración del bucle sin ejecutar el resto del código dentro del bucle. Es decir, si se encuentra la palabra clave “next” dentro de un bucle, se omitirá el código que viene después y el bucle pasará inmediatamente a la siguiente iteración. La palabra clave “next” es útil cuando se desea saltar una iteración específica del bucle, sin afectar el resto del código.</p>
 <p>Por ejemplo, en el siguiente código se utiliza la palabra clave “next” para omitir la impresión del número 3 dentro del bucle “for”:</p>
 <div class="cell">
@@ -444,8 +461,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="estructuras-de-control-break" class="level3" data-number="C.3.2">
-<h3 data-number="C.3.2" class="anchored" data-anchor-id="estructuras-de-control-break"><span class="header-section-number">C.3.2</span> Estructuras de control “break”:</h3>
+<section id="estructuras-de-control-break" class="level3" data-number="D.3.2">
+<h3 data-number="D.3.2" class="anchored" data-anchor-id="estructuras-de-control-break"><span class="header-section-number">D.3.2</span> Estructuras de control “break”:</h3>
 <p>“break”, por otro lado, se utiliza en una estructura de bucle para detener el bucle de forma abrupta, incluso si la condición del bucle todavía se cumple. Es decir, si se encuentra la palabra clave “break” dentro de un bucle, se detendrá el bucle de inmediato y se continuará con la ejecución del código que viene después del bucle. La palabra clave “break” es útil cuando se desea detener el bucle en un punto específico sin tener que esperar a que la condición del bucle se deje de cumplir.</p>
 <p>Por ejemplo, en el siguiente código se utiliza la palabra clave “break” para detener el bucle “while” cuando el valor de “i” es mayor que 5:</p>
 <div class="cell">
@@ -467,8 +484,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="referencias" class="level2" data-number="C.4">
-<h2 data-number="C.4" class="anchored" data-anchor-id="referencias"><span class="header-section-number">C.4</span> Referencias:</h2>
+<section id="referencias" class="level2" data-number="D.4">
+<h2 data-number="D.4" class="anchored" data-anchor-id="referencias"><span class="header-section-number">D.4</span> Referencias:</h2>
 <ul>
 <li><a href="https://rstudio-pubs-static.s3.amazonaws.com/623888_497a5388a98545c48e9b5b6bec4056f6.html">Loops y funciones en R</a></li>
 </ul>
@@ -713,12 +730,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./variables.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Variables en R</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Variables en R</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./funciones.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Funciones en R</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./tidyverse.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Tidyverse en R</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -6,7 +6,7 @@ editor_options:
 
 # Datos de Panel
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 options(scipen = 999, warn=-1)
 
 #cargar Librerias

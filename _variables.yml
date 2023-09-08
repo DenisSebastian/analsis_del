@@ -20,7 +20,7 @@ engine:
   
 library:
   sf: "[Simple Features for R](https://r-spatial.github.io/sf/articles/sf1.html)"
-  dplyr: "[Dplyr](https://dplyr.tidyverse.org)"
+  dplyr: "[dplyr](https://dplyr.tidyverse.org)"
   purrr: "[Purrr](https://purrr.tidyverse.org)"
   mapview: "[Mapview](https://r-spatial.github.io/mapview/)"
   lubridate: "[Lubridate](https://lubridate.tidyverse.org)"

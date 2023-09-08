@@ -15,6 +15,7 @@ book:
     - syllabus.qmd
     # - marco.qmd
     - datos.qmd
+    - clean.qmd
     # - panel.qmd
     # - resumen.qmd
     # - delta.qmd
@@ -26,12 +27,12 @@ book:
     - references.qmd
         
   appendices:
-    # - crime_f.qmd
+    - crime_f.qmd
     - r_project.qmd
     - variables.qmd
-    # - control_r.qmd
+    - control_r.qmd
     # - funciones.qmd
-    # - tidyverse.qmd
+    - tidyverse.qmd
     # - espacial_r.qmd
 
 bibliography: references.bib
