@@ -237,12 +237,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#lectura-de-datos" id="toc-lectura-de-datos" class="nav-link" data-scroll-target="#lectura-de-datos"><span class="header-section-number">2.3</span> Lectura de Datos</a></li>
   <li><a href="#unificar-bases" id="toc-unificar-bases" class="nav-link" data-scroll-target="#unificar-bases"><span class="header-section-number">2.4</span> Unificar Bases</a></li>
   <li><a href="#selección-de-variables" id="toc-selección-de-variables" class="nav-link" data-scroll-target="#selección-de-variables"><span class="header-section-number">2.5</span> Selección de variables</a></li>
-  <li><a href="#eliminar-duplicados" id="toc-eliminar-duplicados" class="nav-link" data-scroll-target="#eliminar-duplicados"><span class="header-section-number">2.6</span> Eliminar Duplicados</a>
-  <ul class="collapse">
-  <li><a href="#imputar-datos-de-zonas-censales-a-los-delitos" id="toc-imputar-datos-de-zonas-censales-a-los-delitos" class="nav-link" data-scroll-target="#imputar-datos-de-zonas-censales-a-los-delitos"><span class="header-section-number">2.6.1</span> Imputar datos de Zonas Censales a los Delitos</a></li>
-  </ul></li>
-  <li><a href="#categorizar-los-delitos" id="toc-categorizar-los-delitos" class="nav-link" data-scroll-target="#categorizar-los-delitos"><span class="header-section-number">2.7</span> Categorizar los delitos</a></li>
-  <li><a href="#barrios-comerciales" id="toc-barrios-comerciales" class="nav-link" data-scroll-target="#barrios-comerciales"><span class="header-section-number">2.8</span> Barrios Comerciales</a></li>
+  <li><a href="#eliminar-duplicados" id="toc-eliminar-duplicados" class="nav-link" data-scroll-target="#eliminar-duplicados"><span class="header-section-number">2.6</span> Eliminar Duplicados</a></li>
+  <li><a href="#imputar-datos-de-zonas-censales-a-los-delitos" id="toc-imputar-datos-de-zonas-censales-a-los-delitos" class="nav-link" data-scroll-target="#imputar-datos-de-zonas-censales-a-los-delitos"><span class="header-section-number">2.7</span> Imputar datos de Zonas Censales a los Delitos</a></li>
+  <li><a href="#categorizar-los-delitos" id="toc-categorizar-los-delitos" class="nav-link" data-scroll-target="#categorizar-los-delitos"><span class="header-section-number">2.8</span> Categorizar los delitos</a></li>
+  <li><a href="#barrios-comerciales" id="toc-barrios-comerciales" class="nav-link" data-scroll-target="#barrios-comerciales"><span class="header-section-number">2.9</span> Barrios Comerciales</a></li>
   </ul>
 </nav>
     </div>
@@ -331,7 +329,7 @@ Lectura Secuencial
 <li>Se declara una varible vacía en la cual se agregará cada base durante al iteración</li>
 <li>Se interará por cada uno de las rutas de los arhivos:<br>
 2.1 Lectura <code>readRDS()</code>.<br>
-2.2 Combinar con <code>rbind()</code>.</li>
+2.2 Combinar con <code>rbind()</code> en su defecto <code>bind_rows()</code>.</li>
 </ol>
 </div>
 </div>
@@ -433,8 +431,9 @@ Lectura Secuencial
 <!--   filter(region == region_num)  -->
 <!-- mapview(del_reg, zcol = "grupo_delictual") -->
 <!-- ``` -->
-<section id="imputar-datos-de-zonas-censales-a-los-delitos" class="level3" data-number="2.6.1">
-<h3 data-number="2.6.1" class="anchored" data-anchor-id="imputar-datos-de-zonas-censales-a-los-delitos"><span class="header-section-number">2.6.1</span> Imputar datos de Zonas Censales a los Delitos</h3>
+</section>
+<section id="imputar-datos-de-zonas-censales-a-los-delitos" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="imputar-datos-de-zonas-censales-a-los-delitos"><span class="header-section-number">2.7</span> Imputar datos de Zonas Censales a los Delitos</h2>
 <p>A la información correspondiente a casos policiales se le va a imputar información de zonas censales (<a href="https://www.ine.gob.cl">Instituto Nacional de Estadísticas</a>) a través de una operación espacial llamada <code>inteserct</code> entre los polígonos de las zonas censales con los puntos de los casos policiales.</p>
 <p>Lectura de Zonas censales</p>
 <div class="cell">
@@ -458,9 +457,8 @@ Lectura Secuencial
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(delitos_info, <span class="st">"data/delitos/delitos_all_info.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-</section>
-<section id="categorizar-los-delitos" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="categorizar-los-delitos"><span class="header-section-number">2.7</span> Categorizar los delitos</h2>
+<section id="categorizar-los-delitos" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="categorizar-los-delitos"><span class="header-section-number">2.8</span> Categorizar los delitos</h2>
 <p>Considerando que en los casos policiales tiene una diversa tipificación de delitos se procede a categorizarlos en grupos similares.</p>
 <p>Para facilitar el proceso de clasificación a cada tipo de delito se le asignará una Sigla que se encuentra en una hoja de un archivo excel.</p>
 <div class="cell">
@@ -532,8 +530,8 @@ Lectura Secuencial
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(delitos_cat_sigla, <span class="st">"data/delitos/delitos_only_cat.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="barrios-comerciales" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="barrios-comerciales"><span class="header-section-number">2.8</span> Barrios Comerciales</h2>
+<section id="barrios-comerciales" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="barrios-comerciales"><span class="header-section-number">2.9</span> Barrios Comerciales</h2>
 <p>Finalmente se procede a filtrar aquellos casos policiales que sean considerados en el proyecto de valuación de barrios comerciales.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>delitos_cat_bc_URB <span class="ot">&lt;-</span> delitos_cat<span class="sc">%&gt;%</span></span>

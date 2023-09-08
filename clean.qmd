@@ -82,7 +82,7 @@ Conociendo los archivos se precederá a leer cada uno de ellos de forma secuenci
 1. Se declara una varible vacía en la cual se agregará cada base durante al iteración
 2. Se interará por cada uno de las rutas de los arhivos:  
   2.1 Lectura `readRDS()`.  
-  2.2 Combinar con `rbind()`. 
+  2.2 Combinar con `rbind()` en su defecto `bind_rows()`. 
 
 :::
 
