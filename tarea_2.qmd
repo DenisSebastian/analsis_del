@@ -1,0 +1,47 @@
+---
+subtitle: "Limpieza"
+editor_options: 
+  chunk_output_type: console
+---
+
+# Tarea 2 {.unnumbered}
+
+
+## Antecedentes
+
+- Fecha de entrega: **26 de Septiembre 2023**
+- Formato: Informe (docx, pdf) + Código (.R)
+- Integrantes: 3 
+
+
+## Instrucciones
+
+Siguiendo como referencia el capítulo de "Limpieza" (@sec-clean) siga las siguiente instrucciones
+
+### Parte 1: Lectura y Unificación de Bases
+
+a) Leer todas las bases de datos anuales que se encuentra en `data/delitos/raw/` unificarlos a través de un cilo iterativo `for`.
+b) Seleccionar las variables `c("DELITO", "FECHA_DEL", "HORA_DEL_D", "BLOQUE")`
+c) Eliminar duplicados
+
+### Parte 2: Imputación de Información Censal
+
+A cada caso policial por su ubicación geográfica imputarle información sociodemográfica de la zona censal correspondiente. Finalmente guardar los datos en `.rds`.
+
+::: {.callout-tip}
+## Función add_info_intersects()
+
+Hacer uso de la función `add_info_intersects()` ver @sec-fnc_addIntersect
+
+:::
+
+### Parte 3: Categorización de Delitos
+
+Con los datos consildados de las etapas anteriores, se deben categorizar los delitos, haciendo uso de arvhivo excel que contiene las siglas y categorias. Previamente se debe agregar una nueva agrupación de delitos que ustedes estimen conveniente, de acuerdo a un hipotético campo de investigación. 
+
+::: {.callout-tip}
+## delito_native.xlsx
+
+Para agregar una nueva agrupación de delitos se debe modificar el archivo excel `data/excel/delito_native.xlsx`, hoja `categorias` y agregar una nueva columna.
+
+:::
