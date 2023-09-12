@@ -147,7 +147,14 @@ saveRDS(tab_all_dens, "data/tablas/tabla_dens_mes/del_dens_all.rds")
 
 Unir Tablas
 
-```{r}
+```{r echo=FALSE, eval =T}
+tab_del_all_mes <-  readRDS("data/tablas/tablas_del_mes/del_zonas_all.rds")
+tab_all_dens <- readRDS("data/tablas/tabla_dens_mes/del_dens_all.rds")
+zonas <- readRDS("data/ine/zonas_urb_consolidadas.rds")
+```
+
+
+```{r eval =T}
 info_zonas_base <- zonas %>%
   dplyr::select(GEOCODIGO = COD_INE_16, REGION, 
                 NOM_REGION, COMUNA, NOM_COMUNA) %>% 
@@ -163,17 +170,18 @@ head(del_dens_zonas[,1:10])
 Selección de Zonas Censales con Mayor Densidad
 
 ```{r}
-
 hist(del_dens_zonas$dens_anual, breaks = 100)
 # hist(del_dens_zonas[del_dens_zonas$dens_anual>50,]$dens_anual, breaks = 100)
+```
 
+Definición de zonas que corresponde al porcentaje (5%) con mayor densidad
 
-# definición de zonas que corresponde al porcentaje
-n_porc <- porc_df(del_dens_zonas, porcentaje = 5)
+```{r eval = T}
+n_porc <- porc_df(del_dens_zonas, porcentaje = 5) # n corresponde a 5% datos
 n_porc
 
 dens_max <- del_dens_zonas %>% 
-  slice_max(dens_anual, n = n_porc) 
+  slice_max(dens_anual, n = n_porc) # El 5 % de valores máximos
 
 
 # Densidades 
@@ -236,7 +244,7 @@ reg_dens_max_cat <- dens_max_cat %>%
   filter(!is.na(dens_anual))%>% 
   slice_max(dens_anual, n = 100) 
 
-mapview(reg_dens_max_cat, zcol = "dens_anual")
+# mapview(reg_dens_max_cat, zcol = "dens_anual")
 ```
 
 
@@ -244,7 +252,7 @@ mapview(reg_dens_max_cat, zcol = "dens_anual")
 
 ![](images/pivot_longer.png){fig-align="center" width="80%"}
 
-```{r}
+```{r eval = T}
 
 categoria_tipo <-  "Comercio ilegal" 
 ts_info <- dens_max %>% 
@@ -262,7 +270,7 @@ head(ts_info)
 
 Gráficos de Serie de Tiempo Todas las Categorías. Se utilizará la librería {{< var library.plotly >}} para hacer gráficos dinámicos
 
-```{r}
+```{r eval = T}
 pline <- ggplot() + 
   geom_line(data = ts_info, aes(x = tiempo, y = densidades,
                                 colour = Categoria),
@@ -274,7 +282,7 @@ pline
 
 ```
 
-```{r}
+```{r eval = T}
 pline <- ggplot() + 
   geom_line(data = ts_info, aes(x = tiempo, y = densidades,
                                 colour = Categoria),
@@ -289,14 +297,14 @@ pline <- ggplot() +
 ggplotly(pline)
 ```
 
-Gráficos sobre médidas de centralidad (8 Primeras Categorías)
+Gráficos sobre médidas de centralidad (4 Primeras Categorías)
 
-```{r}
+```{r eval = T}
 unique(ts_info$Categoria)
 
 df_tidy_mean_1 <- ts_info %>%
   filter(!is.na(densidades)) %>%
-  filter(Categoria %in% unique(ts_info$Categoria)[1:8]) %>%
+  filter(Categoria %in% unique(ts_info$Categoria)) %>%
   group_by(tiempo, Categoria) %>%
   summarise(n = n(),
             mean = mean(densidades),
@@ -323,7 +331,7 @@ ggplotly(mean_plot_1)
 
 Gráficos Desagregados
 
-```{r}
+```{r eval = T}
 color_list <- viridis::viridis(length(unique(ts_info$Categoria)))
 mean_plot_1_solos <- ggplot(df_tidy_mean_1, aes(x = tiempo, y = mean, color = Categoria)) +
   geom_line(aes(x = tiempo, y = mean, color = Categoria)) +
