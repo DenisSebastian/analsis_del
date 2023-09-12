@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Análisis Criminológico de Datos - Syllabus</title>
+<title>Análisis Criminológico de Datos - Tarea 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./datos.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./references.html" rel="next">
+<link href="./tarea_1.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -75,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./syllabus.html">Syllabus</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tarea_1.html">Tareas</a></li><li class="breadcrumb-item"><a href="./tarea_2.html">Tarea 2</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -108,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus.html" class="sidebar-item-text sidebar-link active">
+  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
@@ -141,7 +141,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tarea_2.html" class="sidebar-item-text sidebar-link">
+  <a href="./tarea_2.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Tarea 2</span></a>
   </div>
 </li>
@@ -204,12 +204,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#objetivos-del-curso" id="toc-objetivos-del-curso" class="nav-link active" data-scroll-target="#objetivos-del-curso">Objetivos del curso</a></li>
-  <li><a href="#metodología" id="toc-metodología" class="nav-link" data-scroll-target="#metodología">Metodología</a></li>
-  <li><a href="#evaluaciones" id="toc-evaluaciones" class="nav-link" data-scroll-target="#evaluaciones">Evaluaciones</a></li>
-  <li><a href="#sesiones" id="toc-sesiones" class="nav-link" data-scroll-target="#sesiones">Sesiones</a></li>
-  <li><a href="#horarios" id="toc-horarios" class="nav-link" data-scroll-target="#horarios">Horarios</a></li>
-  <li><a href="#reglamento" id="toc-reglamento" class="nav-link" data-scroll-target="#reglamento">Reglamento</a></li>
+  <li><a href="#antecedentes" id="toc-antecedentes" class="nav-link active" data-scroll-target="#antecedentes">Antecedentes</a></li>
+  <li><a href="#instrucciones" id="toc-instrucciones" class="nav-link" data-scroll-target="#instrucciones">Instrucciones</a>
+  <ul class="collapse">
+  <li><a href="#parte-1-lectura-y-unificación-de-bases" id="toc-parte-1-lectura-y-unificación-de-bases" class="nav-link" data-scroll-target="#parte-1-lectura-y-unificación-de-bases">Parte 1: Lectura y Unificación de Bases</a></li>
+  <li><a href="#parte-2-imputación-de-información-censal" id="toc-parte-2-imputación-de-información-censal" class="nav-link" data-scroll-target="#parte-2-imputación-de-información-censal">Parte 2: Imputación de Información Censal</a></li>
+  <li><a href="#parte-3-categorización-de-delitos" id="toc-parte-3-categorización-de-delitos" class="nav-link" data-scroll-target="#parte-3-categorización-de-delitos">Parte 3: Categorización de Delitos</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -218,7 +219,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Syllabus</h1>
+<h1 class="title">Tarea 2</h1>
+<p class="subtitle lead">Limpieza</p>
 </div>
 
 
@@ -233,172 +235,61 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="objetivos-del-curso" class="level2">
-<h2 class="anchored" data-anchor-id="objetivos-del-curso">Objetivos del curso</h2>
-<p>El Objetivo General de aprendizaje este curso es aplicar herramientas eficientes para el trabajo con grandes volúmenes de datos, aplicándolos al análisis de patrones territoriales y tendencias delictuales.</p>
-<p><strong>Objetivos específicos: </strong></p>
+<section id="antecedentes" class="level2">
+<h2 class="anchored" data-anchor-id="antecedentes">Antecedentes</h2>
 <ul>
-<li>Abrir datos de formato diverso, limpiarlos, estructurarlos y concatenarlos, en R.</li>
-<li>Generar indicadores y series longitudinales con datos de panel, en R.</li>
-<li>Exportar datos agregados a .csv y .shp, para analizar casos territoriales en otros programas.</li>
-</ul>
-<p>Se evaluará la aplicación de estas herramientas al análisis personal de casos territoriales.</p>
-</section>
-<section id="metodología" class="level2">
-<h2 class="anchored" data-anchor-id="metodología">Metodología</h2>
-<ul>
-<li><p>El curso considera sesiones de 1- hora 20, las que se desarrollarán en modalidad presencial teórica de 9:00 a 10:20 y en online en vivo práctica de 11:30 a 12:50 respectivamente. Los días martes se considera una sesión de 1 hora y 20 minutos de trabajo asistido online.</p></li>
-<li><p>De esta manera cada semana tendrá tres partes: una teórica, en la que se explicarán los conceptos fundamentales de la criminología espacial, y otra práctica, en la que los alumnos podrán aplicar las metodologías de análisis espacial estudiadas mediante herramientas de programación con la orientación del profesor y finalmente desarrollar trabajo autónomo asistido por un docente.</p></li>
+<li>Fecha de entrega: <strong>26 de Septiembre 2023</strong></li>
+<li>Formato: Informe (docx, pdf) + Código (.R)</li>
+<li>Integrantes: 3</li>
 </ul>
 </section>
-<section id="evaluaciones" class="level2">
-<h2 class="anchored" data-anchor-id="evaluaciones">Evaluaciones</h2>
-<p>El proceso evaluativo de este curso se basa en la comprensión de que este debe ser continuo y estar ligado al desarrollo de los aprendizajes y no unilateralmente a la calificación. Cada actividad evaluativa tendrá etapas de profundización progresiva y acompañamiento al estudiante para la mejora.</p>
-<ul>
-<li><p>Se realizarán dos tareas que contarán con una ponderación del 30% cada una. Estas tareas estarán diseñadas para evaluar la comprensión de los conceptos clave y la aplicación de los mismos a situaciones prácticas.</p></li>
-<li><p>Se llevará a cabo un trabajo final que tendrá un peso del 40% en la nota final. Este trabajo final será una oportunidad para profundizar en una zona urbana de interés y demostrar la capacidad de análisis y síntesis de los contenidos del curso.</p></li>
-</ul>
+<section id="instrucciones" class="level2">
+<h2 class="anchored" data-anchor-id="instrucciones">Instrucciones</h2>
+<p>Siguiendo como referencia el capítulo de “Limpieza” (<a href="clean.html"><span>Chapter&nbsp;2</span></a>) siga las siguiente instrucciones</p>
+<section id="parte-1-lectura-y-unificación-de-bases" class="level3">
+<h3 class="anchored" data-anchor-id="parte-1-lectura-y-unificación-de-bases">Parte 1: Lectura y Unificación de Bases</h3>
+<ol type="a">
+<li>Leer todas las bases de datos anuales que se encuentra en <code>data/delitos/raw/</code> unificarlos a través de un cilo iterativo <code>for</code>.</li>
+<li>Seleccionar las variables <code>c("DELITO", "FECHA_DEL", "HORA_DEL_D", "BLOQUE")</code></li>
+<li>Eliminar duplicados</li>
+</ol>
 </section>
-<section id="sesiones" class="level2">
-<h2 class="anchored" data-anchor-id="sesiones">Sesiones</h2>
-<div class="cell">
-
+<section id="parte-2-imputación-de-información-censal" class="level3">
+<h3 class="anchored" data-anchor-id="parte-2-imputación-de-información-censal">Parte 2: Imputación de Información Censal</h3>
+<p>A cada caso policial por su ubicación geográfica imputarle información sociodemográfica de la zona censal correspondiente. Finalmente guardar los datos en <code>.rds</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="cell">
-<div class="cell-output-display">
-<table data-quarto-postprocess="true" class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Fecha</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Horario</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Modalidad</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Tema</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">01-09-23</td>
-<td style="text-align: left;">9h00 - 10h20</td>
-<td style="text-align: left;">Presencial teórica</td>
-<td style="text-align: left;">Bienvenida. Introducción a la Criminología desde la economía política, la sociología y la geografía.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">05-09-23</td>
-<td style="text-align: left;">11h00 - 12h20</td>
-<td style="text-align: left;">Sincrónica Online práctica</td>
-<td style="text-align: left;">Lectura de datos en formato entregado por Carabineros, limpieza, transformación y estructuración de datos en R.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">05-09-23</td>
-<td style="text-align: left;">15h00 - 16h20</td>
-<td style="text-align: left;">Sincrónica Online asistida</td>
-<td style="text-align: left;">Tarea 1: estructurar datos de casos policiales por zona censal y de denuncia seguro por comunas en el año 2022</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">08-09-23</td>
-<td style="text-align: left;">9h00 - 10h20</td>
-<td style="text-align: left;">Presencial teórica</td>
-<td style="text-align: left;">Crimen organizado, evolución global y en teórica América Latina</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">08-09-23</td>
-<td style="text-align: left;">11h30 - 12h50</td>
-<td style="text-align: left;">Sincrónica Online práctica</td>
-<td style="text-align: left;">Estructuración y análisis de paneles de datos 1, en R.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">12-09-23</td>
-<td style="text-align: left;">15h00 - 16h20</td>
-<td style="text-align: left;">Sincrónica Online asistida</td>
-<td style="text-align: left;">Tarea 2: analizar tendencias de casos policiales y de denuncia seguro, por regiones, en el período 2017-2022</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">15-09-23</td>
-<td style="text-align: left;">9h00 - 10h20</td>
-<td style="text-align: left;">Presencial teórica</td>
-<td style="text-align: left;">Evolución de tendencias criminales en Chile 2017-2022</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">15-09-23</td>
-<td style="text-align: left;">11h30 - 12h50</td>
-<td style="text-align: left;">Sincrónica Online práctica</td>
-<td style="text-align: left;">Estructuración y análisis de paneles de datos 2, R y exportación a Excel.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">26-09-23</td>
-<td style="text-align: left;">15h00 - 16h20</td>
-<td style="text-align: left;">Sincrónica Online asistida</td>
-<td style="text-align: left;">Profundización de tarea 2.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">29-09-23</td>
-<td style="text-align: left;">9h00 - 10h20</td>
-<td style="text-align: left;">Presencial teórica</td>
-<td style="text-align: left;">Economía política y sociología del poder en las organizaciones criminales</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">29-09-23</td>
-<td style="text-align: left;">11h30 - 12h50</td>
-<td style="text-align: left;">Sincrónica Online práctica</td>
-<td style="text-align: left;">Cálculo de indicadores territoriales de evolución criminal y exportación a Shapefile.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">03-10-23</td>
-<td style="text-align: left;">15h00 - 16h20</td>
-<td style="text-align: left;">Sincrónica Online asistida</td>
-<td style="text-align: left;">Sincrónica Online asistida</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">06-10-23</td>
-<td style="text-align: left;">9h00 - 10h20</td>
-<td style="text-align: left;">Presencial teórica</td>
-<td style="text-align: left;">Síntesis y discusión del curso</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">06-10-23</td>
-<td style="text-align: left;">11h30 - 12h50</td>
-<td style="text-align: left;">Sincrónica Online práctica</td>
-<td style="text-align: left;">Representación estadística y cartográfica de evolución criminal.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">10-10-23</td>
-<td style="text-align: left;">15h00 - 16h20</td>
-<td style="text-align: left;">Sincrónica Online asistida</td>
-<td style="text-align: left;">Profundización de trabajo final.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">13-10-23</td>
-<td style="text-align: left;">9h00 - 11h30</td>
-<td style="text-align: left;">Presencial integradora</td>
-<td style="text-align: left;">Seminario abierto con autoridades y colegas. Presentación de trabajos.</td>
-</tr>
-</tbody>
-</table>
-
-
+<div class="callout-title-container flex-fill">
+Función add_info_intersects()
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Hacer uso de la función <code>add_info_intersects()</code> ver <a href="crime_f.html#sec-fnc_addIntersect"><span>Section&nbsp;A.2</span></a></p>
 </div>
 </div>
 </section>
-<section id="horarios" class="level2">
-<h2 class="anchored" data-anchor-id="horarios">Horarios</h2>
-<p><strong>Septiembre</strong>:</p>
-<center>
-<img src="images/septiembre.png" class="img-fluid" style="width:50.0%">
-</center>
-<strong>Octubre</strong>:
-<center>
-<img src="images/octubre.png" class="img-fluid" style="width:50.0%">
-</center>
+<section id="parte-3-categorización-de-delitos" class="level3">
+<h3 class="anchored" data-anchor-id="parte-3-categorización-de-delitos">Parte 3: Categorización de Delitos</h3>
+<p>Con los datos consildados de las etapas anteriores, se deben categorizar los delitos, haciendo uso de arvhivo excel que contiene las siglas y categorias. Previamente se debe agregar una nueva agrupación de delitos que ustedes estimen conveniente, de acuerdo a un hipotético campo de investigación.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+delito_native.xlsx
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para agregar una nueva agrupación de delitos se debe modificar el archivo excel <code>data/excel/delito_native.xlsx</code>, hoja <code>categorias</code> y agregar una nueva columna.</p>
+</div>
+</div>
+
+
 </section>
-<section id="reglamento" class="level2">
-<h2 class="anchored" data-anchor-id="reglamento">Reglamento</h2>
-<p>Administrativamente el Curso se guía por el Reglamento Académico y el código de Honor de la UAI. Los requisitos de aprobación son los siguientes:</p>
-<ul>
-<li>75% de Asistencia (el éxito del curso requiere de la asistencia y participación de los alumnos en las discusiones).</li>
-<li>Promedio final mínimo de 4,0.</li>
-</ul>
-
-
 </section>
 
 </main> <!-- /main -->
@@ -637,13 +528,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introducción</span>
+      <a href="./tarea_1.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tarea 1</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./datos.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Datos</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
