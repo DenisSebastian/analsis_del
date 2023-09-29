@@ -16,7 +16,7 @@ book:
     # - marco.qmd
     - datos.qmd
     - clean.qmd
-    # - panel.qmd
+    - panel.qmd
     # - resumen.qmd
     # - delta.qmd
     - part: "Tareas"

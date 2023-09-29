@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./tarea_1.html" rel="next">
+<link href="./panel.html" rel="next">
 <link href="./datos.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -156,6 +156,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./clean.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Limpieza</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./panel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datos de Panel</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -307,14 +313,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> delitos_paths){</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>( i )</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "data/delitos/raw/Casos_2017.rds"
-[1] "data/delitos/raw/Casos_2018.rds"
-[1] "data/delitos/raw/Casos_2019.rds"
-[1] "data/delitos/raw/Casos_2020.rds"
-[1] "data/delitos/raw/Casos_2021.rds"
-[1] "data/delitos/raw/Casos_2022.rds"</code></pre>
-</div>
 </div>
 <p>Conociendo los archivos se precederá a leer cada uno de ellos de forma secuencial</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -337,6 +335,29 @@ Lectura Secuencial
 </div>
 <p>Notar que como las cantidad de columnas no son iguales arroja un error.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1: Se declaara una varible vacía en la cual se agregará cada base durante al iteración</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>delitos_raw <span class="ot">&lt;-</span>  <span class="cn">NULL</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2: Se interará por cada uno de las rutas de los arhivos:</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   2.1 Lectura `readRDS()`</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   2.2 Combinar con `robind()`</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> delitos_paths){</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>( i )</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  base <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(i)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  delitos_raw <span class="ot">&lt;-</span>  <span class="fu">rbind</span>(delitos_raw, base)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Show in New Window</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] "data/delitos/raw/Casos_2017.rds"</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] "data/delitos/raw/Casos_2018.rds"</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] "data/delitos/raw/Casos_2019.rds"</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Error in rbind.data.frame(...) :</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co"># numbers of columns of arguments do not match</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Solución utilizar la función <code>bind_rows()</code> de la librería <a href="https://dplyr.tidyverse.org">dplyr</a></p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1: Se declaara una varible vacía en la cual se agregará cada base durante al iteración</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>delitos_raw <span class="ot">&lt;-</span>  <span class="cn">NULL</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -348,31 +369,8 @@ Lectura Secuencial
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> delitos_paths){</span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>( i )</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  base <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(i)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  delitos_raw <span class="ot">&lt;-</span>  <span class="fu">rbind</span>(delitos_raw, base)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Show in New Window</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] "data/delitos/raw/Casos_2017.rds"</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] "data/delitos/raw/Casos_2018.rds"</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] "data/delitos/raw/Casos_2019.rds"</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Error in rbind.data.frame(...) :</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co"># numbers of columns of arguments do not match</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Solución utilizar la función <code>bind_rows()</code> de la librería <a href="https://dplyr.tidyverse.org">dplyr</a></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1: Se declaara una varible vacía en la cual se agregará cada base durante al iteración</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>delitos_raw <span class="ot">&lt;-</span>  <span class="cn">NULL</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2: Se interará por cada uno de las rutas de los arhivos:</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   2.1 Lectura `readRDS()`</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   2.2 Combinar con `robind()`</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> delitos_paths){</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>( i )</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  base <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(i)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  delitos_raw <span class="ot">&lt;-</span>  dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(delitos_raw, base)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  delitos_raw <span class="ot">&lt;-</span>  dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(delitos_raw, base)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 
@@ -382,16 +380,16 @@ Lectura Secuencial
 <h2 data-number="2.4" class="anchored" data-anchor-id="selección-de-variables"><span class="header-section-number">2.4</span> Selección de variables</h2>
 <p>Una forma sencilla de selección de variables es definir previamente los nombres de columnas que se necesitará y después seleccionar con la función <code>select_at()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># selección de variables</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cols_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"DELITO"</span>, <span class="st">"GRUPO"</span>, <span class="st">"CLASIFICAC"</span>, </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">"CATEGORIA"</span>,<span class="st">"GRUPO_DELI"</span>, <span class="st">"GRUPO_INTE"</span>,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">"FECHA_DEL"</span>,  <span class="st">"DIA"</span>,  <span class="st">"MES"</span>, <span class="st">"ANO"</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                <span class="st">"HORA_DEL_D"</span>, <span class="st">"HORA24"</span>, <span class="st">"BLOQUE"</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">"LUGAR"</span>, <span class="st">"geometry"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># selección de variables</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>cols_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"DELITO"</span>, <span class="st">"GRUPO"</span>, <span class="st">"CLASIFICAC"</span>, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">"CATEGORIA"</span>,<span class="st">"GRUPO_DELI"</span>, <span class="st">"GRUPO_INTE"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">"FECHA_DEL"</span>,  <span class="st">"DIA"</span>,  <span class="st">"MES"</span>, <span class="st">"ANO"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                <span class="st">"HORA_DEL_D"</span>, <span class="st">"HORA24"</span>, <span class="st">"BLOQUE"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">"LUGAR"</span>, <span class="st">"geometry"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>delitos_raw <span class="ot">&lt;-</span> delitos_raw <span class="sc">%&gt;%</span> </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_at</span>(<span class="at">.tbl =</span> ., <span class="at">.vars =</span> cols_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>delitos_raw <span class="ot">&lt;-</span> delitos_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_at</span>(<span class="at">.tbl =</span> ., <span class="at">.vars =</span> cols_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="eliminar-duplicados" class="level2" data-number="2.5">
@@ -400,29 +398,29 @@ Lectura Secuencial
 <p>Se crea ID por cada registro considerando las variables de <code>hora</code>, <code>fecha</code>, <code>delito_native</code>, <code>lon</code>, <code>lat.</code> Como en nuestro caso la base de delitos en objeto espacial (Simple Features) se extraerá las columnas de latitud y longitud con la función <code>sf2df()</code> alojado en script de funciones generales (<a href="crime_f.html#sec-fnc_df2sf"><span>Section&nbsp;A.1</span></a>).</p>
 <p>Primero creamos una variable temporal de delitos con las columnas de interés:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>del <span class="ot">&lt;-</span>  delitos_raw <span class="sc">%&gt;%</span> </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sf2df</span>() <span class="sc">%&gt;%</span> <span class="co">#variable temporal tipo df (sacar lon lat)</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(HORA_DEL_D, FECHA_DEL, DELITO,  lon, lat)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(del[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>del <span class="ot">&lt;-</span>  delitos_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sf2df</span>() <span class="sc">%&gt;%</span> <span class="co">#variable temporal tipo df (sacar lon lat)</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(HORA_DEL_D, FECHA_DEL, DELITO,  lon, lat)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(del[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Se genera el ID para valores únicos</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>delitos_raw<span class="sc">$</span>ID <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(<span class="sc">!</span><span class="fu">duplicated</span>(del[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>delitos_raw<span class="sc">$</span>ID <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(<span class="sc">!</span><span class="fu">duplicated</span>(del[,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Se extraen los duplicados (son los duplicados)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>duplicados <span class="ot">&lt;-</span> delitos_raw[<span class="fu">duplicated</span>(delitos_raw<span class="sc">$</span>ID), ]</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># head(duplicados)</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>id_casos_dup <span class="ot">&lt;-</span> duplicados<span class="sc">$</span>ID</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># table(delitos$ID %in%id_casos_dup)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>duplicados <span class="ot">&lt;-</span> delitos_raw[<span class="fu">duplicated</span>(delitos_raw<span class="sc">$</span>ID), ]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># head(duplicados)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>id_casos_dup <span class="ot">&lt;-</span> duplicados<span class="sc">$</span>ID</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># table(delitos$ID %in%id_casos_dup)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Eliminar duplicados</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>delitos_clean <span class="ot">&lt;-</span> delitos_raw[<span class="sc">!</span><span class="fu">duplicated</span>(delitos_raw<span class="sc">$</span>ID), ]</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># dim(delitos_clean)</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># head(delitos_clean)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>delitos_clean <span class="ot">&lt;-</span> delitos_raw[<span class="sc">!</span><span class="fu">duplicated</span>(delitos_raw<span class="sc">$</span>ID), ]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># dim(delitos_clean)</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># head(delitos_clean)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- ## Revisión visual -->
 <!-- Para efectos del presente libro digital se trabaja con una muestra de datos que es 200 registros al azar por año.  -->
@@ -439,24 +437,24 @@ Lectura Secuencial
 <p>A la información correspondiente a casos policiales se le va a imputar información de zonas censales (<a href="https://www.ine.gob.cl">Instituto Nacional de Estadísticas</a>) a través de una operación espacial llamada <code>inteserct</code> entre los polígonos de las zonas censales con los puntos de los casos policiales.</p>
 <p>Lectura de Zonas censales</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>zonas <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/ine/zonas_urb_consolidadas.rds"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">32719</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(zonas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>zonas <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/ine/zonas_urb_consolidadas.rds"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">32719</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(zonas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Imputar infomación censal a delitos, para lo cual se utilizará la función <code>add_info_intersects()</code> que está en el script de funciones (<a href="crime_f.html#sec-fnc_addIntersect"><span>Section&nbsp;A.2</span></a>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>zonas_inf_fil <span class="ot">&lt;-</span> zonas <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(NOM_REGION, PROVINCIA, NOM_PROVIN,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>         COMUNA, NOM_COMUNA, URBANO,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>         DISTRITO, LOC_ZON, GEOCODIGO)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>delitos_info <span class="ot">&lt;-</span> <span class="fu">add_info_intersects</span>(zonas_inf_fil, delitos_clean)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># dim(delitos_info)</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># head(delitos_info)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>zonas_inf_fil <span class="ot">&lt;-</span> zonas <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(NOM_REGION, PROVINCIA, NOM_PROVIN,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>         COMUNA, NOM_COMUNA, URBANO,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>         DISTRITO, LOC_ZON, GEOCODIGO)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>delitos_info <span class="ot">&lt;-</span> <span class="fu">add_info_intersects</span>(zonas_inf_fil, delitos_clean)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># dim(delitos_info)</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># head(delitos_info)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Guardar los resultados</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(delitos_info, <span class="st">"data/delitos/delitos_all_info.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(delitos_info, <span class="st">"data/delitos/delitos_all_info.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="categorizar-los-delitos" class="level2" data-number="2.7">
@@ -464,11 +462,11 @@ Lectura Secuencial
 <p>Considerando que en los casos policiales tiene una diversa tipificación de delitos se procede a categorizarlos en grupos similares.</p>
 <p>Para facilitar el proceso de clasificación a cada tipo de delito se le asignará una Sigla que se encuentra en una hoja de un archivo excel.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>del_sigla <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">"data/excel/delito_native.xlsx"</span>, </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sheet =</span> <span class="st">"delitos"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DELITO =</span> <span class="fu">toupper</span>(DELITO)) <span class="sc">%&gt;%</span> </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Sigla =</span>CATEGORIA)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(del_sigla)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>del_sigla <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">"data/excel/delito_native.xlsx"</span>, </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">sheet =</span> <span class="st">"delitos"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">DELITO =</span> <span class="fu">toupper</span>(DELITO)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Sigla =</span>CATEGORIA)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(del_sigla)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Sigla                                               DELITO
 1    vi ABANDONO DE CÓNYUGE O DE PARIENTES ENFERMOS ART. 352
@@ -481,10 +479,10 @@ Lectura Secuencial
 </div>
 <p>La lista de categorías se encuentra en el mismo archivo Excel</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>categorias <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">"data/excel/delito_native.xlsx"</span>, </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sheet =</span> <span class="st">"categorias"</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(categorias)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>categorias <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">"data/excel/delito_native.xlsx"</span>, </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sheet =</span> <span class="st">"categorias"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(categorias)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Tipo Sigla             Categoria Barrios_Comerciales
 1 Públicos    dd    Desordenes y daños                   0
@@ -504,44 +502,44 @@ Lectura Secuencial
 </div>
 <p>Con la sigla previamente creada se procede a categorizar cada uno de los casos policiales</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>delitos_cat <span class="ot">&lt;-</span> <span class="fu">left_join</span>(delitos_info, del_sigla,</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">by =</span> <span class="st">"DELITO"</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># head(delitos_cat)</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>delitos_cat <span class="ot">&lt;-</span> <span class="fu">left_join</span>(delitos_cat, categorias, </span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">by =</span> <span class="st">"Sigla"</span>)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co"># head(delitos_cat)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>delitos_cat <span class="ot">&lt;-</span> <span class="fu">left_join</span>(delitos_info, del_sigla,</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">by =</span> <span class="st">"DELITO"</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># head(delitos_cat)</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>delitos_cat <span class="ot">&lt;-</span> <span class="fu">left_join</span>(delitos_cat, categorias, </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">by =</span> <span class="st">"Sigla"</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># head(delitos_cat)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Guardar los resultados</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(delitos_cat, <span class="st">"data/delitos/delitos_all_categ.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(delitos_cat, <span class="st">"data/delitos/delitos_all_categ.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Como resultado del proceso anterior quedan muchos casos policiales sin categoría asignada los cuales se proceden a eliminar.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># #Descartar los NA en Categoria</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>delitos_cat_sigla <span class="ot">&lt;-</span> delitos_cat<span class="sc">%&gt;%</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Categoria))</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># head(delitos_cat)</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># dim(delitos_cat_sigla)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># #Descartar los NA en Categoria</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>delitos_cat_sigla <span class="ot">&lt;-</span> delitos_cat<span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Categoria))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># head(delitos_cat)</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># dim(delitos_cat_sigla)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Guardar los resultados</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(delitos_cat_sigla, <span class="st">"data/delitos/delitos_only_cat.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(delitos_cat_sigla, <span class="st">"data/delitos/delitos_only_cat.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="barrios-comerciales" class="level2" data-number="2.8">
 <h2 data-number="2.8" class="anchored" data-anchor-id="barrios-comerciales"><span class="header-section-number">2.8</span> Barrios Comerciales</h2>
 <p>Finalmente se procede a filtrar aquellos casos policiales que sean considerados en el proyecto de valuación de barrios comerciales.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>delitos_cat_bc_URB <span class="ot">&lt;-</span> delitos_cat<span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Barrios_Comerciales <span class="sc">==</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>delitos_cat_bc_URB <span class="ot">&lt;-</span> delitos_cat<span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Barrios_Comerciales <span class="sc">==</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Guardar los resultados</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(delitos_cat_bc_URB, <span class="st">"data/delitos/delitos_eval_bcom_urb.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(delitos_cat_bc_URB, <span class="st">"data/delitos/delitos_eval_bcom_urb.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- ```{r} -->
 <!-- region_num <- "05" -->
@@ -794,8 +792,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./tarea_1.html" class="pagination-link">
-        <span class="nav-page-text">Tarea 1</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./panel.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datos de Panel</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
