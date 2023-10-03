@@ -4,7 +4,8 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Datos de Panel
+# Datos de Panel {#sec-panel}
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 options(scipen = 999, warn=-1)
@@ -28,7 +29,7 @@ Un conjunto de datos de panel recoge observaciones sobre múltiples fenómenos a
 Para nuestro caso los datos de panel serán la densidad de delitos por zona censal y el orden temporal será construido con el mes y el año eso es lo que se realizará a continuación.
 
 
-## Cálculo de Total Delitos por Espacio y tiempo
+## Cálculo de Total Delitos por Espacio y tiempo {#sec-panel1}
 
 
 
@@ -100,7 +101,7 @@ saveRDS(tab_del_all_mes, "data/tablas/tablas_del_mes/del_zonas_all.rds")
 
 ```
 
-## Cálculo de tablas de densidad casos policiales
+## Cálculo de tablas de densidad casos policiales {#sec-paneldensi}
 
 Lectura de Zonas Urbanas del INE, renomabramos la variable `COD_INE_16` por `ZONA`, y seleccionamos además vaariable `AREA`.
 

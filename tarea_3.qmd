@@ -1,0 +1,46 @@
+---
+subtitle: "Panel"
+editor_options: 
+  chunk_output_type: console
+---
+
+# Tarea 3 {.unnumbered}
+
+
+## Antecedentes
+
+- Fecha de entrega: **17 de Octubre 2023**
+- Formato: Informe (docx, pdf) + Código (.R)
+- Integrantes: 3 o 4
+
+
+## Instrucciones
+
+Siguiendo como referencia el capítulo de "Datos Panel" (@sec-panel) siga las siguiente instrucciones:
+
+### Parte 1: Transformación de Datos (50%)
+
+a) Utilizando los datos producto de la caracterización de Delitos de la tarea 2, donde se debía crear una nueva categorización (no usar Barrios_Comerciales) calcular la cantidad de delitos por mes y estructurarlos longitudinalmente con `pivot_wider` como se hizo en la @sec-panel1.
+
+b) Calcular la densidad de delitos por zona censal (@sec-paneldensi)
+
+c) Imputar los resultados de densidad de delitos a la zonas censalesy guardar los resultados.
+
+
+### Parte 2: Consultas (25%)
+
+a) De la base de densidad de delitos por zona censal creada, seleccionar una región de región de estudio y una categoría.
+
+b) Filtrar las 10 Zonas censales que presenten mayor densidad de delitos globales (todos los meses y años)
+
+c) Genere tabla y una visualización espacial con `mapview`
+
+
+### Parte 3: Visualizaciones (25%)
+
+a) Utilizando los datos generados en la parte 1 de esta tarea, convertirlos en formato largo (`pivot_longer`) para generar visulizaciones.
+
+
+b) Filtrar por la misma región de estudio y realizar cálculos de medidas de centralidad, finalmente generar un gráfico temporal del comportamiento de todas la categorías.
+
+

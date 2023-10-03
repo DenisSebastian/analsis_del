@@ -185,6 +185,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Tarea 2</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tarea_3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tarea 3</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -245,8 +251,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">3.1</span> Introducción</a></li>
-  <li><a href="#cálculo-de-total-delitos-por-espacio-y-tiempo" id="toc-cálculo-de-total-delitos-por-espacio-y-tiempo" class="nav-link" data-scroll-target="#cálculo-de-total-delitos-por-espacio-y-tiempo"><span class="header-section-number">3.2</span> Cálculo de Total Delitos por Espacio y tiempo</a></li>
-  <li><a href="#cálculo-de-tablas-de-densidad-casos-policiales" id="toc-cálculo-de-tablas-de-densidad-casos-policiales" class="nav-link" data-scroll-target="#cálculo-de-tablas-de-densidad-casos-policiales"><span class="header-section-number">3.3</span> Cálculo de tablas de densidad casos policiales</a></li>
+  <li><a href="#sec-panel1" id="toc-sec-panel1" class="nav-link" data-scroll-target="#sec-panel1"><span class="header-section-number">3.2</span> Cálculo de Total Delitos por Espacio y tiempo</a></li>
+  <li><a href="#sec-paneldensi" id="toc-sec-paneldensi" class="nav-link" data-scroll-target="#sec-paneldensi"><span class="header-section-number">3.3</span> Cálculo de tablas de densidad casos policiales</a></li>
   <li><a href="#tablas-de-densidad-de-delitos-por-mes-2017-al-2022" id="toc-tablas-de-densidad-de-delitos-por-mes-2017-al-2022" class="nav-link" data-scroll-target="#tablas-de-densidad-de-delitos-por-mes-2017-al-2022"><span class="header-section-number">3.4</span> Tablas de Densidad de Delitos por Mes (2017 al 2022)</a></li>
   <li><a href="#filtros-de-interés" id="toc-filtros-de-interés" class="nav-link" data-scroll-target="#filtros-de-interés"><span class="header-section-number">3.5</span> Filtros de Interés</a></li>
   <li><a href="#densidades-con-respecto-al-tiempo" id="toc-densidades-con-respecto-al-tiempo" class="nav-link" data-scroll-target="#densidades-con-respecto-al-tiempo"><span class="header-section-number">3.6</span> Densidades con Respecto al Tiempo</a></li>
@@ -258,7 +264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datos de Panel</span></h1>
+<h1 class="title"><span id="sec-panel" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Datos de Panel</span></span></h1>
 <p class="subtitle lead">Transformación a Datos de Panel</p>
 </div>
 
@@ -281,8 +287,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Un conjunto de datos de panel recoge observaciones sobre múltiples fenómenos a lo largo de determinados períodos. La dimensión temporal enriquece la estructura de los datos y es capaz de aportar información que no aparece en un único corte.</p>
 <p>Para nuestro caso los datos de panel serán la densidad de delitos por zona censal y el orden temporal será construido con el mes y el año eso es lo que se realizará a continuación.</p>
 </section>
-<section id="cálculo-de-total-delitos-por-espacio-y-tiempo" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="cálculo-de-total-delitos-por-espacio-y-tiempo"><span class="header-section-number">3.2</span> Cálculo de Total Delitos por Espacio y tiempo</h2>
+<section id="sec-panel1" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-panel1"><span class="header-section-number">3.2</span> Cálculo de Total Delitos por Espacio y tiempo</h2>
 <p>En este punto se procederá a crear tablas de cálculo de total casos policiales por <em>espacio</em> las zonas censales, mientras que <em>tiempo</em> las variables de mes y año.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -338,8 +344,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(tab_del_all_mes, <span class="st">"data/tablas/tablas_del_mes/del_zonas_all.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="cálculo-de-tablas-de-densidad-casos-policiales" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="cálculo-de-tablas-de-densidad-casos-policiales"><span class="header-section-number">3.3</span> Cálculo de tablas de densidad casos policiales</h2>
+<section id="sec-paneldensi" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sec-paneldensi"><span class="header-section-number">3.3</span> Cálculo de tablas de densidad casos policiales</h2>
 <p>Lectura de Zonas Urbanas del INE, renomabramos la variable <code>COD_INE_16</code> por <code>ZONA</code>, y seleccionamos además vaariable <code>AREA</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>zonas <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/ine/zonas_urb_consolidadas.rds"</span>)</span>

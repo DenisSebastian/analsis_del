@@ -35,7 +35,7 @@ Hacer uso de la función `add_info_intersects()` ver @sec-fnc_addIntersect
 
 :::
 
-### Parte 3: Categorización de Delitos
+### Parte 3: Categorización de Delitos {#sec-t2P3}
 
 Con los datos consildados de las etapas anteriores, se deben categorizar los delitos, haciendo uso de arvhivo excel que contiene las siglas y categorias. Previamente se debe agregar una nueva agrupación de delitos que ustedes estimen conveniente, de acuerdo a un hipotético campo de investigación. Finalmente se debe filtrar los casos policiales asociados a su categoría de investigación.
 

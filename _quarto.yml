@@ -23,6 +23,7 @@ book:
       chapters:
         - tarea_1.qmd
         - tarea_2.qmd
+        - tarea_3.qmd
 
     - references.qmd
         
