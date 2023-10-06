@@ -19,10 +19,14 @@ source("R/funciones.R")
 
 ## Introducción
 
-La construcción del cálculo de indicadores territoriales de evolución criminal, normalizados por la diferencia entre periodos de tiempo para todas las comunas de Chile, es un tema fundamental en el análisis criminal. En este capítulo, exploraremos en detalle cómo se pueden calcular y utilizar estos indicadores para comprender la evolución de las tendencias criminales en el país. A lo largo del capítulo, examinaremos los métodos y herramientas utilizadas en este proceso, así como los desafíos y consideraciones clave al interpretar y analizar los resultados.
+
+Dentro del análisis criminológico espacial es fundamental conocer la evolución de los delitos en el tiempo. En esta sección, trabjará en la construcción y análisis de indicadores territoriales a nivel comunal de evolución criminal. El indicador para cumplir este propósito será uno que mida la variabilidad (positiva o negativa) normalizada de la cantidad delitos de las comunas en dos periodos de tiempo.
+
+Al comprender la evolución de los delitos en el tiempo, se busca tener una idea rápida y macro de la variabilidad de cada uno de los tipos de delitos en el país, como diagnóstico claro y preciso de la realidad en dos periodos de tiempo.
 
 ## Delitos Base
 
+Cargar la librerías y funciones de uso general
 
 ```{r}
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
@@ -34,6 +38,10 @@ source("R/librerias.R")
 source("R/funciones.R")
 
 ```
+
+**Lectura de Insumos**
+
+Para este resumen general utilizaremos los delitos dentro de la clsificación de Barrios Comerciales, entonces son urbanos. Puede ser con la base que ustedes estimen conveniente, pero debe tener la variable fecha.
 
 ```{r eval=FALSE}
 delitos_cat_bc_URB <- readRDS("data/delitos/delitos_eval_bcom_urb.rds")
@@ -47,30 +55,42 @@ delitos_cat_bc_URB <- readRDS("data_samples/delitos_eval_bcom_urb.rds") %>%
 ```
 
 
+**Generación de Tablas Resumen por día**
+
+Seleccionamos la columnas que nos interesan y eliminamos la geometría.
+
 ```{r eval = T}
 del_all <- delitos_cat_bc_URB %>% 
   st_drop_geometry() %>% 
   select(COMUNA, tiempo = FECHA_DEL,TIPO )
 ```
 
+Tabla de cuenta de delitos diarios por comuna y tipología
 
 ```{r eval = T}
 delcomuna <-  del_all %>% 
   group_by(COMUNA, TIPO,  tiempo) %>% 
-  summarise(cantidad = n())
+  summarise(cantidad = n(), .groups = "keep")
 ```
 
 
 
 ## Estadísticas
 
+En esta etapa se realizarán la contabilidad de delitos por comunas y tipología, además se agregará el cálculo de una medida de dispersión como la varianza para aportar información. Queda abierta la posbilidad de agregar otras medidas estadísticas.
+
 ### Varianza
+
+La varianza es una medida de dispersión que representa la variabilidad de una serie de datos respecto a su media, se denota como $\sigma^2$.
+
+![Ejemplo de muestras de dos poblaciones con la misma media pero varianzas diferentes. La población roja tiene media 100 y varianza 100 (DE=10) mientras que la población azul tiene media 100 y varianza 2500 (DE=50).](images/Comparison_standard_deviations.png){width=60%}
+</center>
 
 ```{r eval = T}
 varianzas <- delcomuna %>% 
   filter(!is.na(TIPO)) %>% 
   group_by(COMUNA, TIPO) %>% 
-  summarise(varianza = sd(cantidad),
+  summarise(varianza = sd(cantidad)^2,
             cantidad = n(),  .groups = "keep")
 
 head(varianzas)
@@ -79,7 +99,9 @@ head(varianzas)
 
 ### Periodos
 
-**Inicio**
+En esta etapa se van a definir los dos periodos que se compararán y así determinar la variabilidad. En este caso vamos analizar el segundo semestre del año 2017 versus el año 2022.
+
+**Periodo 1**
 
 ```{r eval = T}
 p1_inicio <- "2017-07-01"
@@ -92,7 +114,7 @@ ini <- delcomuna %>%
 ```
 
 
-**Fin**
+**Periodo 1**
 
 ```{r eval = T}
 p1_fin <- "2022-07-01"
@@ -108,6 +130,8 @@ fin <- delcomuna %>%
 
 ### Consolidación
 
+Finalmente se unen las tablas calculadas.
+
 ```{r eval = T}
 adjvar <- varianzas %>% 
   left_join(ini, by = c("COMUNA", "TIPO")) %>% 
@@ -118,7 +142,9 @@ adjvar <- varianzas %>%
 ```
 
 
-Indicador de Variación 
+## Indicador de Variación 
+
+En esta etapa se calcularà el indicador de la variación por cada tipo de delito y comuna. Corresponde a la diferencia entre los periodos (evolución) y se divide la suma de los dos períodos, para que el valor quede normalizado en valores entre 1 y -1.
 
 ```{r eval = T}
 adjvar <- adjvar %>% 
@@ -127,7 +153,8 @@ adjvar <- adjvar %>%
 
 
 
-
+ Histograma de la Variabilidad.
+ 
 ```{r eval = T}
 library(hrbrthemes)
 p <- adjvar %>%
@@ -144,7 +171,10 @@ p
 
 ## Agregar Información Espacial
 
+Finalmente se agregará elos resultados del análisis a la la geometrías comunales de Chile para poder cartografias los resultados.
 
+
+Se de primeramente transformar las estructra de datos de formato largo a formato ancho, para que los valores de variabilidad de cada tipo de delito quede por columnas.
 
 ```{r}
 
@@ -154,6 +184,10 @@ varianzas <- adjvar %>%
               values_from = c(varianza, cantidad, inicio, fin, adjvar))
 
 ```
+
+
+
+Agregar a lagesometrias comunales del INE.
 
 
 ```{r}
@@ -170,6 +204,7 @@ comdel_dif <- Comunas_Chile %>%
 
 ```
 
+Guardar Resultados en formato shapefiles
 
 
 ```{r}
@@ -179,15 +214,21 @@ st_write(comdel_dif, "data/delitos/comdel_dif.shp")
 
 ### Revisión por tipología
 
+**Selección de Región y Tipo de Delitos**
+
 ```{r}
 # grep(pattern = "Secuestros", x = names(comdel_dif), value = T)
 tipo = "adjvar_Secuestros"
 region = "13"
 
 r_eval = comdel_dif %>% 
-  filter(REGION == "13") 
+  filter(REGION == "13")
+```
 
 
+**Histograma**
+
+```{r}
 p <- r_eval %>%
   st_drop_geometry() %>% 
   ggplot( aes_string(x=tipo)) +
@@ -203,7 +244,7 @@ p
 ```
 
 
-
+**Visualización Espacial**
 
 ```{r}
 
