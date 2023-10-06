@@ -17,6 +17,7 @@ book:
     - datos.qmd
     - clean.qmd
     - panel.qmd
+    - evo.qmd
     # - resumen.qmd
     # - delta.qmd
     - part: "Tareas"

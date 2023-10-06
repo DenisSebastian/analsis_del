@@ -1,0 +1,218 @@
+---
+subtitle: "Cálculo de indicadores territoriales de evolución criminal"
+editor_options: 
+  chunk_output_type: console
+---
+
+# Evolución {#sec-panel}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+options(scipen = 999, warn=-1)
+
+#cargar Librerias
+source("R/librerias.R")
+# Cargar Funciones
+source("R/funciones.R")
+
+```
+
+## Introducción
+
+La construcción del cálculo de indicadores territoriales de evolución criminal, normalizados por la diferencia entre periodos de tiempo para todas las comunas de Chile, es un tema fundamental en el análisis criminal. En este capítulo, exploraremos en detalle cómo se pueden calcular y utilizar estos indicadores para comprender la evolución de las tendencias criminales en el país. A lo largo del capítulo, examinaremos los métodos y herramientas utilizadas en este proceso, así como los desafíos y consideraciones clave al interpretar y analizar los resultados.
+
+## Delitos Base
+
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+options(scipen = 999, warn=-1)
+
+#cargar Librerias
+source("R/librerias.R")
+# Cargar Funciones
+source("R/funciones.R")
+
+```
+
+```{r eval=FALSE}
+delitos_cat_bc_URB <- readRDS("data/delitos/delitos_eval_bcom_urb.rds")
+```
+
+
+
+```{r eval = T}
+delitos_cat_bc_URB <- readRDS("data_samples/delitos_eval_bcom_urb.rds") %>%
+  rename(ZONA = GEOCODIGO, TIPO = Tipo )
+```
+
+
+```{r eval = T}
+del_all <- delitos_cat_bc_URB %>% 
+  st_drop_geometry() %>% 
+  select(COMUNA, tiempo = FECHA_DEL,TIPO )
+```
+
+
+```{r eval = T}
+delcomuna <-  del_all %>% 
+  group_by(COMUNA, TIPO,  tiempo) %>% 
+  summarise(cantidad = n())
+```
+
+
+
+## Estadísticas
+
+### Varianza
+
+```{r eval = T}
+varianzas <- delcomuna %>% 
+  filter(!is.na(TIPO)) %>% 
+  group_by(COMUNA, TIPO) %>% 
+  summarise(varianza = sd(cantidad),
+            cantidad = n(),  .groups = "keep")
+
+head(varianzas)
+```
+
+
+### Periodos
+
+**Inicio**
+
+```{r eval = T}
+p1_inicio <- "2017-07-01"
+p2_inicio <- "2017-12-31"
+
+ini <- delcomuna %>%
+  filter(tiempo >= ymd(p1_inicio) & tiempo <= ymd(p2_inicio)) %>% 
+  group_by(COMUNA, TIPO) %>% 
+  summarise(inicio = n(),  .groups = "keep")
+```
+
+
+**Fin**
+
+```{r eval = T}
+p1_fin <- "2022-07-01"
+p2_fin <- "2022-12-31"
+
+fin <- delcomuna %>%
+  filter(tiempo >= ymd(p1_fin) & tiempo <= ymd(p2_fin)) %>% 
+  group_by(COMUNA, TIPO) %>% 
+  summarise(fin = n(),  .groups = "keep")
+
+```
+
+
+### Consolidación
+
+```{r eval = T}
+adjvar <- varianzas %>% 
+  left_join(ini, by = c("COMUNA", "TIPO")) %>% 
+  left_join(fin, by = c("COMUNA", "TIPO")) %>% 
+  mutate_if(.predicate = is.numeric,
+            .funs = function(x) ifelse(is.na(x), 0, x))
+
+```
+
+
+Indicador de Variación 
+
+```{r eval = T}
+adjvar <- adjvar %>% 
+  mutate(adjvar = (fin-inicio)/(fin+inicio))
+```
+
+
+
+
+```{r eval = T}
+library(hrbrthemes)
+p <- adjvar %>%
+  ggplot( aes(x=adjvar)) +
+    geom_histogram( binwidth=1,bins = 3, 
+                    fill="#69b3a2", color="#e9ecef", alpha=0.9) +
+    ggtitle("Histograma de Variación Normalizada") +
+    theme_ipsum() +
+    theme(
+      plot.title = element_text(size=15)
+    )
+p
+```
+
+## Agregar Información Espacial
+
+
+
+```{r}
+
+varianzas <- adjvar %>% 
+  mutate(TIPO = gsub(pattern = " ", replacement = "_", x = TIPO)) %>% 
+  pivot_wider(names_from = TIPO,
+              values_from = c(varianza, cantidad, inicio, fin, adjvar))
+
+```
+
+
+```{r}
+Comunas_Chile <- readRDS("data/ine/Comunas_Chile.rds")
+```
+
+
+```{r}
+comdel_dif <- Comunas_Chile %>% 
+  filter(COMUNA %in% varianzas$COMUNA) %>%
+  left_join(varianzas, by  = "COMUNA") %>% 
+  mutate_if(.predicate = is.numeric,
+            .funs = function(x) ifelse(is.na(x), 0, x))
+
+```
+
+
+
+```{r}
+st_write(comdel_dif, "data/delitos/comdel_dif.shp")
+```
+
+
+### Revisión por tipología
+
+```{r}
+# grep(pattern = "Secuestros", x = names(comdel_dif), value = T)
+tipo = "adjvar_Secuestros"
+region = "13"
+
+r_eval = comdel_dif %>% 
+  filter(REGION == "13") 
+
+
+p <- r_eval %>%
+  st_drop_geometry() %>% 
+  ggplot( aes_string(x=tipo)) +
+    geom_histogram( binwidth=1,bins = 3, 
+                    fill="#69b3a2", color="#e9ecef", alpha=0.9) +
+    ggtitle("Histograma de Variación Normalizada") +
+    theme_ipsum() +
+    theme(
+      plot.title = element_text(size=15)
+    )
+p
+
+```
+
+
+
+
+```{r}
+
+mapview(r_eval, zcol = "adjvar_Secuestros")
+```
+
+<center>![](images/secuestros_var.png){width=90%}</center>
+
+
+
+
+
