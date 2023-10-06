@@ -96,11 +96,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="styles/style.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -264,15 +280,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#periodos" id="toc-periodos" class="nav-link" data-scroll-target="#periodos"><span class="header-section-number">4.3.2</span> Periodos</a></li>
   <li><a href="#consolidación" id="toc-consolidación" class="nav-link" data-scroll-target="#consolidación"><span class="header-section-number">4.3.3</span> Consolidación</a></li>
   </ul></li>
-  <li><a href="#agregar-información-espacial" id="toc-agregar-información-espacial" class="nav-link" data-scroll-target="#agregar-información-espacial"><span class="header-section-number">4.4</span> Agregar Información Espacial</a>
+  <li><a href="#indicador-de-variación" id="toc-indicador-de-variación" class="nav-link" data-scroll-target="#indicador-de-variación"><span class="header-section-number">4.4</span> Indicador de Variación</a></li>
+  <li><a href="#agregar-información-espacial" id="toc-agregar-información-espacial" class="nav-link" data-scroll-target="#agregar-información-espacial"><span class="header-section-number">4.5</span> Agregar Información Espacial</a>
   <ul class="collapse">
-  <li><a href="#revisión-por-tipología" id="toc-revisión-por-tipología" class="nav-link" data-scroll-target="#revisión-por-tipología"><span class="header-section-number">4.4.1</span> Revisión por tipología</a></li>
+  <li><a href="#revisión-por-tipología" id="toc-revisión-por-tipología" class="nav-link" data-scroll-target="#revisión-por-tipología"><span class="header-section-number">4.5.1</span> Revisión por tipología</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -294,10 +311,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introducción" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="introducción"><span class="header-section-number">4.1</span> Introducción</h2>
-<p>La construcción del cálculo de indicadores territoriales de evolución criminal, normalizados por la diferencia entre periodos de tiempo para todas las comunas de Chile, es un tema fundamental en el análisis criminal. En este capítulo, exploraremos en detalle cómo se pueden calcular y utilizar estos indicadores para comprender la evolución de las tendencias criminales en el país. A lo largo del capítulo, examinaremos los métodos y herramientas utilizadas en este proceso, así como los desafíos y consideraciones clave al interpretar y analizar los resultados.</p>
+<p>Dentro del análisis criminológico espacial es fundamental conocer la evolución de los delitos en el tiempo. En esta sección, trabjará en la construcción y análisis de indicadores territoriales a nivel comunal de evolución criminal. El indicador para cumplir este propósito será uno que mida la variabilidad (positiva o negativa) normalizada de la cantidad delitos de las comunas en dos periodos de tiempo.</p>
+<p>Al comprender la evolución de los delitos en el tiempo, se busca tener una idea rápida y macro de la variabilidad de cada uno de los tipos de delitos en el país, como diagnóstico claro y preciso de la realidad en dos periodos de tiempo.</p>
 </section>
 <section id="delitos-base" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="delitos-base"><span class="header-section-number">4.2</span> Delitos Base</h2>
+<p>Cargar la librerías y funciones de uso general</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">eval =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>, <span class="at">warn=</span><span class="sc">-</span><span class="dv">1</span>)</span>
@@ -307,6 +326,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar Funciones</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/funciones.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><strong>Lectura de Insumos</strong></p>
+<p>Para este resumen general utilizaremos los delitos dentro de la clsificación de Barrios Comerciales, entonces son urbanos. Puede ser con la base que ustedes estimen conveniente, pero debe tener la variable fecha.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>delitos_cat_bc_URB <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/delitos/delitos_eval_bcom_urb.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -314,26 +335,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>delitos_cat_bc_URB <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data_samples/delitos_eval_bcom_urb.rds"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">ZONA =</span> GEOCODIGO, <span class="at">TIPO =</span> Tipo )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><strong>Generación de Tablas Resumen por día</strong></p>
+<p>Seleccionamos la columnas que nos interesan y eliminamos la geometría.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>del_all <span class="ot">&lt;-</span> delitos_cat_bc_URB <span class="sc">%&gt;%</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(COMUNA, <span class="at">tiempo =</span> FECHA_DEL,TIPO )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Tabla de cuenta de delitos diarios por comuna y tipología</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>delcomuna <span class="ot">&lt;-</span>  del_all <span class="sc">%&gt;%</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(COMUNA, TIPO,  tiempo) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cantidad =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cantidad =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"keep"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="estadísticas" class="level2" data-number="4.3">
+<section id="estadísticas" class="level2 page-columns page-full" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="estadísticas"><span class="header-section-number">4.3</span> Estadísticas</h2>
-<section id="varianza" class="level3" data-number="4.3.1">
+<p>En esta etapa se realizarán la contabilidad de delitos por comunas y tipología, además se agregará el cálculo de una medida de dispersión como la varianza para aportar información. Queda abierta la posbilidad de agregar otras medidas estadísticas.</p>
+<section id="varianza" class="level3 page-columns page-full" data-number="4.3.1">
 <h3 data-number="4.3.1" class="anchored" data-anchor-id="varianza"><span class="header-section-number">4.3.1</span> Varianza</h3>
+<p>La varianza es una medida de dispersión que representa la variabilidad de una serie de datos respecto a su media, se denota como <span class="math inline">\sigma^2</span>.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="images/Comparison_standard_deviations.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption class="figure-caption margin-caption">Ejemplo de muestras de dos poblaciones con la misma media pero varianzas diferentes. La población roja tiene media 100 y varianza 100 (DE=10) mientras que la población azul tiene media 100 y varianza 2500 (DE=50).</figcaption>
+</figure>
+</div>
+
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>varianzas <span class="ot">&lt;-</span> delcomuna <span class="sc">%&gt;%</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(TIPO)) <span class="sc">%&gt;%</span> </span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(COMUNA, TIPO) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">varianza =</span> <span class="fu">sd</span>(cantidad),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">varianza =</span> <span class="fu">sd</span>(cantidad)<span class="sc">^</span><span class="dv">2</span>,</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">cantidad =</span> <span class="fu">n</span>(),  <span class="at">.groups =</span> <span class="st">"keep"</span>)</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(varianzas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -342,18 +375,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 # Groups:   COMUNA, TIPO [6]
   COMUNA TIPO     varianza cantidad
   &lt;chr&gt;  &lt;chr&gt;       &lt;dbl&gt;    &lt;int&gt;
-1 10101  Públicos    0.207       68
-2 10102  Públicos    0            4
-3 10105  Públicos    0            2
-4 10107  Públicos    0            5
-5 10109  Públicos    0            7
-6 10201  Públicos    0            8</code></pre>
+1 10101  Públicos   0.0428       68
+2 10102  Públicos   0             4
+3 10105  Públicos   0             2
+4 10107  Públicos   0             5
+5 10109  Públicos   0             7
+6 10201  Públicos   0             8</code></pre>
 </div>
 </div>
 </section>
 <section id="periodos" class="level3" data-number="4.3.2">
 <h3 data-number="4.3.2" class="anchored" data-anchor-id="periodos"><span class="header-section-number">4.3.2</span> Periodos</h3>
-<p><strong>Inicio</strong></p>
+<p>En esta etapa se van a definir los dos periodos que se compararán y así determinar la variabilidad. En este caso vamos analizar el segundo semestre del año 2017 versus el año 2022.</p>
+<p><strong>Periodo 1</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p1_inicio <span class="ot">&lt;-</span> <span class="st">"2017-07-01"</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>p2_inicio <span class="ot">&lt;-</span> <span class="st">"2017-12-31"</span></span>
@@ -363,7 +397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(COMUNA, TIPO) <span class="sc">%&gt;%</span> </span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">inicio =</span> <span class="fu">n</span>(),  <span class="at">.groups =</span> <span class="st">"keep"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>Fin</strong></p>
+<p><strong>Periodo 1</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>p1_fin <span class="ot">&lt;-</span> <span class="st">"2022-07-01"</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>p2_fin <span class="ot">&lt;-</span> <span class="st">"2022-12-31"</span></span>
@@ -376,6 +410,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="consolidación" class="level3" data-number="4.3.3">
 <h3 data-number="4.3.3" class="anchored" data-anchor-id="consolidación"><span class="header-section-number">4.3.3</span> Consolidación</h3>
+<p>Finalmente se unen las tablas calculadas.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>adjvar <span class="ot">&lt;-</span> varianzas <span class="sc">%&gt;%</span> </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(ini, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"COMUNA"</span>, <span class="st">"TIPO"</span>)) <span class="sc">%&gt;%</span> </span>
@@ -383,11 +418,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(<span class="at">.predicate =</span> is.numeric,</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">.funs =</span> <span class="cf">function</span>(x) <span class="fu">ifelse</span>(<span class="fu">is.na</span>(x), <span class="dv">0</span>, x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Indicador de Variación</p>
+</section>
+</section>
+<section id="indicador-de-variación" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="indicador-de-variación"><span class="header-section-number">4.4</span> Indicador de Variación</h2>
+<p>En esta etapa se calcularà el indicador de la variación por cada tipo de delito y comuna. Corresponde a la diferencia entre los periodos (evolución) y se divide la suma de los dos períodos, para que el valor quede normalizado en valores entre 1 y -1.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>adjvar <span class="ot">&lt;-</span> adjvar <span class="sc">%&gt;%</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">adjvar =</span> (fin<span class="sc">-</span>inicio)<span class="sc">/</span>(fin<span class="sc">+</span>inicio))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Histograma de la Variabilidad.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hrbrthemes)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> adjvar <span class="sc">%&gt;%</span></span>
@@ -405,15 +445,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-</section>
-<section id="agregar-información-espacial" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="agregar-información-espacial"><span class="header-section-number">4.4</span> Agregar Información Espacial</h2>
+<section id="agregar-información-espacial" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="agregar-información-espacial"><span class="header-section-number">4.5</span> Agregar Información Espacial</h2>
+<p>Finalmente se agregará elos resultados del análisis a la la geometrías comunales de Chile para poder cartografias los resultados.</p>
+<p>Se de primeramente transformar las estructra de datos de formato largo a formato ancho, para que los valores de variabilidad de cada tipo de delito quede por columnas.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>varianzas <span class="ot">&lt;-</span> adjvar <span class="sc">%&gt;%</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">TIPO =</span> <span class="fu">gsub</span>(<span class="at">pattern =</span> <span class="st">" "</span>, <span class="at">replacement =</span> <span class="st">"_"</span>, <span class="at">x =</span> TIPO)) <span class="sc">%&gt;%</span> </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> TIPO,</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> <span class="fu">c</span>(varianza, cantidad, inicio, fin, adjvar))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Agregar a lagesometrias comunales del INE.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Comunas_Chile <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/ine/Comunas_Chile.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -424,34 +466,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(<span class="at">.predicate =</span> is.numeric,</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">.funs =</span> <span class="cf">function</span>(x) <span class="fu">ifelse</span>(<span class="fu">is.na</span>(x), <span class="dv">0</span>, x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Guardar Resultados en formato shapefiles</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_write</span>(comdel_dif, <span class="st">"data/delitos/comdel_dif.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="revisión-por-tipología" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1" class="anchored" data-anchor-id="revisión-por-tipología"><span class="header-section-number">4.4.1</span> Revisión por tipología</h3>
+<section id="revisión-por-tipología" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="revisión-por-tipología"><span class="header-section-number">4.5.1</span> Revisión por tipología</h3>
+<p><strong>Selección de Región y Tipo de Delitos</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># grep(pattern = "Secuestros", x = names(comdel_dif), value = T)</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>tipo <span class="ot">=</span> <span class="st">"adjvar_Secuestros"</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>region <span class="ot">=</span> <span class="st">"13"</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>r_eval <span class="ot">=</span> comdel_dif <span class="sc">%&gt;%</span> </span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(REGION <span class="sc">==</span> <span class="st">"13"</span>) </span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> r_eval <span class="sc">%&gt;%</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes_string</span>(<span class="at">x=</span>tipo)) <span class="sc">+</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>( <span class="at">binwidth=</span><span class="dv">1</span>,<span class="at">bins =</span> <span class="dv">3</span>, </span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                    <span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"#e9ecef"</span>, <span class="at">alpha=</span><span class="fl">0.9</span>) <span class="sc">+</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Histograma de Variación Normalizada"</span>) <span class="sc">+</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_ipsum</span>() <span class="sc">+</span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">15</span>)</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(REGION <span class="sc">==</span> <span class="st">"13"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><strong>Histograma</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(r_eval, <span class="at">zcol =</span> <span class="st">"adjvar_Secuestros"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> r_eval <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes_string</span>(<span class="at">x=</span>tipo)) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>( <span class="at">binwidth=</span><span class="dv">1</span>,<span class="at">bins =</span> <span class="dv">3</span>, </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"#e9ecef"</span>, <span class="at">alpha=</span><span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Histograma de Variación Normalizada"</span>) <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_ipsum</span>() <span class="sc">+</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">15</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Visualización Espacial</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(r_eval, <span class="at">zcol =</span> <span class="st">"adjvar_Secuestros"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <center>
 <img src="images/secuestros_var.png" class="img-fluid" style="width:90.0%">
