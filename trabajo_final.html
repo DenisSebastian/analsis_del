@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Centro de Inteligencia Territorial- UAI">
-<meta name="dcterms.date" content="2023-09-01">
 
-<title>Análisis Criminológico de Datos</title>
+<title>Análisis Criminológico de Datos - Trabajo Final</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./syllabus.html" rel="next">
+<link href="./references.html" rel="next">
+<link href="./tarea_3.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -76,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introducción</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tarea_1.html">Tareas</a></li><li class="breadcrumb-item"><a href="./trabajo_final.html">Trabajo Final</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -103,7 +102,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introducción</span></a>
   </div>
 </li>
@@ -166,7 +165,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./trabajo_final.html" class="sidebar-item-text sidebar-link">
+  <a href="./trabajo_final.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Trabajo Final</span></a>
   </div>
 </li>
@@ -229,10 +228,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a>
-  <ul class="collapse">
-  <li><a href="#objetivos-del-curso" id="toc-objetivos-del-curso" class="nav-link" data-scroll-target="#objetivos-del-curso">Objetivos del curso</a></li>
-  </ul></li>
+  <li><a href="#antecedentes" id="toc-antecedentes" class="nav-link active" data-scroll-target="#antecedentes">Antecedentes</a></li>
+  <li><a href="#instrucciones" id="toc-instrucciones" class="nav-link" data-scroll-target="#instrucciones">Instrucciones</a></li>
   </ul>
 </nav>
     </div>
@@ -241,27 +238,15 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Análisis Criminológico de Datos</h1>
-<p class="subtitle lead">Técnicas Avanzadas de Análisis Delictual Aplicado con uso de SIG</p>
+<h1 class="title">Trabajo Final</h1>
+<p class="subtitle lead">Evolución y distribución de un fenómeno</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Centro de Inteligencia Territorial- UAI </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 1, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -269,22 +254,26 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="introducción" class="level1 unnumbered">
-<h1 class="unnumbered">Introducción</h1>
-<p>Este libro tiene como objetivo apoyar la capacitación a los integrantes de la Subsecretaría de Prevención del Delito en el curso de Análisis criminológico de datos. A través de una guía práctica, se proporcionará a los lectores las habilidades necesarias para limpiar, estructurar y analizar datos de una manera rigurosa y efectiva. El libro está diseñado para proporcionar una comprensión sólida de las técnicas de análisis exploratorio y descriptivo de datos, así como de las técnicas de limpieza y transformación de datos.</p>
-<section id="objetivos-del-curso" class="level2">
-<h2 class="anchored" data-anchor-id="objetivos-del-curso">Objetivos del curso</h2>
-<p>El Objetivo General de aprendizaje este curso es aplicar herramientas eficientes para el trabajo con grandes volúmenes de datos, aplicándolos al análisis de patrones territoriales y tendencias delictuales.</p>
-<p><strong>Objetivos específicos: </strong></p>
+<section id="antecedentes" class="level2">
+<h2 class="anchored" data-anchor-id="antecedentes">Antecedentes</h2>
 <ul>
-<li>Abrir datos de formato diverso, limpiarlos, estructurarlos y concatenarlos, en R.</li>
-<li>Generar indicadores y series longitudinales con datos de panel, en R.</li>
-<li>Exportar datos agregados a .csv y .shp, para analizar casos territoriales en otros programas.</li>
+<li>Fecha de Presentación: <strong>20 de Octubre 2023</strong></li>
+<li>Fecha de entrega Informe: <strong>22 de Octubre 2023</strong></li>
+<li>Formato Informe (docx, pdf) + Código (.R)</li>
+<li>Integrantes: 3 o 4</li>
 </ul>
-<p>Se evaluará la aplicación de estas herramientas al análisis personal de casos territoriales.</p>
-
-
 </section>
+<section id="instrucciones" class="level2">
+<h2 class="anchored" data-anchor-id="instrucciones">Instrucciones</h2>
+<ol type="1">
+<li><p>Plantee una pregunta de investigación referente a la evolución y distribución de un fenómeno delictual que sea de particular interés para usted. Ej: ¿Cómo ha evolucionado el crimen organizado en Chile y en qué ciudades ha tenido mayor impacto?. Explique en qué consiste el fenómeno escogido y porqué es interesante analizarlo.</p></li>
+<li><p>Escoja un conjunto de tipos de delitos (mínimo 3) que tenga relación con la pregunta planteada y explique en qué consiste esta relación. Ej: De una parte, Drogas y Trata de Personas, porque son delitos lucrativos que proveen la principal fuente de ingresos al crimen organizado en Chile. De otra parte, Armas, Homicidios y Secuestros, porque son crímenes relacionados con la disputa territorial y el fortalecimiento del poder de coerción de organizaciones criminales.</p></li>
+<li><p>Identifique las comunas de Chile que presenten mayor aumento en los delitos seleccionados, entre el 2° semestre de 2017 y el 2° de 2022, mediante un análisis cartográfico de variación normalizada de casos policiales (detenciones + denuncias). Se recomienda usar simbología de puntos seleccionando solamente las comunas con variación extrema.</p></li>
+<li><p>Escoja una región particularmente afectada por el fenómeno delictual escogido y fundamente esta elección. Realice un análisis cartográfico comparativo de las comunas en la región, usando la variación normalizada de casos policiales. Se recomienda usar simbología de polígonos con escalas de color.</p></li>
+<li><p>Analice la evolución de los tipos de delitos escogidos en el período 2012-2022, comparando para cada tipo las tendencias de Detenciones Policiales, Denuncias Policiales y Registros del sistema Denuncia Seguro. Realice este análisis a escala de las comunas más relevantes para su pregunta de investigación, de la región escogida y del total país. ¿Qué se puede inferir de las diferencias entre las distintas fuentes estadísticas? ¿Parece probable que existan sesgos o diferencias importantes de cifras negras entre ellas? ¿Qué se puede inferir de las diferencias o similitud de tendencias en las distintas escalas analizadas?</p></li>
+</ol>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -523,10 +512,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./tarea_3.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tarea 3</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./syllabus.html" class="pagination-link">
-        <span class="nav-page-text">Syllabus</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
