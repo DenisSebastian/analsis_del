@@ -1,5 +1,5 @@
 ---
-subtitle: "Evolución y distribución de un fenómeno"
+subtitle: "Evolución y distribución de un fenómeno delictual"
 editor_options: 
   chunk_output_type: console
 ---
