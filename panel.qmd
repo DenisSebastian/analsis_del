@@ -298,7 +298,7 @@ mapview(reg_dens_max_cat, zcol = "dens_anual")
 ```
 
 
-## Densidades con Respecto al Tiempo
+## Densidades con Respecto al Tiempo {#sec-paneTiempo}
 
 ![](images/pivot_longer.png){fig-align="center" width="80%"}
 

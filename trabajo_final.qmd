@@ -1,0 +1,31 @@
+---
+subtitle: "Evolución y distribución de un fenómeno"
+editor_options: 
+  chunk_output_type: console
+---
+
+# Trabajo Final {.unnumbered}
+
+
+## Antecedentes
+
+- Fecha de Presentación: **20 de Octubre 2023**
+- Fecha de entrega Informe: **22 de Octubre 2023**
+- Formato Informe (docx, pdf) + Código (.R)
+- Integrantes: 3 o 4
+
+
+## Instrucciones
+
+1.	Plantee una pregunta de investigación referente a la evolución y distribución de un fenómeno delictual que sea de particular interés para usted. 
+Ej: ¿Cómo ha evolucionado el crimen organizado en Chile y en qué ciudades ha tenido mayor impacto?. Explique en qué consiste el fenómeno escogido y porqué es interesante analizarlo. 
+
+2.	Escoja un conjunto de tipos de delitos (mínimo 3) que tenga relación con la pregunta planteada y explique en qué consiste esta relación. 
+Ej: De una parte, Drogas y Trata de Personas, porque son delitos lucrativos que proveen la principal fuente de ingresos al crimen organizado en Chile. De otra parte, Armas, Homicidios y Secuestros, porque son crímenes relacionados con la disputa territorial y el fortalecimiento del poder de coerción de organizaciones criminales.
+
+3.	Identifique las comunas de Chile que presenten mayor aumento en los delitos seleccionados, entre el 2° semestre de 2017 y el 2° de 2022, mediante un análisis cartográfico de variación normalizada de casos policiales (detenciones + denuncias). Se recomienda usar simbología de puntos seleccionando solamente las comunas con variación extrema.
+
+4.	Escoja una región particularmente afectada por el fenómeno delictual escogido y fundamente esta elección. Realice un análisis cartográfico comparativo de las comunas en la región, usando la variación normalizada de casos policiales. Se recomienda usar simbología de polígonos con escalas de color. 
+
+5.	Analice la evolución de los tipos de delitos escogidos en el período 2012-2022, comparando para cada tipo las tendencias de Detenciones Policiales, Denuncias Policiales y Registros del sistema Denuncia Seguro. Realice este análisis a escala de las comunas más relevantes para su pregunta de investigación, de la región escogida y del total país. 
+¿Qué se puede inferir de las diferencias entre las distintas fuentes estadísticas? ¿Parece probable que existan sesgos o diferencias importantes de cifras negras entre ellas? ¿Qué se puede inferir de las diferencias o similitud de tendencias en las distintas escalas analizadas?

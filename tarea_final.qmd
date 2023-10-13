@@ -1,0 +1,36 @@
+---
+subtitle: "Informe y Presentación Final"
+editor_options: 
+  chunk_output_type: console
+---
+
+# Tarea Final {.unnumbered}
+
+
+## Antecedentes
+
+- Fecha de Presentación: **20 de Octubre 2023**
+- Fecha de entrega Informe: **22 de Octubre 2023**
+- Formato Informe (docx, pdf) + Código (.R)
+- Integrantes: 3 o 4
+
+
+## Instrucciones
+
+Considerando la una categorización de delitos de su Interés, realizar una análisis Nacional pasando región por región, el periodo de tiempo comprendido del 2017 al 2022. 
+
+Por región realizar los siguiente: 
+
+a) Análisis Temporal: Resumen apoyado por gráfico de todos los delitos (gráfico de medias). (2pts). Referencias: @sec-paneTiempo
+
+b) Análisis Evolución: Tomar dos periodos de tiempo y calcular la evolución. Seleccionar un tipo de delito y generar un mapa comunal de la variación entre periodos utilizando los quiebres de Fisher o Jenks. (2pts). Referencias: @sec-evolucion
+ 
+ 
+c) Hacer un análisis de resultados por región y uno nacional, que contenga una descripción general del comportamiento de los delitos en el tiempo, eventos destacables y si existen hipótesis que respondan a la variabilidad observada. (2pts). 
+ 
+::: {.callout-tip}
+- Evalúe utilizar ciclos "for" (@sec-bucles) ya que corresponde el mismo el mismo análisis a diferentes regiones del país.
+
+- Todo lo solictado está dentro del material de clases y libro digital. 
+
+:::

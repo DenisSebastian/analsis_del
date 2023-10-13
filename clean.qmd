@@ -77,7 +77,8 @@ Conociendo los archivos se precederá a leer cada uno de ellos de forma secuenci
 
 
 ::: {.callout-note}
-## Lectura Secuencial
+
+## Lectura Secuencial {#sec-lecSeq}
 
 1. Se declara una varible vacía en la cual se agregará cada base durante al iteración
 2. Se interará por cada uno de las rutas de los arhivos:  
