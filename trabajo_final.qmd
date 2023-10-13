@@ -9,10 +9,12 @@ editor_options:
 
 ## Antecedentes
 
-- Fecha de Presentación: **20 de Octubre 2023**
+- Fecha de Presentación: **27 de Octubre 2023**
 - Fecha de entrega Informe: **27 de Octubre 2023**
 - Formato Informe (docx, pdf) + Código (.R)
 - Integrantes: 3 o 4
+- Datos: compartir_SPD -> data -> datos_trabajo_final
+
 
 
 ## Instrucciones
