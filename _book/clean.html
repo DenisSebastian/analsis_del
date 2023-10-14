@@ -170,6 +170,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Evolución</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./workflow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Workflow general</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
@@ -268,7 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#selección-de-variables" id="toc-selección-de-variables" class="nav-link" data-scroll-target="#selección-de-variables"><span class="header-section-number">2.4</span> Selección de variables</a></li>
   <li><a href="#eliminar-duplicados" id="toc-eliminar-duplicados" class="nav-link" data-scroll-target="#eliminar-duplicados"><span class="header-section-number">2.5</span> Eliminar Duplicados</a></li>
   <li><a href="#imputar-datos-censales" id="toc-imputar-datos-censales" class="nav-link" data-scroll-target="#imputar-datos-censales"><span class="header-section-number">2.6</span> Imputar datos Censales</a></li>
-  <li><a href="#categorizar-los-delitos" id="toc-categorizar-los-delitos" class="nav-link" data-scroll-target="#categorizar-los-delitos"><span class="header-section-number">2.7</span> Categorizar los delitos</a></li>
+  <li><a href="#sec-categ" id="toc-sec-categ" class="nav-link" data-scroll-target="#sec-categ"><span class="header-section-number">2.7</span> Categorizar los delitos</a></li>
   <li><a href="#barrios-comerciales" id="toc-barrios-comerciales" class="nav-link" data-scroll-target="#barrios-comerciales"><span class="header-section-number">2.8</span> Barrios Comerciales</a></li>
   </ul>
 </nav>
@@ -475,8 +481,8 @@ Lectura Secuencial
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(delitos_info, <span class="st">"data/delitos/delitos_all_info.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="categorizar-los-delitos" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="categorizar-los-delitos"><span class="header-section-number">2.7</span> Categorizar los delitos</h2>
+<section id="sec-categ" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="sec-categ"><span class="header-section-number">2.7</span> Categorizar los delitos</h2>
 <p>Considerando que en los casos policiales tiene una diversa tipificación de delitos se procede a categorizarlos en grupos similares.</p>
 <p>Para facilitar el proceso de clasificación a cada tipo de delito se le asignará una Sigla que se encuentra en una hoja de un archivo excel.</p>
 <div class="cell">

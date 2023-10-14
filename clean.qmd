@@ -254,7 +254,7 @@ Guardar los resultados
 saveRDS(delitos_info, "data/delitos/delitos_all_info.rds")
 ```
 
-## Categorizar los delitos
+## Categorizar los delitos {#sec-categ}
 
 Considerando que en los casos policiales tiene una diversa tipificación de delitos se procede a categorizarlos en grupos similares.
 

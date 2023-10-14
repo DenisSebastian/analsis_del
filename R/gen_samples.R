@@ -37,5 +37,11 @@ delitos_cat_bc_URB <- readRDS("data/delitos/delitos_eval_bcom_urb.rds")
 sample_cat_bc_URB <- delitos_cat_bc_URB %>% 
   muestra_n(., n = 5000, random = T)
 
-
 saveRDS(sample_cat_bc_URB, "data_samples/delitos_eval_bcom_urb.rds")
+
+
+casos <- readRDS("data/datos_trabajo_final/delitos_all_categ.rds")
+sample_casos <- casos %>% 
+  muestra_n(., n = 10000, random = T)
+
+saveRDS(sample_casos, "data_samples/casos_muestra_1000.rds")

@@ -1,0 +1,568 @@
+---
+subtitle: "Flujo de Trabajo Completo"
+editor_options: 
+  chunk_output_type: console
+---
+
+# Workflow general {#sec-evolucion}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
+options(scipen = 999, warn=-1)
+
+#cargar Librerias
+source("R/librerias.R")
+# Cargar Funciones
+source("R/funciones.R")
+
+```
+
+## Introducción
+
+![Flujo de trabajo general para que se realizará en esté capítulo](images/wf_global.png){#fig-wfGoblal}
+
+En este capítulo se realizará un flujo de trabajo general para la consolidación de tres productos generales que serán utilizados para análisis futuros como también para el trabajo final. El flujo de trabajo general se encuentra en la @fig-wfGoblal, donde se obtendrá los siguientes productos:
+
+
+* Excel por Comuna y Mes
+* Evolución por Comunas espacial
+* Evolución por Zonas espacial
+
+A continución se procede a aplicar de forma detallada los procedimientos para obtener cada uno de estos productos.
+
+
+## Excel por Comuna y Mes
+
+![Flujo de Trabajo para generar Excel de frecuencia de delitos por Comuna y Mes](images/wf_1.png){#fig-wf1}
+
+
+Este producto se pretende consolidar los datos de *Casos Policiales Totales* y la base de *Denuncia Seguro* en un archivo que represente la frecuecia de delitos, previamente limpiados y homolgados, a escala comunal y por meses por meses. El resultado será en formato excel para facilitar el proceso de análsis posterior. El flujo de trabajo en específico para generar este producto se representa en @fig-wf1.
+
+
+
+
+**Librerías de uso general**
+```{r eval=TRUE}
+# librerías ---------------------------------------------------------------
+library(openxlsx)
+library(dplyr)
+library(lubridate)
+library(sf)
+
+```
+
+### Procedimiento a base de  Denuncia Seguro
+
+
+**Lectura**
+
+```{r eval = TRUE}
+# Lectura denuncia seguro
+denuncias <- readRDS("data/datos_trabajo_final/denuncia_seguro.rds") %>% 
+  st_as_sf() %>% st_drop_geometry() %>%# Descartar información espacial
+  as_tibble() # trasformación para visualizar mejor
+
+```
+
+**Limpieza**
+
+En esta etapa se crea un variable temporal de unifica el año y mes que se denominará `MESES` a través de una suma directa, lo que aumentará la eficiencia al momento de realizar consultas.
+
+```{r eval = TRUE}
+denuncias <- denuncias %>% rename(NOM_REGION = REGION) %>% 
+  mutate(MESES = (ANIO*100) + MES)   # agrega de año y mes (muy eficiente)
+
+# visaluzación de transformación de la fechas
+denuncias %>% select(INCIDENTE, ANIO, MES, MESES) %>% head(5)
+```
+
+**Codificación de Tipos de Delitos**
+
+```{r eval = TRUE}
+# Lectura de clasificación de denuncia seguro
+clasificaden <- read.xlsx(
+  "data/datos_trabajo_final/clasificacion_denuncias.xlsx", 
+  sheet = "tipos") %>% 
+  select(-tip) # eliminación de columna
+
+clasificaden %>% as_tibble() %>% head(5)
+
+```
+
+Agregar tipología a base de Denuncia seguro, donde la variable _key_ para hacer la unión es `SUBDELITO`.
+
+```{r eval = TRUE}
+denuncias <- denuncias %>% left_join(clasificaden, by = "SUBDELITO") 
+denuncias %>% arrange(MESES) %>% select(INCIDENTE,MESES, TIPO) %>% head(5)
+```
+
+**Armonización de Tablas**
+
+En esta etapa se realizará unificación de los nombres de comunas y regiones para todas las bases que se van a trabajar, y como la base Denuncia Seguro difieren de la base de Casos Policiales, se deben homologar haciendo uso de las siguientes tablas:
+
+- Tablas de nombres de comunas:
+
+```{r eval = TRUE}
+indcom <- read.xlsx("data/datos_trabajo_final/comunas_carabineros_spd.xlsx")
+indcom %>% as_tibble() %>% head(5)
+```
+
+- Tablas de nombres regiones:
+
+```{r eval = TRUE}
+indreg <- read.xlsx("data/datos_trabajo_final/regiones_carabineros_spd.xlsx")
+indreg %>% as_tibble() %>% head(5)
+```
+
+Unificación de Denuncia Seguron con tablas de nombres
+
+```{r eval=TRUE}
+denuncias <- denuncias %>% left_join(indcom, by = "COMUNA", 
+                                     relationship = "many-to-many")
+denuncias <- denuncias %>% left_join(indreg, by = "NOM_REGION")
+
+denuncias %>% select(COMUNA, NOM_COMUNA, NOM_REGION, REGION) %>% head(5)
+```
+
+
+**Selección de variables**
+
+```{r}
+
+denuncias <- denuncias %>% 
+  mutate(CLASIFICAC = "MENSAJE") %>% 
+  select(REGION,NOM_REGION,COMUNA,NOM_COMUNA,MESES,TIPO,CLASIFICAC)
+
+```
+
+
+
+### Procedimiento a base de Casos Policiales
+
+**Lectura**
+
+Para efectos de este libro digital se tomará una **muestra** de los casos policiales de 10000 a nivel nacional.
+
+```{r eval=FALSE}
+casos <- readRDS("data/datos_trabajo_final/delitos_all_categ.rds")
+casos %>% st_drop_geometry() %>% count(TIPO)
+```
+
+```{r eval=TRUE, echo=FALSE}
+casos <- readRDS("data_samples/casos_muestra_1000.rds")
+# casos %>% st_drop_geometry() %>% count(TIPO)
+
+```
+
+
+**Limpieza**
+
+```{r}
+# Limpieza Casos Policiales
+casos <- casos %>% 
+  st_drop_geometry() %>% 
+  select(-NOM_REGION, -COMUNA) %>%  # eliminar columnas
+  mutate(REGION = as.numeric(REGION),
+         MESES = year(FECHA_DEL)*100 + month(FECHA_DEL), 
+         COMUNA = floor(as.numeric(ZONA)/1000000))
+```
+
+Se debe revisar si los todos los casos policiales tienen su tipología asignada (sin valores NA) y que los nombres estén escritos de forma correcta. Lo primero se realizará revisión de las tablas de frecuencia y revisar si existen problemas. 
+
+::: {.callout-warning}
+## Muestra de 10000 casos policiales
+
+La revisión de tablas de frecuencia va diferir con los datos totales ya que se tomó una muestra para efectos de este libro digital.
+
+:::
+
+```{r}
+# Asignación manual delitos con problemas tipo
+casos %>% count(TIPO) # llama la atención Tipo de baja fecuencia
+```
+
+En este caso podemos observar que existen dos Tipos que hacen referencia a lo mismo `Comercio Ilegal` y `Comercio ilegal`. 
+
+En la base de casos original tambien existen delitos que no tienen tipología asignada correspondiente a `NA`, enconces se verificaremos si existen valores  faltantes mediente la siguiente consulta:
+
+```{r}
+# ver NA
+casos %>% 
+  filter(is.na(TIPO)) %>%  #casos con Tipo NA
+  pull(DELITO) # mostrar los delitos
+
+# en este caso retorna 0,
+# pero con los datos totales si va encontrar casos sin tipología.
+```
+
+
+Para solucionar lo anterior se utilizará un método eficiente de buscar y reemplazar usando la función `case_when()` como se muestra a continuación:
+
+
+```{r}
+casos <- casos %>% 
+  mutate(TIPO = case_when(
+    DELITO == "BOTILLERIA,SUPERMERC.,MINIMARKET QUE EXP.LICOR CONSUMIDO INT.LOCAL S/P" ~ "Desórdenes",
+    DELITO == "ROBO DE VEHICULO MOTORIZADO POR SORPRESA, VIOLENCIA O I_" ~ "Robo vehículos",
+    DELITO == "ROBO CON VIOLENCIA ART.436 INC 1 433,438,439" ~ "Robo violento",
+    DELITO == "VIOLENCIA INTRAFAMILIAR OTROS (LESIONES PSICOLOGICAS O LEVES)" ~ "Violencia familiar",
+    TIPO == "Comercio Ilegal" ~ "Comercio ilegal",
+    .default = TIPO
+    ))
+```
+
+Revisión de cambios ejecutados correctamente
+
+```{r}
+casos %>% count(TIPO) 
+```
+
+
+ Implementar un sistema mediante una CNN, que pueda detectar cambios en imágenes SAR en diferentes tiempos de forma no supervisada.
+
+
+**Codificación de Tipos de Delitos**
+
+Este paso ya fue realizado anteriormente y ya está realizado en base de Casos Policiales, en caso que se deba realizar nuevamente esta operación se recomienda revisar @sec-categ
+
+
+
+**Armonización de Tablas**
+
+```{r}
+casos <- casos %>% left_join(indreg, by = "REGION")
+casos <- casos %>% 
+  filter(!is.na(NOM_COMUNA)) 
+```
+
+
+**Selección de variables**
+
+```{r}
+casos <- casos %>% 
+  select(REGION,NOM_REGION,COMUNA,NOM_COMUNA,MESES,TIPO,CLASIFICAC)
+
+```
+
+
+### Fusión de tablas y estructuración en panel long
+
+
+Unión de las tablas
+```{r}
+hechos <- rbind(casos,denuncias)
+```
+
+
+Contabilizar los Delitos 
+
+```{r}
+hechoscomunames <- hechos %>%
+  group_by(REGION,NOM_REGION,COMUNA,NOM_COMUNA,MESES,CLASIFICAC,TIPO) %>%
+  summarise(HECHOS = n(), .groups = "keep")
+
+# hechoscomunames
+```
+
+filtrar por fecha desde  enero del 2017, encones podríamos filtar con la fechas superror al número `201700`
+
+```{r}
+hechoscomunames <- hechoscomunames %>% 
+  filter(MESES > 201700)
+
+# hechoscomunames
+```
+
+### Guardar los resultados en Excel
+
+```{r eval=F}
+# Guardar Excel
+write.xlsx(hechoscomunames, 
+           "data/datos_trabajo_final/resultados/hechoscomunames.xlsx", 
+           rownames = F)
+saveRDS(hechoscomunames, 
+        "data/datos_trabajo_final/resultados/hechoscomunames.rds")
+
+```
+
+
+## Evolución por Comunas espacial
+
+![Diagrama de flujo para el cáculo de evolución de delitos por Comunas](images/wf_2.png){#fig-wf2}
+
+Con el objetivo de medir la evolución de casos policiales en dos periodos de tiempo, se contruirá un indicador de variabilidad a nivel comunal con representación espacial como punto y polígono.
+
+De acuedo al diagrama de flujo de esta subsección @fig-wf2 se utilizará los resultados *limpieza* y *codificación de tipos de delitos* de casos policiales realizados anteriormente.
+
+
+Primeramente se descartará la información de Denuncia Seguro, dejado solo la clasificación de "DENUNCIA" y "DETENCIÓN"
+
+
+```{r}
+delcomuna <- hechoscomunames %>% 
+  filter(CLASIFICAC %in% c("DENUNCIA","DETENCION"))
+
+```
+
+
+
+**Selección de Periodos, cálculo de frecuencias y variación**
+
+Tabla de medidas estadísticas de frecuencia de delitos
+
+```{r}
+varianzas_base <- delcomuna %>% 
+  group_by(COMUNA, TIPO) %>% 
+  summarise(varianza = sd(HECHOS),
+            cantidad = sum(HECHOS),  .groups = "keep")
+
+head(varianzas_base)
+
+```
+
+- Periodo 1
+
+```{r}
+ini <- delcomuna %>%
+  filter(MESES %in% 201707:201712) %>% 
+  group_by(COMUNA, TIPO) %>% 
+  summarise(inicio = sum(HECHOS),  .groups = "keep")
+
+```
+
+- Periodo 2
+
+```{r}
+fin <- delcomuna %>%
+  filter(MESES %in% 202207:202212) %>% 
+  group_by(COMUNA, TIPO) %>% 
+  summarise(fin = sum(HECHOS),  .groups = "keep")
+```
+
+- Consolidación
+
+```{r}
+
+adjvar <- varianzas_base %>% 
+  left_join(ini, by = c("COMUNA", "TIPO")) %>% 
+  left_join(fin, by = c("COMUNA", "TIPO")) %>% 
+  mutate_if(.predicate = is.numeric,
+            .funs = function(x) ifelse(is.na(x), 0, x)) # si es NA -> 0
+
+```
+
+- Indicador de Variación 
+```{r}
+adjvar <- adjvar %>% 
+  mutate(adjvar = (fin-inicio)/(fin+inicio)) %>% 
+  mutate_if(.predicate = is.numeric,
+            .funs = function(x) ifelse(is.na(x), 0, x))
+adjvar
+```
+
+
+- Histograma de las diferencias normalizadas entre periodos
+
+::: {.panel-tabset}
+
+### Plot
+
+```{r echo=FALSE}
+library(hrbrthemes)
+p <- adjvar %>%
+  ggplot( aes(x=adjvar)) +
+  geom_histogram( binwidth=0.1, 
+                  fill="#69b3a2", color="#e9ecef", alpha=0.9) +
+  scale_x_continuous(breaks = seq(-1, 1, by = 0.2))+
+  ggtitle("Histograma de Variación Normalizada (muestra)") +
+  theme_ipsum() +
+  theme(
+    plot.title = element_text(size=15)
+  )
+p
+
+```
+
+
+### Code
+
+```{r eval=FALSE}
+library(hrbrthemes)
+p <- adjvar %>%
+  ggplot( aes(x=adjvar)) +
+  geom_histogram( binwidth=0.1, 
+                  fill="#69b3a2", color="#e9ecef", alpha=0.9) +
+  scale_x_continuous(breaks = seq(-1, 1, by = 0.2))+
+  ggtitle("Histograma de Variación Normalizada (muestra)") +
+  theme_ipsum() +
+  theme(
+    plot.title = element_text(size=15)
+  )
+p
+
+```
+
+
+:::
+
+
+- Relación del valor normalizado con la diferencia real
+
+
+::: {.panel-tabset}
+
+### Plot
+
+```{r echo=FALSE}
+var_max <- max(adjvar$fin-adjvar$inicio, na.rm = T)
+a <- 1
+b <- 1:20
+
+data <- expand_grid(a, b) %>% 
+  mutate(cambio = (b-a)/(a+b))
+
+v <- ggplot(data = data, aes(x = b, y = cambio))+
+  geom_line(color = "#69b3a2", linewidth =1)+
+  scale_y_continuous(breaks = seq(0, 1.2, by = 0.1))+
+  scale_x_continuous(breaks = seq(0, 20, by = 1))+
+  ggtitle("Representación de la Variación Normalizada")+
+  theme_ipsum()+
+  theme_bw()
+
+v
+```
+
+
+### Code
+
+```{r eval=FALSE}
+var_max <- max(adjvar$fin-adjvar$inicio, na.rm = T)
+a <- 1
+b <- 1:20
+
+data <- expand_grid(a, b) %>% 
+  mutate(cambio = (b-a)/(a+b))
+
+v <- ggplot(data = data, aes(x = b, y = cambio))+
+  geom_line(color = "#69b3a2", linewidth =1)+
+  scale_y_continuous(breaks = seq(0, 1.2, by = 0.1))+
+  scale_x_continuous(breaks = seq(0, 20, by = 1))+
+  ggtitle("Representación de la Variación Normalizada")+
+  theme_ipsum()+
+  theme_bw()
+
+v
+
+```
+:::
+
+
+**Estructuración en Panel Wide**
+
+En este paso cada Tipo de delitos será columna entonces los nombres se deben abreviar, pero de una forma segura, evitando la signación manual. Por lo anterior, este procedimiento se realizarà mediante un diccionario de abreviaciones, de la siguiente forma:
+
+```{r}
+# renombrar TIPO con diccionario
+abrev_tipos <- read.xlsx("data/datos_trabajo_final/abreviaciones.xlsx")
+abrev_tipos
+```
+
+Insertar las abreviaciones a la base y reemplazar por `TIPO`
+
+```{r}
+adjvar <- adjvar %>% 
+  left_join(abrev_tipos, by = c("TIPO" = "Tipo.delito")) %>% 
+  mutate(TIPO = Abreviacion) %>% 
+  select(-Abreviacion)
+adjvar
+```
+
+
+Transformar en formato wider
+
+```{r}
+# Pivot Wider
+varianzas_w <- adjvar%>% 
+  select(-varianza, -cantidad, -inicio, -fin ) %>% 
+  pivot_wider(names_from = TIPO,
+              values_from = c(adjvar), values_fill = 0) %>% 
+  mutate(COMUNA = sprintf("%05d", as.numeric(COMUNA)))
+varianzas_w
+```
+
+**Guardar Resultados Espacial**
+
+
+- Lectura de Archivo de poligonos comunales del INE
+
+```{r}
+comunas_poligonos <- readRDS("data/ine/Comunas_Chile.rds") %>% 
+  select(-Shape_Leng, -Shape_Area)
+```
+
+
+::: {.panel-tabset}
+
+### Puntos Comunales
+
+```{r eval=FALSE}
+
+#convertir a puntos
+comunas_point <-  comunas_poligonos %>% 
+   st_centroid()
+
+
+#agregar los resultados de evolución
+varianzas_w_points <- comunas_point %>%
+  left_join(varianzas_w, by  = "COMUNA") %>% 
+  mutate_if(.predicate = is.numeric,
+            .funs = function(x) ifelse(is.na(x), 0, x))
+
+# Inspección visual
+# r <-  "13"
+# tipo_del <- "Desor"
+# dif = filter(varianzas_w_points, REGION == r)
+# mapview::mapview(dif, zcol = tipo_del)
+
+
+#Guardar Resultados
+st_write(varianzas_w_points, 
+         "data/datos_trabajo_final/resultados/comdel_dif_points.shp", 
+         delete_dsn = T)
+
+
+```
+
+
+### Polígonos Comunales
+
+```{r eval=FALSE}
+
+#agregar los resultados de evolución
+varianzas_w_pol <- comunas_poligonos %>%
+  left_join(varianzas_w, by  = "COMUNA") %>% 
+  mutate_if(.predicate = is.numeric,
+            .funs = function(x) ifelse(is.na(x), 0, x))
+
+
+# Inspección visual
+# r <-  "13"
+# tipo_del <- "Desor"
+# dif_pol = filter(varianzas_w_pol, REGION == r)
+# mapview::mapview(dif_pol, zcol = tipo_del)
+
+#Guardar Resultados
+st_write(varianzas_w_pol, 
+         "data/datos_trabajo_final/resultados/comdel_dif_pol.shp", 
+         delete_dsn = T)
+```
+:::
+
+
+
+
+
+
+<!-- ## Evolución por Zonas espacial -->
+
+<!-- ![](images/wf_3.png) -->

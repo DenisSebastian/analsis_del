@@ -18,7 +18,7 @@ book:
     - clean.qmd
     - panel.qmd
     - evo.qmd
-    # - resumen.qmd
+    - workflow.qmd
     # - delta.qmd
     - part: "Tareas"
       chapters:

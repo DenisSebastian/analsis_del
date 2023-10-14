@@ -16,7 +16,6 @@ library(sf)
 # Lectura denuncia seguro
 denuncias <- readRDS("data/datos_trabajo_final/denuncia_seguro.rds") %>% 
   st_as_sf() %>% st_drop_geometry() # Descartar información espacial
-class(denuncias)
 head(denuncias)
 
 # limpieza denuncia seguro
@@ -54,7 +53,7 @@ denuncias <- denuncias %>%
   mutate(CLASIFICAC = "MENSAJE") %>% 
   select(REGION,NOM_REGION,COMUNA,NOM_COMUNA,MESES,TIPO,CLASIFICAC)
 
-
+denuncias %>% select(COMUNA, NOM_COMUNA, NOM_REGION, REGION) %>% head(5)
 
 
 # Casos Policiales Totales
@@ -235,10 +234,10 @@ varianzas_w_points <- comunas_point %>%
   mutate_if(.predicate = is.numeric,
             .funs = function(x) ifelse(is.na(x), 0, x))
 
-r <-  "06"
-tipo_del <- "Secues"
-dif = filter(varianzas_w_points, REGION == r)
-mapview::mapview(dif, zcol = tipo_del)
+# r <-  "13"
+# tipo_del <- "Desor"
+# dif = filter(varianzas_w_points, REGION == r)
+# mapview::mapview(dif, zcol = tipo_del)
 
 st_write(varianzas_w_points, 
          "data/datos_trabajo_final/resultados/comdel_dif_points.shp", 
@@ -261,6 +260,8 @@ mapview::mapview(dif_pol, zcol = tipo_del)
 st_write(varianzas_w_pol, 
          "data/datos_trabajo_final/resultados/comdel_dif_pol.shp", 
          delete_dsn = T)
+
+
 
 
 
