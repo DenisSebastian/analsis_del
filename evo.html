@@ -338,15 +338,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>delitos_cat_bc_URB <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/delitos/delitos_eval_bcom_urb.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>delitos_cat_bc_URB <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data_samples/delitos_eval_bcom_urb.rds"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">ZONA =</span> GEOCODIGO, <span class="at">TIPO =</span> Tipo )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>delitos_cat_bc_URB <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data_samples/delitos_eval_bcom_urb.rds"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Generación de Tablas Resumen por día</strong></p>
 <p>Seleccionamos la columnas que nos interesan y eliminamos la geometría.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>del_all <span class="ot">&lt;-</span> delitos_cat_bc_URB <span class="sc">%&gt;%</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(COMUNA, <span class="at">tiempo =</span> FECHA_DEL,TIPO )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tiempo =</span> (<span class="fu">year</span>(FECHA_DEL) <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">+</span> <span class="fu">month</span>(FECHA_DEL)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(COMUNA, tiempo, TIPO )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Tabla de cuenta de delitos diarios por comuna y tipología</p>
 <div class="cell">
@@ -373,21 +373,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(TIPO)) <span class="sc">%&gt;%</span> </span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(COMUNA, TIPO) <span class="sc">%&gt;%</span> </span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">varianza =</span> <span class="fu">sd</span>(cantidad)<span class="sc">^</span><span class="dv">2</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">cantidad =</span> <span class="fu">n</span>(),  <span class="at">.groups =</span> <span class="st">"keep"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">cantidad =</span> <span class="fu">sum</span>(cantidad),  <span class="at">.groups =</span> <span class="st">"keep"</span>)</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(varianzas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 4
-# Groups:   COMUNA, TIPO [6]
-  COMUNA TIPO     varianza cantidad
-  &lt;chr&gt;  &lt;chr&gt;       &lt;dbl&gt;    &lt;int&gt;
-1 10101  Públicos   0.0428       68
-2 10102  Públicos   0             4
-3 10105  Públicos   0             2
-4 10107  Públicos   0             5
-5 10109  Públicos   0             7
-6 10201  Públicos   0             8</code></pre>
-</div>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># head(varianzas)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="periodos" class="level3" data-number="4.3.2">
@@ -395,34 +383,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>En esta etapa se van a definir los dos periodos que se compararán y así determinar la variabilidad. En este caso vamos analizar el segundo semestre del año 2017 versus el año 2022.</p>
 <p><strong>Periodo 1</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p1_inicio <span class="ot">&lt;-</span> <span class="st">"2017-07-01"</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>p2_inicio <span class="ot">&lt;-</span> <span class="st">"2017-12-31"</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>ini <span class="ot">&lt;-</span> delcomuna <span class="sc">%&gt;%</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tiempo <span class="sc">&gt;=</span> <span class="fu">ymd</span>(p1_inicio) <span class="sc">&amp;</span> tiempo <span class="sc">&lt;=</span> <span class="fu">ymd</span>(p2_inicio)) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(COMUNA, TIPO) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">inicio =</span> <span class="fu">n</span>(),  <span class="at">.groups =</span> <span class="st">"keep"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p1_inicio <span class="ot">&lt;-</span> <span class="dv">201707</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>p1_final <span class="ot">&lt;-</span> <span class="dv">201707</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>ini <span class="ot">&lt;-</span> delcomuna <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tiempo  <span class="sc">%in%</span> p1_inicio<span class="sc">:</span>p1_final) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(COMUNA, TIPO) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">inicio =</span> <span class="fu">sum</span>(cantidad),  <span class="at">.groups =</span> <span class="st">"keep"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>Periodo 1</strong></p>
+<p><strong>Periodo 2</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>p1_fin <span class="ot">&lt;-</span> <span class="st">"2022-07-01"</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>p2_fin <span class="ot">&lt;-</span> <span class="st">"2022-12-31"</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>fin <span class="ot">&lt;-</span> delcomuna <span class="sc">%&gt;%</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tiempo <span class="sc">&gt;=</span> <span class="fu">ymd</span>(p1_fin) <span class="sc">&amp;</span> tiempo <span class="sc">&lt;=</span> <span class="fu">ymd</span>(p2_fin)) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(COMUNA, TIPO) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">fin =</span> <span class="fu">n</span>(),  <span class="at">.groups =</span> <span class="st">"keep"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p2_inicio <span class="ot">&lt;-</span> <span class="dv">202207</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>p2_final <span class="ot">&lt;-</span> <span class="dv">202212</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>fin <span class="ot">&lt;-</span> delcomuna <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tiempo  <span class="sc">%in%</span> p2_inicio<span class="sc">:</span>p2_final) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(COMUNA, TIPO) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">fin =</span> <span class="fu">sum</span>(cantidad),  <span class="at">.groups =</span> <span class="st">"keep"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="consolidación" class="level3" data-number="4.3.3">
 <h3 data-number="4.3.3" class="anchored" data-anchor-id="consolidación"><span class="header-section-number">4.3.3</span> Consolidación</h3>
 <p>Finalmente se unen las tablas calculadas.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>adjvar <span class="ot">&lt;-</span> varianzas <span class="sc">%&gt;%</span> </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(ini, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"COMUNA"</span>, <span class="st">"TIPO"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(fin, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"COMUNA"</span>, <span class="st">"TIPO"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(<span class="at">.predicate =</span> is.numeric,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">.funs =</span> <span class="cf">function</span>(x) <span class="fu">ifelse</span>(<span class="fu">is.na</span>(x), <span class="dv">0</span>, x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>adjvar <span class="ot">&lt;-</span> varianzas <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(ini, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"COMUNA"</span>, <span class="st">"TIPO"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(fin, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"COMUNA"</span>, <span class="st">"TIPO"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(<span class="at">.predicate =</span> is.numeric,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">.funs =</span> <span class="cf">function</span>(x) <span class="fu">ifelse</span>(<span class="fu">is.na</span>(x), <span class="dv">0</span>, x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -430,22 +418,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="4.4" class="anchored" data-anchor-id="indicador-de-variación"><span class="header-section-number">4.4</span> Indicador de Variación</h2>
 <p>En esta etapa se calcularà el indicador de la variación por cada tipo de delito y comuna. Corresponde a la diferencia entre los periodos (evolución) y se divide la suma de los dos períodos, para que el valor quede normalizado en valores entre 1 y -1.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>adjvar <span class="ot">&lt;-</span> adjvar <span class="sc">%&gt;%</span> </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">adjvar =</span> (fin<span class="sc">-</span>inicio)<span class="sc">/</span>(fin<span class="sc">+</span>inicio))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>adjvar <span class="ot">&lt;-</span> adjvar <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">adjvar =</span> (fin<span class="sc">-</span>inicio)<span class="sc">/</span>(fin<span class="sc">+</span>inicio)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(<span class="at">.predicate =</span> is.numeric,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">.funs =</span> <span class="cf">function</span>(x) <span class="fu">ifelse</span>(<span class="fu">is.na</span>(x), <span class="dv">0</span>, x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Histograma de la Variabilidad.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hrbrthemes)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> adjvar <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>adjvar)) <span class="sc">+</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>( <span class="at">binwidth=</span><span class="dv">1</span>,<span class="at">bins =</span> <span class="dv">3</span>, </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"#e9ecef"</span>, <span class="at">alpha=</span><span class="fl">0.9</span>) <span class="sc">+</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Histograma de Variación Normalizada"</span>) <span class="sc">+</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_ipsum</span>() <span class="sc">+</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">15</span>)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hrbrthemes)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> adjvar <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>adjvar)) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>( <span class="at">binwidth=</span><span class="fl">0.1</span>, </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"#e9ecef"</span>, <span class="at">alpha=</span><span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Histograma de Variación Normalizada (muestra)"</span>) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_ipsum</span>() <span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">15</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="evo_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -456,54 +446,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Finalmente se agregará elos resultados del análisis a la la geometrías comunales de Chile para poder cartografias los resultados.</p>
 <p>Se de primeramente transformar las estructra de datos de formato largo a formato ancho, para que los valores de variabilidad de cada tipo de delito quede por columnas.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>varianzas <span class="ot">&lt;-</span> adjvar <span class="sc">%&gt;%</span> </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">TIPO =</span> <span class="fu">gsub</span>(<span class="at">pattern =</span> <span class="st">" "</span>, <span class="at">replacement =</span> <span class="st">"_"</span>, <span class="at">x =</span> TIPO)) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> TIPO,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> <span class="fu">c</span>(varianza, cantidad, inicio, fin, adjvar))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>varianzas <span class="ot">&lt;-</span> adjvar <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>varianza, <span class="sc">-</span>cantidad, <span class="sc">-</span>inicio, <span class="sc">-</span>fin) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">TIPO =</span> <span class="fu">gsub</span>(<span class="at">pattern =</span> <span class="st">" "</span>, <span class="at">replacement =</span> <span class="st">"_"</span>, <span class="at">x =</span> TIPO)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> TIPO,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> <span class="fu">c</span>(adjvar), <span class="at">values_fill =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Agregar a lagesometrias comunales del INE.</p>
+<p>Agregar a la geometrias comunales del INE.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Comunas_Chile <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/ine/Comunas_Chile.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Comunas_Chile <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/ine/Comunas_Chile.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>comdel_dif <span class="ot">&lt;-</span> Comunas_Chile <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(COMUNA <span class="sc">%in%</span> varianzas<span class="sc">$</span>COMUNA) <span class="sc">%&gt;%</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(varianzas, <span class="at">by  =</span> <span class="st">"COMUNA"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(<span class="at">.predicate =</span> is.numeric,</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">.funs =</span> <span class="cf">function</span>(x) <span class="fu">ifelse</span>(<span class="fu">is.na</span>(x), <span class="dv">0</span>, x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>comdel_dif <span class="ot">&lt;-</span> Comunas_Chile <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(varianzas, <span class="at">by  =</span> <span class="st">"COMUNA"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(<span class="at">.predicate =</span> is.numeric,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">.funs =</span> <span class="cf">function</span>(x) <span class="fu">ifelse</span>(<span class="fu">is.na</span>(x), <span class="dv">0</span>, x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Guardar Resultados en formato shapefiles</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_write</span>(comdel_dif, <span class="st">"data/delitos/comdel_dif.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_write</span>(comdel_dif, <span class="st">"data/delitos/comdel_dif.shp"</span>, <span class="at">delete_dsn =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="revisión-por-tipología" class="level3" data-number="4.5.1">
 <h3 data-number="4.5.1" class="anchored" data-anchor-id="revisión-por-tipología"><span class="header-section-number">4.5.1</span> Revisión por tipología</h3>
 <p><strong>Selección de Región y Tipo de Delitos</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># grep(pattern = "Secuestros", x = names(comdel_dif), value = T)</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>tipo <span class="ot">=</span> <span class="st">"adjvar_Secuestros"</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>region <span class="ot">=</span> <span class="st">"13"</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>r_eval <span class="ot">=</span> comdel_dif <span class="sc">%&gt;%</span> </span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(REGION <span class="sc">==</span> <span class="st">"13"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># grep(pattern = "Desórdenes", x = names(varianzas), value = T)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>tipo <span class="ot">=</span> <span class="st">"Desórdenes"</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>region <span class="ot">=</span> <span class="st">"13"</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>r_eval <span class="ot">=</span> comdel_dif <span class="sc">%&gt;%</span> </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(REGION <span class="sc">==</span> <span class="st">"13"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Histograma</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> r_eval <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes_string</span>(<span class="at">x=</span>tipo)) <span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>( <span class="at">binwidth=</span><span class="dv">1</span>,<span class="at">bins =</span> <span class="dv">3</span>, </span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"#e9ecef"</span>, <span class="at">alpha=</span><span class="fl">0.9</span>) <span class="sc">+</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Histograma de Variación Normalizada"</span>) <span class="sc">+</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_ipsum</span>() <span class="sc">+</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">15</span>)</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> r_eval <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes_string</span>(<span class="at">x=</span>tipo)) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>( <span class="at">binwidth=</span><span class="fl">0.1</span>,<span class="at">bins =</span> <span class="dv">3</span>, </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">fill=</span><span class="st">"#69b3a2"</span>, <span class="at">color=</span><span class="st">"#e9ecef"</span>, <span class="at">alpha=</span><span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="st">"Histograma de Variación Normalizada"</span>) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_ipsum</span>() <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">15</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Visualización Espacial</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(r_eval, <span class="at">zcol =</span> <span class="st">"adjvar_Secuestros"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mapview</span>(r_eval, <span class="at">zcol =</span> tipo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <center>
 <img src="images/secuestros_var.png" class="img-fluid" style="width:90.0%">
