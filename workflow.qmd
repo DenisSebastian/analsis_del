@@ -218,7 +218,6 @@ casos %>% count(TIPO)
 ```
 
 
- Implementar un sistema mediante una CNN, que pueda detectar cambios en imágenes SAR en diferentes tiempos de forma no supervisada.
 
 
 **Codificación de Tipos de Delitos**
@@ -233,6 +232,18 @@ Este paso ya fue realizado anteriormente y ya está realizado en base de Casos P
 casos <- casos %>% left_join(indreg, by = "REGION")
 casos <- casos %>% 
   filter(!is.na(NOM_COMUNA)) 
+```
+
+
+Guardar resultados intermendios, ya que nos ayudaràn para el cálculos a nivel de ZONAS censales.
+
+```{r eval=FALSE}
+saveRDS(casos, "data/datos_trabajo_final/resultados/casos_clean.rds")
+```
+
+
+```{r echo=FALSE, eval=TRUE}
+saveRDS(casos, "data/datos_trabajo_final/resultados/casos_clean_muestra.rds")
 ```
 
 
@@ -286,11 +297,11 @@ saveRDS(hechoscomunames,
 ```
 
 
-## Evolución por Comunas espacial
+## Evolución por Comunas
 
 ![Diagrama de flujo para el cáculo de evolución de delitos por Comunas](images/wf_2.png){#fig-wf2}
 
-Con el objetivo de medir la evolución de casos policiales en dos periodos de tiempo, se contruirá un indicador de variabilidad a nivel comunal con representación espacial como punto y polígono.
+Con el objetivo de medir la evolución de casos policiales en dos periodos de tiempo, se contruirá un indicador de variación de frecuencia a nivel comunal con representación espacial como punto y polígono.
 
 De acuedo al diagrama de flujo de esta subsección @fig-wf2 se utilizará los resultados *limpieza* y *codificación de tipos de delitos* de casos policiales realizados anteriormente.
 
@@ -563,6 +574,268 @@ st_write(varianzas_w_pol,
 
 
 
-<!-- ## Evolución por Zonas espacial -->
+## Evolución por Zonas 
 
-<!-- ![](images/wf_3.png) -->
+![Diagrama de flujo para el cáculo de evolución de delitos por Zonas Censales](images/wf_3.png){#fig-wf3}
+
+Con el objetivo de medir la evolución de casos policiales en dos periodos de tiempo, se contruirá un indicador de evolución de frecuencia  a nivel zona cenal con representación espacial como punto y polígono.
+
+De acuedo al diagrama de flujo de esta subsección @fig-wf3 se utilizará los resultados de limpieza y codificación de tipos de delitos de casos policiales realizados anteriormente, pero esta vez agrupando por `ZONA` censal.
+
+
+
+**Lectura**
+
+Para efectos de este libro digital se tomará una **muestra** de los casos policiales de 10000 a nivel nacional que ya habíamos enriquecido y limpiado en la etapa anterior:
+
+
+
+```{r eval=FALSE}
+casos <- readRDS("data/datos_trabajo_final/resultados/casos_clean.rds")
+casos %>% st_drop_geometry() %>% count(TIPO)
+```
+
+```{r eval=TRUE, echo=FALSE}
+casos <- readRDS("data/datos_trabajo_final/resultados/casos_clean_muestra.rds")
+# casos %>% st_drop_geometry() %>% count(TIPO)
+
+```
+
+
+**Selección de variables**
+
+En esta instación la variable que nos interesa es `ZONA` para poder realizar los cáculos de frecuencia por mes en cada zona y luego realizar la comparción entre períodos.
+
+
+```{r}
+hechos <- casos %>% 
+  select(REGION,NOM_REGION,COMUNA,NOM_COMUNA,ZONA, MESES,TIPO,CLASIFICAC)
+
+```
+
+
+
+Contabilizar los Delitos 
+
+```{r}
+hechosZonas <- hechos %>%
+  group_by(REGION,NOM_REGION,COMUNA,NOM_COMUNA,ZONA, MESES,CLASIFICAC,TIPO) %>%
+  summarise(HECHOS = n(), .groups = "keep")
+
+# hechoscomunames
+```
+
+filtrar por fecha desde  enero del 2017, encones podríamos filtar con la fechas superior al número `201700`
+
+```{r}
+hechosZona <- hechosZonas %>% 
+  filter(MESES > 201700)
+
+```
+
+
+
+
+**Selección de Periodos, cálculo de frecuencias y variación**
+
+Tabla de medidas estadísticas de frecuencia de delitos
+
+```{r}
+varianzas_base_z <- hechosZonas %>% 
+  group_by(ZONA, TIPO) %>% 
+  summarise(varianza = sd(HECHOS),
+            cantidad = sum(HECHOS),  .groups = "keep")
+
+head(varianzas_base)
+
+```
+
+- Periodo 1
+
+```{r}
+ini_z <- hechosZonas %>%
+  filter(MESES %in% 201707:201712) %>% 
+  group_by(ZONA, TIPO) %>% 
+  summarise(inicio = sum(HECHOS),  .groups = "keep")
+
+```
+
+- Periodo 2
+
+```{r}
+fin_z <- hechosZonas %>%
+  filter(MESES %in% 202207:202212) %>% 
+  group_by(ZONA, TIPO) %>% 
+  summarise(fin = sum(HECHOS),  .groups = "keep")
+```
+
+- Consolidación
+
+```{r}
+
+adjvar <- varianzas_base_z %>% 
+  left_join(ini_z, by = c("ZONA", "TIPO")) %>% 
+  left_join(fin_z, by = c("ZONA", "TIPO")) %>% 
+  mutate_if(.predicate = is.numeric,
+            .funs = function(x) ifelse(is.na(x), 0, x)) # si es NA -> 0
+
+```
+
+- Indicador de Variación 
+```{r}
+adjvar <- adjvar %>% 
+  mutate(adjvar = (fin-inicio)/(fin+inicio)) %>% 
+  mutate_if(.predicate = is.numeric,
+            .funs = function(x) ifelse(is.na(x), 0, x))
+adjvar
+```
+
+
+- Histograma de las diferencias normalizadas entre periodos
+
+::: {.panel-tabset}
+
+### Plot
+
+```{r echo=FALSE}
+library(hrbrthemes)
+p <- adjvar %>%
+  ggplot( aes(x=adjvar)) +
+  geom_histogram( binwidth=0.3, 
+                  fill="#69b3a2", color="#e9ecef", alpha=0.9) +
+  scale_x_continuous(breaks = seq(-1, 1, by = 0.2))+
+  ggtitle("Histograma de Variación Normalizada (muestra)") +
+  theme_ipsum() +
+  theme(
+    plot.title = element_text(size=15)
+  )
+p
+
+```
+
+
+### Code
+
+```{r eval=FALSE}
+library(hrbrthemes)
+p <- adjvar %>%
+  ggplot( aes(x=adjvar)) +
+  geom_histogram( binwidth=0.1, 
+                  fill="#69b3a2", color="#e9ecef", alpha=0.9) +
+  scale_x_continuous(breaks = seq(-1, 1, by = 0.2))+
+  ggtitle("Histograma de Variación Normalizada (muestra)") +
+  theme_ipsum() +
+  theme(
+    plot.title = element_text(size=15)
+  )
+p
+
+```
+
+
+:::
+
+
+
+
+**Estructuración en Panel Wide**
+
+En este paso cada Tipo de delitos será columna entonces los nombres se deben abreviar, pero de una forma segura, evitando la signación manual. Por lo anterior, se realizarà de la misma forma realizada anteriormente:
+
+
+Insertar las abreviaciones a la base y reemplazar por `TIPO`
+
+```{r}
+adjvar <- adjvar %>% 
+  left_join(abrev_tipos, by = c("TIPO" = "Tipo.delito")) %>% 
+  mutate(TIPO = Abreviacion) %>% 
+  select(-Abreviacion)
+adjvar
+```
+
+
+Transformar en formato wider
+
+```{r}
+# Pivot Wider
+varianzas_w_z <- adjvar%>% 
+  select(-varianza, -cantidad, -inicio, -fin ) %>% 
+  pivot_wider(names_from = TIPO,
+              values_from = c(adjvar), values_fill = 0) 
+# %>% 
+  # mutate(COMUNA = sprintf("%05d", as.numeric(COMUNA)))
+varianzas_w_z
+```
+
+**Guardar Resultados Espacial**
+
+
+- Lectura de Archivo de poligonos de zonas urbanas del INE
+
+```{r}
+zonas_poligonos <- readRDS("data/ine/zonas_urb_consolidadas.rds") %>% 
+  st_transform(4326) %>%  # crs de latitud longitud
+  select(REGION, NOM_REGION, PROVINCIA, NOM_PROVIN,
+         COMUNA, NOM_COMUNA, URBANO, GEOCODIGO, AREA)
+```
+
+
+::: {.panel-tabset}
+
+### Puntos Comunales
+
+```{r eval=FALSE}
+
+#convertir a puntos
+zonas_point <-  zonas_poligonos %>% 
+   st_centroid()
+
+
+#agregar los resultados de evolución
+varianzas_w_points_z <- zonas_point %>%
+  left_join(varianzas_w_z, by  = c("GEOCODIGO" = "ZONA")) %>% 
+  mutate_if(.predicate = is.numeric,
+            .funs = function(x) ifelse(is.na(x), 0, x))
+
+# Inspección visual
+# r <-  "13"
+# tipo_del <- "Desor"
+# dif = filter(varianzas_w_points_z, REGION == r)
+# mapview::mapview(dif, zcol = tipo_del)
+
+
+#Guardar Resultados
+st_write(varianzas_w_points_z, 
+         "data/datos_trabajo_final/resultados/zondel_dif_points.shp", 
+         delete_dsn = T)
+
+
+```
+
+
+### Polígonos Comunales
+
+```{r eval=FALSE}
+
+#agregar los resultados de evolución
+varianzas_w_pol_z <- zonas_poligonos %>%
+  left_join(varianzas_w_z, by  =  c("GEOCODIGO" = "ZONA")) %>% 
+  mutate_if(.predicate = is.numeric,
+            .funs = function(x) ifelse(is.na(x), 0, x))
+
+
+# Inspección visual
+r <-  "13"
+tipo_del <- "Desor"
+dif_pol = filter(varianzas_w_pol_z, REGION == r)
+mapview::mapview(dif_pol, zcol = tipo_del)
+
+#Guardar Resultados
+st_write(varianzas_w_pol_z, 
+         "data/datos_trabajo_final/resultados/zondel_dif_pol.shp", 
+         delete_dsn = T)
+```
+:::
+
+
+
