@@ -70,13 +70,16 @@ casos <- casos %>%
          COMUNA = floor(as.numeric(ZONA)/1000000))
 
 # Asignación manual delitos con problemas tipo
-casos %>% count(TIPO) # llama la atención Tipo de baja fecuencia
+obj_count <- casos %>% count(TIPO) # llama la atención Tipo de baja fecuencia
+saveRDS(obj_count, "data_samples/tab_count.rds")
+
 
 # ver NA
-casos %>% 
+obj_na <- casos %>% 
   filter(is.na(TIPO)) %>%  #casos con Tipo NA
   pull(DELITO) # mostrar los delitos
 
+saveRDS(obj_na, "data_samples/tab_na.rds")
 # corrección NA y comercio Ilegal
 
 casos <- casos %>% 
@@ -90,8 +93,8 @@ casos <- casos %>%
     ))
 
 # Asignación manual delitos con problemas tipo
-casos %>% count(TIPO) # llama la atención Tipo de baja fecuencia
-
+count_total <- casos %>% count(TIPO) # llama la atención Tipo de baja fecuencia
+saveRDS(count_total, "data_samples/tab_total.rds")
 
 # Codificación  de tipos de delitos
 
@@ -100,6 +103,10 @@ casos %>% count(TIPO) # llama la atención Tipo de baja fecuencia
 casos <- casos %>% left_join(indreg, by = "REGION")
 casos <- casos %>% 
   filter(!is.na(NOM_COMUNA)) 
+
+
+# guardar resultados clean
+saveRDS(casos, "data/datos_trabajo_final/resultados/casos_clean.rds")
 
 
 # selección de variables
@@ -181,7 +188,7 @@ p <- adjvar %>%
   geom_histogram( binwidth=0.1, 
                   fill="#69b3a2", color="#e9ecef", alpha=0.9) +
   scale_x_continuous(breaks = seq(-1, 1, by = 0.2))+
-  ggtitle("Histograma de Variación Normalizada") +
+  ggtitle("Histograma de Variación Normalizada - Comunal") +
   theme_ipsum() +
   theme(
     plot.title = element_text(size=15)
@@ -263,5 +270,168 @@ st_write(varianzas_w_pol,
 
 
 
+# Zonas -------------------------------------------------------------------
+
+
+casos <- readRDS("data/datos_trabajo_final/resultados/casos_clean.rds")
+casos %>% st_drop_geometry() %>% count(TIPO)
+
+
+hechos <- casos %>% 
+  select(REGION,NOM_REGION,COMUNA,NOM_COMUNA,ZONA, 
+         MESES,TIPO,CLASIFICAC)
+
+
+
+
+# Contabilizar los Delitos 
+hechosZonas <- hechos %>%
+  group_by(REGION,NOM_REGION,COMUNA,NOM_COMUNA,ZONA,
+           MESES,CLASIFICAC,TIPO) %>%
+  summarise(HECHOS = n(), .groups = "keep")
+
+# hechoscomunames
+
+# filtrar por fecha desde  enero del 2017, encones podríamos filtar con la fechas superior al número `201700`
+
+hechosZona <- hechosZonas %>% 
+  filter(MESES > 201700)
+
+
+# **Selección de Periodos, cálculo de frecuencias y variación**
+  
+varianzas_base_z <- hechosZonas %>% 
+  group_by(ZONA, TIPO) %>% 
+  summarise(varianza = sd(HECHOS),
+            cantidad = sum(HECHOS),  .groups = "keep")
+
+head(varianzas_base)
+
+
+# - Periodo 1
+
+ini_z <- hechosZonas %>%
+  filter(MESES %in% 201707:201712) %>% 
+  group_by(ZONA, TIPO) %>% 
+  summarise(inicio = sum(HECHOS),  .groups = "keep")
+
+
+# - Periodo 2
+
+fin_z <- hechosZonas %>%
+  filter(MESES %in% 202207:202212) %>% 
+  group_by(ZONA, TIPO) %>% 
+  summarise(fin = sum(HECHOS),  .groups = "keep")
+
+# - Consolidación
+
+
+adjvar <- varianzas_base_z %>% 
+  left_join(ini_z, by = c("ZONA", "TIPO")) %>% 
+  left_join(fin_z, by = c("ZONA", "TIPO")) %>% 
+  mutate_if(.predicate = is.numeric,
+            .funs = function(x) ifelse(is.na(x), 0, x)) # si es NA -> 0
+
+
+# - Indicador de Variación 
+adjvar <- adjvar %>% 
+  mutate(adjvar = (fin-inicio)/(fin+inicio)) %>% 
+  mutate_if(.predicate = is.numeric,
+            .funs = function(x) ifelse(is.na(x), 0, x))
+adjvar
+
+
+# - Histograma de las diferencias normalizadas entre periodos
+
+library(hrbrthemes)
+p <- adjvar %>%
+  ggplot( aes(x=adjvar)) +
+  geom_histogram( binwidth=0.2, 
+                  fill="#69b3a2", color="#e9ecef", alpha=0.9) +
+  scale_x_continuous(breaks = seq(-1, 1, by = 0.2))+
+  ggtitle("Histograma de Variación Normalizada - Zona") +
+  theme_ipsum() +
+  theme(
+    plot.title = element_text(size=15)
+  )
+p
+
+
+  
+  
+  
+  # **Estructuración en Panel Wide**
+  
+adjvar <- adjvar %>% 
+  left_join(abrev_tipos, by = c("TIPO" = "Tipo.delito")) %>% 
+  mutate(TIPO = Abreviacion) %>% 
+  select(-Abreviacion)
+adjvar
+
+
+# Transformar en formato wider
+
+# Pivot Wider
+varianzas_w_z <- adjvar%>% 
+  select(-varianza, -cantidad, -inicio, -fin ) %>% 
+  pivot_wider(names_from = TIPO,
+              values_from = c(adjvar), values_fill = 0) 
+
+# **Guardar Resultados Espacial**
+  
+  
+  # - Lectura de Archivo de poligonos comunales del INE
+
+zonas_poligonos <- readRDS("data/ine/zonas_urb_consolidadas.rds") %>% 
+  st_transform(4326) %>%  # crs de latitud longitud
+  select(REGION, NOM_REGION, PROVINCIA, NOM_PROVIN,
+         COMUNA, NOM_COMUNA, URBANO, GEOCODIGO, AREA)
+
+
+### Puntos Comunales
+
+#convertir a puntos
+zonas_point <-  zonas_poligonos %>% 
+  st_centroid()
+
+
+#agregar los resultados de evolución
+varianzas_w_points_z <- zonas_point %>%
+  left_join(varianzas_w_z, by  = c("GEOCODIGO" = "ZONA")) %>% 
+  mutate_if(.predicate = is.numeric,
+            .funs = function(x) ifelse(is.na(x), 0, x))
+
+# Inspección visual
+r <-  "13"
+tipo_del <- "Desor"
+dif = filter(varianzas_w_points_z, REGION == r)
+mapview::mapview(dif, zcol = tipo_del)
+
+
+#Guardar Resultados
+st_write(varianzas_w_points_z, 
+         "data/datos_trabajo_final/resultados/zondel_dif_points.shp", 
+         delete_dsn = T)
+
+
+#agregar los resultados de evolución
+varianzas_w_pol_z <- zonas_poligonos %>%
+  left_join(varianzas_w_z, by  =  c("GEOCODIGO" = "ZONA")) %>% 
+  mutate_if(.predicate = is.numeric,
+            .funs = function(x) ifelse(is.na(x), 0, x))
+
+
+# Inspección visual
+r <-  "13"
+tipo_del <- "Desor"
+dif_pol = filter(varianzas_w_pol_z, REGION == r)
+mapview::mapview(dif_pol, zcol = tipo_del)
+
+#Guardar Resultados
+st_write(varianzas_w_pol_z, 
+         "data/datos_trabajo_final/resultados/zondel_dif_pol.shp", 
+         delete_dsn = T)
+  
+  
 
 
